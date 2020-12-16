@@ -1,0 +1,33 @@
+package com.nec.asia.nic.comp.trans.dao;
+
+import java.util.Date;
+import java.util.List;
+
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.SyncQueueJob;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.dao.GenericDao;
+
+public interface SyncQueueJobDao extends GenericDao<SyncQueueJob, Long>{
+	public SyncQueueJob findQueueByInfo(Long id, String status);
+	public BaseModelList<SyncQueueJob> findQueueByReceiver(String receiver, String status, String objType, int maxTotal);
+	public BaseModelSingle<SyncQueueJob> findQueueByStatus(String receiver, String status, String objType) throws Exception;
+	public BaseModelSingle<SyncQueueJob> findQueueByObjectId(String objectId, String receiver, String status, String objType) throws Exception;
+	public BaseModelSingle<Boolean> updateStatusQueueJob(Long id, String status);
+	public PaginatedResult<SyncQueueJob> findListQueueBySearch(String objectId, String objectType, String status, int pageNo, int pageSize);
+	public BaseModelSingle<Boolean> saveOrUpdateQueue(SyncQueueJob queue);
+	public List<SyncQueueJob> findQueueByDate(String date,String status,String type);
+	
+	public List<SyncQueueJob> findQueueByPropertyAll(String dateFrom,String dateTo,String status,String receiver,String objecType);
+	public PaginatedResult<SyncQueueJob> findListQueueBySearchAll(String dateFrom, String dateTo, String status,String receiver,String objecType, int pageNo, int pageSize);
+	
+	public PaginatedResult<SyncQueueJob> findListQueueByDateCurrent(String dateCurrent, String status,String receiver,String objecType, int pageNo, int pageSize);
+
+	public List<SyncQueueJob> findSyncQueueJobByObjIdOrReceiver(String objectId, String objectType, String receiver, String status) throws Exception;
+	public List<SyncQueueJob> findSyncQueueJobByManyObjType(
+			String transactionId, String[] strings, String siteCode,
+			String codeStatusQueuePending)throws Exception;
+	public int countByConditions(String objectType, String site, String status, Date date)throws Exception;
+	
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicSearchResult" table="EPP_SEARCH_RESULT" optimistic-lock="version">
+		<id name="searchResultId" type="long">
+			<column name="SEARCH_RESULT_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_SEARCH_RESULT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+        <!-- <many-to-one name="nicWorkflowJob" class="com.nec.asia.nic.comp.trans.domain.NicWorkflowJob" fetch="select">
+            <column name="WORKFLOW_JOB_ID" precision="20" scale="0" not-null="true">
+                <comment>Foreign Key - Workflow Job Id</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="nicTransaction" class="com.nec.asia.nic.comp.trans.domain.NicTransaction" fetch="select">
+            <column name="TRANSACTION_ID" length="36" not-null="true">
+                <comment>Foreign Key - Application Id</comment>
+            </column>
+        </many-to-one> -->
+		<property name="workflowJobId" type="long">
+			<column name="WORKFLOW_JOB_ID" length="20"></column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36"></column>
+		</property>
+
+		<property name="afisKeyNo" type="string">
+			<column name="AFIS_KEY_NO" length="36">
+				<comment>AFIS Key No</comment>
+			</column>
+		</property>
+		<property name="typeSearch" type="string">
+			<column name="TYPE_SEARCH" length="30">
+				<comment>Type of Search (FP 1:N, FP 1:1)</comment>
+			</column>
+		</property>
+		<property name="searchReferenceId" type="string">
+			<column name="SEARCH_REFERENCE_ID" length="36">
+				<comment>Search Receipt No</comment>
+			</column>
+		</property>
+		<property name="searchStatus" type="string">
+			<column name="SEARCH_STATUS" length="30">
+				<comment>Search Status (SUBMITTED, COMPLETED)</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="hasHit" type="yes_no">
+			<column name="HAS_HIT" length="1">
+				<comment>Search Result with Hit Flag (Y/N)</comment>
+			</column>
+		</property>
+        <!--<set name="nicSearchHitResults" table="EPP_SEARCH_HIT_RESULT" inverse="true" lazy="true" fetch="select"> -->
+		<set name="hitList" table="EPP_SEARCH_HIT_RESULT" inverse="true" cascade="all" lazy="false">
+			<key>
+				<column name="SEARCH_RESULT_ID" precision="20" scale="0" not-null="true">
+					<comment>Foreign Key</comment>
+				</column>
+			</key>
+			<one-to-many class="com.nec.asia.nic.comp.trans.domain.NicSearchHitResult" />
+		</set>
+		<sql-query name="getHitTransaction">
+			<return-scalar column="hits" type="string" />
+	        <![CDATA[
+				SELECT EPP_CENTRAL.EPP_SEARCH_HIT_RESULT.TRANSACTION_ID_HIT as hits FROM
+				EPP_CENTRAL.EPP_SEARCH_HIT_RESULT 
+				JOIN EPP_CENTRAL.EPP_SEARCH_RESULT ON EPP_CENTRAL.EPP_SEARCH_RESULT.SEARCH_RESULT_ID = EPP_CENTRAL.EPP_SEARCH_HIT_RESULT.SEARCH_RESULT_ID
+				WHERE EPP_CENTRAL.EPP_SEARCH_RESULT.TRANSACTION_ID = (:tranId) AND EPP_CENTRAL.EPP_SEARCH_RESULT.TYPE_SEARCH = (:type);
+	        ]]>
+		</sql-query>
+	</class>
+</hibernate-mapping>

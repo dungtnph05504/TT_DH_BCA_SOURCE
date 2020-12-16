@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- Modification History: 01 Oct 2013 (Sailaja): Added New view supervisor-rejectJob-List 
+	for the supervisor rejected job list -->
+
+<tiles-definitions>
+	<!-- investigation Assignment - START -->
+	<definition name="investigation.investigationAssignment.list1"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Danh sách phân công xử lý hồ sơ" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationAssignment/investigationAssignment-list.jsp" />
+	</definition>
+	<definition name="investigation.note.approve"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Cập nhật thông tin hồ sơ" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-note.jsp" />
+	</definition>
+	<definition name="investigation.investigationAssignment.list"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationAssignment/investigationAssignment-list1.jsp" />
+	</definition>
+	<definition name="investigation.investigationAssignment.detail.list"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationAssignment/investigationAssignmentDetail-list.jsp" />
+	</definition>
+	<!-- investigation Assignment - END -->
+
+	<!-- fraudCaseManagement Assignment - START -->
+	<definition name="fraudCaseManagement.fraudCaseManagementAssignment.list"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/fraudCaseManagementAssignment/fraudCaseManagementAssignment-list.jsp" />
+	</definition>
+	<!-- fraudCaseManagement Assignment - END -->
+
+	<!-- investigation assigned - START -->
+	<definition name="investigation.investigationAssigned.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Danh sách phân công xử lý hồ sơ" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationAssigned/investigationAssigned-list.jsp" />
+	</definition>
+	<!-- investigation assigned - END -->
+
+	<!-- fraudCaseManagement assigned - START -->
+	<definition name="fraudCaseManagement.fraudCaseManagementAssigned.list"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/fraudCaseManagementAssigned/fraudCaseManagementAssigned-list.jsp" />
+	</definition>
+	<!-- fraudCaseManagement assigned - END -->
+
+	<definition name="investigation.startinvestigation.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/startinvestigation-compare.jsp" />
+	</definition>
+	
+	<definition name="investigation.invesagain"
+		extends="global.layout.standardTitle">
+		  <put-attribute name="title" value="Lập lại danh sách B" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationconfirm-again.jsp" />
+	</definition>
+	
+	<definition name="investigation.cfapprove"
+		extends="global.layout.standardTitle">
+		  <put-attribute name="title" value="Phê duyệt đơn đề nghị cấp hộ chiếu" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-approve.jsp" />
+	</definition>
+
+	<!-- NIC Investigation Job List -->
+	
+	<!--Tạm đóng 8/6/2019 <definition name="investigation.investigation" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-main.jsp" />
+	</definition>-->
+	
+	<definition name="investigation.investigation" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Xử lý hồ sơ hộ chiếu" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-main-vs1.jsp" />
+	</definition>
+	
+	<definition name="investigation.investigation.process" extends="global.layout.standardTitle">
+	    <put-attribute name="title" value="Xử lý hồ sơ hộ chiếu" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-process.jsp" />
+	</definition>
+	<definition name="investigation.compare.info" extends="global.layout.standardTitle">
+	      <put-attribute name="title" value="Khớp thông tin cá nhân" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-compare-info.jsp" />
+	</definition>
+	<definition name="investigation.search.obj" extends="global.layout.standardTitle">
+	      <put-attribute name="title" value="Tra cứu đối tượng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-searchObj.jsp" />
+	</definition>
+	<definition name="investigation.search.nin" extends="global.layout.standardTitle">
+	      <put-attribute name="title" value="Tra cứu chứng minh thư" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigation-searchNin.jsp" />
+	</definition>
+	
+	<definition name="comfirm-lost"
+		template="/WEB-INF/views/investigation/confirm-lost.jsp" />
+	
+	<definition name="investigation-package"
+		template="/WEB-INF/views/investigation/investigationAssignment/detail-package.jsp" />
+	
+	<definition name="investigation-family"
+		template="/WEB-INF/views/investigation/info-family.jsp" />
+		
+	<definition name="investigation-nin"
+		template="/WEB-INF/views/investigation/history-nin.jsp" />	
+		
+	<definition name="investigation-immig"
+		template="/WEB-INF/views/investigation/info-Immigration.jsp" />
+	
+	<definition name="investigation-lost"
+		template="/WEB-INF/views/investigation/info-lost.jsp" />
+	
+	<definition name="investigation-his"
+		template="/WEB-INF/views/investigation/info-history.jsp" />	
+		
+	<definition name="investigation-stay"
+		template="/WEB-INF/views/investigation/info-stay.jsp" />	
+		
+	<definition name="investigation-go"
+		template="/WEB-INF/views/investigation/info-go.jsp" />	
+	
+	<definition name="investigation-doc"
+		template="/WEB-INF/views/investigation/info-document.jsp" />		
+		
+	<definition name="investigation-finger"
+		template="/WEB-INF/views/investigation/info-compare-finger.jsp" />	
+		
+	<definition name="investigation-offer"
+		template="/WEB-INF/views/investigation/info-offer.jsp" />	
+	<definition name="investigation-offer-k"
+		template="/WEB-INF/views/investigation/info-offer-k.jsp" />
+	<definition name="investigation-offer-c"
+		template="/WEB-INF/views/investigation/info-offer-c.jsp" />
+		
+	<definition name="investigation-pay"
+		template="/WEB-INF/views/investigation/info-payment.jsp" />						
+
+	<!-- fraudCaseManagement - start -->
+	<!-- fraudCaseManagement - list - start -->
+	<definition name="investigation.fraudCaseManagement.list"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/fraudCaseManagement/fraudCaseManagement-list.jsp" />
+	</definition>
+	<!-- fraudCaseManagement - list - end -->
+	<!-- fraudCaseManagement - decide - start -->
+	<definition name="investigation.fraudCaseManagement.decide"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/fraudCaseManagement/decide.jsp" />
+	</definition>
+	<!-- fraudCaseManagement - decide - end -->
+	<!-- fraudCaseManagement - print - start -->
+	<definition name="investigation.fraudCaseManagement.print"
+		extends="global.layout.standard.empty">
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/fraudCaseManagement/print.jsp" />
+	</definition>
+	<!-- fraudCaseManagement - print - end -->
+	<!-- fraudCaseManagement - end -->
+
+
+	<!-- Start NIC Investigation -->
+	<definition name="investigation.startinvestigation" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/startinvestigation.jsp" />
+	</definition>
+
+	<!-- Approve Card -->
+	<definition name="investigation.approvejobid" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/nicjobapprove.jsp" />
+	</definition>
+
+	<!-- Reject Card -->
+	<definition name="investigation.rejectjobid" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/nicjobreject.jsp" />
+	</definition>
+
+	<!-- Nic Candidate False Hit -->
+	<definition name="niccandidate-falsehit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/niccandidate-falsehit.jsp" />
+	</definition>
+
+	<!-- Nic Candidate True Hit -->
+	<definition name="niccandidate-truehit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/niccandidate-truehit.jsp" />
+	</definition>
+
+	<!-- Nic Supervisor Rejected Job List -->
+	<definition name="supervisor-rejectJob-List" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/supervisor_reject_list.jsp" />
+	</definition>
+
+	<!-- tunt investigation Approve Status - START -->
+	<definition name="investigation.approveStatus" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/ApproveStatus/approveStatus-main.jsp" />
+	</definition>
+	<!-- investigation Approve Status - END -->
+
+	<definition name="investigation.startApproveStatus.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/ApproveStatus/startApproveStatus-compare.jsp" />
+	</definition>
+	<!-- Trung Approve Assignment -->
+	<definition name="investigation.approveAssignmentList"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/ApproveStatus/approveAssignment-list.jsp" />
+	</definition>
+	<!-- Trung Approve Assignment - END -->
+
+	<!-- Trung Check Sign -->
+	<definition name="investigation.checkSign.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/checkSign/checkSign-compare.jsp" />
+	</definition>
+	<!-- Trung check Sign - END -->
+	<!-- ============================================================================================== -->
+
+	<!-- Trung danh sach kiem duyet sơ bộ -->
+	<definition
+		name="investigation.investigationConfirm.startInvestigationConfirm.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigationConfirm/investigationConfirm-compare.jsp" />
+	</definition>
+
+	<definition
+		name="investigation.investigationConfirm.investigationConfirmList"
+		extends="global.layout.standardTitle">
+		  <put-attribute name="title" value="Lập danh sách B" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigationConfirm/investigationConfirm-list.jsp" />
+	</definition>
+	<definition
+		name="investigation.investigationConfirm.success"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigationConfirm/investigationConfirm-success.jsp" />
+	</definition>
+	<!-- Trung danh sach kiem duyet sơ bộ - END -->
+	<!-- ============================================================================================== -->
+
+	<!--[18/04/2018] Trung Quan ly Perso - START -->
+	<definition name="persoManager.persolist" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/persoManager/perso-list.jsp" />
+	</definition>
+
+	<definition name="persoManager.perso.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/persoManager/perso-compare.jsp" />
+	</definition>
+	<!-- Trung Quan ly Perso - END -->
+	<!-- ============================================================================================== -->
+
+
+	<!-- [19/04/2018] Trung Quan ly Dong bo du lieu don sang A72 - START -->
+	<!-- <definition name="syncSinger.syncSingermain" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/syncSinger/syncSinger-main.jsp" />
+	</definition>
+
+	<definition name="syncSinger.syncSinger.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/syncSinger/syncSinger-compare.jsp" />
+	</definition> -->
+	<!-- Trung Quan ly Dong bo du lieu don sang A72 - END -->
+	<!-- ============================================================================================== -->
+
+	<!-- ========== XÁC MINH HỒ SƠ TỪ BCA ========== -->
+	<!-- Trung danh sach chờ xác minh từ BCA -->
+	<!-- <definition
+		name="investigationBca.startInvestigationPendingBca.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBca/investigationPendingBca-compare.jsp" />
+	</definition>
+
+	<definition
+		name="investigation.investigationBca.investigationPendingBcaList"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBca/investigationPendingBca-list.jsp" />
+	</definition>
+
+	Trung danh sach đã xác minh từ BCA
+	<definition
+		name="investigationBca.startInvestigationConfirmedBca.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBca/investigationConfirmedBca-compare.jsp" />
+	</definition>
+
+	<definition
+		name="investigation.investigationBca.investigationConfirmedBcaList"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBca/investigationConfirmedBca-list.jsp" />
+	</definition> -->
+	<!-- ========== XÁC MINH HỒ SƠ TỪ BCA ========== - END -->
+	<!-- ============================================================================================== -->
+
+	<!-- ========== XÉT DUYỆT HỒ SƠ (GỬI LÃNH ĐẠO) ========== -->
+	<!-- Trung danh sach chờ xét duyệt -->
+	<definition
+		name="investigation.investigationBoss.startInvestigationPendingBoss.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBoss/investigationPendingBoss-compare.jsp" />
+	</definition>
+
+	<definition
+		name="investigation.investigationBoss.investigationPendingBossList"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBoss/investigationPendingBoss-list.jsp" />
+	</definition>
+
+	<!-- Trung danh sach đã xét duyệt -->
+	<definition
+		name="investigation.investigationBoss.startInvestigationApproveBoss.compare"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBoss/investigationApproveBoss-compare.jsp" />
+	</definition>
+
+	<definition
+		name="investigation.investigationBoss.investigationApproveBossList"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationBoss/investigationApproveBoss-list.jsp" />
+	</definition>
+	<!-- ========== XÉT DUYỆT HỒ SƠ (GỬI LÃNH ĐẠO) ========== - END -->
+	<!-- ============================================================================================== -->
+
+
+	<!-- ========== DANH SÁCH HỒ SƠ BỊ TỪ CHỐI ========== -->
+	<!-- ================================================= -->
+	<definition
+		name="investigation.investigationReject.startInvestigationReject.compare"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Xử lý hồ sơ hộ chiếu" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationReject/investigationReject-compare.jsp" />
+	</definition>
+
+	<definition name="investigation.investigationReject.investigationRejectList"
+		extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/investigation/investigationReject/investigationReject-list.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH HỒ SƠ BỊ TỪ CHỐI ========== - END -->
+	<!-- ============================================================================================== -->
+
+	<definition name="nic-investigation-details"
+		template="/WEB-INF/views/investigation/investigation-detail.jsp" />
+		
+	<!-- ========== DANH SÁCH BÀN GIAO ========== -->
+	<!-- ================================================= -->	
+	<definition name="listHandover.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationConfirm/listHandover-list.jsp" />
+	</definition>
+	
+	<definition name="listHandover.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationConfirm/listHandover-compare.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH BÀN GIAO  ========== - END -->
+	<!-- ============================================================================================== -->
+	
+	<!-- ========== DANH SÁCH HỒ SƠ LOST / DAMAGE ========== -->
+	<!-- ================================================= -->
+	<definition name="investigation.investigationLost.investigationLostList" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationLost/investigationLost-list.jsp" />
+	</definition>
+	
+	<definition name="investigation.investigationLost.startInvestigationLost.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationLost/investigationLost-compare.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH HỒ SƠ LOST / DAMAGE  ========== - END -->
+	<!-- ============================================================================================== -->
+	
+	<!-- ========== DANH SÁCH ĐIỂM IN ========== -->
+	<!-- ================================================= -->	
+	<definition name="persoLocations.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationConfirm/persoLocations-list.jsp" />
+	</definition>
+	
+	<definition name="persoLocations.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationConfirm/persoLocations-compare.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH ĐIỂM IN ========== - END -->
+	<!-- ============================================================================================== -->
+	
+	<!-- ========== DANH SÁCH TRẠNG THÁI IN ========== -->
+	<!-- ================================================= -->	
+	<definition name="errorPerso.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoManager/errorPerso-list.jsp" />
+	</definition>
+	
+	<definition name="successPerso.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoManager/successPerso-list.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH TRẠNG THÁI IN ========== - END -->
+	<!-- ============================================================================================== -->
+	
+	<!-- ========== DANH SÁCH CHỜ CẤP SỐ HỘ CHIẾU ========== -->
+	<!-- ================================================= -->	
+	<definition name="pendingPassportNo.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/investigation/investigationConfirm/pendingPassportNo-list.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH CHỜ CẤP SỐ HỘ CHIẾU ========== - END -->
+	<!-- ============================================================================================== -->
+</tiles-definitions>

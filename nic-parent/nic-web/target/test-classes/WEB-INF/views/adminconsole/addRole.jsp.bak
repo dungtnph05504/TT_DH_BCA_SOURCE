@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- taglib uri="displaytag.tld" prefix="display" -->
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<script type="text/javascript">
+
+</script>
+
+<div id="main">
+<div id="content_main">
+
+<table class="heading_report">
+	<tr>
+		<B><td class='subHeading' colspan='4' style='padding:5px'>ADD ROLES</td></b>
+	</tr>
+	
+	
+  <tr> 
+  <td colspan="4"> &nbsp; 
+  </td>
+  </tr>
+	 
+	 <tr>
+		<td style="padding:15px" colspan="4">			&nbsp;
+<table style="width:100%" cellspacing="0" class="displayTable" id="row" cellpadding="0">
+	<thead>
+	<tr>
+	<tbody> 
+	
+				<tr>
+				<td style="border: none; font-weight: bold">Role Id</td>
+				<td style="border: none;">
+				<input id="roleId" name="roleId" class="defaultText" type="text" value="" size="30" maxlength="30" /></td>
+				
+				</tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Description</td>
+				<td style="border: none;">
+				<input id="roleDescr" name="roleDescr" class="defaultText" type="text" value="" size="30" maxlength="30" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Functions:</td>
+				<div style="width: 350px; float: center; height: 140px; border:#0099ff thin outset; display: inline-block;">
+ 				 <div style="width: 100%; height: 28px; background-color: #9C9C9C;">
+  					<div style="padding: 5px;">
+   				 		<div style="display: inline;">Functions selected</div><br/><br/>
+      				 	<input type="checkbox" />Admin Console<br/>
+       					<input type="checkbox" />Inquiry<br/>
+      				 	<input type="checkbox" />Report<br/>
+      			 	 	<input type="checkbox" />Investigation<br/>
+ 				 		</div>
+ 					 </div>
+				</div>
+				<tr>
+				<tr>
+				<td style="border: none; font-weight: bold"><br/>
+				<input type="button" class="button_grey" value="Save" onclick="doSubmitSave(this.form);"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" id="reset_btn" class="button_grey" onclick="" value="Cancel"/></td></tr>
+				</table>
+				</td></table>
+
+				<br /><br />
+
+</div>
+</div>
+<script type="text/javascript">
+		function doSubmitSave(form) {
+
+		}
+	</script>
+	

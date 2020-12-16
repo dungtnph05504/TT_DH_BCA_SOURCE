@@ -1,0 +1,70 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+<!-- 	<bean id="transactionUploadTask" class="com.nec.asia.nic.job.TransactionUploadTask" /> -->
+	
+	<bean id="transactionDownloadTask" class="com.nec.asia.nic.job.TransactionDownloadTask" />
+
+	<!-- Spring Quartz -->
+	<bean name="transactionUploadJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+
+		<property name="jobClass" value="com.nec.asia.nic.job.TransactionUploadJob" />
+
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="transactionUploadTask" value-ref="transactionUploadTask" />
+			</map>
+		</property>
+
+	</bean>
+	<bean name="transactionDownloadJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+
+		<property name="jobClass" value="com.nec.asia.nic.job.TransactionDownloadJob" />
+
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="transactionDownloadTask" value-ref="transactionDownloadTask" />
+			</map>
+		</property>
+
+	</bean>
+
+	<!-- Simple Trigger, run every 30 mins -->
+	<bean id="uploadTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="transactionUploadJob" />
+		<property name="startDelay" value="1000" />
+		<!-- <property name="repeatInterval" value="5000" /> -->
+		<property name="repeatInterval" value="1800000" /> 
+	</bean>
+	<bean id="downloadTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="transactionDownloadJob" />
+		<property name="startDelay" value="1000" />
+		<property name="repeatInterval" value="1800000" />
+	</bean>
+
+	<!-- Cron Trigger, run every 5 seconds -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="transactionUploadJob" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="transactionUploadJob" />
+				<ref bean="transactionDownloadJob" />
+			</list>
+		</property>
+
+		<property name="triggers">
+			<list>
+				<ref bean="uploadTrigger" />
+				<ref bean="downloadTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

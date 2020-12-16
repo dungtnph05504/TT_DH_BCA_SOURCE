@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.perso.domain.PersoDispatchInfo" table="PERSO_DISPATCH_INFO" optimistic-lock="version">
+		<id name="dispatchInfoId" type="long">
+			<column name="DISPATCH_INFO_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_PERSO_DISPATCH_INFO_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="batchNumber" type="string">
+			<column name="BATCH_NUMBER" length="40" not-null="true" />
+		</property>
+		<property name="documentType" type="string">
+			<column name="DOCUMENT_TYPE" length="32" />
+		</property>
+		<property name="priority" type="long">
+			<column name="PRIORITY" precision="10" scale="0" not-null="true" />
+		</property>
+		<property name="batchSize" type="long">
+			<column name="BATCH_SIZE" precision="10" scale="0" not-null="true" />
+		</property>
+		<property name="collectionSite" type="string">
+			<column name="COLLECTION_SITE" length="5" not-null="true" />
+		</property>
+		<property name="collectionDate" type="timestamp">
+			<column name="COLLECTION_DATE" length="7" />
+		</property>
+		<property name="applnRefNo" type="string">
+			<column name="APPLN_REF_NO" length="36" />
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="16" />
+		</property>
+		<property name="sourceLocation" type="string">
+			<column name="SOURCE_LOCATION" length="64" />
+		</property>
+	</class>
+</hibernate-mapping>

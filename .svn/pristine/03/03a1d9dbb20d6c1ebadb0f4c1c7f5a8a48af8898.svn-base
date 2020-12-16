@@ -1,0 +1,320 @@
+##############################
+# NEC QTF sample config file #
+##############################
+
+[Global]
+# Defines the Analysis Target 
+;AnalysisTarget=TOKEN
+;AnalysisTarget=TRAVEL
+AnalysisTarget=FULL_FRONTAL
+
+# Defines the Quality Level
+QualityLevel=HIGH
+;QualityLevel=LOW
+
+# Defines the Skin Type
+;SkinType=BRIGHT
+SkinType=DARK
+
+# Defines how new pixels will be added if the original file is too small
+BackgroundType=WHITE
+;BackgroundType=BLACK
+;BackgroundType=WHITE
+;BackgroundType=GRAY
+
+# Defines compression for JPEG & JPEG2000 files (Ratio or in Bytes)
+;CompressionRatio=1.0
+;CompressionTargetSize=
+
+[NeoFace]
+
+# Defines the NeoFace Algorithm 
+Algorithm=4
+
+# Defines the Eye roll value(in degrees) 0<=EyeRoll<=90
+EyesRoll=60
+
+# Defines the maximum eye width (0.0<EyeMaxWidthRel<1.0)
+EyeMaxWidthRel=0.9
+
+# Defines the maximum eye width (in pixels) 
+#EyeMaxWidthAbs=120
+
+# Defines the minimum eye width(0.0<EyeMinWidthRel<1.0)
+#EyeMinWidthRel=0.1
+
+# Defines the minimum eye width (in pixels) 
+EyeMinWidthAbs=20
+
+# Maximum recogniseable number of faces
+MaxFace=3
+
+# Ordering Policy 
+#		NFP_DISTANCE_ODERED or NFP_SCORE_ODERED
+OrderingPolicy=NFP_DISTANCE_ODERED
+
+# Reliability
+Reliability=0.5
+
+# Detection mode: Only valid when used with Algorithm 1.
+#		NFP_MODE_DEPTH or NFP_MODE_TIME
+DetectionMode=NFP_MODE_DEPTH
+
+# Process time
+ProcessTime=500000
+
+# Search Depth
+SearchDepth=70
+
+[ImageSize]
+# Defines if the image size is measured in width or height
+;ImageMode=WIDTH
+;ImageMode=HEIGHT
+# Defines the classifier for the feature defined in the section 
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+# Switch the analysis off or leave it to default (can't be done in the API)
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+# Switch the processing off or leave it to default (can't be done in the API)
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[WidthToHeightRatio]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[NumberofFaces]
+# Define the minimum eye width that will be used to search for a face (relative: 0.0-1.0 or absolute in pixels)
+;EyeMinWidthRel=0.05
+EyeMinWidthAbs=20
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[EyeDistance]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[EyeWidth]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[ColourProfile]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=ALWAYS_OFF
+;Analysis=ALWAYS_OFF
+
+[HeadRotationHor]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[HeadPositionHor]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[HeadPositionVer]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[HeadWidth]
+# Defines if the feature is predominant when head width or length has to be 
+# modified. Only one feature between HeadWidth and HeadLength can be predominant
+;Predominant=0
+;Predominant=1
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[HeadLength]
+# Defines if the feature is predominant if head width or length has to be 
+# modified. Only one feature between HeadWidth and HeadLength can be predominant
+;Predominant=0
+;Predominant=1
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[Brightness]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[Contrast]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[ColourCast]
+# Defines the reference image for colour cast detection
+;ReferenceImage=
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=ALWAYS_OFF
+;Analysis=ALWAYS_OFF
+Processing=ALWAYS_OFF
+;Processing=ALWAYS_OFF
+
+[BlockyArtefacts]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[Sharpness]
+# Defines the threshold for the selected processing algorithm
+;AlgorithmThreshold=6.0
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=ALWAYS_OFF
+;Processing=ALWAYS_OFF
+
+[HeadRotationVer]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[RedEyes]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+Processing=DEFAULT
+;Processing=ALWAYS_OFF
+
+[FaceShadow]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[InterferingBackground]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[GreyValueBackground]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+;Analysis=DEFAULT
+Analysis=ALWAYS_OFF
+Processing=ALWAYS_OFF
+
+[ColourVariationBackground]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+;Analysis=DEFAULT
+Analysis=ALWAYS_OFF
+Processing=ALWAYS_OFF
+
+[GlassesSunglasses]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[GlassesReflection]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+[GlassesHeavyFrame]
+;MinCorrectable=
+;MinValid=
+;MaxValid=
+;MaxCorrectable=
+Analysis=DEFAULT
+;Analysis=ALWAYS_OFF
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="jdbcDatasource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" lazy-init="false">
+		<property name="user" value="${jdbc.loginuser}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<!-- 
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = ${jdbc.server})(PORT = ${jdbc.port}))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = ${jdbc.database})))" />
+	    -->
+	    <property name="jdbcUrl" value="${nic.db.url}" />
+		<property name="initialPoolSize" value="10" />
+		<property name="maxPoolSize" value="20" />
+		<property name="minPoolSize" value="10" />
+		<property name="acquireIncrement" value="5" />
+		<property name="acquireRetryAttempts" value="5" />
+	</bean>
+
+	<bean id="dsJndiTemplate" class="org.springframework.jndi.JndiTemplate" lazy-init="true">
+<!-- 		<property name="environment">
+			<props>
+				<prop key="java.naming.provider.url">t3://${jndi.server}:${jndi.port}</prop>
+				<prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+			</props>
+		</property> -->
+	</bean>
+
+	<bean id="jndiDatasource" class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="true">
+		<property name="jndiTemplate" ref="dsJndiTemplate" />
+		<property name="jndiName">
+			<value>${datasource.jndi}</value>
+		</property>
+	</bean>
+
+	<import resource="spring-hibernate.xml" />
+</beans>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schema/jaxws.xsd
+		http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<cxf:bus name="defaultOutBus"><!-- id="defaultOutBus"  -->
+        <cxf:features>
+            <cxf:logging limit="-1" />
+        </cxf:features>
+    </cxf:bus>
+	<cxf:bus name="securedOutBus" ><!-- id="securedOutBus"  -->
+        <cxf:features>
+            <cxf:logging limit="-1" />
+        </cxf:features>
+        <cxf:inInterceptors><ref bean="wss4jInInterceptor"/></cxf:inInterceptors>
+        <cxf:outInterceptors><ref bean="wss4jOutInterceptor"/></cxf:outInterceptors>
+    </cxf:bus>
+    
+    <bean id="wss4jInInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="UsernameToken"/>
+				<entry key="passwordType" value="PasswordDigest" />
+				<entry key="passwordCallbackRef"><ref bean="serverPasswordCallbackHandler"/></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="wss4jOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="user" value="CPDServer" />
+				<entry key="action" value="UsernameToken"/>
+				<entry key="passwordType" value="PasswordDigest" />
+				<entry key="passwordCallbackRef"><ref bean="serverPasswordCallbackHandler"/></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="serverPasswordCallbackHandler" class="com.nec.asia.nic.framework.security.webservices.ServerPasswordCallbackHandler" />	
+
+	<!-- CPDv2 -->
+	
+	<!-- CA -->
+	
+	<!-- Data Packing -->
+	<!-- <bean id="packWS" class="necsap.epassport.wspack.Service1Soap"
+		factory-bean="packWSFactory" factory-method="create" />
+	<bean id="packWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="necsap.epassport.wspack.Service1Soap" />
+		<property name="bus" ref="defaultOutBus" />
+		<property name="address" value="http://172.16.1.6/WSPACK/NICDataPackingService.asmx" />
+	</bean> -->
+	
+	<!-- Perso -->
+	<!-- <bean id="persoWS" class="com.nec.asia.Persoservices"
+		factory-bean="persoWSFactory" factory-method="create" />
+	<bean id="persoWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.Persoservices" />
+		<property name="address" value="http://172.16.1.166:1002/PersoService.svc" />
+	</bean> -->
+
+</beans>

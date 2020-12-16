@@ -1,0 +1,581 @@
+package com.nec.asia.nic.comp.trans.service.impl;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nec.asia.nic.comp.immihistory.domain.ImmiHistory;
+import com.nec.asia.nic.comp.immihistory.domain.ImmiHistoryChilden;
+import com.nec.asia.nic.comp.immihistory.domain.ImmiHistoryInfo;
+import com.nec.asia.nic.comp.immihistory.model.Immihistory;
+import com.nec.asia.nic.comp.immihistory.model.ImmihistoryChildren;
+import com.nec.asia.nic.comp.job.dto.ImmiHistoryData;
+import com.nec.asia.nic.comp.trans.dao.NicImmiHistoryChildenDao;
+import com.nec.asia.nic.comp.trans.dao.NicImmiHistoryDao;
+import com.nec.asia.nic.comp.trans.domain.BorderGate;
+import com.nec.asia.nic.comp.trans.dto.CountPassport;
+import com.nec.asia.nic.comp.trans.dto.ImmiHistoryDto;
+import com.nec.asia.nic.comp.trans.dto.NicUploadJobDto;
+import com.nec.asia.nic.comp.trans.service.BorderGateService;
+import com.nec.asia.nic.comp.trans.service.NicImmiHistoryService;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.service.impl.DefaultBusinessServiceImpl;
+import com.nec.asia.nic.utils.HelperClass;
+
+/**
+ * @author JohnPaul_Millan
+ * @Company : NEC ASIA PACIFIC PTE LTD
+ * @Since : Mar 4, 2014
+ * 
+ */
+ 
+ 
+/*
+ * Modification History:
+ * 
+ * 13 Mar 2014 (chris): add the non-argument constructor
+ * 22 Sep 2014 (chris): add method findAfisRefIdByTransactionId()
+ * 11 Jan 2016 (chris): add method getNextAfisKeyNo()
+ */
+ 
+@Service("nicImmiHistoryService")
+public class NicImmiHistorySerivceImpl 
+					extends DefaultBusinessServiceImpl<ImmiHistory, Long, NicImmiHistoryDao>
+					implements NicImmiHistoryService {
+	
+	public final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private BorderGateService borderGateService;
+	
+	@Autowired
+	private NicImmiHistoryChildenDao chilDao;
+	
+	public NicImmiHistorySerivceImpl(){
+		
+	}
+
+	@Autowired
+	public NicImmiHistorySerivceImpl(NicImmiHistoryDao dao) {
+		this.dao = dao;
+	}
+	
+	@Override
+	public List<ImmiHistory> findByNinPPno(String nin, String passportNo) {
+		try {
+			List<ImmiHistory> list = this.dao.findByNinPPno(nin,passportNo);
+			if(list != null && list.size() > 0){
+				int i = 0;
+				for(ImmiHistory immi : list){
+					/*Tạm đóng do thay đổi lại trường trong xnc*/
+					/*i++;
+					if(immi.getDob() != null){
+						String dfDob = HelperClass.convertDateToString(immi.getDob());
+						immi.setFmDob(dfDob);
+					}
+					if(immi.getPassportExpiredDate() != null){
+						String dfPassportEx = HelperClass.convertDateToString(immi.getPassportExpiredDate());
+						immi.setFmPassportExpiredDate(dfPassportEx);
+					}
+					if(immi.getCreatedTime() != null){
+						String dfCeatedTime = HelperClass.convertDateToString1(immi.getCreatedTime());
+						immi.setFmCreateDate(dfCeatedTime);
+					}
+					if(immi.getVisaValidTo() != null){
+						String dfVisaValid = HelperClass.convertDateToString(immi.getVisaValidTo());
+						immi.setFmVisaValidTo(dfVisaValid);
+					}
+					if(StringUtils.isNotEmpty(immi.getGender())){
+						immi.setGender(immi.getGender().equals("M") ? "Nam" : "Nữ");
+					}
+					immi.setStt(i);
+					if(immi.getImmiType() == 0){
+						immi.setImmiTypeStr("Xuất cảnh");
+					}else{
+						immi.setImmiTypeStr("Nhập cảnh");
+					}*/
+				}
+				return list;
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ArrayList<ImmiHistory>();
+	}
+
+	@Override
+	public List<ImmiHistory> findAllByTypeOrGate(String type, String borderGate) {
+		try {
+			return dao.findAllByTypeOrGate(type, borderGate);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public List<CountPassport> borderGateNC(){
+		
+		List<CountPassport> result = null;
+		try {
+			result = dao.borderGateNC();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public List<CountPassport> borderGateNCVP(){
+		
+		List<CountPassport> result = null;
+		try {
+			result = dao.borderGateNCVP();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public List<CountPassport> borderGateXC(){
+		
+		List<CountPassport> result = null;
+		try {
+			result = dao.borderGateXC();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public List<CountPassport> borderGateXCVP(){
+		
+		List<CountPassport> result = null;
+		try {
+			result = dao.borderGateXCVP();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public List<NicUploadJobDto> newImmihistory(){
+		
+		List<NicUploadJobDto> result = null;
+		try {
+			result = dao.newImmihistory();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public List<ImmiHistory> listImmihistoryAll(NicUploadJobDto dto, int pageNumber, int pageSize){
+		
+		List<ImmiHistory> result = null;
+		try {
+			result = dao.listImmihistoryAll(dto, pageNumber, pageSize);
+			if(result != null){
+				for(ImmiHistory immi : result){
+					if(immi.getImmiType().equals("N")){
+						immi.setImmiType("Nhập cảnh");
+					}
+					else if(immi.getImmiType().equals("X")){
+						immi.setImmiType("Xuất cảnh");
+					}
+					
+					if(immi.getGender().equals("M"))
+						immi.setGender("Nam");
+					else if(immi.getGender().equals("F"))
+						immi.setGender("Nữ");
+					else 
+						immi.setGender("Khác");
+					
+//					if(immi.getCreatedTime() != null)
+//						immi.setCrDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(immi.getCreatedTime()));
+					
+					if(immi.getDateOfBirth() != null)
+						immi.setDefDateOfBirth(new SimpleDateFormat("dd/MM/yyyy").format(immi.getDateOfBirth()));
+					
+					List<BorderGate> lstGate = borderGateService.findAllBorderGate(immi.getBorderGateCode());
+					if(lstGate != null && lstGate.size() > 0){
+						immi.setBorderGateCode(lstGate.get(0).getName());
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public long listImmihistoryAllCount(NicUploadJobDto dto){
+		
+		long result = 0;
+		try {
+			result = dao.listImmihistoryAllCount(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<ImmiHistoryData> findImmiByNinPPno(String nin, String passportNo) throws Exception {
+		try {
+			List<ImmiHistory> list = this.dao.findByNinPPno(nin,passportNo);
+			if(list != null && list.size() > 0){
+				List<ImmiHistoryData> listImmiData = new ArrayList<ImmiHistoryData>();
+				for(ImmiHistory immi : list){
+					
+					ImmiHistoryData immiData = new ImmiHistoryData();
+					immiData.setFullName(immi.getFullName());
+					//immiData.setDob(immi.getDateOfBirth());
+					if(immi.getDateOfBirth() != null){
+						DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+						String date = dateFormat.format(immi.getDateOfBirth());
+						immiData.setDob(date);
+					}
+					immiData.setCountryCode(immi.getCountryCode());
+					immiData.setNin(immi.getIdentityCardNo());
+					immiData.setGender(immi.getGender());					
+					immiData.setImmiType(immi.getImmiType());
+					//immiData.setImmiCreateDate(immi.getCreatedTime());
+					if(immi.getCreatedTime() != null){
+						DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+						String date = dateFormat.format(immi.getCreatedTime());
+						immiData.setImmiCreateDate(date);
+					}
+					immiData.setPassportNo(immi.getPassportNo());
+					immiData.setVisaNo(immi.getVisaNo());
+					immiData.setBorderGate(immi.getBorderGateCode());
+					//immiData.setExpiryDate(immi.getPassportExpiredDate());
+					if(immi.getPassportExpiredDate() != null){
+						DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+						String date = dateFormat.format(immi.getPassportExpiredDate());
+						immiData.setExpiryDate(date);
+					}
+					immiData.setVisaSymbol(immi.getVisaSymbolCode());
+					immiData.setVisaType(immi.getVisaTypeCode());
+					//immiData.setVisaIssueDate(immi.getVisaIssueDate());
+					if(immi.getVisaIssueDate() != null){
+						DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+						String date = dateFormat.format(immi.getVisaIssueDate());
+						immiData.setVisaIssueDate(date);
+					}
+					//immiData.setVisaValidFrom(immi.getCaValidFromDate());
+					if(immi.getCaValidFromDate() != null){
+						DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+						String date = dateFormat.format(immi.getCaValidFromDate());
+						immiData.setVisaValidFrom(date);
+					}
+					//immiData.setVisaValidTo(immi.getCaValidToDate());
+					if(immi.getCaValidToDate() != null){
+						DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+						String date = dateFormat.format(immi.getCaValidToDate());
+						immiData.setVisaValidTo(date);
+					}
+					immiData.setGateNote(immi.getGateNote());
+					immiData.setPurposeCode(immi.getPurposeCode());
+					listImmiData.add(immiData);
+				}
+				return listImmiData;
+			}
+		}catch (Throwable ex) {
+			ex.printStackTrace();
+			throw new Exception(ex);
+		}
+		return null;
+	}
+
+	@Override
+	public void saveOrUpdateImmi(ImmiHistory immiHistory) throws Exception {
+		try {
+			this.dao.saveOrUpdate(immiHistory);
+		} catch (Throwable e) {
+			throw new Exception(e);
+		}
+	}
+
+	@Override
+	public Boolean updateSupervisor(String transactionId,
+			String supervisorName, String note, String blacklistId,
+			Integer isPass) throws Exception {
+		try {
+			ImmiHistory immi = this.dao.findImmiByTransactionId(transactionId, null);
+			if(immi != null){
+				immi.setSupervisorFullname(supervisorName);
+				immi.setSupervisorNote(note);
+				immi.setCheckBlackListIdStr(blacklistId);
+				immi.setSupervisorResult(-1);			
+				if(isPass != null){
+					immi.setSupervisorResult(isPass);					
+				}
+				this.dao.saveOrUpdate(immi);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean updateAdminStatus(String transactionId, String adminName,
+			String note, Integer isPass) throws Exception {
+		try {
+			ImmiHistory immi = this.dao.findImmiByTransactionId(transactionId, null);
+			if(immi != null){
+				immi.setAdminFullname(adminName);
+				immi.setAdminNote(note);
+				immi.setAdminResult(-1);			
+				if(isPass != null){
+					immi.setAdminResult(isPass);					
+				}
+				this.dao.saveOrUpdate(immi);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean checkDownloadQueue(Long idImmi) {
+		Boolean check = false;
+		try {
+			ImmiHistory immi =  this.dao.findById(idImmi);
+			if(immi != null){
+				if(immi.getSystemCheckResult() == 1){
+					check = true;
+				}else{
+					if(immi.getSupervisorResult() == 1){
+						check = true;
+					}else{
+						if(immi.getAdminResult() != -1){
+							check = true;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	@Override
+	public ImmiHistory updateInfoImmihistory(Immihistory immi) {
+		try {
+			ImmiHistory immiUp = this.dao.findImmiByTransactionId(immi.getTransactionId(), null);
+			if(immiUp != null){
+				//immiUp.setFirstName(immi.getFirstName());
+				//immiUp.setMiddleName(immi.getMiddleName());
+				//immiUp.setLastName(immi.getLastName());
+				//immiUp.setFullName(immi.getFullName());
+				//immiUp.setFullNameWithout(immi.getFullNameWithout());
+				//immiUp.setPlaceOfBirthCode(immi.getPlaceOfBirthCode());
+				//immiUp.setIdentityCardNo(immi.getIdentityCardNo());
+				//immiUp.setDateOfBirth(immi.getDateOfBirth());
+				//immiUp.setDefDateOfBirth(immi.getDefDateOfBirth());
+				//immiUp.setGender(immi.getGender());
+				//immiUp.setCountryCode(immi.getCountryCode());
+				//immiUp.setPassportNo(immi.getPassportNo());
+				//immiUp.setPassportType(immi.getPassportType());
+				//immiUp.setPassportIssuePlaceCode(immi.getPassportIssuePlaceCode());
+				//immiUp.setPassportExpiredDate(immi.getPassportExpiredDate());
+				//immiUp.setIcaoLine(immi.getIcaoLine());
+				//immiUp.setPersonId(immi.getPersonId());
+				//immiUp.setPersonType(immi.getPersonType());
+				//immiUp.setCaSerialNumber(immi.getCaSerialNumber());
+				//immiUp.setCaSignedDate(immi.getCaSignedDate());
+				//immiUp.setCaValidFromDate(immi.getCaValidFromDate());
+				//immiUp.setCaValidToDate(immi.getCaValidToDate());
+				immiUp.setVisaNo(immi.getVisaNo());
+				immiUp.setVisaTypeCode(immi.getVisaTypeCode());
+				immiUp.setVisaValue(immi.getVisaValue());
+				immiUp.setVisaSymbolCode(immi.getVisaSymbolCode());
+				immiUp.setVisaIssuePlaceCode(immi.getVisaIssuePlaceCode());
+				immiUp.setVisaIssueDate(immi.getVisaIssueDate());
+				immiUp.setFreeVisaId(immi.getFreeVisaId());
+				immiUp.setResidenceUntilDate(immi.getResidenceUntilDate());
+				immiUp.setFlightNo(immi.getFlightNo());
+				immiUp.setPurposeCode(immi.getPurposeCode());
+				immiUp.setPurposeName(immi.getPurposeName());
+				immiUp.setDeleteFlag(immi.getDeleteFlag());
+				this.dao.saveOrUpdate(immiUp);
+				//List<ImmiHistoryChilden> chilList = chilDao.findByImmiId(immiUp.getId());
+				this.deleteChildeByImmiId(immiUp.getId());
+				List<ImmihistoryChildren> listChil = immi.getChildrens();
+				if(listChil != null){
+					for(ImmihistoryChildren chil : listChil){
+						ImmiHistoryChilden immiChil = new ImmiHistoryChilden();
+						immiChil.setImmihistoryId(immiUp.getId());
+						immiChil.setAddress(chil.getAddress());
+						immiChil.setDateOfBirth(chil.getDateOfBirth());
+						immiChil.setFamilyrelationshipCode(chil.getFamilyrelationshipCode());
+						immiChil.setFullName(chil.getFullName());
+						immiChil.setGender(chil.getGender());
+						immiChil.setPlaceOfBirthCode(chil.getPlaceOfBirthCode());
+						immiChil.setCreatedBy("SYSTEM");
+						immiChil.setCreatedTime(new Date());
+						chilDao.saveOrUpdate(immiChil);
+					}
+				}
+				return immiUp;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public PaginatedResult<ImmiHistoryDto> getAllImmihistory(String fullName,
+			String dob, String gender, String passportNo, String visaNo,
+			String nin, String nationality, int pageNo, int pageSize) {
+		try {
+			PaginatedResult<ImmiHistoryDto> result = this.dao.getAllImmihistory(fullName, dob, gender, passportNo, visaNo, nin, nationality, pageNo, pageSize);			
+			if(result != null){
+				for(ImmiHistoryDto dto : result.getRows()){
+					if(StringUtils.isNotEmpty(dto.getGender())){
+						dto.setGender(dto.getGender().equals("M") ? "Nam" : "Nữ");
+					}
+//					if(StringUtils.isNotEmpty(dto.getDob())){
+//						Date dob1 = HelperClass.convertStringToDate1(dto.getDob());
+//						if(dob1 != null){
+//							dto.setDob(HelperClass.convertDateToString2(dob1));
+//						}
+//					}
+				}
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public PaginatedResult<ImmiHistoryDto> getAllImmihistoryA(String fullName,
+			int startY, int endY, String gender, String passportNo,
+			String visaNo, String nin, String nationality, int pageNo,
+			int pageSize) {
+		try {
+			PaginatedResult<ImmiHistoryDto> result = this.dao.getAllImmihistoryA(fullName, startY, endY, gender, passportNo, visaNo, nin, nationality, pageNo, pageSize);
+			if(result != null){
+				for(ImmiHistoryDto dto : result.getRows()){
+					if(StringUtils.isNotEmpty(dto.getGender())){
+						dto.setGender(dto.getGender().equals("M") ? "Nam" : "Nữ");
+					}
+//					if(StringUtils.isNotEmpty(dto.getDob())){
+//						Date dob = HelperClass.convertStringToDate1(dto.getDob());
+//						if(dob != null){
+//							dto.setDob(HelperClass.convertDateToString2(dob));
+//						}
+//					}
+				}
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Integer totalImmiByBorder(String immiType, String borderGate) {
+		try {
+			return this.dao.totalImmiByBorder(immiType, borderGate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public void deleteChildeByImmiId(Long id) {
+		try {
+			List<ImmiHistoryChilden> list = chilDao.findByImmiId(id);
+			if(list != null){
+				for(ImmiHistoryChilden chil : list){
+					chilDao.delete(chil);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public PaginatedResult<ImmiHistoryInfo> getListImihistory(String fullname,String passportNo,
+    		String vidaNo,String nationCode,String dob,String gender,String fromDate,String endDate,
+    		String typeXnc,String ckXNC,String chuyenBay,String sophieuXNC,String purpose,
+    		String sapxep,int pageNo,int pageSite) {
+           try {
+        	   PaginatedResult<ImmiHistoryInfo> pag = new PaginatedResult<ImmiHistoryInfo>();
+        	   pag = this.dao.getListImmihistory(fullname, passportNo,
+ 					  vidaNo, nationCode, dob, gender, fromDate, endDate,
+ 					  typeXnc, ckXNC, chuyenBay, sophieuXNC, purpose, sapxep, pageNo, pageSite);
+        	   if(pag !=null){
+        		   List<ImmiHistoryInfo> list = pag.getRows();
+        		   for(ImmiHistoryInfo immi:list){
+        			   if(immi.getGender().equals("M")){
+        				   immi.setGender("Nam");
+        			   }else if(immi.getGender().equals("F")){
+        				   immi.setGender("Nữ");
+        			   }
+        			   if(immi.getTypeXnc().equals("N")){
+        				   immi.setTypeXnc("Nhập");
+        			   }else immi.setTypeXnc("Xuất");
+        		   }
+        	   }
+			   return pag;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
+	public ImmiHistory getImmiHistoryById(Long id) {
+		// TODO Auto-generated method stub
+		try {
+			return  this.dao.getImmiHistoryById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return null;
+	}
+}

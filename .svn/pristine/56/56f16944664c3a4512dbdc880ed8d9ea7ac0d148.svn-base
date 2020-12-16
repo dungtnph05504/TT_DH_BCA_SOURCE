@@ -1,0 +1,390 @@
+package com.nec.asia.nic.comp.a08database.domain;
+
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "DoiTuongDetail")
+@XmlType(name = "DoiTuongDetail", propOrder = { "doiTuongId",
+		"doiTuongTtiDangKyId", "tenChinh", "ngaySinh", "gioiTinh",
+		"quocTichHn", "quocTichGoc", "ngheNghiep", "noiSinh", "danToc",
+		"tonGiao", "ghiChu", "soDangKy", "loaiDoiTuong", "xuatNhap",
+		"donViDangKy", "lyDoDangKy", "ngayHetHan", "nguoiCanBaoTin",
+		"dvCanBaoTin", "telBaoTin", "dcCanBaoTin", "ngayDangKy", "ngayGiaiToa",
+		"lyDoGiaiToa", "soCvGiaiToa", "soCvDangKy", "nguoiDangKyCv",
+		"ngayCvDangKy", "nguoiNhapMay", "ngayNhapMay", "anh",
+		"diaChiThuongTru", "noiOHienNay", "noiLamViec", "queQuan",
+		"tenDonViDangKy", "nguoiKyCv", "nguoiDuyetGiaiToa", "chucVuGiaiToa", "family" })
+public class DoiTuongDetail {
+	private Double doiTuongId;
+	private Double doiTuongTtiDangKyId;
+	private String tenChinh;
+	private String ngaySinh;
+	private String gioiTinh;
+	private String quocTichHn;
+	private String quocTichGoc;
+	private String ngheNghiep;
+	private String noiSinh;
+	private String danToc;
+	private String tonGiao;
+	private String ghiChu;
+	private String soDangKy;
+	private String loaiDoiTuong;
+	private String xuatNhap;
+	private String donViDangKy;
+	private String lyDoDangKy;
+	private String ngayHetHan;
+	private String nguoiCanBaoTin;
+	private String dvCanBaoTin;
+	private String telBaoTin;
+	private String dcCanBaoTin;
+	private String ngayDangKy;
+	private String ngayGiaiToa;
+	private String lyDoGiaiToa;
+	private String soCvGiaiToa;
+	private String soCvDangKy;
+	private String nguoiDangKyCv;
+	private String ngayCvDangKy;
+	private String nguoiNhapMay;
+	private String ngayNhapMay;
+	private String anh;
+	
+	private String diaChiThuongTru;
+	private String noiOHienNay;
+	private String noiLamViec;
+	private String queQuan;
+	private String tenDonViDangKy;
+	private String nguoiKyCv;
+	private String nguoiDuyetGiaiToa;
+	private String chucVuGiaiToa;
+	private List<PersonFamily> family;
+	
+	public List<PersonFamily> getFamily() {
+		return family;
+	}
+
+	public void setFamily(List<PersonFamily> family) {
+		this.family = family;
+	}
+
+	public String getDiaChiThuongTru() {
+		return diaChiThuongTru;
+	}
+
+	public void setDiaChiThuongTru(String diaChiThuongTru) {
+		this.diaChiThuongTru = diaChiThuongTru;
+	}
+
+	public String getNoiOHienNay() {
+		return noiOHienNay;
+	}
+
+	public void setNoiOHienNay(String noiOHienNay) {
+		this.noiOHienNay = noiOHienNay;
+	}
+
+	public String getNoiLamViec() {
+		return noiLamViec;
+	}
+
+	public void setNoiLamViec(String noiLamViec) {
+		this.noiLamViec = noiLamViec;
+	}
+
+	public String getQueQuan() {
+		return queQuan;
+	}
+
+	public void setQueQuan(String queQuan) {
+		this.queQuan = queQuan;
+	}
+
+	public String getTenDonViDangKy() {
+		return tenDonViDangKy;
+	}
+
+	public void setTenDonViDangKy(String tenDonViDangKy) {
+		this.tenDonViDangKy = tenDonViDangKy;
+	}
+
+	public String getNguoiKyCv() {
+		return nguoiKyCv;
+	}
+
+	public void setNguoiKyCv(String nguoiKyCv) {
+		this.nguoiKyCv = nguoiKyCv;
+	}
+
+	public String getNguoiDuyetGiaiToa() {
+		return nguoiDuyetGiaiToa;
+	}
+
+	public void setNguoiDuyetGiaiToa(String nguoiDuyetGiaiToa) {
+		this.nguoiDuyetGiaiToa = nguoiDuyetGiaiToa;
+	}
+
+	public String getChucVuGiaiToa() {
+		return chucVuGiaiToa;
+	}
+
+	public void setChucVuGiaiToa(String chucVuGiaiToa) {
+		this.chucVuGiaiToa = chucVuGiaiToa;
+	}
+
+	public String getAnh() {
+		return anh;
+	}
+
+	public void setAnh(String anh) {
+		this.anh = anh;
+	}
+
+	public Double getDoiTuongId() {
+		return doiTuongId;
+	}
+
+	public void setDoiTuongId(Double doiTuongId) {
+		this.doiTuongId = doiTuongId;
+	}
+
+	public Double getDoiTuongTtiDangKyId() {
+		return doiTuongTtiDangKyId;
+	}
+
+	public void setDoiTuongTtiDangKyId(Double doiTuongTtiDangKyId) {
+		this.doiTuongTtiDangKyId = doiTuongTtiDangKyId;
+	}
+
+	public String getTenChinh() {
+		return tenChinh;
+	}
+
+	public void setTenChinh(String tenChinh) {
+		this.tenChinh = tenChinh;
+	}
+
+	public String getNgaySinh() {
+		return ngaySinh;
+	}
+
+	public void setNgaySinh(String ngaySinh) {
+		this.ngaySinh = ngaySinh;
+	}
+
+	public String getGioiTinh() {
+		return gioiTinh;
+	}
+
+	public void setGioiTinh(String gioiTinh) {
+		this.gioiTinh = gioiTinh;
+	}
+
+	public String getQuocTichHn() {
+		return quocTichHn;
+	}
+
+	public void setQuocTichHn(String quocTichHn) {
+		this.quocTichHn = quocTichHn;
+	}
+
+	public String getQuocTichGoc() {
+		return quocTichGoc;
+	}
+
+	public void setQuocTichGoc(String quocTichGoc) {
+		this.quocTichGoc = quocTichGoc;
+	}
+
+	public String getNgheNghiep() {
+		return ngheNghiep;
+	}
+
+	public void setNgheNghiep(String ngheNghiep) {
+		this.ngheNghiep = ngheNghiep;
+	}
+
+	public String getNoiSinh() {
+		return noiSinh;
+	}
+
+	public void setNoiSinh(String noiSinh) {
+		this.noiSinh = noiSinh;
+	}
+
+	public String getDanToc() {
+		return danToc;
+	}
+
+	public void setDanToc(String danToc) {
+		this.danToc = danToc;
+	}
+
+	public String getTonGiao() {
+		return tonGiao;
+	}
+
+	public void setTonGiao(String tonGiao) {
+		this.tonGiao = tonGiao;
+	}
+
+	public String getGhiChu() {
+		return ghiChu;
+	}
+
+	public void setGhiChu(String ghiChu) {
+		this.ghiChu = ghiChu;
+	}
+
+	public String getSoDangKy() {
+		return soDangKy;
+	}
+
+	public void setSoDangKy(String soDangKy) {
+		this.soDangKy = soDangKy;
+	}
+
+	public String getLoaiDoiTuong() {
+		return loaiDoiTuong;
+	}
+
+	public void setLoaiDoiTuong(String loaiDoiTuong) {
+		this.loaiDoiTuong = loaiDoiTuong;
+	}
+
+	public String getXuatNhap() {
+		return xuatNhap;
+	}
+
+	public void setXuatNhap(String xuatNhap) {
+		this.xuatNhap = xuatNhap;
+	}
+
+	public String getDonViDangKy() {
+		return donViDangKy;
+	}
+
+	public void setDonViDangKy(String donViDangKy) {
+		this.donViDangKy = donViDangKy;
+	}
+
+	public String getLyDoDangKy() {
+		return lyDoDangKy;
+	}
+
+	public void setLyDoDangKy(String lyDoDangKy) {
+		this.lyDoDangKy = lyDoDangKy;
+	}
+
+	public String getNgayHetHan() {
+		return ngayHetHan;
+	}
+
+	public void setNgayHetHan(String ngayHetHan) {
+		this.ngayHetHan = ngayHetHan;
+	}
+
+	public String getNguoiCanBaoTin() {
+		return nguoiCanBaoTin;
+	}
+
+	public void setNguoiCanBaoTin(String nguoiCanBaoTin) {
+		this.nguoiCanBaoTin = nguoiCanBaoTin;
+	}
+
+	public String getDvCanBaoTin() {
+		return dvCanBaoTin;
+	}
+
+	public void setDvCanBaoTin(String dvCanBaoTin) {
+		this.dvCanBaoTin = dvCanBaoTin;
+	}
+
+	public String getTelBaoTin() {
+		return telBaoTin;
+	}
+
+	public void setTelBaoTin(String telBaoTin) {
+		this.telBaoTin = telBaoTin;
+	}
+
+	public String getDcCanBaoTin() {
+		return dcCanBaoTin;
+	}
+
+	public void setDcCanBaoTin(String dcCanBaoTin) {
+		this.dcCanBaoTin = dcCanBaoTin;
+	}
+
+	public String getNgayDangKy() {
+		return ngayDangKy;
+	}
+
+	public void setNgayDangKy(String ngayDangKy) {
+		this.ngayDangKy = ngayDangKy;
+	}
+
+	public String getNgayGiaiToa() {
+		return ngayGiaiToa;
+	}
+
+	public void setNgayGiaiToa(String ngayGiaiToa) {
+		this.ngayGiaiToa = ngayGiaiToa;
+	}
+
+	public String getLyDoGiaiToa() {
+		return lyDoGiaiToa;
+	}
+
+	public void setLyDoGiaiToa(String lyDoGiaiToa) {
+		this.lyDoGiaiToa = lyDoGiaiToa;
+	}
+
+	public String getSoCvGiaiToa() {
+		return soCvGiaiToa;
+	}
+
+	public void setSoCvGiaiToa(String soCvGiaiToa) {
+		this.soCvGiaiToa = soCvGiaiToa;
+	}
+
+	public String getSoCvDangKy() {
+		return soCvDangKy;
+	}
+
+	public void setSoCvDangKy(String soCvDangKy) {
+		this.soCvDangKy = soCvDangKy;
+	}
+
+	public String getNguoiDangKyCv() {
+		return nguoiDangKyCv;
+	}
+
+	public void setNguoiDangKyCv(String nguoiDangKyCv) {
+		this.nguoiDangKyCv = nguoiDangKyCv;
+	}
+
+	public String getNgayCvDangKy() {
+		return ngayCvDangKy;
+	}
+
+	public void setNgayCvDangKy(String ngayCvDangKy) {
+		this.ngayCvDangKy = ngayCvDangKy;
+	}
+
+	public String getNguoiNhapMay() {
+		return nguoiNhapMay;
+	}
+
+	public void setNguoiNhapMay(String nguoiNhapMay) {
+		this.nguoiNhapMay = nguoiNhapMay;
+	}
+
+	public String getNgayNhapMay() {
+		return ngayNhapMay;
+	}
+
+	public void setNgayNhapMay(String ngayNhapMay) {
+		this.ngayNhapMay = ngayNhapMay;
+	}
+}

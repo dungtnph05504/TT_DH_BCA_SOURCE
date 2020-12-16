@@ -1,0 +1,893 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicTransaction" table="EPP_TRANSACTION" optimistic-lock="version">
+		<id name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" />
+			<generator class="assigned" />
+		</id>
+		<property name="personCode" type="string">
+			<column name="PERSON_CODE" length="30">
+				<comment>Mã cá nhân, được cập nhật khi khớp hồ sơ</comment>
+			</column>
+		</property>
+		<property name="applnRefNo" type="string">
+			<column name="APPLN_REF_NO" length="36">
+				<comment>Reference No (eg. Payment Receipt No)</comment>
+			</column>
+		</property>
+		<property name="nin" type="string">
+			<column name="NIN" length="15">
+				<comment>National Identity Number</comment>
+			</column>
+		</property>
+		<property name="dateOfApplication" type="timestamp">
+			<column name="DATE_OF_APPLICATION" length="7" not-null="true">
+				<comment>Capture Date</comment>
+			</column>
+		</property>
+		<property name="estDateOfCollection" type="timestamp">
+			<column name="EST_DATE_OF_COLLECTION" length="7">
+				<comment>Release Date</comment>
+			</column>
+		</property>
+		<property name="passportType" type="string">
+			<column name="PASSPORT_TYPE" length="30">
+				<comment>Passport Type (Regular, Official, etc)</comment>
+			</column>
+		</property>
+		<property name="validityPeriod" type="int">
+			<column name="VALIDITY_PERIOD" precision="10" scale="0">
+				<comment>Valid Duration (5 year)</comment>
+			</column>
+		</property>
+		<property name="issuingAuthority" type="string">
+			<column name="ISSUING_AUTHORITY">
+				<comment>issuing authority</comment>
+			</column>
+		</property>
+		<property name="priority" type="int">
+			<column name="PRIORITY" precision="10" scale="0">
+				<comment>Priority (0: Normal, 1: Express, 2: VIP)</comment>
+			</column>
+		</property>
+		<property name="regSiteCode" type="string">
+			<column name="REG_SITE_CODE" length="5">
+				<comment>Registration Location</comment>
+			</column>
+		</property>
+		<property name="issSiteCode" type="string">
+			<column name="ISS_SITE_CODE" length="5">
+				<comment>Collection Location</comment>
+			</column>
+		</property>
+		<property name="nicSiteCode" type="string">
+			<column name="NIC_SITE_CODE" length="20">
+				<comment>Noi xu ly tu Co quan dai dien (Neu co)</comment>
+			</column>
+		</property>
+		<property name="transactionType" type="string">
+			<column name="TRANSACTION_TYPE" length="30">
+				<comment>Transaction Type (NEW, RENEWAL, LOST)</comment>
+			</column>
+		</property>
+		<property name="transactionStatus" type="string">
+			<column name="TRANSACTION_STATUS" length="30">
+				<comment>Transaction Status</comment>
+			</column>
+		</property>
+		<property name="prevPassportNo" type="string">
+			<column name="PREV_PASSPORT_NO" length="16">
+				<comment>Previous Passport Number</comment>
+			</column>
+		</property>
+		<property name="prevDateOfIssue" type="timestamp">
+			<column name="PREV_DATE_OF_ISSUE" length="7">
+				<comment>Previous Date of Issue</comment>
+			</column>
+		</property>
+		<property name="registrationNo" type="string">
+			<column name="REGISTRATION_NO" length="20">
+				<comment>REGISTRATION_NO</comment>
+			</column>
+		</property>
+		<property name="recieptNo" type="string">
+			<column name="RECEIPT_NO" length="25">
+				<comment>So bien nhan tu duoi A</comment>
+			</column>
+		</property>
+		<property name="isEpassport" type="yes_no">
+			<column name="IS_EPASSPORT" length="1">
+				<comment>Loại hộ chiếu - Y: hộ chiếu điện tử/ N: hộ chiếu thường</comment>
+			</column>
+		</property>
+		<property name="isPostOffice" type="yes_no">
+			<column name="IS_POST_OFFICE" length="1">
+				<comment>Có nhận qua đường bưu điện hay không - N: Không / Y: có</comment>
+			</column>
+		</property>
+<!-- 		<property name="receiver" type="string">
+			<column name="RECEIVER" length="64">
+				<comment>Nơi hẹn trả kết quả</comment>
+			</column>
+		</property> -->
+		<property name="note" type="string">
+			<column name="NOTE" length="2000">
+				<comment>Ghi chú</comment>
+			</column>
+		</property>
+		<property name="infoPerson" type="string">
+			<column name="INFO_PERSON">
+				<comment>Thông tin con cái lưu dạng XML</comment>
+			</column>
+		</property>
+		<property name="packageId" type="string">
+			<column name="PACKAGE_ID" length="64">
+				<comment>Số danh sách bàn giao: C</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Create Workstation Id</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Update By</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="string">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Update Workstation Id</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+		<property name="prevDateOfExpr" type="string">
+			<column name="PREV_DATE_OF_EXPR" length="8">
+				<comment>Ngày hết hạn hộ chiếu cũ</comment>
+			</column>
+		</property>
+		<property name="appointmentPlace" type="string">
+			<column name="APPOINTMENT_PLACE" length="200">
+				<comment>Địa chỉ nơi hẹn trả</comment>
+			</column>
+		</property>
+		<property name="transactionSubType" type="string">
+			<column name="TRANSACTION_SUB_TYPE" length="30">
+				<comment>TRANSACTION_SUB_TYPE</comment>
+			</column>
+		</property>
+		<property name="applicant" type="string">
+			<column name="APPLICANT" length="100">
+				<comment>Người nộp hồ sơ</comment>
+			</column>
+		</property>
+		<property name="registrationType" type="string">
+			<column name="REGISTRATION_TYPE" length="10">
+				<comment>Loai to khai. Dien tu = ONLINE; Viet tay = HNDWRT; Thuong = NORMAL;</comment>
+			</column>
+		</property>
+		<property name="paBlacklistId" type="long">
+			<column name="PA_BLACKLIST_ID" precision="19" scale="0">
+				<comment>Id doi tuong blacklist duoc xac dinh trung tai PA</comment>
+			</column>
+		</property>
+		<property name="paInqBllUser" type="string">
+			<column name="PA_INQ_BLL_USER" length="50">
+				<comment>Ten can bo tra doi tuong tai PA</comment>
+			</column>
+		</property>
+		<property name="paArchiveCode" type="string">
+			<column name="PA_ARCHIVE_CODE" length="20">
+				<comment>So ho so luu PA</comment>
+			</column>
+		</property>
+		<property name="paSearchBio" type="yes_no">
+			<column name="PA_SEARCH_BIO" length="1">
+				<comment>Xac dinh ho so da duoc Tra cuu sinh trac ('Y') hay chua (Null)</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="4000">
+				<comment>Mo ta</comment>
+			</column>
+		</property>
+		<property name="paJoinPersonDate" type="timestamp">
+			<column name="PA_JOIN_PERSON_DATE" length="6">
+				<comment>Ngày khớp cá nhân</comment>
+			</column>
+		</property>
+		<property name="paSearchObjDate" type="timestamp">
+			<column name="PA_SEARCH_OBJ_DATE" length="6">
+				<comment>Ngày tra cứu đối tượng</comment>
+			</column>
+		</property>
+		<property name="paSaveDocDate" type="timestamp">
+			<column name="PA_SAVE_DOC_DATE" length="6">
+				<comment>Ngày lưu hồ sơ</comment>
+			</column>
+		</property>
+		<property name="archiveCode" type="string">
+			<column name="ARCHIVE_CODE" length="20">
+				<comment>So ho so luu tren A</comment>
+			</column>
+		</property>
+		<property name="matchedTypePerson" type="string">
+			<column name="MATCHED_TYPE_PERSON" length="2">
+				<comment>Loại khớp cá nhân: KK,KT,KM</comment>
+			</column>
+		</property>
+		<!-- <property name="printPerso" type="long">
+			<column name="PRINT_PERSO" precision="10" scale="0">
+				<comment>Noi in</comment>
+			</column>
+		</property>
+		<property name="syncPassport" type="int">
+			<column name="SYNCPASSPORT" precision="10" scale="0">
+				<comment>Dong bo sang BCA</comment>
+			</column>
+		</property>
+		<property name="packageID" type="string">
+			<column name="PACKAGE_ID" length="64">
+				<comment>Ma ban giao tu RIC update du lieu</comment>
+			</column>
+		</property>
+		<property name="leaderOfficerId" type="string">
+			<column name="LEADER_OFFICER_ID" length="60">
+				<comment>Ma lanh dao ky duyet</comment>
+			</column>
+		</property>
+		<property name="noteHandoverB" type="string">
+			<column name="NOTE_HANDOVER_B" length="4000">
+				<comment>Ghi chu danh sach B</comment>
+			</column>
+		</property>
+		<property name="isPostOffice" type="yes_no">
+			<column name="IS_POST_OFFICE" length="1">
+				<comment>Tiep nhận qua bưu điện. N: Không /Y: Có</comment>
+			</column>
+		</property>
+		<property name="infoPerson" type="string">
+			<column name="INFO_PERSON" length="2000">
+				<comment>Thong tin con cai</comment>
+			</column>
+		</property>
+		<property name="passportStyle" type="yes_no">
+			<column name="PASSPORT_STYLE" length="1">
+				<comment>PASSPORT_STYLE</comment>
+			</column>
+		</property>
+		<property name="receiver" type="string">
+			<column name="RECEIVER" length="500">
+				<comment>RECEIVER</comment>
+			</column>
+		</property>
+		<property name="tranType" type="string">
+			<column name="TRAN_TYPE" length="30">
+				<comment>TRAN_TYPE</comment>
+			</column>
+		</property>
+		
+		NEW 25-03-2020
+		<property name="personCode" type="string">
+			<column name="PERSON_CODE" length="30">
+				<comment>Mã cá nhân</comment>
+			</column>
+		</property> -->
+		<!-- NEW 25-03-2020 -->
+		
+        <!-- 
+        <set name="nicWorkflowJobs" table="EPP_WORKFLOW_JOB" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TRANSACTION_ID" length="36">
+                    <comment>Application Id</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.comp.trans.domain.NicWorkflowJob" />
+        </set> -->
+		<one-to-one name="nicRegistrationData" class="com.nec.asia.nic.comp.trans.domain.NicRegistrationData"></one-to-one>
+		<one-to-one name="nicTransactionPayment" class="com.nec.asia.nic.comp.trans.domain.NicTransactionPayment"></one-to-one>
+        <!-- 
+        <set name="nicTransactionAttachments" table="EPP_TRANSACTION_ATTACHMENT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TRANSACTION_ID" length="36">
+                    <comment>Application Id</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.comp.trans.domain.NicTransactionAttachment" />
+        </set> -->
+        <!-- 
+        <set name="nicSearchResults" table="EPP_SEARCH_RESULT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TRANSACTION_ID" length="36" not-null="true">
+                    <comment>Foreign Key - Application Id</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.comp.trans.domain.NicSearchResult" />
+        </set> -->
+        	
+		<set name="listHandovers" table="EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="TRANSACTION_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.nec.asia.nic.comp.listHandover.domain.NicListHandover">
+                <column name="PACKAGE_ID" not-null="true" />
+                <column name="TYPE_LIST" not-null="true"/>
+            </many-to-many>
+        </set>
+	</class>
+
+	<sql-query name="updateStatusByTransactionIdList">
+        <![CDATA[
+        UPDATE EPP_TRANSACTION 
+        SET TRANSACTION_STATUS=:status, UPDATE_BY=:officerId, UPDATE_WKSTN_ID=:workstationId, UPDATE_DATETIME=sysdate 
+        WHERE TRANSACTION_ID in (:txnIdList) and TRANSACTION_STATUS in ('PO','QC')
+        ]]>
+	</sql-query>
+	<sql-query name="getCollectedTransByDate">
+      <![CDATA[
+	      SELECT  
+		    TRUNC(T.EST_DATE_OF_COLLECTION) est_collection_date ,
+		    COUNT (T.TRANSACTION_ID) rec_num
+		FROM 
+		    EPP_CENTRAL.EPP_TRANSACTION T
+		WHERE 
+		    T.CREATE_BY NOT IN ('SYSTEM', 'TEST')
+		    AND T.TRANSACTION_STATUS NOT IN ('FA', 'KO', 'RD')
+		    AND T.EST_DATE_OF_COLLECTION BETWEEN TO_DATE(:fromDate,'MM/DD/YYYY') AND TO_DATE(:fromDate,'MM/DD/YYYY') + :noOfDays
+		GROUP BY TRUNC(T.EST_DATE_OF_COLLECTION)
+		ORDER BY TRUNC(T.EST_DATE_OF_COLLECTION)
+      ]]>
+	</sql-query>
+	<sql-query name="getPendingTransByDate">
+        <![CDATA[
+	       SELECT  
+		    TRUNC(T.EST_DATE_OF_COLLECTION)                                                         est_collection_date,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'WA', 1, 0))                   Pending_AFIS,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'FG', 1, 0))                           Pending_Investigation,
+		    --SUM(DECODE(T.TRANSACTION_STATUS, 'FG', 1, 'RV', 1, 'VG', 1, 0))                         Pending_Investigation1,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'VE', 1, 0))                        Pending_Verified,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'RP', 1,'WC', 1, 0))           Pending_Perso,
+		    --SUM(DECODE(T.TRANSACTION_STATUS, 'RP', 1,'WC', 1, 'AS', 1, 0))           Pending_Perso1,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'QC', 1, 0))                        Pending_QC,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'ST', 1, 0))                               Pending_Dispatch,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'RD', 1, 0))                                        Pending_Receive,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'OK', 1, 0))                                 Pending_Issue
+		FROM 
+		    EPP_CENTRAL.EPP_TRANSACTION T
+		WHERE 
+		    T.CREATE_BY NOT IN ('SYSTEM', 'TEST')
+		   AND T.EST_DATE_OF_COLLECTION BETWEEN TO_DATE(:fromDate,'MM/DD/YYYY') AND TO_DATE(:fromDate,'MM/DD/YYYY') + :noOfDays
+		GROUP BY TRUNC(T.EST_DATE_OF_COLLECTION)
+		ORDER BY TRUNC(T.EST_DATE_OF_COLLECTION)
+        ]]>
+	</sql-query>
+	<sql-query name="getAllTransByDate">
+        <![CDATA[
+        SELECT  
+		    TRUNC(T.EST_DATE_OF_COLLECTION)                                                         est_collection_date,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'WA', 1, 0))                   Pending_AFIS,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'FG', 1, 0))                           Pending_Investigation,
+		    --SUM(DECODE(T.TRANSACTION_STATUS, 'FG', 1, 'RV', 1, 'VG', 1, 0))                         Pending_Investigation1,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'VE', 1, 0))                        Pending_Verified,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'RP', 1,'WC', 1, 0))           Pending_Perso,
+		    --SUM(DECODE(T.TRANSACTION_STATUS, 'RP', 1,'WC', 1, 'AS', 1, 0))           Pending_Perso1,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'QC', 1, 0))                        Pending_QC,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'ST', 1, 0))                               Pending_Dispatch,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'RD', 1, 0))                                        Pending_Receive,
+		    SUM(DECODE(T.TRANSACTION_STATUS, 'OK', 1, 0))                                 Pending_Issue,
+		    SUM(CASE WHEN T.TRANSACTION_STATUS NOT IN ('FA', 'KO', 'RD') THEN 
+		    1
+		    ELSE
+		    0
+		    END) Collected_Passport
+		FROM 
+		    EPP_CENTRAL.EPP_TRANSACTION T
+		WHERE 
+		    T.CREATE_BY NOT IN ('SYSTEM', 'TEST')
+		    AND T.EST_DATE_OF_COLLECTION BETWEEN TO_DATE(:fromDate,'MM/DD/YYYY') AND TO_DATE(:fromDate,'MM/DD/YYYY') + :noOfDays
+		GROUP BY TRUNC(T.EST_DATE_OF_COLLECTION)
+		ORDER BY TRUNC(T.EST_DATE_OF_COLLECTION)
+        ]]>
+	</sql-query>
+	<sql-query name="issuePassportList">
+		<return-scalar column="regSite" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+	        SELECT * FROM (
+		        SELECT EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_NAME AS regSite, count (*) AS total FROM EPP_CENTRAL_SYS.SITE_REPOSITORY   
+	        	JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE
+	          	JOIN EPP_CENTRAL.EPP_DOCUMENT_DATA ON EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID=EPP_DOCUMENT_DATA.TRANSACTION_ID
+	      		WHERE EPP_DOCUMENT_DATA.STATUS = 'ISSUANCE' AND EPP_DOCUMENT_DATA.ACTIVE_FLAG = 'Y'
+				GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_NAME, EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+				Order by EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID asc
+			)
+			WHERE ROWNUM < 8
+        ]]>
+	</sql-query>
+	<sql-query name="noneIssuePassportList">
+		<return-scalar column="regSite" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+	        SELECT * FROM (
+	        	SELECT R.SITE_NAME AS regSite, count (R.SITE_ID) AS total FROM EPP_CENTRAL_SYS.SITE_REPOSITORY R
+	          	LEFT JOIN EPP_CENTRAL.EPP_TRANSACTION T ON R.SITE_ID = T.REG_SITE_CODE
+	          	LEFT JOIN EPP_CENTRAL.EPP_DOCUMENT_DATA D ON T.TRANSACTION_ID = D.TRANSACTION_ID
+	      		WHERE (D.STATUS = 'PERSONALIZED') AND D.PACKAGE_ID is not null
+				GROUP BY R.SITE_NAME
+				Order by R.SITE_NAME desc
+			)
+			WHERE ROWNUM < 8
+        ]]>
+	</sql-query>
+	
+	<sql-query name="nonePrintPassport">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+	       SELECT * FROM (
+				SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION 
+				JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+				JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+				WHERE (EPP_CENTRAL.EPP_WORKFLOW_JOB.INVESTIGATION_STATUS = '40' AND (EPP_CENTRAL.EPP_WORKFLOW_JOB.PERSO_REGISTER_STATUS IS NULL OR EPP_CENTRAL.EPP_WORKFLOW_JOB.PERSO_REGISTER_STATUS = '' OR EPP_CENTRAL.EPP_WORKFLOW_JOB.PERSO_REGISTER_STATUS = '09'))
+				AND EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME >= to_date('01/07/19', 'DD/MM/YY')
+				GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+				Order by groupID asc
+				)
+			WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>
+	
+	<sql-query name="printedPassport">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+	        SELECT * FROM (
+				SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION 
+				JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+				JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+				WHERE (EPP_CENTRAL.EPP_WORKFLOW_JOB.INVESTIGATION_STATUS = '40' AND EPP_CENTRAL.EPP_WORKFLOW_JOB.PERSO_REGISTER_STATUS = '02')
+				AND EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME >= to_date('01/07/19', 'DD/MM/YY')
+				GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+				Order by groupID asc
+			)
+			WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>
+	<sql-query name="allPassportList">
+		<return-scalar column="packId" type="string" />
+		<return-scalar column="createDate" type="date" />
+		<return-scalar column="createBy" type="string" />
+		<return-scalar column="regSite" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+	       	SELECT EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID as packId, 
+			  EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE as createDate, EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_BY as createBy,
+			  EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE as regSite, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+			  JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+			  JOIN EPP_CENTRAL.EPP_LIST_HANDOVER ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+       		  AND (EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE >= TO_DATE(:fromDate, 'DD/MM/YYYY') OR TO_DATE(:fromDate, 'DD/MM/YYYY') IS NULL) AND (EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE <= TO_DATE(:toDate, 'DD/MM/YYYY') OR TO_DATE(:toDate, 'DD/MM/YYYY') IS NULL)
+			  AND (EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID = (:packageID) OR (:packageID) IS NULL) AND (EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = (:regSCode) OR (:regSCode) IS NULL)
+			  GROUP BY EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID, 
+			  EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE, EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_BY,
+			  EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE
+			Order by createDate desc
+        ]]>
+	</sql-query>
+	<!-- <sql-query name="allPersoList">
+		<return-scalar column="namePerso" type="string" />
+		<return-scalar column="createDate" type="date" />
+		<return-scalar column="groupName" type="string" />
+		<return-scalar column="packId" type="string" />
+        <![CDATA[
+	       	SELECT  EPP_CENTRAL.EPP_PERSO_LOCATIONS.NAME as namePerso, 
+			  	EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE as createDate, 
+		        EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_NAME as groupName,
+		        EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId
+		        FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+		        JOIN EPP_CENTRAL.EPP_TRANSACTION_PACKAGE ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.PACKAGE_ID
+		        JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+		        JOIN EPP_CENTRAL.EPP_PERSO_LOCATIONS ON EPP_CENTRAL.EPP_PERSO_LOCATIONS.ID_PERSO = EPP_CENTRAL.EPP_TRANSACTION.PRINT_PERSO
+		        JOIN EPP_CENTRAL.PERSO_SITES ON EPP_CENTRAL.PERSO_SITES.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE
+		        JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE
+		        JOIN EPP_CENTRAL_SYS.SITE_GROUPS ON EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+				WHERE (EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.TYPE_LIST = 8)
+		        AND EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = 'MB'
+		        AND (EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE >= TO_DATE(:fromDate, 'DD/MM/YYYY') OR TO_DATE(:fromDate, 'DD/MM/YYYY') IS NULL) AND (EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE <= TO_DATE(:toDate, 'DD/MM/YYYY') OR TO_DATE(:toDate, 'DD/MM/YYYY') IS NULL)
+				AND (EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.PACKAGE_ID = (:packageID) OR (:packageID) IS NULL) AND (EPP_CENTRAL.EPP_TRANSACTION.PRINT_PERSO = (:printPerso) OR (:printPerso) = 0 OR (:printPerso) IS NULL)
+		        GROUP BY EPP_CENTRAL.EPP_PERSO_LOCATIONS.NAME, 
+				EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE, 
+		        EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_NAME,
+		        EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+			Order by createDate desc
+        ]]>
+	</sql-query> -->
+	<sql-query name="allPersoList">
+		<return-scalar column="namePerso" type="string" />
+		<return-scalar column="createDate" type="date" />
+		<return-scalar column="groupName" type="string" />
+		<return-scalar column="packId" type="string" />
+        <![CDATA[
+	       	SELECT  EPP_CENTRAL.EPP_PERSO_LOCATIONS.NAME as namePerso, 
+			  	EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE as createDate, 
+		        EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_NAME as groupName,
+		        EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId
+		        FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+		        JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+		        JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID    
+		        JOIN EPP_CENTRAL.PERSO_SITES ON EPP_CENTRAL.PERSO_SITES.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE
+            JOIN EPP_CENTRAL.EPP_PERSO_LOCATIONS ON EPP_CENTRAL.EPP_PERSO_LOCATIONS.ID_PERSO = EPP_CENTRAL.PERSO_SITES.PERSO_ID
+		        JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.PERSO_SITES.SITE_ID
+		        JOIN EPP_CENTRAL_SYS.SITE_GROUPS ON EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+				WHERE (EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TYPE_LIST = 'B')
+		        AND EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = 'AA'
+		        AND (EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE >= TO_DATE(:fromDate, 'DD/MM/YYYY') OR TO_DATE(:fromDate, 'DD/MM/YYYY') IS NULL) AND (EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE <= TO_DATE(:toDate, 'DD/MM/YYYY') OR TO_DATE(:toDate, 'DD/MM/YYYY') IS NULL)
+				AND (EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID = (:packageID) OR (:packageID) IS NULL) AND (EPP_CENTRAL.EPP_TRANSACTION.PRINT_PERSO = (:printPerso) OR (:printPerso) = 0 OR (:printPerso) IS NULL)
+		        GROUP BY EPP_CENTRAL.EPP_PERSO_LOCATIONS.NAME, 
+            EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE, 
+		        EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_NAME,
+		        EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+			Order by createDate desc;
+        ]]>
+	</sql-query>
+	<sql-query name="newTransactionProcessCXL">
+        <![CDATA[
+	       	SELECT * FROM (
+			  SELECT  EPP_CENTRAL.EPP_REGISTRATION_DATA.SEARCH_NAME, EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_NAME, EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID FROM EPP_CENTRAL.EPP_TRANSACTION
+              JOIN EPP_CENTRAL.EPP_REGISTRATION_DATA ON EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID = EPP_CENTRAL.EPP_REGISTRATION_DATA.TRANSACTION_ID
+				      JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+			        JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+              WHERE EPP_CENTRAL.EPP_WORKFLOW_JOB.INVESTIGATION_OFFICER_ID IS NULL AND EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME IS NOT NULL
+              Order by EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME desc
+			  )
+	       	WHERE ROWNUM <= 5
+        ]]>
+	</sql-query>
+	<sql-query name="newTransactionProcessDDXL">
+        <![CDATA[
+	       	SELECT * FROM (
+			  SELECT  EPP_CENTRAL.EPP_REGISTRATION_DATA.SEARCH_NAME, EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_NAME, EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID FROM EPP_CENTRAL.EPP_TRANSACTION
+              	JOIN EPP_CENTRAL.EPP_REGISTRATION_DATA ON EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID = EPP_CENTRAL.EPP_REGISTRATION_DATA.TRANSACTION_ID
+				JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+			  	JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+              	WHERE EPP_CENTRAL.EPP_WORKFLOW_JOB.INVESTIGATION_OFFICER_ID IS NOT NULL AND TRUNC(TO_DATE(EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME,'DD/MM/YY')) >= TRUNC(TO_DATE('16/08/2019','DD/MM/YY')) AND EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME IS NOT NULL
+              Order by EPP_CENTRAL.EPP_WORKFLOW_JOB.UPDATE_DATETIME desc
+			  )
+	       	WHERE ROWNUM <= 5
+        ]]>
+	</sql-query>
+	<sql-query name="totalHosoTrongNgay">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			    SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+                    JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+                    JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+			        WHERE TRUNC(TO_DATE(EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+				    GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			    Order by groupID asc
+        ]]>
+	</sql-query>
+	<sql-query name="slhosoDuyetCap">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+	        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+	        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+		      	JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+		        WHERE TRUNC(TO_DATE(EPP_CENTRAL.EPP_LIST_HANDOVER.UPDATE_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+		        AND EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 'B'
+		        AND EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.APPROVE_STAGE = 'D'
+			    GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			Order by groupID asc
+        ]]>
+	</sql-query>
+	<sql-query name="slhosoTuChoi">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+	        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+	        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+		      	JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+		        WHERE TRUNC(TO_DATE(EPP_CENTRAL.EPP_LIST_HANDOVER.UPDATE_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+		        AND EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 'B'
+		        AND EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.APPROVE_STAGE = 'K'
+			    GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			Order by groupID asc
+        ]]>
+	</sql-query>
+	<sql-query name="slhosoSapHetHan">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION 
+				JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+				JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+				WHERE (EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_STATUS != 'RIC_ISSUED')
+				AND (TRUNC(TO_DATE(SYSDATE, 'DD/MM/YYYY')) - TRUNC(TO_DATE(EPP_CENTRAL.EPP_TRANSACTION.EST_DATE_OF_COLLECTION, 'DD/MM/YYYY')) < 5)
+	      		GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			Order by groupID asc
+        ]]>
+	</sql-query>
+	
+	<sql-query name="sohschuaxl">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+				JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+				JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+				WHERE (INVESTIGATION_OFFICER_ID IS NULL OR INVESTIGATION_OFFICER_ID = '00' OR INVESTIGATION_OFFICER_ID = '01' OR INVESTIGATION_OFFICER_ID != '02')
+				AND TRUNC(TO_DATE(EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+				AND (EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID NOT IN 'BB')
+				GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			Order by groupID asc
+        ]]>
+	</sql-query>
+	<sql-query name="sohsdaxl">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+				SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+		        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+		        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+			      	JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+			        JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+			        WHERE TRUNC(TO_DATE(EPP_CENTRAL.EPP_LIST_HANDOVER.UPDATE_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+			        AND INVESTIGATION_OFFICER_ID IS NOT NULL AND INVESTIGATION_OFFICER_ID != '00' AND INVESTIGATION_OFFICER_ID != '01'      
+				    AND (EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID NOT IN 'BB')
+				    GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			    Order by groupID asc
+        ]]>
+	</sql-query>
+	<!-- <sql-query name="sohsdaxl">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+				SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION
+		        	JOIN EPP_CENTRAL.EPP_TRANSACTION_PACKAGE ON EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+		        	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.PACKAGE_ID
+			      	JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+			        WHERE TRUNC(TO_DATE(EPP_CENTRAL.EPP_LIST_HANDOVER.UPDATE_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+			        AND EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 8
+			        AND EPP_CENTRAL.EPP_LIST_HANDOVER.STATUS_HANDOVER = 1
+			       
+				    GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			    Order by groupID asc
+        ]]>
+	</sql-query> -->
+	
+	<!-- <sql-query name="slhosoQuaHan">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION 
+			JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+			JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+			WHERE (EPP_CENTRAL.EPP_WORKFLOW_JOB.INVESTIGATION_STATUS != '40') AND EPP_CENTRAL.EPP_WORKFLOW_JOB.CREATE_DATETIME >= to_date('01/07/19', 'DD/MM/YY')
+			AND (EPP_CENTRAL.EPP_TRANSACTION.EST_DATE_OF_COLLECTION - TRUNC(TO_DATE(SYSDATE,'DD-MM-YYYY')) < 0)
+      		GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			Order by groupID asc
+        ]]>
+	</sql-query> -->
+	<sql-query name="slhosoQuaHan">
+		<return-scalar column="groupID" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID as groupID, count (*) AS total FROM EPP_CENTRAL.EPP_TRANSACTION 
+		        JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE = EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID
+		        JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+		        WHERE (EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_STATUS != 'RIC_ISSUED')
+		        AND (TRUNC(TO_DATE(EPP_CENTRAL.EPP_TRANSACTION.EST_DATE_OF_COLLECTION, 'DD/MM/YYYY')) - TRUNC(TO_DATE(SYSDATE, 'DD/MM/YYYY')) < 0)
+		        GROUP BY EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+			Order by groupID asc
+        ]]>
+	</sql-query>
+	<sql-query name="tracuuhosohc">
+		<return-scalar column="tranId" type="string" />
+		<return-scalar column="fullname" type="string" />
+		<return-scalar column="gender" type="string" />
+		<return-scalar column="dob" type="date" />
+		<return-scalar column="pob" type="string" />
+		<return-scalar column="nin" type="string" />
+		<return-scalar column="passportNo" type="string" />
+		<return-scalar column="dateApp" type="date" />
+        <![CDATA[
+			SELECT tranId, fullname, gender, dob, pob, nin, passportNo, dateApp FROM 
+				(   
+				SELECT DISTINCT EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID as tranId,
+					EPP_CENTRAL.EPP_REGISTRATION_DATA.SURNAME_LINE1 as fullname, 
+					EPP_CENTRAL.EPP_REGISTRATION_DATA.GENDER as gender,
+					EPP_CENTRAL.EPP_REGISTRATION_DATA.DATE_OF_BIRTH as dob,
+					EPP_CENTRAL.EPP_REGISTRATION_DATA.PLACE_OF_BIRTH as pob,
+					EPP_CENTRAL.EPP_TRANSACTION.NIN as nin,
+					EPP_CENTRAL.EPP_DOCUMENT_DATA.PASSPORT_NO as passportNo,
+					EPP_CENTRAL.EPP_TRANSACTION.DATE_OF_APPLICATION as dateApp
+					FROM EPP_CENTRAL.EPP_TRANSACTION
+					JOIN EPP_CENTRAL.EPP_REGISTRATION_DATA ON EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID = EPP_CENTRAL.EPP_REGISTRATION_DATA.TRANSACTION_ID
+					LEFT JOIN EPP_CENTRAL.EPP_DOCUMENT_DATA ON EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID = EPP_CENTRAL.EPP_DOCUMENT_DATA.TRANSACTION_ID
+					LEFT JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+					WHERE (EPP_CENTRAL.EPP_REGISTRATION_DATA.SURNAME_LINE1 = (:fullnameS) OR (:fullnameS) IS NULL)
+					AND (EPP_CENTRAL.EPP_REGISTRATION_DATA.GENDER = (:genderS) OR (:genderS) IS NULL)
+					AND (EPP_CENTRAL.EPP_REGISTRATION_DATA.DATE_OF_BIRTH = (:dobS) OR (:dobS) IS NULL)
+					AND (EPP_CENTRAL.EPP_REGISTRATION_DATA.PLACE_OF_BIRTH = (:pobS) OR (:pobS) IS NULL)
+					AND (EPP_CENTRAL.EPP_TRANSACTION.NIN = (:ninS) OR (:ninS) IS NULL)
+					AND (EPP_CENTRAL.EPP_DOCUMENT_DATA.PASSPORT_NO = (:passportNoS) OR (:passportNoS) IS NULL)
+					AND (EPP_CENTRAL.EPP_TRANSACTION.RECEIPT_NO = (:receiptNoS) OR (:receiptNoS) IS NULL)
+					AND (EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID = (:packageIdS) OR (:packageIdS) IS NULL)
+					AND (EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TYPE_LIST = (:typeListS) OR (:typeListS) = -1)
+				)
+			Order by dateApp desc
+        ]]>
+	</sql-query>
+	<sql-query name="listPackageIDPerso">
+		<return-scalar column="packId" type="string" />
+        <!-- <![CDATA[
+			SELECT DISTINCT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId FROM EPP_CENTRAL.EPP_TRANSACTION
+				  JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.ISS_SITE_CODE
+				  JOIN EPP_CENTRAL_SYS.SITE_GROUPS ON EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID
+				  JOIN EPP_CENTRAL.EPP_TRANSACTION_PACKAGE ON EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+				  JOIN EPP_CENTRAL.EPP_LIST_HANDOVER ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.PACKAGE_ID
+				  WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 8 AND EPP_CENTRAL.EPP_LIST_HANDOVER.STATUS_HANDOVER = 1
+				  AND (EPP_CENTRAL.EPP_LIST_HANDOVER.IS_SYNC_PERSO IS NULL OR EPP_CENTRAL.EPP_LIST_HANDOVER.IS_SYNC_PERSO = 'N')
+				  AND EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.STAGE = 'D'
+				  AND EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = (:code)
+        ]]> -->
+        <![CDATA[
+			SELECT DISTINCT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+		          	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+		          	JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID				  
+		          	JOIN EPP_CENTRAL.PERSO_SITES ON EPP_CENTRAL.PERSO_SITES.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.ISS_SITE_CODE
+		          	JOIN EPP_CENTRAL.EPP_PERSO_LOCATIONS ON EPP_CENTRAL.PERSO_SITES.PERSO_ID = EPP_CENTRAL.EPP_PERSO_LOCATIONS.ID_PERSO          
+					JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.PERSO_SITES.SITE_ID
+		          WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 'B' AND EPP_CENTRAL.EPP_LIST_HANDOVER.STATUS_HANDOVER = 1
+				  	AND (EPP_CENTRAL.EPP_LIST_HANDOVER.IS_SYNC_PERSO IS NULL OR EPP_CENTRAL.EPP_LIST_HANDOVER.IS_SYNC_PERSO = 'N')
+				  	AND EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.APPROVE_STAGE = 'D'
+				  	AND EPP_CENTRAL_SYS.SITE_REPOSITORY.GROUP_ID = (:code)  		   
+        ]]>
+	</sql-query>
+	<sql-query name="packageIDPerso">
+		<return-scalar column="packId" type="string" />       
+        <![CDATA[
+			SELECT DISTINCT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+		          	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+		          	JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID				  
+		          	JOIN EPP_CENTRAL.PERSO_SITES ON EPP_CENTRAL.PERSO_SITES.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.ISS_SITE_CODE
+		          	JOIN EPP_CENTRAL.EPP_PERSO_LOCATIONS ON EPP_CENTRAL.PERSO_SITES.PERSO_ID = EPP_CENTRAL.EPP_PERSO_LOCATIONS.ID_PERSO          
+					JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.PERSO_SITES.SITE_ID
+		          WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 'B' AND EPP_CENTRAL.EPP_LIST_HANDOVER.STATUS_HANDOVER = 1
+				  	AND (EPP_CENTRAL.EPP_LIST_HANDOVER.IS_SYNC_PERSO IS NULL OR EPP_CENTRAL.EPP_LIST_HANDOVER.IS_SYNC_PERSO = 'N')
+				  	AND EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.APPROVE_STAGE = 'D'
+				  	AND EPP_CENTRAL.EPP_PERSO_LOCATIONS.CODE = (:code)		   
+        ]]>
+	</sql-query>
+	<sql-query name="packageIDConfig">
+		<return-scalar column="packId" type="string" />      
+		<return-scalar column="siteTo" type="string" />        
+        <![CDATA[
+			SELECT DISTINCT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId, EPP_CENTRAL.CONFIGURATION_WORKFLOW.SITE_ID_TO as siteTo FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+            JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+            JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID				  
+            JOIN EPP_CENTRAL.CONFIGURATION_WORKFLOW ON EPP_CENTRAL.EPP_LIST_HANDOVER.SITE_CODE = EPP_CENTRAL.CONFIGURATION_WORKFLOW.SITE_ID_FROM
+            WHERE  EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = (:handoverId)  
+            AND EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 'B' AND EPP_CENTRAL.EPP_LIST_HANDOVER.HANDOVER_STATUS = 1	
+            AND (EPP_CENTRAL.CONFIGURATION_WORKFLOW.DATE_TIME_FROM <= TO_DATE(:todayTime,'dd/mm/yyyy hh24:mi:ss'))
+			AND (EPP_CENTRAL.CONFIGURATION_WORKFLOW.DATE_TIME_TO >= TO_DATE(:todayTime,'dd/mm/yyyy hh24:mi:ss'))
+            AND EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PROPOSAL_STAGE = 'D'  
+            AND EPP_CENTRAL.CONFIGURATION_WORKFLOW.CONFIG_TYPE = 'IN'
+            AND EPP_CENTRAL.CONFIGURATION_WORKFLOW.STAGE = 'Y'
+            
+        ]]>
+	</sql-query>
+	<sql-query name="packageIDDefault">
+		<return-scalar column="packId" type="string" />      
+		<return-scalar column="code" type="string" />        
+        <![CDATA[
+			SELECT DISTINCT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId, EPP_CENTRAL.EPP_PERSO_LOCATIONS.CODE as code FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+		          	JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID
+		          	JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID				  
+		          	JOIN EPP_CENTRAL.PERSO_SITES ON EPP_CENTRAL.PERSO_SITES.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.REG_SITE_CODE
+		          	JOIN EPP_CENTRAL.EPP_PERSO_LOCATIONS ON EPP_CENTRAL.PERSO_SITES.PERSO_ID = EPP_CENTRAL.EPP_PERSO_LOCATIONS.ID_PERSO          
+					JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.PERSO_SITES.SITE_ID
+		          WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = (:handoverId)
+		                AND EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = (:type) 
+		          				  	
+				  	    AND EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PROPOSAL_STAGE = 'D'
+				  	 
+        ]]>
+	</sql-query>
+	
+	<!--packageIDDefault tạm đóng điều kiện AND EPP_CENTRAL.EPP_LIST_HANDOVER.HANDOVER_STATUS = 1  -->
+	<sql-query name="sitePerso">     
+		<return-scalar column="code" type="string" />        
+        <![CDATA[
+			SELECT DISTINCT EPP_CENTRAL.EPP_PERSO_LOCATIONS.CODE as code FROM EPP_CENTRAL.EPP_TRANSACTION 
+		          	JOIN EPP_CENTRAL.PERSO_SITES ON EPP_CENTRAL.PERSO_SITES.SITE_ID = EPP_CENTRAL.EPP_TRANSACTION.ISS_SITE_CODE
+		          	JOIN EPP_CENTRAL.EPP_PERSO_LOCATIONS ON EPP_CENTRAL.PERSO_SITES.PERSO_ID = EPP_CENTRAL.EPP_PERSO_LOCATIONS.ID_PERSO          
+                	JOIN EPP_CENTRAL_SYS.SITE_REPOSITORY ON EPP_CENTRAL_SYS.SITE_REPOSITORY.SITE_ID = EPP_CENTRAL.PERSO_SITES.SITE_ID
+		            WHERE EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID = (:tranId)
+        ]]>
+	</sql-query>
+	
+	<!--<sql-query name="searchImmiQuery">
+		<return-scalar column="FULL_NAME" type="string" />
+		<return-scalar column="GENDER" type="string" />
+		<return-scalar column="DATE_OF_BIRTH" type="string" />
+		<return-scalar column="COUNTRY_CODE" type="string" />
+		<return-scalar column="PASSPORT_NO" type="string" />
+		<return-scalar column="VISA_NO" type="string" />
+		<return-scalar column="IDENTITY_CARD_NO" type="string" />
+		<return-scalar column="PLACE_OF_BIRTH_CODE" type="string" />
+		<return-scalar column="R_" type="int" />
+		<return-scalar column="RESULT_COUNT" type="int" />
+        <![CDATA[
+			SELECT * FROM
+          		(
+			  SELECT immi.FULL_NAME, immi.GENDER, immi.DATE_OF_BIRTH, immi.COUNTRY_CODE, immi.PASSPORT_NO, immi.VISA_NO, immi.IDENTITY_CARD_NO, immi.PLACE_OF_BIRTH_CODE, rownum r_, COUNT(*) OVER () RESULT_COUNT
+			  FROM EPP_CENTRAL.IMMIHISTORY immi
+			  WHERE (:fname IS NULL OR immi.FULL_NAME = :fname) 
+			  AND (:gender IS NULL OR immi.GENDER = :gender) 
+			  AND (:ppNo IS NULL OR immi.PASSPORT_NO = :ppNo) 
+			  AND (:vsNo IS NULL OR immi.VISA_NO = :vsNo)
+			  AND (:nin IS NULL OR immi.IDENTITY_CARD_NO = :nin)
+			  AND (:nationality IS NULL OR immi.COUNTRY_CODE = :nationality)
+			  AND (:dob IS NULL OR (immi.DATE_OF_BIRTH >= to_date(:dob,'DD/MM/YYYY') AND immi.DATE_OF_BIRTH <= to_date(:dob,'DD/MM/YYYY')))
+			  )
+			WHERE r_ >= (((:pageNo-1) * :pageSize) + 1) and r_ < ((:pageNo * :pageSize) + 1)
+        ]]>
+	</sql-query>
+	<sql-query name="searchImmiQueryA">
+		<return-scalar column="FULL_NAME" type="string" />
+		<return-scalar column="GENDER" type="string" />
+		<return-scalar column="DATE_OF_BIRTH" type="string" />
+		<return-scalar column="COUNTRY_CODE" type="string" />
+		<return-scalar column="PASSPORT_NO" type="string" />
+		<return-scalar column="VISA_NO" type="string" />
+		<return-scalar column="IDENTITY_CARD_NO" type="string" />
+		<return-scalar column="PLACE_OF_BIRTH_CODE" type="string" />
+		<return-scalar column="R_" type="int" />
+		<return-scalar column="RESULT_COUNT" type="int" />
+        <![CDATA[
+			SELECT * FROM
+          		(
+			  SELECT immi.FULL_NAME, immi.GENDER, immi.DATE_OF_BIRTH, immi.COUNTRY_CODE, immi.PASSPORT_NO, immi.VISA_NO, immi.IDENTITY_CARD_NO, immi.PLACE_OF_BIRTH_CODE, rownum r_, COUNT(*) OVER () RESULT_COUNT
+			  FROM EPP_CENTRAL.IMMIHISTORY immi
+			  WHERE (:fname IS NULL OR immi.FULL_NAME = :fname) 
+			  AND (:gender IS NULL OR immi.GENDER = :gender) 
+			  AND (:ppNo IS NULL OR immi.PASSPORT_NO = :ppNo) 
+			  AND (:vsNo IS NULL OR immi.VISA_NO = :vsNo)
+			  AND (:nin IS NULL OR immi.IDENTITY_CARD_NO = :nin)
+			  AND (:nationality IS NULL OR immi.COUNTRY_CODE = :nationality)
+			  AND (:startY IS NULL OR EXTRACT(YEAR FROM(immi.DATE_OF_BIRTH)) >= :startY)
+        	  AND (:endY IS NULL OR EXTRACT(YEAR FROM(immi.DATE_OF_BIRTH)) <= :endY)
+			  )
+			WHERE r_ >= (((:pageNo-1) * :pageSize) + 1) and r_ < ((:pageNo * :pageSize) + 1)
+        ]]>
+	</sql-query>-->
+	<!--<sql-query name=”LIB_SP” callable=”true”>
+	   <return class=”com.org.lib.LibraryDetails”>
+		   <return-property name=”ISBN” column=”isbn_nbr” />
+		   <return-property name=”bookName” column=”book_name” />
+	   </return>
+	   {call SP_LIB_DTL(? , :branchCD ,:authorCD) }
+	</sql-query>-->
+</hibernate-mapping>

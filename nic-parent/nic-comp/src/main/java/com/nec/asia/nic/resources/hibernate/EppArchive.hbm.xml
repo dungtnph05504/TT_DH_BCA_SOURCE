@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.EppArchive" table="EPP_CENTRAL.EPP_ARCHIVE" optimistic-lock="version">		
+		<id name="id" type="long">
+			<column name="ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_ARCHIVE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="archiveCode" type="string">
+			<column name="ARCHIVE_CODE" length="20">
+				<comment>So ho so luu</comment>
+			</column>
+		</property>
+		<property name="docCode" type="string">
+			<column name="DOC_CODE" length="50">
+				<comment>Ma ho so</comment>
+			</column>
+		</property>
+		<property name="receiptNo" type="string">
+			<column name="RECEIPT_NO" length="50">
+				<comment>So bien nhan</comment>
+			</column>
+		</property> 
+		<property name="abridgment" type="string">
+			<column name="ABRIDGMENT" length="100">
+				<comment>Trich yeu</comment>
+			</column>
+		</property> 
+		<property name="desc" type="string">
+			<column name="DESC_" length="100">
+				<comment>Ghi chú</comment>
+			</column>
+		</property> 
+		<property name="type" type="string">
+			<column name="TYPE_" length="100">
+				<comment>Loai ho so XNC. 'HC' = Hồ sơ hộ chiếu</comment>
+			</column>
+		</property> 
+		<property name="startPage" type="long">
+			<column name="START_PAGE">
+				<comment>To so</comment>
+			</column>
+		</property>
+		<property name="pageCount" type="long">
+			<column name="PAGE_COUNT" precision="3" scale="0">
+				<comment>So trang/ho so</comment>
+			</column>
+		</property>
+		<property name="regOffice" type="string">
+			<column name="REG_OFFICE" length="20">
+				<comment>Don vi dang ky</comment>
+			</column>
+		</property>
+		<property name="savedTime" type="string">
+			<column name="SAVED_TIMES" length="10">
+				<comment>giai doan luu ho so nguoi VN khong duoc nuoc ngoai cho cu tru</comment>
+			</column>
+		</property>
+		<property name="docName" type="string">
+			<column name="DOC_NAME" length="50">
+				<comment>luu so ds A, B,N,C,T doi voi ho so nguoi VN khong duoc nuoc ngoai cho cu tru tuy tung giai doan luu ho so</comment>
+			</column>
+		</property>
+		<property name="createdTs" type="timestamp">
+			<column name="CREATED_TS" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedTs" type="timestamp">
+			<column name="UPDATED_TS" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedBy" type="string">
+			<column name="UPDATED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="packNo" type="string">
+			<column name="PACK_NO" length="20">
+				<comment>Số tập lưu</comment>
+			</column>
+		</property>
+		<property name="createdByName" type="string">
+			<column name="CREATED_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedByName" type="string">
+			<column name="UPDATED_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

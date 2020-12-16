@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.EppDocumentPrintedResidence" table="EPP_CENTRAL.EPP_DOCUMENT_PRINTED_RESIDENCE" optimistic-lock="version">		
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_DOC_PRINTED_RESIDENCE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+ 		
+ 		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="20">
+				<comment>Số HC</comment>
+			</column>
+		</property>
+		<property name="printContent" type="string">
+			<column name="PRINT_CONTENT" length="1000">
+				<comment>Nội dung in</comment>
+			</column>
+		</property>
+		<property name="printContentEn" type="string">
+			<column name="PRINT_CONTENT_EN" length="1000">
+				<comment>Nội dung in TA</comment>
+			</column>
+		</property>
+ 		<property name="printSiteCode" type="string">
+			<column name="PRINT_SITE_CODE" length="200">
+				<comment>Mã trung tâm in</comment>
+			</column>
+		</property>
+		<property name="printDate" type="timestamp">
+			<column name="PRINT_DATE" length="7">
+				<comment>Ngày in</comment>
+			</column>
+		</property>
+		<property name="printBy" type="string">
+			<column name="PRINT_BY" length="60">
+				<comment>Nguời in</comment>
+			</column>
+		</property>
+		<property name="printAgency" type="string">
+			<column name="PRINT_AGENCY" length="200">
+				<comment>Cơ quan in</comment>
+			</column>
+		</property>
+		<property name="signer" type="string">
+			<column name="SIGNER" length="120">
+				<comment>Nguời ký</comment>
+			</column>
+		</property>
+		<property name="signerPosition" type="string">
+			<column name="SIGNER_POSITION" length="120">
+				<comment>Chức vụ người ký</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Ngày tạo</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="60">
+				<comment>Nguời tạo</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Ngày cập nhật</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="120">
+				<comment>Nguời cập nhật</comment>
+			</column>
+		</property>
+		<property name="printByName" type="string">
+			<column name="PRINT_BY_NAME" length="120">
+				<comment>Họ tên cán bộ in</comment>
+			</column>
+		</property>
+		<property name="createByName" type="string">
+			<column name="CREATE_BY_NAME" length="120">
+				<comment>Họ tên người tạo</comment>
+			</column>
+		</property>
+		<property name="updateByName" type="string">
+			<column name="UPDATE_BY_NAME" length="120">
+				<comment>Họ tên người cập nhật</comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Số hồ sơ</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicAfisData" table="EPP_AFIS_DATA" optimistic-lock="version">
+		<id name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" />
+			<generator class="assigned" />
+		</id>
+		<property name="afisKeyNo" type="string">
+			<column name="AFIS_KEY_NO" length="36">
+				<comment>AFIS Key No</comment>
+			</column>
+		</property>
+		<property name="afisRefId" type="long">
+			<column name="AFIS_REF_ID" precision="20" scale="0">
+				<comment>AFIS Reference ID</comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="30">
+				<comment>AFIS Record Status</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+	</class>
+	<sql-query name="generate.afis.keynumber">
+		<return-scalar column="keynumber" type="string" />
+            <![CDATA[
+            SELECT GET_NEXT_AFIS_KEY_NO(:prefix) as keynumber from DUAL
+            ]]>
+	</sql-query>
+	<sql-query name="baf.getRegistrationId">
+		<return-scalar column="REGISTRATION_ID" type="long" />
+            <![CDATA[
+            SELECT REGISTRATION_ID from BAF_LATEST_DATASYNC where TRANSACTION_ID=:transactionId
+            ]]>
+	</sql-query>
+</hibernate-mapping>

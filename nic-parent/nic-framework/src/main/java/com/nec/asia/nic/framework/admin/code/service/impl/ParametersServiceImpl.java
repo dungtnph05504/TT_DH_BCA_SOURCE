@@ -1,0 +1,173 @@
+package com.nec.asia.nic.framework.admin.code.service.impl;
+
+
+import java.util.List;
+
+import org.hibernate.criterion.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.dao.ParametersDao;
+import com.nec.asia.nic.framework.admin.code.domain.Parameters;
+import com.nec.asia.nic.framework.admin.code.domain.ParametersId;
+import com.nec.asia.nic.framework.admin.code.exception.ParametersServiceException;
+import com.nec.asia.nic.framework.admin.code.service.ParametersService;
+import com.nec.asia.nic.framework.dao.DaoException;
+import com.nec.asia.nic.framework.service.impl.DefaultBusinessServiceImpl;
+
+/**
+ * 
+ * @author chris_wong
+ * 
+ */
+/*
+ * Modification History:
+ * 25 Jan 2016 (Tue): Added findAllActForPagination method to get all params have delete_flg = true.
+ */
+@Service("parametersService")
+@Transactional
+public class ParametersServiceImpl
+		extends
+		DefaultBusinessServiceImpl<Parameters, ParametersId, ParametersDao>
+		implements ParametersService {
+
+	/** must define the non-argument constructor because we use CGLib proxy */
+	public ParametersServiceImpl() {
+	}
+
+	@Autowired
+	public ParametersServiceImpl(ParametersDao dao) {
+		this.dao = dao;
+	}
+	
+	@Override
+	public PaginatedResult<Parameters> findAllForPaginationByScope(String paramScope, int pageNo, int pageSize)
+			throws ParametersServiceException {
+		logger.debug("In Service ===========>>>>>>>Param Scope : {} " , paramScope);
+		PaginatedResult<Parameters> pr = null;
+		try {
+			pr = this.dao.findAllForPaginationByScope(paramScope, pageNo, pageSize);
+		} catch (Exception ex) {
+			logger.error("Error occurred while getting the parameters. Exception: " + ex.getMessage(), ex);
+			throw new ParametersServiceException(ex);
+		}
+
+		return pr;
+	}
+	
+	public PaginatedResult<Parameters> findAllForPagination( int pageNo, int pageSize) throws ParametersServiceException{
+		
+		PaginatedResult<Parameters>  paramList = this.dao.findAllForPagination(pageNo, pageSize);
+		
+		return paramList;
+	}
+
+
+	 public Parameters getParamDetails(String paraScope , String paramName) throws ParametersServiceException{
+		 
+		 ParametersId paramId = new ParametersId();
+		 paramId.setParaScope(paraScope);
+		 paramId.setParaName(paramName);
+		 Parameters paramEntity = this.dao.findById(paramId);
+		 
+		 return paramEntity;
+	 }
+	 
+	 public List<Parameters> getParamDetailsList(String paraScope) throws ParametersServiceException{
+		 
+		 List<Parameters> paramEntity = this.dao.findAllByScope(paraScope);
+		 return paramEntity;
+	 }
+	 
+	 public String saveParam(Parameters parameters){
+		String status = "";
+		
+		String paraScope = "";
+		String paraName = "";
+		try {
+			paraScope = parameters.getId().getParaScope();
+			paraName = parameters.getId().getParaName();
+			ParametersId paramId = new ParametersId();
+			paramId.setParaScope(paraScope);
+			paramId.setParaName(paraName);
+			Parameters paramEntity = this.dao.findById(paramId);
+			if(paramEntity!=null){
+				status = "exist";
+			} else {
+				this.dao.save(parameters);
+				status = "success";
+			}
+		} catch (Exception exp) {
+			logger.error("Error when saving parameters:"+paraScope+","+paraName, exp);
+			status = "fail";
+		}
+		return status;
+	}
+
+	public String updateParam(Parameters parameter)
+			throws ParametersServiceException {
+		String status = "";
+		try {
+			Parameters paramEntity = this.findById(parameter.getId());
+			
+			paramEntity.setUpdateBy(parameter.getUpdateBy());
+			paramEntity.setUpdateDate(parameter.getUpdateDate());
+			paramEntity.setUpdateWkstnId(parameter.getUpdateWkstnId());
+			paramEntity.setParaDesc(parameter.getParaDesc());
+			paramEntity.setParaShortValue(parameter.getParaShortValue());
+			//[26 Jan 2016][Tue] - add
+			paramEntity.setParaLobValue(parameter.getParaLobValue());
+			// End
+			paramEntity.setSystemId(parameter.getSystemId());
+			paramEntity.setParaType(parameter.getParaType());
+			paramEntity.setAdminAccessibleFlag(parameter.getAdminAccessibleFlag());
+			paramEntity.setUserAccessibleFlag(parameter.getUserAccessibleFlag());
+			paramEntity.getId().setParaScope(parameter.getId().getParaScope());
+			this.dao.saveOrUpdate(paramEntity);
+			
+			status = "success";
+		} catch (Exception exp) {
+			logger.error("Error occurred while update param. Exception: "+exp.getMessage());
+			status = "fail";
+		}
+		return status;
+	}
+
+	public String deleteParam(Parameters parameter) throws ParametersServiceException {
+		String status = "";
+		try {
+			Parameters paramEntity = getParamDetails(parameter.getId().getParaScope(), parameter.getId().getParaName());
+			paramEntity.setDeleteBy(parameter.getDeleteBy());
+			paramEntity.setDeleteDate(parameter.getDeleteDate());
+			paramEntity.setDeleteWkstnId(parameter.getDeleteWkstnId());
+			paramEntity.setDeleteFlag(parameter.getDeleteFlag());
+			//this.dao.saveOrUpdate(paramEntity);
+			this.dao.deleteParameter(parameter);
+			status = "success";
+		} catch (Exception exp) {
+			logger.error("Error occurred while delete param. Exception: "+exp.getMessage());
+			status = "fail";
+
+		}
+		return status;
+	}
+	
+	public PaginatedResult<Parameters> findAllActForPagination( int pageNo, int pageSize, Order orders) throws ParametersServiceException, DaoException {
+		
+		return this.dao.findAllActForPagination(pageNo, pageSize, orders);
+	}
+
+	@Override
+	public PaginatedResult<Parameters> getPageParamByParaName(String parameter,
+			int pageNo, int pageSize, Order hibernateOrder) {
+		try {
+			return this.dao.getPageParamByParaName(parameter, pageNo, pageSize, hibernateOrder);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new PaginatedResult<>();
+		}
+	}
+
+}

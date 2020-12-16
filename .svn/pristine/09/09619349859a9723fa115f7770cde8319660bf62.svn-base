@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.perso.domain.PersoStatus" table="PERSO_STATUS" optimistic-lock="version">
+		<id name="statusId" type="long">
+			<column name="STATUS_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_PERSO_STATUS_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" not-null="true" />
+		</property>
+		<property name="applnRefNo" type="string">
+			<column name="APPLN_REF_NO" length="36" />
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="16" />
+		</property>
+		<property name="chipSerialNo" type="string">
+			<column name="CHIP_SERIAL_NO" length="36" />
+		</property>
+		<property name="serialNo" type="string">
+			<column name="SERIAL_NO" length="36" />
+		</property>
+		<property name="transactionStatus" type="string">
+			<column name="TRANSACTION_STATUS" length="30" />
+		</property>
+		<property name="statusDate" type="timestamp">
+			<column name="STATUS_DATE" length="7" not-null="true" />
+		</property>
+		<property name="printingSite" type="string">
+			<column name="PRINTING_SITE" length="30" />
+		</property>
+		<property name="dateOfIssue" type="timestamp">
+			<column name="DATE_OF_ISSUE" length="7" />
+		</property>
+		<property name="dateOfExpiry" type="timestamp">
+			<column name="DATE_OF_EXPIRY" length="7" />
+		</property>
+		<property name="errorCode" type="string">
+			<column name="ERROR_CODE" length="64" />
+		</property>
+		<property name="errorMessage" type="string">
+			<column name="ERROR_MESSAGE" />
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7" />
+		</property>
+		<property name="sourceLocation" type="string">
+			<column name="SOURCE_LOCATION" length="64" />
+		</property>
+	</class>
+</hibernate-mapping>

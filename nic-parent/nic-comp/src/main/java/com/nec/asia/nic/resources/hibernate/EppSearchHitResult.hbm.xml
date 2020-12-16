@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicSearchHitResult" table="EPP_SEARCH_HIT_RESULT" optimistic-lock="version">
+		<id name="hitResultId" type="long">
+			<column name="HIT_RESULT_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_SEARCH_HIT_RESULT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+<!--         <many-to-one name="searchResult" class="com.nec.asia.nic.comp.trans.domain.NicSearchResult" fetch="select">
+            <column name="SEARCH_RESULT_ID" precision="20" scale="0" not-null="true">
+                <comment>Foreign Key</comment>
+            </column>
+        </many-to-one> -->
+		<property name="searchResultId" type="long">
+			<column name="SEARCH_RESULT_ID" precision="20" scale="0" not-null="true">
+				<comment>Foreign Key</comment>
+			</column>
+		</property>
+		<property name="afisKeyNoHit" type="string">
+			<column name="AFIS_KEY_NO_HIT" length="36">
+				<comment>Hit Candidate - AFIS Key No</comment>
+			</column>
+		</property>
+		<property name="transactionIdHit" type="string">
+			<column name="TRANSACTION_ID_HIT" length="36" not-null="true">
+				<comment>Hit Candidate - Application Ref No</comment>
+			</column>
+		</property>
+		<property name="hitDecision" type="yes_no">
+			<column name="HIT_DECISION" length="1">
+				<comment>AFIS Hit Decision</comment>
+			</column>
+		</property>
+		<property name="dataSource" type="string">
+			<column name="DATA_SOURCE" length="30">
+				<comment>AFIS Data Source</comment>
+			</column>
+		</property>
+		<property name="hitInfo" type="string">
+			<column name="HIT_INFO">
+				<comment>Hit Positions and match score</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="verifyDecision" type="yes_no">
+			<column name="VERIFY_DECISION" length="1">
+				<comment>Verify Decision (Y: Hit, N: No-Hit)</comment>
+			</column>
+		</property>
+		<property name="verifyDecisionBy" type="string">
+			<column name="VERIFY_DECISION_BY" length="64">
+				<comment>Verify By</comment>
+			</column>
+		</property>
+		<property name="verifyDecisionDatetime" type="timestamp">
+			<column name="VERIFY_DECISION_DATETIME" length="7">
+				<comment>Verify Datetime</comment>
+			</column>
+		</property>
+		<property name="verifyDecisionRemarks" type="string">
+			<column name="VERIFY_DECISION_REMARKS" length="1000">
+				<comment>Verify Remarks</comment>
+			</column>
+		</property>
+		<property name="verify2Decision" type="yes_no">
+			<column name="VERIFY2_DECISION" length="1">
+				<comment>Secondary Verify Decision</comment>
+			</column>
+		</property>
+		<property name="verify2DecisionBy" type="string">
+			<column name="VERIFY2_DECISION_BY" length="64">
+				<comment>Secondary Verify By</comment>
+			</column>
+		</property>
+		<property name="verify2DecisionDatetime" type="timestamp">
+			<column name="VERIFY2_DECISION_DATETIME" length="7">
+				<comment>Secondary Verify Datetime</comment>
+			</column>
+		</property>
+		<property name="verify2DecisionRemarks" type="string">
+			<column name="VERIFY2_DECISION_REMARKS" length="1000">
+				<comment>Secondary Verify Remarks</comment>
+			</column>
+		</property>
+	</class>
+	
+	<sql-query name="blacklistHit">
+		<return-scalar column="tran" type="string" />
+        <![CDATA[
+			SELECT EPP_CENTRAL.EPP_SEARCH_HIT_RESULT.TRANSACTION_ID_HIT as tran FROM EPP_CENTRAL.EPP_SEARCH_HIT_RESULT
+			JOIN EPP_CENTRAL.EPP_SEARCH_RESULT ON EPP_CENTRAL.EPP_SEARCH_RESULT.SEARCH_RESULT_ID = EPP_CENTRAL.EPP_SEARCH_HIT_RESULT.SEARCH_RESULT_ID
+			WHERE EPP_CENTRAL.EPP_SEARCH_RESULT.TRANSACTION_ID = (:tranId) AND EPP_CENTRAL.EPP_SEARCH_RESULT.TYPE_SEARCH = (:type)
+			AND EPP_CENTRAL.EPP_SEARCH_RESULT.HAS_HIT = 'Y'
+			GROUP BY EPP_CENTRAL.EPP_SEARCH_HIT_RESULT.TRANSACTION_ID_HIT
+        ]]>
+	</sql-query>
+	<sql-query name="getHitTransactionByDataSource">
+			<return-scalar column="hit" type="string" />
+			<return-scalar column="person" type="long" />
+			<return-scalar column="hitId" type="long" />
+	        <![CDATA[
+				select distinct s.transaction_id_hit as hit, w.originaly_person_id as person, s.hit_result_id as hitId from EPP_CENTRAL.epp_search_hit_result s
+					join EPP_CENTRAL.epp_search_result h on h.search_result_id = s.search_result_id
+					join EPP_CENTRAL.epp_transaction t on t.transaction_id = s.transaction_id_hit
+					join EPP_CENTRAL.epp_workflow_job w on w.transaction_id = s.transaction_id_hit
+					where h.transaction_id=(:tranid) and s.data_source = (:source) and t.reg_site_code = (:regSite) and s.search_result_id = (:searchId)
+					order by s.hit_result_id desc
+	        ]]>
+	</sql-query>	
+	<sql-query name="getHitTransactionByDataSourceBMS">
+			<return-scalar column="hit" type="string" />
+			<return-scalar column="person" type="long" />
+			<return-scalar column="hitId" type="long" />
+	        <![CDATA[
+				select distinct s.transaction_id_hit as hit, w.originaly_person_id as person, s.hit_result_id as hitId from EPP_CENTRAL.epp_search_hit_result s
+					join EPP_CENTRAL.epp_search_result h on h.search_result_id = s.search_result_id
+					join EPP_CENTRAL.epp_transaction t on t.transaction_id = s.transaction_id_hit
+					join EPP_CENTRAL.epp_workflow_job w on w.transaction_id = s.transaction_id_hit
+					where h.transaction_id=(:tranid) and s.data_source = (:source) and (t.reg_site_code = (:regSite) or (:regSite) is null) and s.search_result_id = (:searchId)
+					order by s.hit_result_id desc
+	        ]]>
+	</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://epass.asia.nec.com/pps/dispatchInfo" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:di="http://epass.asia.nec.com/pps/dispatchInfo">
+
+    <xs:element name="dispatchInfo" type="di:dispatchInfoType"></xs:element>
+    
+    <xs:complexType name="dispatchInfoType">
+    	<xs:sequence>
+    		<xs:element name="batchNum" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="docType" type="di:docTypeType" maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="priority" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="batchSize" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="collectLocation" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="collectionDate" type="xs:date" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="documents" type="di:documentType" maxOccurs="1" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="documentType">
+    	<xs:sequence>
+    		<xs:element name="document" type="di:documentInfoType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="documentInfoType">
+    	<xs:sequence>
+    		<xs:element name="arn" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="documentNum" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="docTypeType">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="Regular"></xs:enumeration>
+    		<xs:enumeration value="Official"></xs:enumeration>
+    		<xs:enumeration value="Diplomatic"></xs:enumeration>
+    		<xs:enumeration value="MRP"></xs:enumeration>
+    		<xs:enumeration value="Hajj"></xs:enumeration>
+    		<xs:enumeration value="MRCTDR"></xs:enumeration>
+    		<xs:enumeration value="MRCTDS"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+</xs:schema>

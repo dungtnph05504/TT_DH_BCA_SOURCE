@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.SyncQueueJob" table="EPP_CENTRAL.SYS_SYNC_QUEUE_TXN" optimistic-lock="version">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.SYNC_QUEUE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="createdTs" type="timestamp">
+			<column name="CREATED_TS" length="6">
+				<comment>Ngày đưa vào hàng đợi</comment>
+			</column>
+		</property>
+		<property name="dateUpdateStatusHanding" type="timestamp">
+			<column name="DATE_UPDATE_STATUS_HANDING" length="6">
+				<comment>Ngày update trang thai</comment>
+			</column>
+		</property>
+		<property name="objectId" type="string">
+			<column name="OBJECT_ID" length="50">
+				<comment>Mã hồ sơ</comment>
+			</column>
+		</property>
+		<property name="objectType" type="string">
+			<column name="OBJECT_TYPE" length="20">
+				<comment>Loại giao dịch</comment>
+			</column>
+		</property>
+		<property name="receiver" type="string">
+			<column name="RECEIVER" length="20">
+				<comment>Tên </comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="10">
+				<comment>Loại hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="syncRetry" type="java.lang.Integer">
+			<column name="SYNC_RETRY" >
+				<comment>Số lần đã gọi hs</comment>
+			</column>
+		</property>
+		<property name="syncTs" type="timestamp">
+			<column name="SYNC_TS" length="6">
+				<comment>Ngày gọi</comment>
+			</column>
+		</property>
+		<property name="bmsId" type="java.lang.Long">
+			<column name="BMS_ID" precision="20" scale="0">
+				<comment>Ngày gọi</comment>
+			</column>
+		</property>
+		<property name="transactionIdMaster" type="string">
+			<column name="TRAN_ID_MASTER" length="20">
+				<comment>Loại hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="tranStatus" type="string">
+			<column name="TRAN_STATUS" length="36">
+				<comment>TRAN_STATUS</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

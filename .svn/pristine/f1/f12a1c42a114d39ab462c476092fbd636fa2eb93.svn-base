@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+ <form:form  commandName="mnicParamForm"  id="mnicParamForm" action=""   method="post">
+			<div class="content_main">
+			<br />			
+			<table width="80%" bordercolor="#333333" class="data_table">
+				<tr>
+					<td style="padding: 15px" colspan="4">
+						
+							<tbody>
+								<tr>
+									<td>Name:</td>
+									<td><form:input type="text" id="paraName"  path="id.paraName" readonly="true"/>									
+									</td>
+								</tr>
+								<tr>
+									<td class="table_row">Scope:</td>
+									<td class="table_row">
+									
+									<form:input type="text" id="id.paraScope" path="id.paraScope"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Data Type:</td>
+									<td>
+									<select>
+									<option>STRING</option>
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="table_row">Value</td>
+									<td class="table_row">
+									<form:textarea rows="4"  style="width: 98%" id="paraShortValue"  path="paraShortValue"></form:textarea></td>
+								</tr>
+								<tr>
+									<td colspan="5" align="center" style="padding: 20px;"><input
+										type="button" class="button_grey" id="update_btn" value="Save" />
+										<input type="button" class="button_grey"
+										onclick="deleteParameter('MIN_CITIZEN_AGE_FOR_REDUCE_RATE', this);"
+										value="Delete" /> <input type="button" class="button_grey"
+										onclick="javascript:window.location.href='parameter-mgmt.html';"
+										value="Cancel" /></td>
+								</tr>
+						
+						</td>
+						</tr>
+			</table>
+			</div>
+		</form:form>
+
+		<br />
+
+	
+	<div id="dialog-confirm1"></div>
+	<!-- script for the delete for payment parameter-->
+	<script>
+		$(function() {
+			$("#dialog-confirm").dialog({
+				modal : true,
+				autoOpen : false,
+				width : 500,
+				resizable : true,
+				show : {
+					effect : "fade",
+					duration : 200
+				},
+				hide : {
+				//effect: "explode",
+				//duration: 1000
+				},
+				buttons : {
+					Ok : function() {
+						window.location.assign("");
+					},
+					Cancel : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+		});
+	</script>
+	<script>
+		$(function() {
+			$('#update_btn').click(function() {
+				$('#update_msg').show();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+        function deleteParameter(MIN_CITIZEN_AGE_FOR_REDUCE_RATE, obj){
+            alert("Dialog open");
+            $("#dialog-confirm").dialog('option', 'title', 'Delete ParameterName');
+            $("#dialog-confirm").html('Do you want to delete the Parameter Name('+MIN_CITIZEN_AGE_FOR_REDUCE_RATE+')?<br>Please OK to confirm.');
+            $("#dialog-confirm").dialog( 'open' );
+        }
+    </script>
+

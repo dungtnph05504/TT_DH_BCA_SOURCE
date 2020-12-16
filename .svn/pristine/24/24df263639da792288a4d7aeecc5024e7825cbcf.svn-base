@@ -1,0 +1,38 @@
+package com.nec.asia.nic.comp.trans.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nec.asia.nic.comp.trans.dao.BorderGateDao;
+import com.nec.asia.nic.comp.trans.domain.BorderGate;
+import com.nec.asia.nic.comp.trans.service.BorderGateService;
+
+@Service
+public class BorderGateServiceImpl implements BorderGateService {
+
+	@Autowired
+	private BorderGateDao dao;
+	
+	@Override
+	public List<BorderGate> findAllBorderGate(String code) {
+		try {
+			return dao.findAllBorderGate(code);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+	@Override
+	public List<BorderGate> findBorderGateBySync(String syncData) {
+		try {
+			return dao.findBorderGateBySync(syncData);			
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
+}

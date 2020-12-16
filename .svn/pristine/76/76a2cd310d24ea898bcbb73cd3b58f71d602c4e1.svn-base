@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+	attributeFormDefault="unqualified" targetNamespace="http://epass.asia.nec.com/pps/persoStatus"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ps="http://epass.asia.nec.com/pps/persoStatus">
+	<xs:element name="persoStatus" type="ps:persoStatusType">
+
+	</xs:element>
+
+
+
+
+
+
+
+	<xs:complexType name="persoStatusType">
+		<xs:sequence>
+			<xs:element name="status" maxOccurs="1" minOccurs="1"
+				type="ps:statusType">
+				<xs:annotation>
+					<xs:documentation>State the purpose of this status file. The value
+						can be one of the followings:
+
+						Imported - When the job files were
+						imported by the personalization system
+						PendingPerso - When the job
+						is grouped into batch and ready for
+						personalization
+						Printed - When
+						the document has been printed
+						QcCompleted - When the quality check
+						on the document has been completed
+						Error - When there is some error
+						in the job file, maybe the format is
+						invalid or contains some
+						invalid data
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusDate" type="xs:dateTime"
+				maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Creation date of this status file
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jobs" type="ps:jobType" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Contain the list of jobs which are in the status
+						indicated by the "status" field.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="jobType">
+		<xs:sequence>
+			<xs:element name="job" type="ps:jobInfoType" maxOccurs="unbounded"
+				minOccurs="1"></xs:element>
+
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="jobInfoType">
+		<xs:sequence>
+			<xs:element name="arn" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Unique application reference number (ARN) of the
+						application
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusDate" type="xs:dateTime"
+				maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicate when the status is changed for this
+						application
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentNum" type="xs:string"
+				maxOccurs="1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Document number of the application. This value
+						will only be provided in the "QcCompleted"
+						status.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chipSerialNum" type="xs:string"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+			<xs:element name="printingSite" type="xs:string"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+			<xs:element name="doi" type="xs:date" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+			<xs:element name="doe" type="xs:date" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+			<xs:element name="errorCode" maxOccurs="1" minOccurs="0"
+				type="ps:errorCodeType">
+				<xs:annotation>
+					<xs:documentation>
+						Specify the error code that cause the error.
+						This field is only mandatory when the status is
+						"Error".
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorMessage" type="xs:string"
+				maxOccurs="1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Specify the error details. This field is only
+						mandatory when the status is "Error".
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="operator" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="statusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Imported"></xs:enumeration>
+			<xs:enumeration value="PendingPerso"></xs:enumeration>
+			<xs:enumeration value="Printed"></xs:enumeration>
+			<xs:enumeration value="QcCompleted"></xs:enumeration>
+			<xs:enumeration value="Error"></xs:enumeration>
+			<xs:enumeration value="Rejected"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="errorCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="InvalidData"></xs:enumeration>
+			<xs:enumeration value="SystemError"></xs:enumeration>
+			<xs:enumeration value="PersoError"></xs:enumeration>
+			<xs:enumeration value="QcError"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

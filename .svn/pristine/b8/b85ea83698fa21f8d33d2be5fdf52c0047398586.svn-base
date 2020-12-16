@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicFPData" table="EPP_FP_DATA" optimistic-lock="version">
+		<composite-id name="id" class="com.nec.asia.nic.comp.trans.domain.NicFPDataId">
+			<key-property name="transactionId" type="string">
+				<column name="TRANSACTION_ID" length="36" />
+			</key-property>
+			<key-property name="fingerPosition" type="int">
+				<column name="FINGER_POSITION" precision="10" scale="0" />
+			</key-property>
+		</composite-id>
+		<property name="siteCode" type="string">
+			<column name="SITE_CODE" length="5">
+				<comment>Registration Location</comment>
+			</column>
+		</property>
+		<property name="dateOfApplication" type="timestamp">
+			<column name="DATE_OF_APPLICATION" length="7">
+				<comment>Capture Date</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="fpIndicator" type="string">
+			<column name="FP_INDICATOR" length="1">
+				<comment>Fingerprint Indicator : N: Normal, B: Blank/Not Captured, A:Amputated</comment>
+			</column>
+		</property>
+		<property name="quality" type="int">
+			<column name="QUALITY" precision="10" scale="0">
+				<comment>Fingerprint Quality : 0~100</comment>
+			</column>
+		</property>
+		<property name="verifyScore" type="int">
+			<column name="VERIFY_SCORE" precision="10" scale="0">
+				<comment>Fingerprint Verify Score (N/A)</comment>
+			</column>
+		</property>
+		<property name="docId" type="long">
+			<column name="DOC_ID" precision="20" scale="0">
+				<comment>Reference Attachment ID</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

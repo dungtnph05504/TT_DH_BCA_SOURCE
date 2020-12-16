@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.NicTransactionPackage" table="EPP_CENTRAL.EPP_TRANSACTION_PACKAGE" optimistic-lock="version">		
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_TRANSACTION_PACKAGE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<!-- <id column="ROWID" type="string" /> -->
+		<property name="packageId" type="string">
+			<column name="PACKAGE_ID" length="200">
+				<comment>Mã danh sách</comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="200">
+				<comment>Mã giao dịch</comment>
+			</column>
+		</property>
+		<property name="stage" type="string">
+			<column name="STAGE" length="20">
+				<comment>Trạng thái</comment>
+			</column>
+		</property>	
+		<property name="typeList" type="int">
+			<column name="TYPE_LIST" precision="10" scale="0" >
+				<comment>TYPE_LIST</comment>
+			</column>
+		</property>	
+		<property name="noteApprove" type="string">
+			<column name="NOTE_APPROVE" length="4000">
+				<comment>NOTE_APPROVE</comment>
+			</column>
+		</property>	
+		<property name="noteLeaderApprove" type="string">
+			<column name="NOTE_LEADER_APPROVE" length="4000">
+				<comment>NOTE_APPROVE</comment>
+			</column>
+		</property>	
+		<property name="offerStage" type="string">
+			<column name="OFFER_STAGE" length="20">
+				<comment>OFFER_STAGE</comment>
+			</column>
+		</property>	
+	</class>
+</hibernate-mapping>

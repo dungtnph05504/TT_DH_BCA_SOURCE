@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Verification job wiring -->
+	<!-- TRUNG UPDATE LẠI WORKFLOW NHƯ BẢN GỐC CỦA NEC -->
+	<bean id="applicationContextProvider" class="com.nec.asia.nic.comp.job.utils.ApplicationContextProvider" />
+
+	<bean id="baseExecutor" class="com.nec.asia.nic.comp.job.command.NicCommandExecutor" scope="prototype">
+		<property name="command" ref="initCmd" />
+	</bean>
+	<bean id="baseExecutorSync" class="com.nec.asia.nic.comp.job.command.NicCommandExecutor" scope="prototype">
+		<property name="command" ref="syncPassportCmd" />
+	</bean>
+	<bean id="baseExecutorLds" class="com.nec.asia.nic.comp.job.command.NicCommandExecutor" scope="prototype">
+		<property name="command" ref="ldsProcessCmd" />
+	</bean>
+
+
+	<bean id="initCmd" class="com.nec.asia.nic.comp.job.command.NicInitialCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="afisEnrollCmd" />
+				<entry key="REP" value-ref="afisEnrollCmd" />
+				<entry key="LOST" value-ref="afisEnrollCmd" />
+				<!-- <entry key="REG" value-ref="cpdCmd" />
+				<entry key="REP" value-ref="cpdCmd" />
+				<entry key="LOST" value-ref="cpdCmd" /> -->
+			</map>
+		</property>
+	</bean>
+
+	<bean id="afisEnrollCmd" class="com.nec.asia.nic.comp.job.command.NicAfisEnrollmentCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="idserverAgentService" ref="idserverAgentService" />
+		<property name="nicAfisDataService" ref="nicAfisDataService" />
+		<property name="documentDataService" ref="documentDataService" />
+		<property name="transactionAttachmentService" ref="nicTransactionDocumentService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="cpdCmd" />
+				<entry key="REP" value-ref="cpdCmd" />
+				<entry key="LOST" value-ref="cpdCmd" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="afisScreeningCmd" class="com.nec.asia.nic.comp.job.command.NicAfisScreenAsyncCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="inquirySearchResultService" ref="inquirySearchResultService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="idserverAgentService" ref="idserverAgentService" />
+		<property name="nicAfisDataService" ref="nicAfisDataService" />
+		<property name="codesService" ref="codesService" />
+		<property name="bufPersonInvestigationService" ref="bufPersonInvestigationService" />
+		<property name="eppPersonService" ref="eppPersonService" />
+		<property name="transactionAttachmentService" ref="nicTransactionDocumentService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="initInvestigationCmd" />
+				<entry key="REP" value-ref="initInvestigationCmd" />
+				<entry key="LOST" value-ref="initInvestigationCmd" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="afisVerifyCmd" class="com.nec.asia.nic.comp.job.command.NicVerifyAfisCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="inquirySearchResultService" ref="inquirySearchResultService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="idserverAgentService" ref="idserverAgentService" />
+		<property name="documentDataService" ref="documentDataService" />
+		<property name="nicAfisDataService" ref="nicAfisDataService" />
+		<property name="transactionAttachmentService" ref="nicTransactionDocumentService" />
+		<property name="parametersService" ref="parametersService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="afisScreeningCmd" />
+				<entry key="REP" value-ref="afisScreeningCmd" />
+				<entry key="LOST" value-ref="afisScreeningCmd" />
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="cpdCmd" class="com.nec.asia.nic.comp.job.command.NicVerifyCpdCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="nicRegistrationDataService" ref="nicRegistrationDataService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="inquirySearchResultService" ref="inquirySearchResultService" />
+		<property name="nicAfisDataService" ref="nicAfisDataService" />
+		<property name="documentDataService" ref="documentDataService" />
+		<property name="parametersService" ref="parametersService" />
+		<property name="workflowProcessService" ref="workflowProcessService" />
+		<property name="persoLocationsService" ref="persoLocationsService" />
+		<property name="codesService" ref="codesService" />
+		<property name="bufPersonInvestigationService" ref="bufPersonInvestigationService" />
+		<property name="eppPersonService" ref="eppPersonService" />
+		<property name="transactionAttachmentService" ref="nicTransactionDocumentService" />
+		<property name="queueJobService" ref="queueJobService" />
+		<property name="siteService" ref="siteService" />
+		<property name="configurationWorkflowService" ref="configurationWorkflowService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="blacklistCmd" />
+				<entry key="REP" value-ref="blacklistCmd" />
+				<entry key="LOST" value-ref="blacklistCmd" />
+				<!--<entry key="REG" value-ref="initInvestigationCmd" />
+				<entry key="REP" value-ref="initInvestigationCmd" />
+				<entry key="LOST" value-ref="initInvestigationCmd" /> -->
+			</map>
+		</property>
+		<property name="demographicFields">
+			<map>
+				<entry key="searchName" value="true" />
+				<!-- <entry key="firstnameFull" value="true" />
+				<entry key="middlenameFull" value="true" />
+				<entry key="surnameFull" value="true" /> -->
+				<entry key="dateOfBirth" value="true" />
+				<entry key="gender" value="true" />
+			</map>
+		</property>
+
+	</bean>
+	
+	<bean id="blacklistCmd" class="com.nec.asia.nic.comp.job.command.NicVerifyBlacklistCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="inquirySearchResultService" ref="inquirySearchResultService" />
+		<property name="nicAfisDataService" ref="nicAfisDataService" />
+		<property name="nicBlacklistService" ref="nicBlacklistService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="identificationCmd" />
+				<entry key="REP" value-ref="identificationCmd" />
+				<entry key="LOST" value-ref="identificationCmd" />
+				<!--<entry key="REG" value-ref="initInvestigationCmd" />
+				<entry key="REP" value-ref="initInvestigationCmd" />
+				<entry key="LOST" value-ref="initInvestigationCmd" /> -->
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="identificationCmd" class="com.nec.asia.nic.comp.job.command.NicVerifyIdentificationCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="inquirySearchResultService" ref="inquirySearchResultService" />
+		<property name="nicAfisDataService" ref="nicAfisDataService" />
+		<property name="nicIdentificationService" ref="nicIdentificationService" />
+		<property name="getRecordDetailService" ref="getRecordDetailService" />
+		<property name="parametersDao" ref="parametersDao" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="afisScreeningCmd" />
+				<entry key="REP" value-ref="afisVerifyCmd" />
+				<entry key="LOST" value-ref="afisVerifyCmd" />
+				<!--<entry key="REG" value-ref="initInvestigationCmd" />
+				<entry key="REP" value-ref="initInvestigationCmd" />
+				<entry key="LOST" value-ref="initInvestigationCmd" /> -->
+			</map>
+		</property>
+	</bean>
+
+	<bean id="initInvestigationCmd" class="com.nec.asia.nic.comp.job.command.NicInitInvestigationCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="nicSearchHitResultService" ref="nicSearchHitResultService" />
+		<!--<property name="nicRegistrationDataService" ref="nicRegistrationDataService" />-->
+		<property name="nicSearchResultService" ref="nicSearchResultService" />
+		
+		<!--<property name="transactionAttachmentService" ref="nicTransactionDocumentService" />
+		<property name="documentDataService" ref="documentDataService" />
+		<property name="nicImmiHistoryService" ref="nicImmiHistoryService" />
+		<property name="bufPersonInvestigationService" ref="bufPersonInvestigationService" />
+		<property name="nicTransactionPackageService" ref="nicTransactionPackageService" />
+		<property name="userService" ref="userService" />-->
+		<property name="siteService" ref="siteService" />
+		<property name="listHandoverService" ref="listHandoverService" />
+		<property name="queueJobService" ref="queueJobService" />
+		<property name="configurationWorkflowService" ref="configurationWorkflowService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<!-- <entry key="REG" value-ref="submitPersoCmd" />
+				<entry key="REP" value-ref="submitPersoCmd" />
+				<entry key="LOST" value-ref="submitPersoCmd" /> -->
+			</map>
+		</property>
+	</bean>
+
+	<bean id="submitPersoCmd" class="com.nec.asia.nic.comp.job.command.NicSubmitPersoCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="dataPackService" ref="dataPackService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="persoService" ref="persoService" />
+		<property name="persoService2" ref="persoServiceMBID60" />
+		<property name="parametersService" ref="parametersService" />
+		
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+				<entry key="REG" value-ref="successCmd" />
+				<entry key="REP" value-ref="successCmd" />
+				<entry key="LOST" value-ref="successCmd" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="errorCmd" class="com.nec.asia.nic.comp.job.command.NicVerifyErrorCommand" scope="prototype">
+	</bean>
+	
+
+	<bean id="successCmd" class="com.nec.asia.nic.comp.job.command.NicVerifySuccessCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="nicRegistrationDataService" ref="nicRegistrationDataService" />
+
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorCmd" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="errorSyncCmd" class="com.nec.asia.nic.comp.job.command.NicSyncPassportErrorCommand" scope="prototype">
+	</bean>
+	
+	<bean id="syncPassportCmd" class="com.nec.asia.nic.comp.job.command.NicSyncPassportCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="queuesJobScheduleService" ref="queuesJobScheduleService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="transactionAttachmentService" ref="nicTransactionDocumentService" />
+		<property name="logJobScheduleService" ref="logJobScheduleService" />
+		<property name="documentDataService" ref="documentDataService" />
+		
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorSyncCmd" />
+				<entry key="LOS" value-ref="lostPPCmd" />
+				<entry key="REG" value-ref="verifyPPCmd" />
+				<entry key="REP" value-ref="verifyPPCmd" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="lostPPCmd" class="com.nec.asia.nic.comp.job.command.NicSyncPassportLostCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="queuesJobScheduleService" ref="queuesJobScheduleService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="logJobScheduleService" ref="logJobScheduleService" />
+		<property name="documentDataService" ref="documentDataService" />
+		
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorSyncCmd" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="verifyPPCmd" class="com.nec.asia.nic.comp.job.command.NicVerifyBCACommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="queuesJobScheduleService" ref="queuesJobScheduleService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="logJobScheduleService" ref="logJobScheduleService" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorSyncCmd" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="jobSearchingHistoryCmd" class="com.nec.asia.nic.comp.job.command.NicJobSearchingHistoryCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorSyncCmd" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ldsProcessCmd" class="com.nec.asia.nic.comp.job.command.NicLdsProcessCommand" scope="prototype">
+		<property name="commandUtil" ref="commandUtil" />
+		<property name="queuesJobScheduleService" ref="queuesJobScheduleService" />
+		<property name="nicTransactionService" ref="nicTransactionService" />
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="dataPackService" ref="dataPackService" />
+		<property name="nicTransactionLogService" ref="nicTransactionLogService" />
+		<property name="persoService" ref="persoService" />
+		<property name="persoService2" ref="persoServiceMBID60" />
+		<property name="childs">
+			<map>
+				<entry key="09" value-ref="errorLdsCmd" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="errorLdsCmd" class="com.nec.asia.nic.comp.job.command.NicLdsProcessErrorCommand" scope="prototype">
+	</bean>
+</beans>

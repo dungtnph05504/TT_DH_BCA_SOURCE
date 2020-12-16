@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	 <class name="com.nec.asia.nic.comp.trans.domain.EppInventory" table="EPP_CENTRAL.EPP_INVENTORY" optimistic-lock="version">
+		  	<id name="id" type="java.lang.Integer">
+				<column name="ID" precision="10" scale="0" />
+				<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_INVESTORY_SEQ_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+			</id>
+		    <property name="name" type="string">
+				<column name="NAME" length="100">
+					<comment>NAME</comment>
+				</column>
+			</property>
+			<property name="code" type="string">
+				<column name="CODE" length="20">
+					<comment>CODE</comment>
+				</column>
+			</property>
+			<property name="officeId" type="java.lang.Integer">
+				<column name="OFFICE_ID" precision="10" scale="0">
+					<comment>OFFICE_ID</comment>
+				</column>
+			</property>
+			<property name="description" type="string">
+				<column name="DESCRIPTION" precision="10" scale="0">
+					<comment>DESCRIPTION</comment>
+				</column>
+			</property>
+			<property name="active" type="string">
+				<column name="ACTIVE" length="1">
+					<comment>ACTIVE</comment>
+				</column>
+			</property>
+			<property name="address" type="string">
+				<column name="ADDRESS" length="255">
+					<comment>ADDRESS</comment>
+				</column>
+			</property>
+	 </class>
+	 <sql-query name="statusInvestory">
+		<return-scalar column="siteGroup" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+        SELECT EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID as siteGroup, count (*) as total
+			FROM EPP_CENTRAL.EPP_INVENTORY
+			JOIN EPP_CENTRAL.EPP_INVENTORY_ITEMS ON EPP_CENTRAL.EPP_INVENTORY.ID = EPP_CENTRAL.EPP_INVENTORY_ITEMS.INVENTORY_ID
+			JOIN EPP_CENTRAL.EPP_INVENTORY_ITEMS_DETAIL ON EPP_CENTRAL.EPP_INVENTORY_ITEMS.ID = EPP_CENTRAL.EPP_INVENTORY_ITEMS_DETAIL.INVENTORY_ITEMS_ID
+			JOIN EPP_CENTRAL_SYS.SITE_GROUPS ON EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID = EPP_CENTRAL.EPP_INVENTORY.CODE
+			WHERE EPP_CENTRAL.EPP_INVENTORY_ITEMS_DETAIL.STATUS = (:status)
+		GROUP BY EPP_CENTRAL_SYS.SITE_GROUPS.GROUP_ID
+        ]]>
+	</sql-query>
+</hibernate-mapping>

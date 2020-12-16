@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.PersoSites" table="EPP_CENTRAL.PERSO_SITES" optimistic-lock="version">
+  <id name="id" type="long">
+	<column name="ID" precision="10" scale="0" />
+	<generator class="sequence">
+		<param name="sequence">EPP_CENTRAL.PERSO_SITED_ID</param>
+		<param name="allocationSize">100</param>
+	</generator>
+  </id>
+  <property name="persoId" type="long">
+	<column name="PERSO_ID" precision="10" scale="0">
+			<comment>PERSO_ID</comment>
+	</column>
+   </property>
+   <property name="siteId" type="string">
+		<column name="SITE_ID" length="5" not-null="true">
+			<comment>SITE_ID</comment>
+		</column>	
+	</property>
+	<property name="active" type="yes_no">
+		<column name="ACTIVE" length="1" not-null="true">
+			<comment>ACTIVE</comment>
+		</column>
+	</property>		
+ </class>
+</hibernate-mapping>

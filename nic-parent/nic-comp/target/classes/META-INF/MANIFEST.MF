@@ -1,0 +1,80 @@
+Manifest-Version: 1.0
+Class-Path: lib/nic-framework-1.1-SNAPSHOT.jar lib/spring-core-4.2.4.R
+ ELEASE.jar lib/spring-aop-4.2.4.RELEASE.jar lib/aopalliance-1.0.jar l
+ ib/spring-beans-4.2.4.RELEASE.jar lib/spring-context-support-4.2.4.RE
+ LEASE.jar lib/spring-orm-4.2.4.RELEASE.jar lib/spring-tx-4.2.4.RELEAS
+ E.jar lib/spring-web-4.2.4.RELEASE.jar lib/spring-webmvc-4.2.4.RELEAS
+ E.jar lib/spring-jdbc-4.2.4.RELEASE.jar lib/spring-ldap-core-2.0.4.RE
+ LEASE.jar lib/spring-integration-core-4.2.4.RELEASE.jar lib/spring-re
+ try-1.1.2.RELEASE.jar lib/spring-messaging-4.2.4.RELEASE.jar lib/hibe
+ rnate-core-4.3.11.Final.jar lib/jboss-logging-3.1.3.GA.jar lib/jboss-
+ logging-annotations-1.2.0.Beta1.jar lib/jboss-transaction-api_1.2_spe
+ c-1.0.0.Final.jar lib/dom4j-1.6.1.jar lib/hibernate-commons-annotatio
+ ns-4.0.5.Final.jar lib/hibernate-jpa-2.1-api-1.0.0.Final.jar lib/java
+ ssist-3.18.1-GA.jar lib/antlr-2.7.7.jar lib/jandex-1.1.0.Final.jar li
+ b/hibernate-validator-5.2.2.Final.jar lib/validation-api-1.1.0.Final.
+ jar lib/classmate-1.1.0.jar lib/p6spy-1.3.jar lib/tiles-api-2.2.2.jar
+  lib/tiles-core-2.2.2.jar lib/commons-digester-2.0.jar lib/tiles-jsp-
+ 2.2.2.jar lib/tiles-servlet-2.2.2.jar lib/tiles-template-2.2.2.jar li
+ b/tiles-el-2.2.2.jar lib/jnbis-1.0.4.jar lib/tiles-extras-2.2.2.jar l
+ ib/tiles-ognl-2.2.2.jar lib/ognl-2.7.3.jar lib/javassist-3.7.ga.jar l
+ ib/tiles-compat-2.2.2.jar lib/commons-logging-1.1.1.jar lib/commons-l
+ ang-2.5.jar lib/commons-dbcp-1.4.jar lib/commons-pool-1.5.4.jar lib/c
+ ommons-io-2.4.jar lib/aspectjrt-1.6.12.jar lib/aspectjtools-1.6.10.ja
+ r lib/jasperreports-4.8.0.jar lib/commons-beanutils-1.8.3.jar lib/jco
+ mmon-1.0.15.jar lib/jfreechart-1.0.12.jar lib/xml-apis-1.3.02.jar lib
+ /jdtcore-3.1.0.jar lib/castor-1.2.jar lib/poi-ooxml-3.7.jar lib/poi-3
+ .7.jar lib/poi-ooxml-schemas-3.7.jar lib/xmlbeans-2.3.0.jar lib/stax-
+ api-1.0.1.jar lib/geronimo-stax-api_1.0_spec-1.0.jar lib/jackson-core
+ -2.0.5.jar lib/jackson-databind-2.0.5.jar lib/jackson-annotations-2.0
+ .5.jar lib/itext-2.1.7.jar lib/bcmail-jdk14-138.jar lib/bctsp-jdk14-1
+ .38.jar lib/bcprov-jdk14-1.38.jar lib/bcmail-jdk14-1.38.jar lib/slf4j
+ -api-1.7.13.jar lib/jcl-over-slf4j-1.7.13.jar lib/slf4j-log4j12-1.7.1
+ 3.jar lib/log4j-1.2.16.jar lib/bsh-2.0b4.jar lib/oscache-2.4.jar lib/
+ quartz-2.2.2.jar lib/c3p0-0.9.1.1.jar lib/commons-codec-1.4.jar lib/e
+ sapi-2.1.0.jar lib/commons-configuration-1.5.jar lib/commons-beanutil
+ s-core-1.7.0.jar lib/xom-1.2.5.jar lib/xercesImpl-2.8.0.jar lib/xalan
+ -2.7.0.jar lib/bsh-core-2.0b4.jar lib/antisamy-1.4.3.jar lib/batik-cs
+ s-1.7.jar lib/batik-ext-1.7.jar lib/batik-util-1.7.jar lib/xml-apis-e
+ xt-1.3.04.jar lib/nekohtml-1.9.12.jar lib/commons-httpclient-3.1.jar 
+ lib/axis-1.4.jar lib/axis-jaxrpc-1.4.jar lib/axis-saaj-1.4.jar lib/ax
+ is-wsdl4j-1.5.1.jar lib/commons-discovery-0.4.jar lib/jaxb-core-2.2.1
+ 1.jar lib/nic-dx-type-1.1-SNAPSHOT.jar lib/idserver-agent-3.3-SNAPSHO
+ T.jar lib/spid-6.0.jar lib/baf-client-agent-3.2-SNAPSHOT.jar lib/baf-
+ axis-client-3.2-SNAPSHOT.jar lib/cxf-rt-frontend-jaxws-3.1.4.jar lib/
+ xml-resolver-1.2.jar lib/asm-5.0.4.jar lib/cxf-core-3.1.4.jar lib/woo
+ dstox-core-asl-4.4.1.jar lib/stax2-api-3.1.4.jar lib/xmlschema-core-2
+ .2.1.jar lib/cxf-rt-bindings-soap-3.1.4.jar lib/cxf-rt-wsdl-3.1.4.jar
+  lib/cxf-rt-databinding-jaxb-3.1.4.jar lib/jaxb-impl-2.2.11.jar lib/c
+ xf-rt-bindings-xml-3.1.4.jar lib/cxf-rt-frontend-simple-3.1.4.jar lib
+ /cxf-rt-ws-addr-3.1.4.jar lib/cxf-rt-ws-policy-3.1.4.jar lib/cxf-rt-f
+ eatures-clustering-3.1.4.jar lib/cxf-rt-transports-http-3.1.4.jar lib
+ /cxf-rt-ws-security-3.1.4.jar lib/cxf-rt-security-saml-3.1.4.jar lib/
+ cxf-rt-security-3.1.4.jar lib/wss4j-ws-security-common-2.1.4.jar lib/
+ opensaml-saml-impl-3.1.1.jar lib/opensaml-profile-api-3.1.1.jar lib/o
+ pensaml-core-3.1.1.jar lib/opensaml-saml-api-3.1.1.jar lib/opensaml-x
+ mlsec-api-3.1.1.jar lib/opensaml-soap-api-3.1.1.jar lib/opensaml-secu
+ rity-impl-3.1.1.jar lib/opensaml-security-api-3.1.1.jar lib/cryptacul
+ ar-1.0.jar lib/bcprov-jdk15on-1.51.jar lib/opensaml-xmlsec-impl-3.1.1
+ .jar lib/java-support-7.1.1.jar lib/guava-18.0.jar lib/opensaml-xacml
+ -impl-3.1.1.jar lib/opensaml-xacml-api-3.1.1.jar lib/opensaml-xacml-s
+ aml-impl-3.1.1.jar lib/opensaml-xacml-saml-api-3.1.1.jar lib/jasypt-1
+ .9.2.jar lib/geronimo-javamail_1.4_spec-1.7.1.jar lib/ehcache-2.9.0.j
+ ar lib/wss4j-ws-security-dom-2.1.4.jar lib/wss4j-policy-2.1.4.jar lib
+ /neethi-3.0.3.jar lib/wss4j-ws-security-stax-2.1.4.jar lib/wss4j-bind
+ ings-2.1.4.jar lib/wss4j-ws-security-policy-stax-2.1.4.jar lib/spring
+ -context-4.2.4.RELEASE.jar lib/spring-expression-4.2.4.RELEASE.jar li
+ b/wsdl4j-1.6.2.jar lib/wss4j-1.6.9.jar lib/xmlsec-1.5.3.jar lib/opens
+ aml-2.5.1-1.jar lib/openws-1.4.2-1.jar lib/xmltooling-1.3.2-1.jar lib
+ /joda-time-1.6.2.jar lib/commons-collections-3.2.1.jar lib/commons-fi
+ leupload-1.2.2.jar lib/bcprov-jdk14-138.jar lib/xstream-1.3.jar lib/x
+ pp3_min-1.1.4c.jar lib/j2ssh-core-0.2.9.jar lib/commons-net-1.4.0.jar
+  lib/oro-2.0.8.jar lib/javax.el-api-3.0.0.jar lib/nic-lds-1.0-SNAPSHO
+ T.jar lib/jcifs-1.3.17.jar lib/servlet-api-2.4.jar lib/commons-vfs2-2
+ .1.jar lib/commons-vfs2-sandbox-2.0.jar lib/jackson-mapper-asl-1.9.13
+ .jar lib/jackson-core-asl-1.9.13.jar lib/json-20160810.jar
+Build-Jdk: 1.7.0_79
+Built-By: dungq
+Created-By: Maven Integration for Eclipse
+Main-Class: com.nec.asia.nic.comp.job.JobInitializingBean
+

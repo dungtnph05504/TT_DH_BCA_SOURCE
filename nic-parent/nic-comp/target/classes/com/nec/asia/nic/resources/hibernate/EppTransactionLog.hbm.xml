@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicTransactionLog" table="EPP_TRANSACTION_LOG" optimistic-lock="version">
+		<id name="logId" type="long">
+			<column name="LOG_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_TRANSACTION_LOG_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="refId" type="string">
+			<column name="REF_ID" length="36" not-null="true">
+				<comment>Application Id</comment>
+			</column>
+		</property>
+		<property name="logCreateTime" type="timestamp">
+			<column name="LOG_CREATE_TIME" length="7">
+				<comment>Log Creation Datetime</comment>
+			</column>
+		</property>
+		<property name="transactionStage" type="string">
+			<column name="TRANSACTION_STAGE" length="30">
+				<comment>Transaction Stage</comment>
+			</column>
+		</property>
+		<property name="transactionStatus" type="string">
+			<column name="TRANSACTION_STATUS" length="50">
+				<comment>Transaction Status</comment>
+			</column>
+		</property>
+		<property name="wkstnId" type="string">
+			<column name="WKSTN_ID" length="64">
+				<comment>Workstation Id</comment>
+			</column>
+		</property>
+		<property name="officerId" type="string">
+			<column name="OFFICER_ID" length="64">
+				<comment>Officer Id</comment>
+			</column>
+		</property>
+		<property name="siteCode" type="string">
+			<column name="SITE_CODE" length="5">
+				<comment>Office Location</comment>
+			</column>
+		</property>
+		<property name="startTime" type="timestamp">
+			<column name="START_TIME" length="7">
+				<comment>Stage Start Time</comment>
+			</column>
+		</property>
+		<property name="endTime" type="timestamp">
+			<column name="END_TIME" length="7">
+				<comment>Stage End Time</comment>
+			</column>
+		</property>
+		<property name="logInfo" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType"><!-- clob -->
+			<column name="LOG_INFO">
+				<comment>Log Info</comment>
+			</column>
+		</property>
+		<property name="logData" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType"><!-- org.hibernate.type.MaterializedClobType cannot used, causing dead lock -->
+			<column name="LOG_DATA">
+				<comment>Log Binary</comment>
+			</column>
+		</property>
+		<property name="retryCount" type="int">
+			<column name="RETRY_COUNT" precision="10" scale="0">
+				<comment>Stage Retry Count</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,1014 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<c:url var="pingServerUrl" value="/servlet/user/pingServer" />
+<c:url var="getLogCheckConn" value="/servlet/central/logCheckConnection" />
+<c:url var="getDulieuTN" value="/servlet/central/dulieutn" />
+<c:url var="getThongkeDiaPhuong" value="/servlet/central/truyenNhanDuLieu/PA" />
+<c:url var="getThongkeTTXL" value="/servlet/central/truyenNhanDuLieu/A" />
+<c:url var="getThongkePerso" value="/servlet/central/truyenNhanDuLieu/IN" />
+<c:url var="getThongkeHTHH" value="/servlet/central/truyenNhanDuLieu/A08" />
+<c:url var="getThongkeFHTHH" value="/servlet/central/truyenNhanDuLieu/FA08" />
+<link rel="stylesheet" type="text/css" href="/eppcentral/resources/style1/plugins/breaking-news-ticker/breaking-news-ticker.css">
+<script src="/eppcentral/resources/style1/plugins/breaking-news-ticker/breaking-news-ticker.min.js"></script>
+<style>
+<!--
+
+-->
+.main-footer {
+    display: none;
+}
+
+.text-center{
+	text-align: right !important;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+    white-space: pre-wrap;
+}
+.cls-mg-bot {
+	margin-top: 10px;
+}
+
+#truyenNhanDP {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto
+}
+
+#truyenNhanTTXL {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto
+}
+
+#truyenNhanPerso {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto
+}
+
+#truyenNhanHTHH {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto
+}
+
+#tbTruyenNhanDL {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#truyenNhanDP input[type="text"] {
+	width: 80%;
+	text-align: right;
+	font-size: 18px;
+	min-width: 60px;
+	display: inline-block;
+}
+
+#truyenNhanDP tr td {
+	text-align: left;
+	font-size: 20px;
+	padding: 8px 6px;
+}
+
+#truyenNhanTTXL input[type="text"] {
+	width: 80%;
+	text-align: right;
+	font-size: 18px;
+	min-width: 60px;
+	display: inline-block;
+}
+
+#truyenNhanTTXL tr td {
+	text-align: left;
+	font-size: 20px;
+	padding: 8px 6px;
+}
+
+#truyenNhanPerso input[type="text"] {
+	width: 80%;
+	text-align: right;
+	font-size: 18px;
+	min-width: 60px;
+	display: inline-block;
+}
+
+#truyenNhanPerso tr td {
+	text-align: left;
+	font-size: 20px;
+	padding: 8px 6px;
+}
+
+#truyenNhanHTHH input[type="text"] {
+	width: 80%;
+	text-align: right;
+	font-size: 18px;
+	min-width: 60px;
+	display: inline-block;
+}
+
+#truyenNhanHTHH tr td {
+	text-align: left;
+	font-size: 20px;
+	padding: 8px 6px;
+}
+
+#nhanTuHTHH input[type="text"] {
+	width: 100%;
+	text-align: right;
+	font-size: 18px;
+	min-width: 109px;
+	display: inline-block;
+}
+
+#nhanTuHTHH tr td {
+	text-align: left;
+	font-size: 20px;
+	padding: 8px 6px;
+}
+
+#tbTruyenNhanDL input[type="text"] {
+	width: 100%;
+	text-align: right;
+	font-size: 18px;
+	min-width: 50px;
+}
+
+#tbTruyenNhanDL tr td {
+	text-align: left;
+	font-size: 20px;
+	padding: 8px 6px;
+}
+a.detail{
+	text-align: left;
+	font-size: 15px;
+	color: blue;
+	float: right;
+    display: inline-block;
+    margin-top: 4px;
+}
+.font-bold {
+    font-weight: bold;
+}
+
+.n_panel.d_panel {
+    /* width: 100%; */
+    position: absolute;
+    top: 21px;
+    right: 50px;
+    display: block;
+    z-index: 889;
+    color: black;
+    height: 40px;
+    transition: all 0.4s;
+    bottom: -350px;
+    background: white;
+}
+
+.n_panel .fixWidth {
+    position: relative;
+}
+
+.n_panel .wheels {
+    /* width: 100%; */
+    overflow: hidden;
+}
+
+.n_panel .wheel {
+    position: relative;
+    z-index: 0;
+    float: left;
+    width: 320px;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.n_panel .wheel .selectContainer {
+    display: block;
+    text-align: center;
+    padding: 0;
+    transition: transform 0.18s ease-out;
+}
+
+.n_panel .wheel .selectContainer li {
+    font-size: 20px;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 10px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.n_panel .selectLine {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    pointer-events: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #DCDCDC;
+}
+
+.n_panel .shadowMask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), #ffffff);
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="./breaking-news-ticker.css">
+<form:form modelAttribute="formData" name="formData" > 
+
+		<!--Content start-->
+<div class="form-desing">
+   <div> 
+	   <div>
+		   <div class="row">
+		   	   <div class="ov_hidden">
+			  <div class="new-heading-2" >THỐNG KÊ TRUYỀN NHẬN</div>
+			   		<div class="col-md-4">
+			   			<fieldset style="height: 275px;">
+			   				<legend style="font-size: 20px;">TRUYỀN NHẬN DỮ LIỆU TỪ ĐỊA PHƯƠNG</legend>
+			   					<div id="truyenNhanDP">
+			   						<table class="dt-table table">
+					   					<tbody>
+					   						<tr>
+					   							<td colspan="4">Nhận hồ sơ: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countReceiveTranPA" class="form-control" value="${transmissPa.countReceiveTran}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Nhận danh sách A: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countReceiveHanAPA" class="form-control" value="${transmissPa.countReceiveHanA}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi danh sách B: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendHanBPA" class="form-control" value="${transmissPa.countSendHanB}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi danh sách C: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendHanCPA" class="form-control" value="${transmissPa.countSendHanC}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=PA&objStatus=PENDING">Chờ gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countWaitingToSendPA" class="form-control" value="${transmissPa.countWaitingToSend}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=PA&objStatus=DOING">Đang gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countSendingPA" class="form-control" value="${transmissPa.countSending}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=PA&objStatus=NONE">Gửi lỗi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countErrorPA" class="form-control" value="${transmissPa.countError}" readonly=""></td>
+					   						</tr>
+					   					</tbody>
+				   					</table>
+			   					</div>
+			   			</fieldset>
+			   		</div>
+			   		<div class="col-md-4">
+			   			<fieldset style="height: 275px;">
+			   				<legend style="font-size: 20px;">TRUYỀN NHẬN DỮ LIỆU VỀ TTXL</legend>
+			   				<div id="truyenNhanTTXL">
+			   						<table class="dt-table table">
+					   					<tbody>
+					   						<tr>
+					   							<td colspan="4">Nhận hồ sơ từ TTXL: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countReceiveTranA" class="form-control" value="${transmissA.countReceiveTran}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Nhận danh sách B: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countReceiveHanBA" class="form-control" value="${transmissA.countReceiveHanB}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi hồ sơ về TTXL: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendTranA" class="form-control" value="${transmissA.countSendTran}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi danh sách A: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendHanAA" class="form-control" value="${transmissA.countSendHanA}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=A&objStatus=PENDING">Chờ gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countWaitingToSendA" class="form-control" value="${transmissA.countWaitingToSend}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=A&objStatus=DOING">Đang gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countSendingA" class="form-control" value="${transmissA.countSending}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=A&objStatus=NONE">Gửi lỗi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countErrorA" class="form-control" value="${transmissA.countError}" readonly=""></td>
+					   						</tr>
+					   					</tbody>
+				   					</table>
+			   					</div>
+			   			</fieldset>
+			   		</div>
+			   		<div class="col-md-4">
+			   			<fieldset style="height: 275px;">
+			   				<legend style="font-size: 20px;">TRUYỀN NHẬN DỮ LIỆU VỀ PERSO</legend>
+			   				<div id="truyenNhanPerso">
+			   						<table class="dt-table table">
+					   					<tbody>
+					   						<tr>
+					   							<td colspan="4">Nhận danh sách C: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countReceiveHanCIN" class="form-control" value="${transmissIn.countReceiveHanC}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Đóng gói dữ liệu: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countPackIN" class="form-control" value="${transmissIn.countPack}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi danh sách B: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendHanBIN" class="form-control" value="${transmissIn.countSendHanB}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?objType=IN&objStatus=PENDING">Chờ gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countWaitingToSendIN" class="form-control" value="${transmissIn.countWaitingToSend}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?objType=IN&objStatus=DOING">Đang gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countSendingIN" class="form-control" value="${transmissIn.countSending}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=IN&objStatus=NONE">Gửi lỗi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countErrorIN" class="form-control" value="${transmissIn.countError}" readonly=""></td>
+					   						</tr>
+					   					</tbody>
+				   					</table>
+			   					</div>
+			   			</fieldset>
+			   		</div>
+       				<div class="col-md-4" style="margin-top: 15px;">
+       					<fieldset style="height: 405px">
+       						<legend style="font-size: 20px;">TRUYỀN DỮ LIỆU VỀ HTHH</legend>
+       						<div id="truyenNhanHTHH">
+			   						<table class="dt-table table">
+					   					<tbody>
+					   						<tr>
+					   							<td colspan="4">Gửi hồ sơ: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendTranA08" class="form-control" value="${transmissA08.countSendTran}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi danh sách B: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendHanBA08" class="form-control" value="${transmissA08.countSendHanB}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi hộ chiếu: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendPassportA08" class="form-control" value="${transmissA08.countSendPassport}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi danh sách C: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendHanCA08" class="form-control" value="${transmissA08.countSendHanC}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi thông tin báo mất hủy: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendLostA08" class="form-control" value="${transmissA08.countSendLost}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td colspan="4">Gửi thông tin hồ sơ lưu: </td>
+					   							<td class="text-center" colspan="2"><input type="text" id="countSendArchiveA08" class="form-control" value="${transmissA08.countSendArchive}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=A08&objStatus=PENDING">Chờ gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countWaitingToSendA08" class="form-control" value="${transmissA08.countWaitingToSend}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=A08&objStatus=DOING">Đang gửi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countSendingA08" class="form-control" value="${transmissA08.countSending}" readonly=""></td>
+					   							<td style="width: 25%;" ><a class="detail" href="/eppcentral/servlet/central/showQueue?receiver=A08&objStatus=NONE">Gửi lỗi:</a></td>
+					   							<td class="text-center" ><input type="text" id="countErrorA08" class="form-control" value="${transmissA08.countError}" readonly=""></td>
+					   						</tr>
+					   					</tbody>
+				   					</table>
+			   					</div>
+       					</fieldset>
+       				</div>
+       				
+       				<div class="col-md-3" style="margin-top: 15px;">
+       					<fieldset style="height: 405px;">
+       						<legend style="font-size: 20px;">NHẬN DỮ LIỆU TỪ HTHH</legend>
+       						<div id="nhanTuHTHH">
+			   						<table class="dt-table table">
+					   					<tbody>
+					   						<tr>
+					   							<td>HS chưa chuyển: </td>
+					   							<td class="text-center"><input type="text" id="countWaintTranA08" class="form-control" value="${transmissFA08.countWaintTran}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td>HC chưa chuyển: </td>
+					   							<td class="text-center"><input type="text" id="countWaintPpA08" class="form-control" value="${transmissFA08.countWaintPassport}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td>HS đã nhận: </td>
+					   							<td class="text-center"><input type="text" id="countRecievedTranA08" class="form-control" value="${transmissFA08.countReceiveTran}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td width="75%">HC đã nhận: </td>
+					   							<td class="text-center"><input type="text" id="countRecievedPpA08" class="form-control" value="${transmissFA08.countReceivePassport}" readonly=""></td>
+					   						</tr>
+					   						<tr>
+					   							<td>Chuyển lỗi: </td>
+					   							<td class="text-center" ><input type="text" id="countErrorA08" class="form-control" value="${transmissFA08.countError}" readonly=""></td>
+					   						</tr>
+					   					</tbody>
+				   					</table>
+			   					</div>
+       					</fieldset>
+       				</div>
+       				<div class="col-md-5" style="margin-top: 15px;">
+       					<fieldset style="height: 405px;">
+       						<legend style="font-size: 20px;">TRUYỀN NHẬN DỮ LIỆU</legend>
+       						<div id="tbTruyenNhanDL">
+       							<table class="dt-table table">
+				   					<tbody>
+					   					<tr>
+					                        <td colspan="5">Trả KQ tra cứu</td>
+				                            <td class="text-center" colspan="5"><input type="text" id="trakq" class="form-control" value="${rptStatic.trakq}" readonly=""></td>
+				                        </tr>
+				                        <tr>
+				                            <td style="width: 50%"></td>
+				                            <td class="font-bold">NB</td>
+				                            <td class="font-bold">ĐN</td>
+				                            <td class="font-bold">TSN</td>
+				                            <td class="font-bold">PQ</td>
+				                            <td class="font-bold">CR</td>
+				                            <td class="font-bold">BQP</td>
+				                        </tr>
+				                        <tr>
+				                            <td>Gửi DL XNC</td>
+				                            <c:forEach items="${rptStatic.lstRpt}" var="item">
+				                            	<c:choose>
+											         <c:when test = "${item.siteCode == 'NB'}">
+											            <td class="text-center"><input type="text" id="guidl_Nb" class="form-control dl-ip" value="${item.guidl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'DN'}">
+											            <td class="text-center"><input type="text" id="guidl_Dn" class="form-control dl-ip" value="${item.guidl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'TSN'}">
+											            <td class="text-center"><input type="text" id="guidl_Tsn" class="form-control dl-ip" value="${item.guidl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'PQ'}">
+											            <td class="text-center"><input type="text" id="guidl_Pq" class="form-control dl-ip" value="${item.guidl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'CR'}">
+											            <td class="text-center"><input type="text" id="guidl_Cr" class="form-control dl-ip" value="${item.guidl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'BQP-MC'}">
+				                            			<td class="text-center"><input type="text" id="guidl_Bqp" class="form-control dl-ip" value="${item.guidl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:otherwise>
+											         </c:otherwise>
+											    </c:choose>
+				                       		</c:forEach>
+				                        </tr>
+				                        <tr>
+				                            <td>Nhận DL XNC</td>
+				                            <c:forEach items="${rptStatic.lstRpt}" var="item">
+				                            	<c:choose>
+											         <c:when test = "${item.siteCode == 'NB'}">
+											            <td class="text-center"><input type="text" id="nhandl_Nb" class="form-control dl-ip" value="${item.nhandl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'DN'}">
+											            <td class="text-center"><input type="text" id="nhandl_Dn" class="form-control dl-ip" value="${item.nhandl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'TSN'}">
+											            <td class="text-center"><input type="text" id="nhandl_Tsn" class="form-control dl-ip" value="${item.nhandl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'PQ'}">
+											            <td class="text-center"><input type="text" id="nhandl_Pq" class="form-control dl-ip" value="${item.nhandl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'CR'}">
+											            <td class="text-center"><input type="text" id="nhandl_Cr" class="form-control dl-ip" value="${item.nhandl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'BQP-MC'}">
+				                            			<td class="text-center"><input type="text" id="nhandl_Bqp" class="form-control dl-ip" value="${item.nhandl_Nb}" readonly=""></td>
+											         </c:when>
+											         <c:otherwise>
+											         </c:otherwise>
+											    </c:choose>
+				                       		</c:forEach>               
+				                        </tr>
+				                        <tr>
+				                            <td>Gửi TT Hộ chiếu</td>
+				                            <c:forEach items="${rptStatic.lstRpt}" var="item">
+				                            	<c:choose>
+											         <c:when test = "${item.siteCode == 'NB'}">
+											            <td class="text-center"><input type="text" id="guihc_Nb" class="form-control dl-ip" value="${item.guihc_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'DN'}">
+											            <td class="text-center"><input type="text" id="guihc_Dn" class="form-control dl-ip" value="${item.guihc_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'TSN'}">
+											            <td class="text-center"><input type="text" id="guihc_Tsn" class="form-control dl-ip" value="${item.guihc_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'PQ'}">
+											            <td class="text-center"><input type="text" id="guihc_Pq" class="form-control dl-ip" value="${item.guihc_Bqp}" readonly=""></td>
+											         </c:when>
+											          <c:when test = "${item.siteCode == 'CR'}">
+											            <td class="text-center"><input type="text" id="guihc_Cr" class="form-control dl-ip" value="${item.guihc_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'BQP-MC'}">
+											            <td class="text-center"><input type="text" id="guihc_Bqp" class="form-control dl-ip" value="${item.guihc_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:otherwise>
+											         </c:otherwise>
+											    </c:choose>
+				                       		</c:forEach>
+				                        </tr>
+				                        <tr>
+				                            <td>Gửi TT GT mất, hủy</td>
+				                            <c:forEach items="${rptStatic.lstRpt}" var="item">
+				                            	<c:choose>
+											         <c:when test = "${item.siteCode == 'NB'}">
+											            <td class="text-center"><input type="text" id="guimh_Nb" class="form-control dl-ip" value="${item.guimh_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'DN'}">
+											              <td class="text-center"><input type="text" id="guimh_Dn" class="form-control dl-ip" value="${item.guimh_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'TSN'}">
+											            <td class="text-center"><input type="text" id="guimh_Tsn" class="form-control dl-ip" value="${item.guimh_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'PQ'}">
+											            <td class="text-center"><input type="text" id="guimh_Pq" class="form-control dl-ip" value="${item.guimh_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'CR'}">
+											            <td class="text-center"><input type="text" id="guimh_Cr" class="form-control dl-ip" value="${item.guimh_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:when test = "${item.siteCode == 'BQP-MC'}">
+											            <td class="text-center"><input type="text" id="guimh_Bqp" class="form-control dl-ip" value="${item.guimh_Bqp}" readonly=""></td>
+											         </c:when>
+											         <c:otherwise>
+											         </c:otherwise>
+											    </c:choose>
+				                       		</c:forEach>
+				                        </tr>
+				                        <tr>
+				                            <td colspan="5">Gửi TT Hộ chiếu ký CA cho BNG</td>
+				                            <td class="text-center" colspan="5"><input type="text" id="kyca_bng" class="form-control" value="${rptStatic.kyca_bng}" readonly=""></td>
+				                        </tr>
+				                    </tbody>
+				   				</table>
+       						</div>
+       						<div class="n_panel d_panel" style="bottom: 0; top: auto;">
+		                    <div class="fixWidth">
+		                        <div class="wheels">
+		                            <div class="wheel" style="width: 420px;">
+		                            <div id="newsTickerLogCheckConn" onclick="window.location='/eppcentral/servlet/listLogCheckConnection/viewList'">
+			                            <div class="bn-news" id="myMarqueeLogConn">
+			                                 <ul id="loadLogCheckConn" class="selectContainer" style="white-space: nowrap;">
+			                                </ul>
+			                            </div>
+			                            </div>
+		                            </div>
+		                        </div>
+		                        <div class="selectLine"></div>
+		                        <div class="shadowMask"></div>
+		                    </div>
+			                </div>
+       					</fieldset>
+       				</div>
+			   </div>
+		   </div>
+<div id="dialog-confirm"></div>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		logCheckConnection();
+		dulieutruyennhan();
+		
+		window.setInterval(function() {
+			dulieutruyennhan();
+		}, 55000);
+		
+		window.setInterval(function() {
+			transmissionPA();
+		}, 56000);
+		
+		window.setInterval(function() {
+			transmissionA();
+		}, 57000);
+		
+		window.setInterval(function() {
+			transmissionIn();
+		}, 58000);
+		
+		window.setInterval(function() {
+			transmissionA08();
+		}, 59000);
+		
+		window.setInterval(function() {
+			transmissionFA08()
+		}, 60000);
+		
+		window.setInterval(function() {
+			sessPingServer();
+		}, 25000);
+		
+		window.setInterval(function() {
+			logCheckConnection();
+		}, 30000);
+	});
+	
+	function transmissionPA() {
+		$.ajax({
+			url : '${getThongkeDiaPhuong}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+					
+					$('#countReceiveTranPA').prop('readonly',false);
+					$('#countReceiveTranPA').val(response.countReceiveTran);
+					$('#countReceiveTranPA').prop('readonly',true);
+					
+					$('#countReceiveHanAPA').prop('readonly',false);
+					$('#countReceiveHanAPA').val(response.countReceiveHanA);
+					$('#countReceiveHanAPA').prop('readonly',true);
+					
+					$('#countSendHanBPA').prop('readonly',false);
+					$('#countSendHanBPA').val(response.countSendHanB);
+					$('#countSendHanBPA').prop('readonly',true);
+					
+					$('#countSendHanCPA').prop('readonly',false);
+					$('#countSendHanCPA').val(response.countSendHanC);
+					$('#countSendHanCPA').prop('readonly',true);
+					
+					$('#countWaitingToSendPA').prop('readonly',false);
+					$('#countWaitingToSendPA').val(response.countWaitingToSend);
+					$('#countWaitingToSendPA').prop('readonly',true);
+					
+					$('#countSendingPA').prop('readonly',false);
+					$('#countSendingPA').val(response.countSending);
+					$('#countSendingPA').prop('readonly',true);
+					
+					$('#countErrorPA').prop('readonly',false);
+					$('#countErrorPA').val(response.countError);
+					$('#countErrorPA').prop('readonly',true);
+					
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+	
+	function transmissionA() {
+		$.ajax({
+			url : '${getThongkeTTXL}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+					
+					$('#countReceiveTranA').prop('readonly',false);
+					$('#countReceiveTranA').val(response.countReceiveTran);
+					$('#countReceiveTranA').prop('readonly',true);
+					
+					$('#countReceiveHanBA').prop('readonly',false);
+					$('#countReceiveHanBA').val(response.countReceiveHanB);
+					$('#countReceiveHanBA').prop('readonly',true);
+					
+					$('#countSendTranA').prop('readonly',false);
+					$('#countSendTranA').val(response.countSendTran);
+					$('#countSendTranA').prop('readonly',true);
+					
+					$('#countSendHanAA').prop('readonly',false);
+					$('#countSendHanAA').val(response.countSendHanA);
+					$('#countSendHanAA').prop('readonly',true);
+					
+					$('#countWaitingToSendA').prop('readonly',false);
+					$('#countWaitingToSendA').val(response.countWaitingToSend);
+					$('#countWaitingToSendA').prop('readonly',true);
+					
+					$('#countSendingA').prop('readonly',false);
+					$('#countSendingA').val(response.countSending);
+					$('#countSendingA').prop('readonly',true);
+					
+					$('#countErrorA').prop('readonly',false);
+					$('#countErrorA').val(response.countError);
+					$('#countErrorA').prop('readonly',true);
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+	
+	function transmissionIn() {
+		$.ajax({
+			url : '${getThongkePerso}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+				
+					$('#countReceiveHanCIN').prop('readonly',false);
+					$('#countReceiveHanCIN').val(response.countReceiveHanC);
+					$('#countReceiveHanCIN').prop('readonly',true);
+					
+					$('#countPackIN').prop('readonly',false);
+					$('#countPackIN').val(response.countPack);
+					$('#countPackIN').prop('readonly',true);
+					
+					$('#countSendHanBIN').prop('readonly',false);
+					$('#countSendHanBIN').val(response.countSendHanB);
+					$('#countSendHanBIN').prop('readonly',true);
+					
+					$('#countWaitingToSendIN').prop('readonly',false);
+					$('#countWaitingToSendIN').val(response.countWaitingToSend);
+					$('#countWaitingToSendIN').prop('readonly',true);
+					
+					$('#countSendingIN').prop('readonly',false);
+					$('#countSendingIN').val(response.countSending);
+					$('#countSendingIN').prop('readonly',true);
+					
+					$('#countErrorIN').prop('readonly',false);
+					$('#countErrorIN').val(response.countError);
+					$('#countErrorIN').prop('readonly',true);
+					
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+	
+	function transmissionA08() {
+		$.ajax({
+			url : '${getThongkeHTHH}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+					
+					$('#countSendTranA08').prop('readonly',false);
+					$('#countSendTranA08').val(response.countSendTran);
+					$('#countSendTranA08').prop('readonly',true);
+					
+					$('#countSendHanBA08').prop('readonly',false);
+					$('#countSendHanBA08').val(response.countSendHanB);
+					$('#countSendHanBA08').prop('readonly',true);
+					
+					$('#countSendPassportA08').prop('readonly',false);
+					$('#countSendPassportA08').val(response.countSendPassport);
+					$('#countSendPassportA08').prop('readonly',true);
+					
+					$('#countSendHanCA08').prop('readonly',false);
+					$('#countSendHanCA08').val(response.countSendHanC);
+					$('#countSendHanCA08').prop('readonly',true);
+					
+					$('#countSendLostA08').prop('readonly',false);
+					$('#countSendLostA08').val(response.countSendLost);
+					$('#countSendLostA08').prop('readonly',true);
+					
+					$('#countSendArchiveA08').prop('readonly',false);
+					$('#countSendArchiveA08').val(response.countSendArchive);
+					$('#countSendArchiveA08').prop('readonly',true);
+					
+					$('#countWaitingToSendA08').prop('readonly',false);
+					$('#countWaitingToSendA08').val(response.countWaitingToSend);
+					$('#countWaitingToSendA08').prop('readonly',true);
+					
+					$('#countSendingA08').prop('readonly',false);
+					$('#countSendingA08').val(response.countSending);
+					$('#countSendingA08').prop('readonly',true);
+					
+					$('#countErrorA08').prop('readonly',false);
+					$('#countErrorA08').val(response.countError);
+					$('#countErrorA08').prop('readonly',true);
+					
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+	function transmissionFA08() {
+		$.ajax({
+			url : '${getThongkeFHTHH}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+					
+					$('#countWaintTranA08').prop('readonly',false);
+					$('#countWaintTranA08').val(response.countWaintTran);
+					$('#countWaintTranA08').prop('readonly',true);
+					
+					$('#countWaintPpA08').prop('readonly',false);
+					$('#countWaintPpA08').val(response.countWaintPassport);
+					$('#countWaintPpA08').prop('readonly',true);
+					
+					$('#countRecievedTranA08').prop('readonly',false);
+					$('#countRecievedTranA08').val(response.countReceiveTran);
+					$('#countRecievedTranA08').prop('readonly',true);
+					
+					$('#countRecievedPpA08').prop('readonly',false);
+					$('#countRecievedPpA08').val(response.countReceivePassport);
+					$('#countRecievedPpA08').prop('readonly',true);
+					
+					$('#countErrorA08').prop('readonly',false);
+					$('#countErrorA08').val(response.countError);
+					$('#countErrorA08').prop('readonly',true);
+					
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+
+	
+	function dulieutruyennhan() {
+		$.ajax({
+			url : '${getDulieuTN}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+					$('#trakq').prop('readonly',false);
+					$('#trakq').val(response.trakq);
+					$('#trakq').prop('readonly',true);
+					$('#kyca_bng').prop('readonly',false);
+					$('#kyca_bng').val(response.kyca_bng);
+					$('#kyca_bng').prop('readonly',true);
+					
+					for (var i = 0; i < response.lstRpt.length; i++) {
+						if(response.lstRpt[i].siteCode == 'NB'){
+							$('#guidl_Nb').prop('readonly',false);
+							$('#guidl_Nb').val(response.lstRpt[i].guidl_Nb);
+							$('#guidl_Nb').prop('readonly',true);
+							
+							$('#nhandl_Nb').prop('readonly',false);
+							$('#nhandl_Nb').val(response.lstRpt[i].nhandl_Nb);
+							$('#nhandl_Nb').prop('readonly',true);
+							
+							$('#guihc_Nb').prop('readonly',false);
+							$('#guihc_Nb').val(response.lstRpt[i].guihc_Bqp);
+							$('#guihc_Nb').prop('readonly',true);
+							
+							$('#guimh_Nb').prop('readonly',false);
+							$('#guimh_Nb').val(response.lstRpt[i].guimh_Bqp);
+							$('#guimh_Nb').prop('readonly',true);
+						}
+						else if(response.lstRpt[i].siteCode == 'DN'){
+							$('#guidl_Dn').prop('readonly',false);
+							$('#guidl_Dn').val(response.lstRpt[i].guidl_Nb);
+							$('#guidl_Dn').prop('readonly',true);
+							
+							$('#nhandl_Dn').prop('readonly',false);
+							$('#nhandl_Dn').val(response.lstRpt[i].nhandl_Nb);
+							$('#nhandl_Dn').prop('readonly',true);
+							
+							$('#guihc_Dn').prop('readonly',false);
+							$('#guihc_Dn').val(response.lstRpt[i].guihc_Bqp);
+							$('#guihc_Dn').prop('readonly',true);
+							
+							$('#guimh_Dn').prop('readonly',false);
+							$('#guimh_Dn').val(response.lstRpt[i].guimh_Bqp);
+							$('#guimh_Dn').prop('readonly',true);
+						}
+						else if(response.lstRpt[i].siteCode == 'TSN'){
+							$('#guidl_Tsn').prop('readonly',false);
+							$('#guidl_Tsn').val(response.lstRpt[i].guidl_Nb);
+							$('#guidl_Tsn').prop('readonly',true);
+							
+							$('#nhandl_Tsn').prop('readonly',false);
+							$('#nhandl_Tsn').val(response.lstRpt[i].nhandl_Nb);
+							$('#nhandl_Tsn').prop('readonly',true);
+							
+							$('#guihc_Tsn').prop('readonly',false);
+							$('#guihc_Tsn').val(response.lstRpt[i].guihc_Bqp);
+							$('#guihc_Tsn').prop('readonly',true);
+							
+							$('#guimh_Tsn').prop('readonly',false);
+							$('#guimh_Tsn').val(response.lstRpt[i].guimh_Bqp);
+							$('#guimh_Tsn').prop('readonly',true);
+						} 
+						else if(response.lstRpt[i].siteCode == 'BQP-MC'){
+							$('#guidl_Bqp').prop('readonly',false);
+							$('#guidl_Bqp').val(response.lstRpt[i].guidl_Nb);
+							$('#guidl_Bqp').prop('readonly',true);
+							
+							$('#nhandl_Bqp').prop('readonly',false);
+							$('#nhandl_Bqp').val(response.lstRpt[i].nhandl_Nb);
+							$('#nhandl_Bqp').prop('readonly',true);
+							
+							$('#guihc_Bqp').prop('readonly',false);
+							$('#guihc_Bqp').val(response.lstRpt[i].guihc_Bqp);
+							$('#guihc_Bqp').prop('readonly',true);
+							
+							$('#guimh_Bqp').prop('readonly',false);
+							$('#guimh_Bqp').val(response.lstRpt[i].guimh_Bqp);
+							$('#guimh_Bqp').prop('readonly',true);
+						}
+					}
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+
+	function sessPingServer(form) {
+		var ajaxUrl = '${pingServerUrl}';
+		$.ajax({
+			url : ajaxUrl,
+			cache : false,
+			success : function(data) {
+				//TODO put any logic required here
+			},
+			error : function(e) {
+				redirectForSessionTimeout();
+			}
+		});
+	}
+	
+	function logCheckConnection() {
+		$.ajax({
+			url : '${getLogCheckConn}',
+			dataType : "json",
+			type : "GET",
+			contentType : 'application/json; charset=utf-8',
+			cache : false,
+			success : function(response) {
+				if (response != null) {
+					
+						if (response.length > 0) {
+							if($('#loadLogCheckConn li').length != response.length)
+							{
+								$("#loadLogCheckConn").empty();
+								for (var i = 0; i < response.length; i++) {
+									$("#loadLogCheckConn").append(
+											'<li style="color:red">'
+													+ response[i].siteName + ' - '
+													+ response[i].stage + '</li>');
+								}
+								$('#newsTickerLogCheckConn').breakingNews({
+									effect: 'slide-right'
+								});
+							}else{
+								$( "#loadLogCheckConn li" ).each(function( index ) {
+									  $( this ).text(response[index].siteName + ' - ' + response[index].stage) ;
+									  $( this ).css('color', 'red');
+								});
+							}
+						}else{
+							if($('#loadLogCheckConn li').length == 1){
+								$("#loadLogCheckConn").empty();
+								$("#loadLogCheckConn").append(
+										'<li style="color:blue">'
+												+ 'KẾT NỐI ỔN ĐỊNH' + '</li>');
+								$('#newsTickerLogCheckConn').breakingNews({
+									effect: 'slide-right'
+								});
+							}else
+							if($('#loadLogCheckConn li').length != 1)
+							{
+								$("#loadLogCheckConn").empty();
+								$("#loadLogCheckConn").append(
+										'<li style="color:blue">'
+												+ 'KẾT NỐI ỔN ĐỊNH' + '</li>');
+							}else{
+								$( "#loadLogCheckConn li" ).each(function( index ) {
+									  $( this ).text('KẾT NỐI ỔN ĐỊNH') ;
+									  $( this ).css('color', 'blue');
+								});
+							}
+						}
+				}
+			},
+			error : function(xhr) {
+				console.log('error');
+			}
+		});
+	}
+
+				</script>
+			</div>
+		</div>
+	</div>
+</form:form>

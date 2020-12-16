@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" 
+	version="2.4"> -->
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	metadata-complete="true">
+	<filter>
+
+		<filter-name>encoding-filter</filter-name>
+
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+
+
+		<init-param>
+
+			<param-name>encoding</param-name>
+
+			<param-value>UTF-8</param-value>
+
+		</init-param>
+
+
+		<init-param>
+
+			<param-name>forceEncoding</param-name>
+
+			<param-value>true</param-value>
+
+		</init-param>
+
+	</filter>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:nic/spring-context.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Serves static resource content from .jar files such as spring-faces.jar -->
+	<!-- <servlet> <servlet-name>Resources Servlet</servlet-name> <servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class> 
+		<load-on-startup>0</load-on-startup> </servlet> -->
+	<!-- Map all /resources requests to the Resource Servlet for handling -->
+	<!-- <servlet-mapping> <servlet-name>Resources Servlet</servlet-name> <url-pattern>/resources/*</url-pattern> 
+		</servlet-mapping> -->
+	<!-- The front controller of this Spring Web application, responsible for 
+		handling all application requests -->
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/web-context.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/servlet/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>XSSFilter</filter-name>
+		<filter-class>com.nec.asia.nic.web.filters.XSSFilter</filter-class>
+		<init-param>
+			<param-name>enableFilter</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>XSSFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.nec.asia.nic.web.filters.LoginFilter</filter-class>
+		<init-param>
+			<param-name>loginURL</param-name>
+			<param-value>/servlet/user/login</param-value>
+		</init-param>
+		<init-param>
+			<param-name>userSessionKey</param-name>
+			<param-value>userSession</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignoreURLs</param-name>
+			<param-value>/resources,/applet,/css,/images,/img,/js,/css/images,/servlet/user/loginChk</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>flushMode</param-name>
+			<param-value>AUTO</param-value>
+		</init-param>
+	</filter>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<jsp-config>
+		<taglib>
+			<taglib-uri>colfunction</taglib-uri>
+			<taglib-location>/WEB-INF/tld/CollectionFunctions.tld</taglib-location>
+		</taglib>
+		<jsp-property-group>
+	        <url-pattern>*.jsp</url-pattern>
+	        <page-encoding>UTF-8</page-encoding>
+	    </jsp-property-group>
+	</jsp-config>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/layout/error-standard.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/layout/error-standard.jsp</location>
+	</error-page>
+	<!-- <error-page> <exception-type>org.springframework.web.servlet.PageNotFound</exception-type> 
+		<location>/WEB-INF/layout/error-standard.jsp</location> </error-page> -->
+</web-app>

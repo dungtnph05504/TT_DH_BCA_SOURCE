@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.FeeRecieptPayment" table="EPP_RECEIPT_PAYMENT">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_RECEIPT_PAYMENT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+  		<property name="recieptNo" type="string">
+			<column name="RECIEPT_NO" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="typePayment" type="string">
+			<column name="TYPE_PAYMENT" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="250">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="price" type="java.lang.Double">
+			<column name="PRICE" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="unit" type="string">
+			<column name="UNIT" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="amount" type="int">
+			<column name="AMOUNT" precision="5" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="total" type="java.lang.Double">
+			<column name="TOTAL" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateDate" type="timestamp">
+			<column name="UPDATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="rmPaymentFlag" type="string">
+			<column name="RM_PAYMENT_FLAG" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createByName" type="string">
+			<column name="CREATE_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+ 	</class>
+</hibernate-mapping>

@@ -1,0 +1,79 @@
+#menu {
+	cursor: pointer;
+	font:14px Arial,Verdana, Helvetica, sans-serif;
+	font-weight:bold;
+	background-color: #337ab7;
+	border: 1px solid transparent;
+	border-color: #269abc;
+    /*background-image:url(images/nav-bg.png);
+    background-repeat:repeat-x;*/
+}
+
+/* remove all the bullets, borders and padding from the default list styling */
+#menu ul {padding:0;margin:0;list-style-type:none;height:30px;}
+#menu li {float:left;position:relative;height:30px;}
+
+/* style the links for the top level */
+#menu a,
+#menu span  {
+	color:#ffffff;
+    position: relative;
+    height: 30px;
+    display: block;
+    float: left;	
+    padding: 0 5px 0 5px;
+    line-height: 30px;
+    text-decoration: none;
+	
+}
+
+/* style the second level links */
+#menu ul ul a,
+#menu ul ul span {
+	background:#D2D2D2; 
+	color:#000; 
+	height:auto; 
+	line-height:1.2em;
+	padding:8px; 
+	white-space:wrap;
+	float:none;
+	width:220px;
+	z-index : 99999;
+}
+
+#menu ul ul li {
+	height:auto;
+	display:block;
+	border:1px solid #fff;
+	z-index : 9999;
+}
+
+/* style the top level hover */
+#menu ul a:hover,
+#menu ul span:hover{background: #2ae url(images/shade.png) repeat-x bottom; color: #ffffff;}
+#menu :hover > a, #menu ul ul :hover > a, #menu :hover > span,#menu ul ul :hover > span {background: #2ae url(images/shade.png) repeat-x bottom; color: #ffffff;}
+
+/* make the second level visible when hover on first level list OR link */
+#menu ul li:hover ul,
+#menu ul a:hover ul,
+#menu ul span:hover ul{visibility:visible;}
+
+/* style the third level background */
+#menu ul ul ul a,#menu ul ul ul span {background:#D2D2D2;left:-2px;}
+
+/* style the third level hover */
+#menu ul ul ul a:hover,#menu ul ul ul span:hover {background:#2ae url(images/shade.png) repeat-x bottom; color: #ffffff;}
+
+/* hide the sub levels and give them a positon absolute so that they take up no room */
+#menu ul ul {
+	visibility:hidden; 
+	position:absolute;
+	height:0;
+	top:30px;
+	left:0;
+	z-index: 9999;
+	
+	}
+
+.rightarrowclass{position:absolute; top:8px; right:10px;}
+#dividerRed{background:url(images/divider_2.gif) top left repeat-x; height:3px;}

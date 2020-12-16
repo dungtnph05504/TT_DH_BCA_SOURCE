@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 14, 2016 10:26:40 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.site.domain.SiteRepository" table="EPP_CENTRAL_SYS.SITE_REPOSITORY">
+        <id name="siteId" type="string">
+            <column name="SITE_ID" length="5" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="siteGroups" class="com.nec.asia.nic.framework.admin.site.domain.SiteGroups" fetch="select" lazy="false">
+            <column name="GROUP_ID" length="5">
+                <comment>Group ID</comment>
+            </column>
+        </many-to-one>
+        <property name="siteFunctionType" type="string">
+            <column name="SITE_FUNCTION_TYPE" length="10">
+                <comment>Function of site</comment>
+            </column>
+        </property>
+        <property name="country" type="string">
+            <column name="COUNTRY" length="5">
+                <comment>Country of site</comment>
+            </column>
+        </property>
+        <property name="siteName" type="string">
+            <column name="SITE_NAME" length="100">
+                <comment>site full name</comment>
+            </column>
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="100">
+                <comment>address of site</comment>
+            </column>
+        </property>
+        <property name="zipCode" type="string">
+            <column name="ZIP_CODE" length="20">
+                <comment>Zip code of site</comment>
+            </column>
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="64">
+                <comment>City of Site</comment>
+            </column>
+        </property>
+        <property name="region" type="string">
+            <column name="REGION" length="64">
+                <comment>Region of Site</comment>
+            </column>
+        </property>
+        <property name="siteNumber" type="java.lang.Integer">
+            <column name="SITE_NUMBER" precision="5" scale="0">
+                <comment>Site Numeric Identifier</comment>
+            </column>
+        </property>
+        <property name="activeIndicator" type="string">
+            <column name="ACTIVE_INDICATOR" length="2">
+                <comment>Active Indicatior</comment>
+            </column>
+        </property>
+        <property name="createVersion" type="java.lang.Integer">
+            <column name="CREATE_VERSION" precision="5" scale="0">
+                <comment>version created</comment>
+            </column>
+        </property>
+        <property name="updateVersion" type="java.lang.Integer">
+            <column name="UPDATE_VERSION" precision="5" scale="0">
+                <comment>version updated</comment>
+            </column>
+        </property>
+        <property name="authority" type="string">
+            <column name="AUTHORITY" length="64">
+                <comment>Authority at charge of site</comment>
+            </column>
+        </property>
+        <property name="a08Id" type="long">
+            <column name="A08_ID" precision="10" scale="0">
+                <comment>a08 ID</comment>
+            </column>
+        </property>
+        <set name="departments" table="EPP_CENTRAL_SYS.DEPARTMENT" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SITE_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.nec.asia.nic.framework.admin.site.domain.Department" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	 <definition name="nic-enquiry-jobqueue" extends="global.layout.standard">
+		<put-attribute name="queue"
+			value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/nicEnquiry/jobqueue.jsp" />
+	</definition> 
+	<definition name="nic-enquiry-hitList" template="/WEB-INF/views/nicEnquiry/jobqueue_hit_list.jsp" />
+	
+	<definition name="nic-enquiry-transInfo" template="/WEB-INF/views/nicEnquiry/jobqueue_trans_info.jsp" />
+	
+	<definition name="nic-enquiry-history-events" template="/WEB-INF/views/nicEnquiry/jobqueue_history_events.jsp" />
+	
+	<definition name="nic-enquiry-deatils-init" template="/WEB-INF/views/nicEnquiry/jobqueue_details_init.jsp" />
+	
+	<definition name="nic-enquiry-demographicInfo" template="/WEB-INF/views/nicEnquiry/jobqueue_demographic_info.jsp" />
+	
+	<definition name="nic-enquiry-jobInfo" template="/WEB-INF/views/nicEnquiry/jobqueue_job_info.jsp" />
+	
+	<definition name="nic-enquiry-passport-info" template="/WEB-INF/views/nicEnquiry/jobqueue_passport_info.jsp" />
+	
+	<definition name="audit-enquiry-searchList" extends="global.layout.standard">
+		<put-attribute name="queue"
+			value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/nicEnquiry/auditEnquiry.jsp" />
+	</definition> 
+	
+	<definition name="user-session-enquiry" extends="global.layout.standard">
+		<put-attribute name="queue"
+			value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/nicEnquiry/UserSessionEnquiry.jsp" />
+	</definition> 
+	
+	<definition name="nic-enquiry-person-summary" template="/WEB-INF/views/nicEnquiry/person_summary.jsp" />
+	
+	<definition name="nic-enquiry-trans-docs" template="/WEB-INF/views/nicEnquiry/trans_docs_list.jsp" />
+	
+	<definition name="photo-full-view" template="/WEB-INF/views/nicEnquiry/photos_full_view.jsp" />
+	
+	<definition name="fp-info" template="/WEB-INF/views/nicEnquiry/fp_info.jsp" />
+	
+	<definition name="issuance-details" template="/WEB-INF/views/nicEnquiry/issuance_details.jsp" />
+	
+</tiles-definitions>

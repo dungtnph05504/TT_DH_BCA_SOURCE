@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppIdentification" table="EPP_CENTRAL.EPP_IDENTIFICATION" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_IDENTIFICATION_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="idNumber" type="string">
+			<column name="ID_NUMBER" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maCsdl" type="string">
+			<column name="MA_CSDL" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="cmId" type="string">
+			<column name="CM_ID" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maDp" type="string">
+			<column name="MA_DP" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="soCmnd" type="string">
+			<column name="SO_CMND" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ctVt1" type="string">
+			<column name="CT_VT_1" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ctVt2" type="string">
+			<column name="CT_VT_2" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="hoTen" type="string">
+			<column name="HO_TEN" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="tenKhac" type="string">
+			<column name="TEN_KHAC" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maGioiTinh" type="string">
+			<column name="MA_GIOI_TINH" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ngaySinh" type="string">
+			<column name="NGAY_SINH" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="namSinh" type="string">
+			<column name="NAM_SINH" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="noiSinh" type="string">
+			<column name="NOI_SINH" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nguyenQuan" type="string">
+			<column name="NGUYEN_QUAN" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maDpNq" type="string">
+			<column name="MA_DP_NQ" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maDpTt" type="string">
+			<column name="MA_DP_TT" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maPxTt" type="string">
+			<column name="MA_PX_TT" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="thonPhoTt" type="string">
+			<column name="THON_PHO_TT" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="soNhaTt" type="string">
+			<column name="SO_NHA_TT" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maNgheNghiep" type="string">
+			<column name="MA_NGHE_NGHIEP" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="noiLamViec" type="string">
+			<column name="NOI_LAM_VIEC" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maDanToc" type="string">
+			<column name="MA_DAN_TOC" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maTonGiao" type="string">
+			<column name="MA_TON_GIAO" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maHocVan" type="string">
+			<column name="MA_HOC_VAN" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="hoTenCha" type="string">
+			<column name="HO_TEN_CHA" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="hoTenMe" type="string">
+			<column name="HO_TEN_ME" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="hoTenVc" type="string">
+			<column name="HO_TEN_VC" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="soCmndCu" type="string">
+			<column name="SO_CMND_CU" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ngayCapCu" type="string">
+			<column name="NGAY_CAP_CU" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maDpCap" type="string">
+			<column name="MA_DP_CAP" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dauVetRieng" type="string">
+			<column name="DAU_VET_RIENG" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ngayKhai" type="string">
+			<column name="NGAY_KHAI" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="imgId" type="string">
+			<column name="IMG_ID" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="tenAnhTruoc" type="string">
+			<column name="TEN_ANH_TRUOC" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="tenAnhSau" type="string">
+			<column name="TEN_ANH_SAU" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="thuMuc" type="string">
+			<column name="THU_MUC" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="anhTruoc" type="org.hibernate.type.MaterializedBlobType">
+			<column name="ANH_TRUOC">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="anhSau" type="org.hibernate.type.MaterializedBlobType">
+			<column name="ANH_SAU">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

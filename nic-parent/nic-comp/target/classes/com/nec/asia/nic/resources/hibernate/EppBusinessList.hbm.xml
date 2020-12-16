@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.NicBusinessList" table="EPP_CENTRAL.EPP_BUSINESS_LIST" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_BUSINESS_LIST_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="decisionNumber" type="string">
+			<column name="DECISIONNUMBER" length="200">
+				<comment>Số quyết định </comment>
+			</column>
+		</property>
+		<property name="serial" type="int">
+			<column name="SERIAL" precision="20" scale="0">
+				<comment>Thứ tự người cử đi công tác</comment>
+			</column>
+		</property>
+		<property name="fullname" type="string">
+			<column name="FULLNAME" length="100">
+				<comment>Họ tên đầy đủ </comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="1">
+				<comment>Giới tính (M/F/O)</comment>
+			</column>
+		</property>
+		<property name="dob" type="timestamp">
+			<column name="DOB" length="7">
+				<comment>Ngày sinh</comment>
+			</column>
+		</property>
+		<property name="pob" type="string">
+			<column name="POB" length="200">
+				<comment>Nơi sinh</comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="ADDRESS" length="2000">
+				<comment>Địa chỉ hiện tại</comment>
+			</column>
+		</property>
+		<property name="agency" type="string">
+			<column name="AGENCY" length="500">
+				<comment>Cơ quan chủ quản</comment>
+			</column>
+		</property>
+		<property name="position" type="string">
+			<column name="POSITION" length="200">
+				<comment>Chức vụ</comment>
+			</column>
+		</property>
+		<property name="positionEng" type="string">
+			<column name="POSITIONENG" length="200">
+				<comment>Chức vụ (Tiếng Anh)</comment>
+			</column>
+		</property>
+		<property name="addressAgency" type="string">
+			<column name="ADDRESSAGENCY" length="2000">
+				<comment>Địa chỉ cơ quan</comment>
+			</column>
+		</property>
+		<property name="phone" type="string">
+			<column name="PHONE" length="20">
+				<comment>Số điện thoại cơ quan</comment>
+			</column>
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE" length="50">
+				<comment>Loại công chức/viên chức</comment>
+			</column>
+		</property>
+		<property name="rank" type="string">
+			<column name="RANK" length="50">
+				<comment>Bậc công chức/viên chức</comment>
+			</column>
+		</property>
+		<property name="curb" type="string">
+			<column name="CURB" length="50">
+				<comment>Ngạch công chức/viên chức</comment>
+			</column>
+		</property>
+		<property name="jaw" type="string">
+			<column name="JAW" length="50">
+				<comment>Bậc/hàm (nếu là lực lượng vũ trang)</comment>
+			</column>
+		</property>
+		
+		<property name="createBy" type="string">
+			<column name="CREATEBY" length="200">
+				<comment>Người tạo</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATEDATE" length="7">
+				<comment>Ngày tạo</comment>
+			</column>
+		</property>
+		<property name="ModifyBy" type="string">
+			<column name="MODIFYBY" length="200">
+				<comment>Người thay đổi</comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFYDATE" length="7">
+				<comment>Ngày thay đổi</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="30">
+				<comment>Mô tả thêm</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

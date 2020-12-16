@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name = "com.nec.asia.nic.comp.trans.domain.EppMatchPersonHistory" table="EPP_CENTRAL.EPP_MATCH_PERSON_HISTORY" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID"/>
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_MATCH_PERSON_HISTORY_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="approveDate" type="timestamp">
+			<column name="APPROVE_DATE" length="7">
+				<comment>Ngày duyệt</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Ngày tách/khớp</comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Số hồ sơ</comment>
+			</column>
+		</property>
+		<property name="approverName" type="string">
+			<column name="APPROVER_NAME" length="120">
+				<comment>Người duyệt</comment>
+			</column>
+		</property>
+		<property name="reason" type="string">
+			<column name="REASON" length="1000">
+				<comment>Lý do</comment>
+			</column>
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE_" length="1">
+				<comment>Loại T: tách, K: khớp</comment>
+			</column>
+		</property>
+		<property name="personCode" type="string">
+			<column name="PERSON_CODE" length="15">
+				<comment>Mã cá nhân</comment>
+			</column>
+		</property>
+		<property name="orgPerson" type="string">
+			<column name="ORG_PERSON" length="15">
+				<comment>Mã cá nhân gốc</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="120">
+				<comment>Người tách/khớp</comment>
+			</column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

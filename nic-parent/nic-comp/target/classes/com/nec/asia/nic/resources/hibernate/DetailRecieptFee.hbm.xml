@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.DetailRecieptFee" table="EPP_CENTRAL.EPP_INVOICE">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_INVOICE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+  		<property name="recieptNo" type="string">
+			<column name="RECIEPT_NO" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="codeBill" type="string">
+			<column name="CODE_BILL" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="numberBill" type="string">
+			<column name="NUMBER_BILL" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="price" type="java.lang.Double">
+			<column name="PRICE" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="priceFlag" type="string">
+			<column name="PRICE_FLAG" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="250">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFY_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyBy" type="string">
+			<column name="MODIFY_BY" length="250">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="4000">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="reason" type="string">
+			<column name="REASON" length="4000" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="cashierName" type="string">
+			<column name="CASHIER_NAME" length="120">
+				<comment>CASHIER_NAME</comment>
+			</column>
+		</property>
+		<property name="createByName" type="string">
+			<column name="CREATE_BY_NAME" length="120">
+				<comment>CREATE_BY_NAME</comment>
+			</column>
+		</property>
+		<property name="dateOfReceipt" type="timestamp">
+			<column name="DATE_OF_RECEIPT" length="7">
+				<comment>DATE_OF_RECEIPT</comment>
+			</column>
+		</property>
+		<property name="customerName" type="string">
+			<column name="CUSTOMER_NAME" length="120">
+				<comment>CUSTOMER_NAME</comment>
+			</column>
+		</property>
+ 	</class>
+</hibernate-mapping>

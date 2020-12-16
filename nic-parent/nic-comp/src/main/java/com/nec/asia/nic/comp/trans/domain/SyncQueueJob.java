@@ -1,0 +1,138 @@
+package com.nec.asia.nic.comp.trans.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class SyncQueueJob implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String STATUS_DOING = "DOING";
+	public static final String STATUS_PENDING = "PENDING";
+	public static final String STATUS_DONE = "DONE";
+	public static final String STATUS_NONE = "NONE";
+	private Date createdTs;
+	private Long id;
+	private String objectId;
+	private String objectType;
+	private String receiver;
+	private String status;
+	private Integer syncRetry;
+	private Date syncTs;
+	private Long bmsId;
+	private String transactionIdMaster;
+	private String tranStatus;
+	private Date dateUpdateStatusHanding;
+	
+	public SyncQueueJob() {
+		super();
+	}
+	
+	public SyncQueueJob(Date createdTs, Long id, String objectId,
+			String objectType, String receiver, String status,
+			Integer syncRetry, Date syncTs, Long bmsId,
+			String transactionIdMaster, String tranStatus,
+			Date dateUpdateStatusHanding) {
+		super();
+		this.createdTs = createdTs;
+		this.id = id;
+		this.objectId = objectId;
+		this.objectType = objectType;
+		this.receiver = receiver;
+		this.status = status;
+		this.syncRetry = syncRetry;
+		this.syncTs = syncTs;
+		this.bmsId = bmsId;
+		this.transactionIdMaster = transactionIdMaster;
+		this.tranStatus = tranStatus;
+		this.dateUpdateStatusHanding = dateUpdateStatusHanding;
+	}
+
+	public Date getDateUpdateStatusHanding() {
+		return dateUpdateStatusHanding;
+	}
+
+	public void setDateUpdateStatusHanding(Date dateUpdateStatusHanding) {
+		this.dateUpdateStatusHanding = dateUpdateStatusHanding;
+	}
+
+	public Long getBmsId() {
+		return bmsId;
+	}
+
+	public void setBmsId(Long bmsId) {
+		this.bmsId = bmsId;
+	}
+
+	public Date getCreatedTs() {
+		return createdTs;
+	}
+	public void setCreatedTs(Date createdTs) {
+		this.createdTs = createdTs;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getObjectId() {
+		return objectId;
+	}
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
+	public String getObjectType() {
+		return objectType;
+	}
+	public void setObjectType(String objectType) {
+		this.objectType = objectType;
+	}
+	public String getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Integer getSyncRetry() {
+		return syncRetry;
+	}
+	public void setSyncRetry(Integer syncRetry) {
+		this.syncRetry = syncRetry;
+	}
+	public Date getSyncTs() {
+		return syncTs;
+	}
+	public void setSyncTs(Date syncTs) {
+		this.syncTs = syncTs;
+	}
+
+	public String getTransactionIdMaster() {
+		return transactionIdMaster;
+	}
+
+	public void setTransactionIdMaster(String transactionIdMaster) {
+		this.transactionIdMaster = transactionIdMaster;
+	}
+
+	public String getTranStatus() {
+		return tranStatus;
+	}
+
+	public void setTranStatus(String tranStatus) {
+		this.tranStatus = tranStatus;
+	}
+
+	
+	
+	
+
+}

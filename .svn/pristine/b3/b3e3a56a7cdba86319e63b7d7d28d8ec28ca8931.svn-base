@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.NicTransactionPaymentDetail" table="EPP_CENTRAL.EPP_TRANSACTION_PAYMENT_DETAIL">
+  <id name="id" type="long">
+	<column name="ID" precision="20" scale="0" />
+	<generator class="sequence">
+		<param name="sequence">EPP_CENTRAL.SEQ_PAYMENT_DETAIL_ID</param>
+		<param name="allocationSize">100</param>
+	</generator>
+  </id>
+  <property generated="never" lazy="false" name="paymentId" type="java.lang.String">
+   <column length="30" name="PAYMENT_ID" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="typePayment" type="java.lang.String">
+   <column name="TYPE_PAYMENT" length="30"/>
+  </property>
+  <property generated="never" lazy="false" name="statusFee" type="yes_no">
+   <column name="STATUS_FEE" length="1">
+   
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="subTypePayment" type="java.lang.String">
+   <column length="30" name="SUBTYPE_PAYMENT"/>
+  </property>
+  <property generated="never" lazy="false" name="paymentAmount" type="java.lang.Double">
+   <column name="PAYMENT_AMOUNT" precision="18" scale="5"/>
+  </property>
+  <property generated="never" lazy="false" name="createBy" type="java.lang.String">
+   <column length="64" name="CREATE_BY"/>
+  </property>
+  <property generated="never" lazy="false" name="createWsktnId" type="java.lang.String">
+   <column length="64" name="CREATE_WKSTN_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
+   <column length="7" name="CREATE_DATETIME"/>
+  </property>
+  <property generated="never" lazy="false" name="updateBy" type="java.lang.String">
+   <column length="64" name="UPDATE_BY"/>
+  </property>
+  <property generated="never" lazy="false" name="updateWsktnId" type="java.lang.String">
+   <column length="64" name="UPDATE_WKSTN_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="updateDate" type="java.util.Date">
+   <column length="7" name="UPDATE_DATETIME"/>
+  </property>
+  <property generated="never" lazy="false" name="note" type="java.lang.String">
+   <column name="NOTE" />
+  </property>
+ </class>
+</hibernate-mapping>

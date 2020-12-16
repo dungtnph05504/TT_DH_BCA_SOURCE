@@ -1,0 +1,134 @@
+package com.nec.asia.nic.comp.trans.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nec.asia.nic.comp.trans.dao.BorderGateDao;
+import com.nec.asia.nic.comp.trans.domain.BorderGate;
+import com.nec.asia.nic.comp.trans.dto.BorderGateDto;
+import com.nec.asia.nic.comp.trans.service.BorderGateService;
+import com.nec.asia.nic.framework.PaginatedResult;
+
+@Service
+public class BorderGateServiceImpl implements BorderGateService {
+
+	@Autowired
+	private BorderGateDao dao;
+	
+	@Override
+	public List<BorderGate> findAllBorderGate(String code) {
+		try {
+			return dao.findAllBorderGate(code);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public BorderGate findBorderGatebyId(Long id) {
+		try {
+			return dao.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+	@Override
+	public BorderGate findBorderGateByCode(String Code) {
+		try {
+			List<BorderGate> list = findAllBorderGate(Code);
+			return list.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public Boolean deleteBorderGate(Long id) throws Exception {
+		try {
+			BorderGate epp = this.dao.findById(id);
+			if(epp != null){
+				this.dao.delete(epp);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+	@Override
+	public List<BorderGate> findBorderGateBySync(String syncData) {
+		try {
+			return dao.findBorderGateBySync(syncData);			
+		} catch (Exception e) {
+		}
+		return null;
+	}
+
+	@Override
+	public List<BorderGate> findAllBorderGate() {
+		try {
+			return dao.findAllBorderGate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public PaginatedResult<BorderGateDto> findAllBorderGate(String code, int pageNo, int pageSize) {
+		try {
+			PaginatedResult<BorderGate> result = this.dao.findAllBorderGate(code, pageNo, pageSize);
+			if(result != null){
+				List<BorderGateDto> list = new ArrayList<BorderGateDto>();
+				int i = (pageNo - 1) * pageSize;
+				for(BorderGate epp : result.getRows()){
+					BorderGateDto dto = new BorderGateDto();
+					dto.setId(epp.getId());
+					i++;
+					dto.setStt(i);
+					dto.setCreateBy(epp.getCreateBy());
+					dto.setLastModifiedBy(epp.getLastModifiedBy());
+					dto.setCreateDate(epp.getCreateDate());
+					dto.setLastModifiedDate(epp.getLastModifiedDate());
+					dto.setCode(epp.getCode());
+					dto.setName(epp.getName());
+					if (epp.getBorderGateKind()==1) {
+						dto.setNameborderGateKind("Cảng hàng không");
+					}else if (epp.getBorderGateKind()==2) {
+						dto.setNameborderGateKind("Cửa khẩu đất liền");
+					}else {
+						dto.setNameborderGateKind("Cảng biển");
+					}
+					dto.setDescription(epp.getDescription());
+					
+					list.add(dto);
+				}
+				PaginatedResult<BorderGateDto> pr = new PaginatedResult<BorderGateDto>(result.getTotal(), pageNo, list);
+				return pr;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void saveOrUpdateBorderGate(BorderGate borderGate) {
+		dao.saveOrUpdate(borderGate);
+		
+	}
+	
+}

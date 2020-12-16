@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns = "http://impl.ws.dx.nic.asia.nec.com/"
+    xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:ns2 = "http://schemas.xmlsoap.org/soap/http"
+    xmlns:ns1 = "http://ws.dx.nic.asia.nec.com/"
+    name = "adminWSImplService"
+    targetNamespace = "http://impl.ws.dx.nic.asia.nec.com/">
+    <wsdl:import location = "adminWS.wsdl" namespace = "http://ws.dx.nic.asia.nec.com/"/>
+    <wsdl:binding name="adminWSImplServiceSoapBinding"
+    	type="ns1:adminWS">
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" /> 
+    	<wsdl:operation name="getProofDocumentMatrix">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getProofDocumentMatrix" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getPaymentMatrix">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getPaymentMatrix" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getAuthorizedFunctions">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getAuthorizedFunctions" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getConfigurations">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getConfigurations" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="changeUserPassword">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/changeUserPassword" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="uploadNationOffical">
+    		<soap:operation	soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="findResultOfficalNation">
+    		<soap:operation	soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="officalNationUpdateStatus">
+    		<soap:operation	soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="officalNationUpdateStatusFail">
+    		<soap:operation	soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getParaSignerCompare">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getParaSignerCompare" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getPaymentMatrixAll">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getPaymentMatrixAll" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getAuthenUser">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getAuthenUser" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="getMappingAuthentication">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/getMappingAuthentication" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="uploadRecieptInformation">
+    		<soap:operation
+    			soapAction="http://impl.ws.dx.nic.asia.nec.com/uploadRecieptInformation" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name = "adminWSImplService">
+        <wsdl:port binding = "tns:adminWSImplServiceSoapBinding" name = "adminWSImplPort">
+            <soap:address location = "http://172.16.12.61:8480/eppws/services/admin"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

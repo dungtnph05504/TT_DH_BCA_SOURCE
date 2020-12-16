@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns = "http://asia.nec.com/nic/dx/ws/impl/"
+    xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:ns2 = "http://schemas.xmlsoap.org/soap/http"
+    xmlns:ns1 = "http://asia.nec.com/nic/dx/ws/"
+    name = "reportWSImplService"
+    targetNamespace = "http://asia.nec.com/nic/dx/ws/impl/">
+    <wsdl:import location = "reportWS.wsdl" namespace = "http://asia.nec.com/nic/dx/ws/"/>
+    <wsdl:binding name="reportWSImplServiceSoapBinding" type="ns1:reportWS">
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<wsdl:operation name="uploadTransactionReconReportData">
+    		<soap:operation
+    			soapAction="http://asia.nec.com/nic/dx/ws/impl/uploadTransactionReconReportData" />
+    		<wsdl:input name="uploadTransactionReconReportDataRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="uploadTransactionReconReportDataResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="retrieveTransactionReconReportData">
+    		<soap:operation
+    			soapAction="http://asia.nec.com/nic/dx/ws/impl/retrieveTransactionReconReportData" />
+    		<wsdl:input name="retrieveTransactionReconReportDataRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="retrieveTransactionReconReportDataResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="uploadCardReconReportData">
+    		<soap:operation
+    			soapAction="http://asia.nec.com/nic/dx/ws/impl/uploadCardReconReportData" />
+    		<wsdl:input name="uploadCardReconReportDataRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="uploadCardReconReportDataResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="retrieveCardReconReportData">
+    		<soap:operation
+    			soapAction="http://asia.nec.com/nic/dx/ws/impl/retrieveCardReconReportData" />
+    		<wsdl:input name="retrieveCardReconReportDataRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="retrieveCardReconReportDataResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name = "reportWSImplService">
+        <wsdl:port binding = "tns:reportWSImplServiceSoapBinding" name = "reportWSImplPort">
+            <soap:address location = "https://mnic.mnis.gov.mu/nicws/services/report"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

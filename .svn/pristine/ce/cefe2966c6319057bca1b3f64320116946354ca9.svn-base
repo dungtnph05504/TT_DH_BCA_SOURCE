@@ -1,0 +1,107 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+
+<c:url var="submitUrl" value="/servlet/batchJobMgmt/createJob"/>
+<c:url var="jobShcedualUrl" value="/servlet/adminJobSchedule/viewShchedul"/>
+<c:url var="cancelUrl" value="/servlet/batchJobMgmt/view"/>
+<!-- <div id="main"> -->
+<div id="content_main">
+<form:form  modelAttribute="mnicBatchJobForm"  id="mnicBatchJobForm"  name="mnicBatchJobForm"    method="GET" >   
+      <%--  <table>
+       <tr>
+			<td colspan="4"><form:errors path="*" element="div"
+					class="errors" /></td>
+		</tr>
+		</table> --%>
+     <div id="heading_report" align="justify"  style='padding:2px'>Batch Job Management</div>
+   
+	<div id="addJobDiv">
+		<table style="width: 100%; background-color: #E3F1FE"
+			class="data_table">
+			<c:if test='${not empty mnicBatchJobForm.mode}'>
+				<tr>
+					<td width="10%">Job Id:</td>
+					<td><c:out value="${jobId}" /> <form:hidden id="jobId" path="jobId" /></td>
+				</tr>
+				<tr>
+					<td width="10%">Job Name:</td>
+					<td><c:out value="${mnicBatchJobForm.jobName}" /> <form:hidden
+							id="jobName" path="jobName" /></td>
+				</tr>
+				<tr>
+					<td>Class Name:</td>
+					<td><c:out value="${mnicBatchJobForm.jobClass}" /> <form:hidden
+							id="jobClass" path="jobClass"></form:hidden></td>
+				</tr>
+			</c:if>
+			<c:if test='${empty mnicBatchJobForm.mode}'>
+				<tr>
+					<td width="10%">Job Id:</td>
+					<td><form:input id="jobId" path="jobId" type="text"
+							size='70' /></td>
+				</tr>
+				<tr>
+					<td width="10%">Job Name:</td>
+					<td><form:input id="jobName" path="jobName" type="text"
+							size='70' /></td>
+				</tr>
+				<tr>
+					<td>Class Name:</td>
+					<td><form:input id="jobClass" path="jobClass" type="text"
+							size='70'></form:input></td>
+				</tr>
+			</c:if>
+			<tr>
+				<td width='10%'>Job Description:</td>
+				<td width="50%"><form:textarea id="jobDesc" path="jobDesc"
+						rows="8" cols="80"></form:textarea></td>
+			</tr>
+			<tr>
+				<td width='10%'>Job Properties:</td>
+				<td width="50%"><form:textarea id="jobProperties"
+						path="jobProperties" rows="8" cols="80"></form:textarea></td>
+			</tr>
+		</table>
+	</div>
+	<div id="addButtonDiv" class="displayTag" style="background-image:url('<%=request.getContextPath()%>/images/head.png');background-repeat: repeat-x;height: 50px;">                    
+   	<table>
+   <tr>
+   	<td colspan="5" align="right" style="padding: 20px;">
+   	    <c:if test='${not empty mnicBatchJobForm.mode}'>
+   	    <input type="button"  onclick="submitAmend()" class="button_grey" id="amd_button" value="Amend"/>
+   	    <input type="button"  onclick="submitJobSchedule()" class="button_grey" id="jshd_button" value="Job Schedule"/>
+   	    </c:if>
+   	    <c:if test='${empty mnicBatchJobForm.mode}'>
+    	<input type="button"  onclick="saveForm('save')" class="button_grey" id="add_button" value="Add Job"/>
+    	</c:if>
+    	<input type="button"  class="button_grey" id="cancel_button" onclick="cancelPag()" value="Cancel"/>		
+	</td>
+	</tr>
+   	</table>
+ </div>
+</form:form>
+</div>
+ <!-- </div> -->
+<script>
+function saveForm(task){	   
+	   	
+        document.forms["mnicBatchJobForm"].action ='${submitUrl}';
+	    document.forms["mnicBatchJobForm"].submit();
+	    $(".border_success").show();
+	    
+		
+}
+function submitJobSchedule(){
+	 document.forms["mnicBatchJobForm"].action ='${jobShcedualUrl}';
+	 document.forms["mnicBatchJobForm"].submit();		
+	
+}
+function cancelPag(){	
+	
+    document.forms["mnicBatchJobForm"].action = '${cancelUrl}';
+	document.forms["mnicBatchJobForm"].submit();
+}
+
+	</script>

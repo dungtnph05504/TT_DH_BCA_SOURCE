@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppDocumentReturned" table="EPP_CENTRAL.EPP_DOCUMENT_RETURNED" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID"/>
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_DOCUMENT_RETURNED_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="20">
+				<comment>so ho chieu</comment>
+			</column>
+		</property>
+		<property name="receivedDate" type="timestamp">
+			<column name="RECEIVED_DATE" length="7">
+				<comment>ngay nhan</comment>
+			</column>
+		</property>
+		<property name="receivedName" type="string">
+			<column name="RECEIVED_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="officeCode" type="string">
+			<column name="OFFICE_CODE" length="20">
+				<comment>ma co quan tra lai</comment>
+			</column>
+		</property>
+		<property name="storageNo" type="string">
+			<column name="STORAGE_NO" length="30">
+				<comment>so luu kho</comment>
+			</column>
+		</property>
+		<property name="note" type="string">
+			<column name="NOTE" length="2000">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="receiptNo" type="string">
+			<column name="RECEIPT_NO" length="20">
+				<comment>so bien nhan</comment>
+			</column>
+		</property>
+		<property name="returnName" type="string">
+			<column name="RETURN_NAME" length="120">
+				<comment>nguoi nhan</comment>
+			</column>
+		</property>
+		<property name="returnDate" type="timestamp">
+			<column name="RETURN_DATE" length="7">
+				<comment>ngay nhan(dung cho tra lai ho chieu dia phuong)</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateDate" type="timestamp">
+			<column name="UPDATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,478 @@
+package com.nec.asia.nic.comp.trans.dao.impl;
+
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.nec.asia.nic.comp.trans.dao.SyncQueueJobDao;
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.SyncQueueJob;
+import com.nec.asia.nic.comp.ws.log.domain.CreateMessageException;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.domain.Parameters;
+import com.nec.asia.nic.framework.admin.code.domain.ParametersId;
+import com.nec.asia.nic.framework.admin.code.service.ParametersService;
+import com.nec.asia.nic.framework.dao.impl.GenericHibernateDao;
+import com.nec.asia.nic.utils.DateUtil;
+
+@Repository
+public class SyncQueueJobDaoImpl extends
+		GenericHibernateDao<SyncQueueJob, Long> implements SyncQueueJobDao {
+
+	@Autowired
+	private ParametersService parameterService;
+	
+	@Override
+	public SyncQueueJob findQueueByInfo(Long id, String status) {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			if (id != null) {
+				criteria.add(Restrictions.eq("id", id));
+			}
+			if (StringUtils.isNotEmpty(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			List<SyncQueueJob> list = this.findAll(criteria);
+			if (list != null && list.size() > 0)
+				return list.get(0);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
+	public List<SyncQueueJob> findQueueByDate(String date, String status,
+			String objectType) {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(date)) {
+			//	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+				Date dateCurrent =DateUtil.strToDate(date, DateUtil.FORMAT_YYYYMMDD); //formatter.parse(date);
+				criteria.add(Restrictions.ge("createdTs", dateCurrent));
+				criteria.add(Restrictions.like("status", status,MatchMode.ANYWHERE).ignoreCase());
+				criteria.add(Restrictions.like("objectType", objectType,MatchMode.ANYWHERE).ignoreCase());
+				List<SyncQueueJob> list = this.findAll(criteria);
+				return list;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public BaseModelList<SyncQueueJob> findQueueByReceiver(String receiver,
+			String status, String objType, int maxTotal) {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(receiver)) {
+				criteria.add(Restrictions.eq("receiver", receiver));
+			}
+			if (StringUtils.isNotEmpty(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			if (StringUtils.isNotEmpty(objType)) {
+				criteria.add(Restrictions.eq("objectType", objType));
+			}
+			Order orders = Order.desc("id");
+			List<SyncQueueJob> list = this.findAllOrder(criteria, orders);
+			if (list != null && list.size() > 0)
+				return new BaseModelList<SyncQueueJob>(list, true, null);
+		} catch (Exception e) {
+			return new BaseModelList<SyncQueueJob>(null, false,  CreateMessageException.createMessageException(e) + " - findQueueByReceiver - " + receiver + " - thất bại.");
+		}
+		return new BaseModelList<SyncQueueJob>(null, true, null);
+	}
+
+	@Override
+	public BaseModelSingle<SyncQueueJob> findQueueByStatus(String receiver,
+			String status, String objType) throws Exception {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(receiver)) {
+				criteria.add(Restrictions.eq("receiver", receiver));
+			}
+			if (StringUtils.isNotEmpty(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			if (StringUtils.isNotEmpty(objType)) {
+				criteria.add(Restrictions.eq("objectType", objType));
+			}
+			Order orders = Order.desc("id");
+			List<SyncQueueJob> list = this.findAllOrder(criteria, orders);
+			if (list != null && list.size() > 0)
+				return new BaseModelSingle<SyncQueueJob>(list.get(0), true,
+						null);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return new BaseModelSingle<SyncQueueJob>(null, true,  CreateMessageException.createMessageException(new Exception(e)) + " - findQueueByStatus - " + status + " - thất bại.");
+		}
+		return new BaseModelSingle<SyncQueueJob>(null, true, null);
+	}
+
+	@Override
+	public BaseModelSingle<SyncQueueJob> findQueueByObjectId(String objectId,
+			String receiver, String status, String objType) throws Exception {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(receiver)) {
+				criteria.add(Restrictions.eq("receiver", receiver));
+			}
+			if (StringUtils.isNotEmpty(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			if (StringUtils.isNotEmpty(objType)) {
+				criteria.add(Restrictions.eq("objectType", objType));
+			}
+			if (StringUtils.isNotEmpty(objectId)) {
+				criteria.add(Restrictions.eq("objectId", objectId));
+			}
+			List<SyncQueueJob> list = this.findAll(criteria);
+			if (list != null && list.size() > 0)
+				return new BaseModelSingle<SyncQueueJob>(list.get(0), true,
+						null);
+			} catch (Throwable e) {
+				e.printStackTrace();
+
+				return new BaseModelSingle<SyncQueueJob>(null, false,  CreateMessageException.createMessageException(new Exception(e))  + " - findQueueByObjectId: " + objectId + " - thất bại.");
+			}
+		return new BaseModelSingle<SyncQueueJob>(null, true, null);
+	}
+
+
+	@Override
+	public BaseModelSingle<Boolean> updateStatusQueueJob(Long id, String status) {
+		try {
+			Boolean check = false;
+			SyncQueueJob queue = this.findById(id);
+			if (queue != null) {
+				queue.setStatus(status);
+				this.saveOrUpdate(queue);
+				check = true;
+			}
+			return new BaseModelSingle<Boolean>(check, true, null);
+		} catch (Throwable e) {
+
+			return new BaseModelSingle<Boolean>(false, false,  CreateMessageException.createMessageException(new Exception(e)) + " - updateStatusQueueJob - " + id + " - thất bại");
+		}
+	}
+
+	@Override
+	public BaseModelSingle<Boolean> saveOrUpdateQueue(SyncQueueJob queue) {
+		try {
+			this.saveOrUpdate(queue);
+			return new BaseModelSingle<Boolean>(true, true, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return new BaseModelSingle<Boolean>(false, false,  CreateMessageException.createMessageException(e) + " - saveOrUpdateQueue: " + queue.getObjectId() + " - thất bại.");
+		}
+	}
+   @Override
+   public PaginatedResult<SyncQueueJob> findListQueueBySearchAll(String dateFrom, String dateTo, String status,String receiver,String objecType, int pageNo, int pageSize){
+	   try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			Order orders = Order.desc("createdTs");
+			Date auditDateFrom = DateUtil.strToDate(dateFrom, DateUtil.FORMAT_YYYYMMDD);
+			Date auditDateTo = DateUtil.strToDate(dateTo, DateUtil.FORMAT_YYYYMMDD);
+			
+			if (StringUtils.isNotBlank(status)) {
+				criteria.add(Restrictions.like("status", status, MatchMode.ANYWHERE).ignoreCase());
+			}
+			if(StringUtils.isNotBlank(receiver)){
+				criteria.add(Restrictions.like("receiver", receiver, MatchMode.ANYWHERE).ignoreCase());
+			}
+			if(StringUtils.isNotBlank(objecType)){
+				criteria.add(Restrictions.eq("objectType", objecType));
+			}
+//			if (StringUtils.isNotBlank(status)) {
+//				dCriteria.add(Restrictions.eq("errorFlag", status).ignoreCase());
+//			}
+			   
+			if (auditDateFrom != null && auditDateTo != null) {
+				criteria.add(Restrictions.between("createdTs", auditDateFrom, auditDateTo));
+			} else if(auditDateFrom!=null){
+				criteria.add(Restrictions.ge("createdTs", auditDateFrom));
+			} else if(auditDateTo!=null){
+				criteria.add(Restrictions.le("createdTs", auditDateTo));
+			}
+			return this.findAllForPagination(criteria, pageNo, pageSize, orders);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+   }
+   public PaginatedResult<SyncQueueJob> findListQueueByDateCurrent(String dateCurrent,String status,String receiver,String objecType,int pageNo,int pageSize){
+	   try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			Order orders = Order.desc("createdTs");
+			Date auditDateFrom = DateUtil.strToDate(dateCurrent, DateUtil.FORMAT_YYYYMMDD);
+			if (StringUtils.isNotBlank(status)) {
+				criteria.add(Restrictions.like("status", status, MatchMode.ANYWHERE).ignoreCase());
+			}
+			if(StringUtils.isNotBlank(receiver)){
+				criteria.add(Restrictions.like("receiver", receiver, MatchMode.ANYWHERE).ignoreCase());
+			}
+			if(StringUtils.isNotBlank(objecType)){
+				criteria.add(Restrictions.eq("objectType", objecType).ignoreCase());
+			}
+			criteria.add(Restrictions.ge("createdTs", auditDateFrom));
+			return this.findAllForPagination(criteria, pageNo, pageSize, orders);
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}
+	   return null;
+   }
+   
+   @Override
+	public List<SyncQueueJob> findQueueByPropertyAll(String dateFrom,
+			String dateTo, String status, String receiver, String objectType) {
+		// DetachedCriteria criteria
+		// =DetachedCriteria.forClass(SyncQueueJob.class);
+		DetachedCriteria criteria = DetachedCriteria
+				.forClass(getPersistentClass());
+		criteria.addOrder((Order.desc("createdTs")));
+		Date auditDateFrom = DateUtil.strToDate(dateFrom,
+				DateUtil.FORMAT_YYYYMMDD);
+		Date auditDateTo = DateUtil.strToDate(dateTo, DateUtil.FORMAT_YYYYMMDD);
+
+		// if (StringUtils.isNotBlank(status)) {
+		criteria.add(Restrictions.like("status", status, MatchMode.ANYWHERE)
+				.ignoreCase());
+		// }
+		if (StringUtils.isNotBlank(receiver)) {
+			criteria.add(Restrictions.like("receiver", receiver,
+					MatchMode.ANYWHERE).ignoreCase());
+		}
+		// if(StringUtils.isNotBlank(objectType)){
+		criteria.add(Restrictions.like("objectType", objectType,
+				MatchMode.ANYWHERE).ignoreCase());
+		// }
+		if (auditDateFrom != null && auditDateTo != null) {
+			criteria.add(Restrictions.between("createdTs", auditDateFrom,
+					auditDateTo));
+		} else if (auditDateFrom != null) {
+			criteria.add(Restrictions.ge("createdTs", auditDateFrom));
+		} else if (auditDateTo != null) {
+			criteria.add(Restrictions.le("createdTs", auditDateTo));
+		}
+		return this.findAll(criteria);
+	}
+	
+	
+	@Override
+	public PaginatedResult<SyncQueueJob> findListQueueBySearch(String objectId,
+			String objectType, String status, String receiver, int pageNo, int pageSize) {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			if (StringUtils.isNotEmpty(objectId)) {
+				criteria.add(Restrictions.eq("objectId", objectId));
+			}
+			if (StringUtils.isNotEmpty(objectType)) {
+				criteria.add(Restrictions.eq("objectType", objectType));
+			}
+			if (StringUtils.isNotBlank(receiver)) {
+				if (receiver.equals("PA")) {
+					criteria.add(Restrictions.not(Restrictions.in("receiver", new String[]{"AA", "BB", "CC", "IN_A08_MB", "IN_A08_MT", "A08_HH", "IN_A08", "IN_A08_MN"})));
+				}else if (receiver.equals("A")){
+					criteria.add(Restrictions.in("receiver", new String[]{"AA", "BB", "CC"}));
+				}else if (receiver.equals("A08")){
+					criteria.add(Restrictions.eq("receiver", "A08_HH"));
+				}
+			}
+			Parameters param = parameterService.findById(new ParametersId(Parameters.PARA_SCOPE_TRANSMISSION, Parameters.PARA_NAME_RECEIVER_ERROR));
+			if (param != null) {
+				criteria.add(Restrictions.not(Restrictions.in("receiver", param.getParaShortValue().split(","))));
+			}else{
+				criteria.add(Restrictions.not(Restrictions.in("receiver", new String[]{"BDVP", "BDHP"})));
+			}
+			criteria.addOrder(Order.desc("id"));
+			PaginatedResult<SyncQueueJob> list = this.findAllForPagination(
+					criteria, pageNo, pageSize);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<SyncQueueJob> findSyncQueueJobByObjIdOrReceiver(String objectId,
+			String objectType, String receiver, String status) throws Exception {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			criteria.addOrder((Order.asc("createdTs")));
+			if (StringUtils.isNotEmpty(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			if (StringUtils.isNotEmpty(objectId)) {
+				criteria.add(Restrictions.eq("objectId", objectId));
+			}
+			if (StringUtils.isNotEmpty(objectType)) {
+				criteria.add(Restrictions.eq("objectType", objectType));
+			}
+			if (StringUtils.isNotBlank(receiver)) {
+				criteria.add(Restrictions.eq("receiver", receiver));
+			}
+			List<SyncQueueJob> list = this.findAll(criteria);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<SyncQueueJob> findSyncQueueJobByManyObjType(
+			String transactionId, String[] strings, String siteCode,
+			String codeStatusQueuePending) throws Exception {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			criteria.addOrder((Order.asc("createdTs")));
+			if (StringUtils.isNotEmpty(codeStatusQueuePending)) {
+				criteria.add(Restrictions.eq("status", codeStatusQueuePending));
+			}
+			if (StringUtils.isNotEmpty(transactionId)) {
+				criteria.add(Restrictions.eq("objectId", transactionId));
+			}
+			if (strings.length > 0) {
+				criteria.add(Restrictions.in("objectType", strings));
+			}
+			if (StringUtils.isNotBlank(siteCode)) {
+				criteria.add(Restrictions.eq("receiver", siteCode));
+			}
+			List<SyncQueueJob> list = this.findAll(criteria);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public int countByConditions(String objectType, String site, String status, Date date)
+			throws Exception {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			if (date != null) {
+				criteria.add(Restrictions.between("createdTs", date,
+						new Date(date.getTime() + 86400000)));
+			}
+			if (StringUtils.isNotBlank(status)) {
+				criteria.add(Restrictions.eq("status", status));
+			}
+			if (site.equals("PA")) {
+				criteria.add(Restrictions.not(Restrictions.in("receiver", new String[]{"AA", "BB", "CC", "IN_A08_MB", "IN_A08_MT", "A08_HH", "IN_A08", "IN_A08_MN"})));
+			}else if (site.equals("A")){
+				criteria.add(Restrictions.in("receiver", new String[]{"AA", "BB", "CC"}));
+			}else if (site.equals("IN")){
+				criteria.add(Restrictions.eq("objectType", "IN"));
+			}else if (site.equals("A08")) {
+				criteria.add(Restrictions.eq("receiver", "A08_HH"));
+			}
+			if (StringUtils.isNotBlank(objectType)) {
+				criteria.add(Restrictions.eq("objectType", objectType));
+			}
+			Parameters param = parameterService.findById(new ParametersId(Parameters.PARA_SCOPE_TRANSMISSION, Parameters.PARA_NAME_RECEIVER_ERROR));
+			if (param != null) {
+				criteria.add(Restrictions.not(Restrictions.in("receiver", param.getParaShortValue().split(","))));
+			}else{
+				criteria.add(Restrictions.not(Restrictions.in("receiver", new String[]{"BDVP", "BDHP"})));
+			}
+			List<SyncQueueJob> list = this.findAll(criteria);
+			if (list != null && list.size() > 0) {
+				return list.size();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public PaginatedResult<SyncQueueJob> getPageByCodition(Date fDate,
+			Date tDate, String receiver, String objType, int pageNo,
+			int pageSize) throws Exception {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(objType)) {
+				criteria.add(Restrictions.eq("objectType", objType));
+			}
+			if (StringUtils.isNotBlank(receiver)) {
+				criteria.add(Restrictions.eq("receiver", receiver));
+			}
+			if (fDate != null && tDate != null) {
+				criteria.add(Restrictions.between("createdTs",
+						fDate, tDate));
+			} else if (fDate != null) {
+				criteria.add(Restrictions.ge("createdTs", fDate));
+			} else if (tDate != null) {
+				criteria.add(Restrictions.le("createdTs", tDate));
+			}
+			criteria.addOrder(Order.asc("id"));
+			PaginatedResult<SyncQueueJob> list = this.findAllForPagination(
+					criteria, pageNo, pageSize);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<SyncQueueJob> getPageByCodition(Date fDate, Date tDate,
+			String receiver, String objType) {
+		try {
+			DetachedCriteria criteria = DetachedCriteria
+					.forClass(SyncQueueJob.class);
+			if (StringUtils.isNotEmpty(objType)) {
+				criteria.add(Restrictions.eq("objectType", objType));
+			}
+			if (StringUtils.isNotBlank(receiver)) {
+				criteria.add(Restrictions.eq("receiver", receiver));
+			}
+			if (fDate != null && tDate != null) {
+				criteria.add(Restrictions.between("createdTs",
+						fDate, tDate));
+			} else if (fDate != null) {
+				criteria.add(Restrictions.ge("createdTs", fDate));
+			} else if (tDate != null) {
+				criteria.add(Restrictions.le("createdTs", tDate));
+			}
+			criteria.addOrder(Order.asc("id"));
+			List<SyncQueueJob> list = this.findAll(
+					criteria);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}

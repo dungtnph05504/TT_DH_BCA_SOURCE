@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.admin.code.domain.VRicCode" table="v_ric_code">
+  <!-- <composite-id>
+   <key-property name="codeXml" column="CODE_XML" type="com.nec.asia.nic.comp.dataAccess.type.StringOracleXmlType" />
+  </composite-id> -->
+  <id column="ROWID" name="id" type="string">
+   <generator class="native"/>
+  </id>
+  
+  <!-- <property name="codeXml" column="CODE_XML" type="com.nec.asia.nic.comp.dataAccess.type.StringOracleXmlType" /> -->
+  <property name="codeXml" column="CODE_XML" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType" />
+ </class>
+</hibernate-mapping>

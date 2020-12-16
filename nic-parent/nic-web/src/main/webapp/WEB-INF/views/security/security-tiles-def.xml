@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="security.usermanagement.userlist" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/userList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="security.usermanagement.addEditUser" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/addEditUser.jsp"></put-attribute>
+	</definition>
+	<definition name="security.usermanagement.registerFP" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/registerFP.jsp"></put-attribute>
+	</definition>
+	<definition name="security.usermanagement.enrollFP" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/enrollFP.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="security.usermanagement.changePassword" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/changePass.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="security.usermanagement.rolelist" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/roleList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="security.usermanagement.addEditRole" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/addEditRole.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="security.usermanagement.workstationlist" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/workstationList.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="security.usermanagement.addEditWorkStation" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/security/addEditWorkStation.jsp"></put-attribute>
+	</definition>
+	
+	
+</tiles-definitions>

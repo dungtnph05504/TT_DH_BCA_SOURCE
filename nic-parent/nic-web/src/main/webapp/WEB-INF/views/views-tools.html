@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Mauritius National Identity Card (MNIC) System</title>
+	<link rel="stylesheet" type="text/css" href="../../css/flexigrid.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/smoothness/jquery-ui-1.9.2.custom.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/base/jquery.ui.all.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/menubar.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+	
+	<script type="text/javascript" src="../../js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.ui.menubar.js"></script>
+	<script type="text/javascript" src="../../js/tools.js"></script>
+	<script type="text/javascript" src="../../js/flexigrid.js"></script>
+		
+	<script type="text/javascript" src="../../js/jquery-tooltip.js"></script>
+	<script type="text/javascript" src="../../js/jquery-class.js"></script>
+
+	<script type="text/javascript" src="../../js/menubar.js"></script>
+
+
+	<script type="text/javascript" src="../../js/ajaxFormValidator.js"></script>
+	<script type="text/javascript" src="../../js/errorBinder.js"></script>
+</head>
+
+<body>
+<div id="page" class="container">
+	<div id="content">
+		<div id="main" class="span-18 last">
+			<!-- header start-->
+
+			<div class='header'>
+				<table border=0px cellspacing='0px'>
+				<tr>
+					<td rowspan='2' width='5%'>
+						<img src="../../images/logo.gif">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<!--
+						<table width='100%' align="right">						
+							<tr>
+								<td class='headerText' width='40%'><b>USER ID:</b>&nbsp;Bright Zheng</td>
+								<td class='headerText' width='40%'><b>WORKSTATION:</b>&nbsp;bright_zheng</td>
+							</tr>
+						</table>
+						-->
+					</td>
+				</tr>
+				</table>
+			</div>
+			<!-- header end -->
+			
+			<!-- menu begin -->			
+			<div id="headerBottom">
+			<ul id="navmenu">
+				<li><a href="?url=welcome.html">Home</a></li>
+				<li><a href="#" onmouseover="mopen('m1')" onmouseout="mclosetime()">RIC Functions<span class="downArrow"></span></a>
+					<div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+						<a href="#">Registration</a>
+						<a href="#">Verification</a>
+						<a href="#">Card Issuance</a>
+					</div>
+				</li>
+				<li><a href="#" onmouseover="mopen('m2')" onmouseout="mclosetime()">NIC Functions<span class="downArrow"></span></a>
+					<div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+						<a href="#">Workflow Management</a>
+						<a href="#">Investigation</a>
+					</div>
+				</li>
+			</ul>
+			</div>
+			<!-- menu end -->
+			
+			
+			
+			
+			<!-- Dynamic body, should be set for UI pages -->
+			<div id="thebody"></div>
+			<script>
+				function getURLParameter(name) {
+					return decodeURI(
+						(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+					);
+				}
+				var url = getURLParameter("url");
+				console.info(url);
+				$('#thebody').load("./" + url);
+			</script>
+			
+			
+			
+			
+			
+			<div id="footer">
+			Mauritius National Identity Card (MNIC) System | Copyright @ 2012.
+			<br/>Best Viewed at Screen Resolution 1280 by 1024.
+			</div> 
+			</div></div></div></div></div>
+		</div>
+	</div>
+	
+</div>
+</body>
+</html>

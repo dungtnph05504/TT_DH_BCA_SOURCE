@@ -1,0 +1,194 @@
+<project
+    xmlns = "http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- 
+/* 
+ * Modification History:
+ * 
+ * 29 Dec 2015 chris/khang : init project interfaces.
+ * 22 Jun 2017 chris       : clean up xsd
+ */
+-->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.nec.asia</groupId>
+    <artifactId>nic-dx-type</artifactId>
+    <packaging>jar</packaging>
+    <version>1.1-SNAPSHOT</version>
+    <name>NIC Data Exchange Type</name>
+    <url>http://www.nec.com.sg</url>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <cxf.version>2.7.2</cxf.version><!-- 2.7.2 3.1.4  -->
+        <cxf.xjc-utils.version>2.6.0</cxf.xjc-utils.version><!-- 2.6.0  3.0.5 -->
+        <commons-lang.version>2.3</commons-lang.version>
+        <!-- nic wsdl -->
+        <transaction.wsdl.location>${basedir}/wsdl/transaction.wsdl</transaction.wsdl.location>
+        <idserver.wsdl.location>${basedir}/wsdl/idserver.wsdl</idserver.wsdl.location>
+        <report.wsdl.location>${basedir}/wsdl/report.wsdl</report.wsdl.location>
+        <sync.wsdl.location>${basedir}/wsdl/sync.wsdl</sync.wsdl.location>
+        <admin.wsdl.location>${basedir}/wsdl/admin.wsdl</admin.wsdl.location>
+        <xjb.location>${basedir}/wsdl/nicBinding.xjb.xml</xjb.location>
+        
+		<!-- Perso for EPP -->
+		<perso.dispatch.location>${basedir}/wsdl/perso/dispatchInfo.xsd</perso.dispatch.location>
+		<perso.data.location>${basedir}/wsdl/perso/persoData.xsd</perso.data.location>
+		<perso.status.location>${basedir}/wsdl/perso/persoStatus.xsd</perso.status.location>
+		<dispatchInfo.xjb.location>${basedir}/wsdl/perso/dispatchInfoBinding.xjb.xml</dispatchInfo.xjb.location>
+		<persoData.xjb.location>${basedir}/wsdl/perso/persoDataBinding.xjb.xml</persoData.xjb.location>
+		<persoStatus.xjb.location>${basedir}/wsdl/perso/persoStatusBinding.xjb.xml</persoStatus.xjb.location>
+		<inventory.wsdl.location>${basedir}/wsdl/perso/inventory.ws.wsdl</inventory.wsdl.location>
+    </properties>
+  
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>apache-cxf</artifactId>
+            <version>${cxf.version}</version>
+            <type>pom</type>
+        </dependency>
+         -->
+        <!-- DataTypeAdapter for java date
+        <dependency>
+            <groupId>org.apache.cxf.xjc-utils</groupId>
+            <artifactId>cxf-xjc-runtime</artifactId>
+            <version>${cxf.xjc-utils.version}</version>
+        </dependency>
+         -->
+         <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-xjc-plugin</artifactId>
+                <version>${cxf.xjc-utils.version}</version>
+                <executions>
+                    <execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>xsdtojava</goal>
+						</goals>
+						<configuration>
+							<sourceRoot>${basedir}/src/main/java</sourceRoot>
+							<xsdOptions>
+								<xsdOption>
+									<xsd>${perso.dispatch.location}</xsd>
+									<packagename>com.nec.asia.epp.perso.dispatchInfo</packagename>
+									<bindingFile>${dispatchInfo.xjb.location}</bindingFile>
+									<extension>true</extension>
+								</xsdOption>
+								<xsdOption>
+									<xsd>${perso.data.location}</xsd>
+									<packagename>com.nec.asia.epp.perso.persoData</packagename>
+									<bindingFile>${persoData.xjb.location}</bindingFile>
+									<extension>true</extension>
+								</xsdOption>
+								<xsdOption>
+									<xsd>${perso.status.location}</xsd>
+									<packagename>com.nec.asia.epp.perso.persoStatus</packagename>
+									<bindingFile>${persoStatus.xjb.location}</bindingFile>
+									<extension>true</extension>
+								</xsdOption>
+							</xsdOptions>
+						</configuration>
+					</execution>
+                </executions>
+            </plugin>
+            <!-- to generate java from wsdl                     -->
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <defaultOptions>
+                                <bindingFiles>
+                                    <bindingFile>${xjb.location}</bindingFile>
+                                </bindingFiles>
+                            </defaultOptions>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${transaction.wsdl.location}</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${idserver.wsdl.location}</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${report.wsdl.location}</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${sync.wsdl.location}</wsdl>
+                                </wsdlOption>
+                                 <wsdlOption>
+                                    <wsdl>${admin.wsdl.location}</wsdl>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <!-- 
+    <distributionManagement>
+        <repository>
+            <id>NEC</id>
+            <url>http://203.127.253.245:8006/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>NEC</id>
+            <url>http://203.127.253.245:8006/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+	 -->
+    
+</project>

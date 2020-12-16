@@ -1,0 +1,32 @@
+
+<script type="text/javascript">
+	function doSubmit(form){
+		window.location.href="?url=booking/hotel_book.html";
+		return false;
+	}
+</script>
+
+<div>
+	<form name="login" action="" method="post">
+		<fieldset>
+			<legend>Login Information</legend>
+			<p>
+				<label for="j_username">User:</label>
+				<br />
+				<input type="text" name="j_username" id="j_username" value="bright" />
+			</p>
+			<p>
+				<label for="j_password">Password:</label>
+				<br />
+				<input type="password" name="j_password" id="j_password" value="zheng"/>
+			</p>
+			<p>
+				<input type="checkbox" name="_spring_security_remember_me" id="remember_me" />
+				<label for="remember_me">Don't ask for my password for two weeks</label>
+			</p>
+			<p>
+				<button id="submit" type="submit" onclick="return doSubmit(this.form);">Login</button>
+			</p>
+		</fieldset>
+	</form>
+</div>

@@ -1,0 +1,34 @@
+##
+# Modification History:
+# 26 Mar 2014 (chris): add ca-02.endpoint to support round-robin load-balancer, remove two way SSL configuration
+##
+
+# information of SERVER CPDv2
+cpdv2.endpoint=http://192.168.112.9:8080/cpdv2uat/cxf/nicWebService
+#cpdv2.endpoint=http://192.168.112.10:8080/cpdv2uat/cxf/nicWebService
+#cpdv2.decoupled.endpoint=http://192.168.114.10:9990/decoupled_endpoint
+#cpdv2.endpoint=http://192.168.114.31:8280/cpdv2/cxf/nicWebService
+
+# information of SERVER CA
+ca.endpoint=http://192.168.112.10:8080/signserveruat/signingservice
+ca-02.endpoint=http://192.168.112.11:8080/signserveruat/signingservice
+#ca.endpoint=http://192.168.112.10:8080/signserveruat/signingservice
+#ca.endpoint=http://192.168.114.31:8280/signserver/signingservice
+#no required two way SSL
+
+
+# information of data pack web service
+datapack.endpoint=http://192.168.114.30/WSPACK/DataPackingService.asmx
+
+# information of perso web service
+perso.endpoint=http://192.168.114.30:1002/PersoService.svc
+
+# information of cims web service
+inventory.endpoint=http://192.168.114.30:13332/CIWS/CardInventoryServiceLibrary.UpdateNICCardInventoryState.svc
+
+# information of arjo web service
+#inventory.endpoint=http://172.16.14.123:18080/asisInventoryWS/services/InventoryPort
+inventory.endpoint=http://172.16.13.7:18080/asisInventoryWS/services/InventoryPort
+
+# information of perso job cancellation web service
+perso.jobcancellation.endpoint=http://192.168.114.30:1002/PersoJobCancellation/JobCancellationService.svc

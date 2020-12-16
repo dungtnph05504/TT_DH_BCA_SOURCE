@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 10:20:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.code.domain.Parameters" table="PARAMETERS">
+        <composite-id name="id" class="com.nec.asia.nic.framework.admin.code.domain.ParametersId">
+            <key-property name="paraScope" type="java.lang.String">
+                <column name="PARA_SCOPE" length="30" />
+            </key-property>
+            <key-property name="paraName" type="java.lang.String">
+                <column name="PARA_NAME" length="30" />
+            </key-property>
+        </composite-id>
+        <property name="paraShortValue" type="java.lang.String">
+            <column name="PARA_SHORT_VALUE" length="100">
+                <comment>Short Value of Parameter(For Text, Number)</comment>
+            </column>
+        </property>
+        <!-- org.hibernate.type.MaterializedClobType not working -->
+        <property name="paraLobValue" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType"><!-- same as org.hibernate.type.StringClobType -->
+            <column name="PARA_LOB_VALUE">
+                <comment>Long Text Value of Parameter</comment>
+            </column>
+        </property>
+        <property name="paraDesc" type="java.lang.String">
+            <column name="PARA_DESC" length="255">
+                <comment>Description of Parameter</comment>
+            </column>
+        </property>
+        <property name="paraType"
+				type="com.nec.asia.nic.framework.admin.code.domain.type.ParameterTypeUserType">
+			<column name="PARA_TYPE" length="100" not-null="true">
+                <comment>Type of the Parameter(DATE, DATETIME, CT:CodeTable, INTEGER, NUMBER_RANGE, PERCENTAGE, STRING, etc)</comment>
+            </column>
+		</property>
+        <property name="userAccessibleFlag" type="yes_no">
+            <column name="USER_ACCESSIBLE_FLAG" length="1">
+                <comment>User Accessible Flag(Y/N)</comment>
+            </column>
+        </property>
+        <property name="adminAccessibleFlag" type="yes_no">
+            <column name="ADMIN_ACCESSIBLE_FLAG" length="1">
+                <comment>System Administrator Accessible Flag(Y/N)</comment>
+            </column>
+        </property>
+        <property name="systemId" type="java.lang.String">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="java.lang.String">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="java.lang.String">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="java.lang.String">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="java.lang.String">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDate" type="java.util.Date">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="java.lang.String">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="java.lang.String">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDate" type="java.util.Date">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="yes_no">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

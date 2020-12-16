@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2013 6:44:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.rbac.domain.Workstations" table="WORKSTATIONS" lazy="false">
+  <!-- 
+/* 
+ * Modification History:
+ * 
+ * 21 Dec 2015 (chris): commented ACCESSIBLE_FLAG, COUNTER_PRIORITY
+ */
+   -->
+        <id name="wkstnId" type="string">
+            <column name="WKSTN_ID" length="64" />
+            <generator class="assigned" />
+        </id>
+        <property name="wkstnDesc" type="string">
+            <column name="WKSTN_DESC" length="255">
+                <comment>Description of Workstation</comment>
+            </column>
+        </property>
+        <property name="wkstnType" type="string">
+            <column name="WKSTN_TYPE" length="30">
+                <comment>Type of Workstation</comment>
+            </column>
+        </property>
+        <!-- <property name="accessibleFlag" type="org.hibernate.type.YesNoType">
+            <column name="ACCESSIBLE_FLAG" length="1">
+                <comment>Accessible Flag to indicate this workstation can handle applicant with special needs(disable, pregnant women, wheelchair, etc)</comment>
+            </column>
+        </property> -->
+        <!-- <property name="counterPriority" type="string">
+            <column name="COUNTER_PRIORITY" length="1">
+                <comment>Priority Indicator of workstation(0 to 9),0: Normal, 1: Priority</comment>
+            </column>
+        </property> -->
+        <property name="siteCode" type="string">
+            <column name="SITE_CODE" length="5">
+                <comment>Location site code of workstation</comment>
+            </column>
+        </property>
+        <property name="systemId" type="string">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="string">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="string">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="string">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="string">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="string">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="string">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDate" type="timestamp">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="org.hibernate.type.YesNoType">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+        <set name="roles" table="WORKSTATIONS_ROLES" lazy="false">
+        	<key>
+        		<column name="WKSTN_ID" not-null="true"></column>
+        	</key>
+			<many-to-many entity-name="com.nec.asia.nic.framework.admin.rbac.domain.Roles" not-found="ignore">
+				<column name="ROLE_ID" not-null="true"></column>
+			</many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

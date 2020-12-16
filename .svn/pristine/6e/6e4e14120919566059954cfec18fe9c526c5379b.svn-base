@@ -1,0 +1,560 @@
+package com.nec.asia.nic.admin.site.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.displaytag.tags.TableTagParameters;
+import org.displaytag.util.ParamEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.nec.asia.nic.common.EppSiteRepoForm;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.domain.CodeValues;
+import com.nec.asia.nic.framework.admin.code.domain.Parameters;
+import com.nec.asia.nic.framework.admin.code.domain.ParametersId;
+import com.nec.asia.nic.framework.admin.code.service.CodesService;
+import com.nec.asia.nic.framework.admin.code.service.ParametersService;
+import com.nec.asia.nic.framework.admin.site.domain.SiteGroups;
+import com.nec.asia.nic.framework.admin.site.domain.SiteRepository;
+import com.nec.asia.nic.framework.admin.site.service.SiteService;
+import com.nec.asia.nic.framework.controller.AbstractController;
+import com.nec.asia.nic.framework.report.service.AuditAccessLogService;
+import com.nec.asia.nic.util.Constants;
+import com.nec.asia.nic.util.pagingUtil;
+
+/**
+ * @author Tue
+ */
+@Controller
+@RequestMapping(value="/siteMgmt")
+public class EppSiteController  extends AbstractController {
+private static final Logger logger = LoggerFactory.getLogger(EppSiteController.class);
+	
+	@Autowired
+	private ParametersService parametersService;
+	
+	@Autowired
+	private SiteService siteService;
+	
+	@Autowired
+	private AuditAccessLogService auditAccessLogService;
+	
+	@Autowired
+	private CodesService codesService;
+	
+	private static String COUNTRY = "NATIONALITY";//"COUNTRY";
+	private static String REGION = "REGION";
+	private static String SITE_FUNCTION_TYPE = "SITE_FUNCTION_TYPE";
+	private static String SITE_CODE = "SITE_CODE";
+	
+	@RequestMapping(value = "/view")
+	@ExceptionHandler
+	public ModelAndView getSiteGroups(WebRequest request, Model model) throws Exception {
+
+		int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		PaginatedResult<SiteGroups> prSiteGroupList = siteService.getAllSiteGroups(pageNo, pageSize);
+		List<SiteGroups> list = new ArrayList<SiteGroups>();
+		list = prSiteGroupList.getRows();
+		if(list != null && list.size() > 0){
+			for(SiteGroups item : list){
+				if(item.getLevelNic().equals("1")){
+					item.setLevelNic_des("Xử lý");
+				}
+				
+			}
+		}
+		
+		//phúc edit
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(prSiteGroupList.getTotal(), pageSize));
+		model.addAttribute("startIndex", prSiteGroupList.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", prSiteGroupList.getTotal());
+		model.addAttribute("endIndex", firstResults + prSiteGroupList.getRowSize());
+		model.addAttribute("jobList", list);
+		//end	
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		return new ModelAndView("siteMgmt.viewSiteGroup");
+		
+	}
+	
+	@RequestMapping(value = "/ajaxView")
+	@ExceptionHandler
+	public PaginatedResult<SiteGroups> queryAjax(WebRequest request, Model model) throws Exception {
+		int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		int pageNo = 1;
+		ParametersId id = new ParametersId();
+		id.setParaName(Parameters.MAX_RECORDS_PER_PAGE);
+		id.setParaScope(Parameters.SCOPE_SYSTEM);
+		String tableId = "row";
+
+		// Get num records per page
+		Parameters parameter = parametersService.findById(id);
+		if (parameter != null) {
+			String pageSizeDb = parameter.getParaShortValue();
+
+			if (StringUtils.isNotBlank(pageSizeDb) && StringUtils.isNumeric(pageSizeDb)) {
+				pageSize = Integer.parseInt(pageSizeDb);
+			}
+		}
+		
+		pageNo=request.getParameter("page")!=null?Integer.parseInt(request.getParameter("page")):1;
+		pageSize=request.getParameter("rp")!=null?Integer.parseInt(request.getParameter("rp")):pageSize;
+
+		List<SiteGroups> prSiteGroupList = siteService.findAll();
+		
+		PaginatedResult<SiteGroups> result = new PaginatedResult<SiteGroups>(pageNo, pageSize, prSiteGroupList);
+		
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		return result;
+		
+	}
+	
+	
+	@RequestMapping(value = {"/getSiteRepo/{groupId}"})
+	@ExceptionHandler
+	public ModelAndView getSiteRepository(WebRequest request,  @ModelAttribute("siteRepoForm")EppSiteRepoForm siteRepoForm, @PathVariable String groupId, Model model)
+			throws Exception {
+		/*int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		int pageNo = 1;
+		ParametersId id = new ParametersId();
+		id.setParaName(Parameters.MAX_RECORDS_PER_PAGE);
+		id.setParaScope(Parameters.SCOPE_SYSTEM);
+		String tableId = "row";
+
+		Parameters parameter = parametersService.findById(id);
+		if (parameter != null) {
+			String pageSizeDb = parameter.getParaShortValue();
+
+			if (StringUtils.isNotBlank(pageSizeDb) && StringUtils.isNumeric(pageSizeDb)) {
+				pageSize = Integer.parseInt(pageSizeDb);
+			}
+		}*/
+		int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		/*String pageNumber = request
+				.getParameter((new ParamEncoder(tableId).encodeParameterName(TableTagParameters.PARAMETER_PAGE)));
+
+		if (StringUtils.isNotBlank(pageNumber) && StringUtils.isNumeric(pageNumber)) {
+			pageNo = Integer.parseInt(pageNumber);
+		}*/
+		PaginatedResult<SiteRepository> prSiteRepoList = null;
+		if(StringUtils.isNotEmpty(siteRepoForm.getSearchText())) {
+			 prSiteRepoList = siteService.search(siteRepoForm.getGroupId(), siteRepoForm.getSearchText(), pageNo, pageSize);
+		} else {
+			prSiteRepoList = siteService.getAllSiteRepoByGroupId(groupId, pageNo, pageSize);
+		}
+		
+		List<SiteRepository> list = new ArrayList<SiteRepository>();
+		list = prSiteRepoList.getRows();
+		model.addAttribute("idGroup", groupId);
+		//phúc edit
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(prSiteRepoList.getTotal(), pageSize));
+		model.addAttribute("startIndex", prSiteRepoList.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", prSiteRepoList.getTotal());
+		model.addAttribute("endIndex", firstResults + prSiteRepoList.getRowSize());
+		model.addAttribute("jobList", list);
+		//end	
+		Map<String, Object> siteRepoList = new HashMap<String, Object>();
+		siteRepoList.put("siteRepoList", list);
+		//model.addAttribute("jobList",list);
+		siteRepoList.put("totalRecords", prSiteRepoList.getTotal());
+		siteRepoList.put("pageSize", pageSize);
+		ModelAndView modelView = new ModelAndView("siteMgmt.siteRepoView", siteRepoList);
+		EppSiteRepoForm eppSiteRepoForm = new EppSiteRepoForm();
+		eppSiteRepoForm.setGroupId(groupId);
+		eppSiteRepoForm.setSearchText(siteRepoForm.getSearchText());
+		modelView.addObject("siteRepoForm", eppSiteRepoForm);
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+
+		return modelView;
+	}	
+		
+	@RequestMapping(value = {"/addSiteGroup"})
+	@ExceptionHandler
+	public ModelAndView addSiteGroups(WebRequest request, Model model) throws Exception {
+		EppSiteRepoForm eppSiteRepoForm = new EppSiteRepoForm();
+		eppSiteRepoForm.setMode("new");
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		return new ModelAndView ("siteMgmt.addEditSiteGroup","siteGroupForm",eppSiteRepoForm);
+	}
+	
+	@RequestMapping(value = {"/editSiteGroup/{groupId}"})
+	@ExceptionHandler
+	public ModelAndView editSiteGroups(WebRequest request, @PathVariable String groupId, Model model) throws Exception {
+		EppSiteRepoForm eppSiteRepoForm = new EppSiteRepoForm();
+		SiteGroups siteGroupsObj = new SiteGroups();
+		if(StringUtils.isNotEmpty(groupId)) {
+			siteGroupsObj = siteService.getSiteGroupById(groupId);
+			if(siteGroupsObj != null) {
+				eppSiteRepoForm.setGroupId(groupId);
+				eppSiteRepoForm.setGroupName(siteGroupsObj.getGroupName());
+				if(siteGroupsObj.getCreateVersion() != null){
+					eppSiteRepoForm.setGroupCreateVersion(siteGroupsObj.getCreateVersion().toString());					
+				}
+				if(siteGroupsObj.getUpdateVersion() != null){
+					eppSiteRepoForm.setGroupUpdateVersion(siteGroupsObj.getUpdateVersion().toString());					
+				}
+			}
+		} 
+		eppSiteRepoForm.setMode("edit");
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		return new ModelAndView ("siteMgmt.addEditSiteGroup","siteGroupForm",eppSiteRepoForm);
+	}
+	
+	@RequestMapping(value = {"/saveSiteGroup"} )
+	@ResponseBody
+	@ExceptionHandler
+	public String saveSiteGroups(HttpServletRequest httpRequest,@ModelAttribute("siteGroupForm")EppSiteRepoForm siteGroupForm, BindingResult result) throws Exception {
+		long startTimeMs = System.currentTimeMillis();
+		Throwable throwable = null;
+		try {
+			String functionName = "Cập nhật nhóm trung tâm";
+			Object[] args = { siteGroupForm };
+			long timeMs = System.currentTimeMillis() - startTimeMs;
+			auditAccessLogService.saveAuditAccessLogForWeb(httpRequest, functionName, args, throwable, timeMs);
+			if(null != siteGroupForm.getGroupId() && isSiteGroupExist(siteGroupForm.getGroupId()) && siteGroupForm.getMode().equals("new")) {
+				return "exist";
+			}
+					
+			return siteService.updateSiteGroup(siteGroupForm.getSiteGroups());
+		
+		} catch(Exception exp) {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping(value = {"/delSiteGroup/{groupId}"})
+	@ExceptionHandler
+	public ModelAndView delSiteGroups(HttpServletRequest httpRequest, @PathVariable String groupId, Model model) throws Exception {
+		long startTimeMs = System.currentTimeMillis();
+		Throwable throwable = null;		
+		
+		int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		ParametersId id = new ParametersId();
+		id.setParaName(Parameters.MAX_RECORDS_PER_PAGE);
+		id.setParaScope(Parameters.SCOPE_SYSTEM);
+		Parameters parameter = parametersService.findById(id);
+		if(parameter!=null){
+			 String pageSizeDb = parameter.getParaShortValue();
+			 if(StringUtils.isNotBlank(pageSizeDb) && StringUtils.isNumeric(pageSizeDb)){
+				 pageSize = Integer.parseInt(pageSizeDb);
+			 }
+		}
+		
+		EppSiteRepoForm eppSiteRepoForm = new EppSiteRepoForm();
+		eppSiteRepoForm.setGroupId(groupId);
+		
+		String status = siteService.delSiteGroup(groupId);
+		String message = "";
+		if(status.equals("success")) {
+			message = groupId +" Deleted Successfully";
+		} else {
+			message = groupId +" Failed to Delete";
+		}
+		
+		PaginatedResult<SiteGroups> prSiteGroupList = siteService.getAllSiteGroups(1, pageSize);
+		List<SiteGroups> list= new ArrayList<SiteGroups>();
+		list = prSiteGroupList.getRows();
+		Map<String, Object> siteGroupMap = new HashMap<String, Object>();
+		siteGroupMap.put("siteGroupList", list);
+		siteGroupMap.put("totalRecords", prSiteGroupList.getTotal());
+		siteGroupMap.put("pageSize",pageSize);
+		siteGroupMap.put("status", status);
+		siteGroupMap.put("message", message);
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		ModelAndView modelView = new ModelAndView("siteMgmt.viewSiteGroup",siteGroupMap);
+		modelView.addObject("siteGroupForm", eppSiteRepoForm);	
+		try {
+			String functionName = "Xóa nhóm trung tâm";
+			Object[] args = { eppSiteRepoForm };
+			long timeMs = System.currentTimeMillis() - startTimeMs;
+			auditAccessLogService.saveAuditAccessLogForWeb(httpRequest, functionName, args, throwable, timeMs);
+		} catch(Exception exp) {}
+		
+		return  modelView;
+	}	
+	
+	@RequestMapping(value = {"/addSiteRepo"})
+	@ExceptionHandler
+	public ModelAndView addSiteRepository(@ModelAttribute("siteRepoForm")EppSiteRepoForm siteRepoForm ,WebRequest request, Model model) throws Exception {
+		
+		// Get Site code list
+		/*List<CodeValues> siteCodeList = eppCodeSevice.findAllByCodeId(SITE_CODE);
+		Map<String, String> siteCodeMap = new LinkedHashMap<String, String>();
+		if(null != siteCodeList) {
+			for(CodeValues codeValue : siteCodeList) {
+				siteCodeMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		siteRepoForm.setSysSiteCodeMap(siteCodeMap);*/
+				
+		// Get Site Group list.
+		List<SiteGroups> siteGroupList = siteService.findAll();
+		Map<String, String> siteGroupMap = new LinkedHashMap<String, String>();
+		if(null != siteGroupList) {
+			for(SiteGroups siteGroup : siteGroupList) {
+				siteGroupMap.put(siteGroup.getGroupId(), siteGroup.getGroupName());
+			}
+		}
+		siteRepoForm.setSysSiteGroupMap(siteGroupMap);
+		
+		// Get nationality list
+		List<CodeValues> countryList = codesService.findAllByCodeId(COUNTRY);
+		Map<String, String> conutryMap = new LinkedHashMap<String, String>();
+		if(null != countryList) {
+			for(CodeValues codeValue : countryList) {
+				conutryMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		siteRepoForm.setSysNationalityMap(conutryMap);
+		
+		// Get Region list
+		List<CodeValues> regionList = codesService.findAllByCodeId(REGION);
+		Map<String, String> regionMap = new LinkedHashMap<String, String>();
+		if(null != regionList) {
+			for(CodeValues codeValue : regionList) {
+				regionMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		siteRepoForm.setSysRegionMap(regionMap);
+		
+		// Get Function type list
+		List<CodeValues> functionTypeList = codesService.findAllByCodeId(SITE_FUNCTION_TYPE);
+		Map<String, String> functionTypeMap = new LinkedHashMap<String, String>();
+		if(null != functionTypeList) {
+			for(CodeValues codeValue : functionTypeList) {
+				functionTypeMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		siteRepoForm.setSysSiteFunctionTypeMap(functionTypeMap);
+		
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		return new ModelAndView ("siteMgmt.addEditSiteRepo","siteRepoForm",siteRepoForm);
+	}
+	
+	@RequestMapping(value = {"/editSiteRepo/{siteId}/{dummyToForceRefresh}"})
+	@ExceptionHandler
+	public ModelAndView editSiteRepository(WebRequest request, @PathVariable String siteId, @PathVariable String dummyToForceRefresh, Model model) throws Exception {
+		EppSiteRepoForm eppSiteRepoForm = new EppSiteRepoForm();
+		SiteRepository siteGroupsObj = new SiteRepository();
+		if(StringUtils.isNotEmpty(siteId)) {
+			siteGroupsObj = siteService.getSiteRepoById(siteId);
+			if(siteGroupsObj != null) {
+				eppSiteRepoForm.parse(siteGroupsObj);
+			}
+		} 
+		
+		// Get Site code list
+		List<CodeValues> siteCodeList = codesService.findAllByCodeId(SITE_CODE);
+		Map<String, String> siteCodeMap = new LinkedHashMap<String, String>();
+		if(null != siteCodeList) {
+			for(CodeValues codeValue : siteCodeList) {
+				siteCodeMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		eppSiteRepoForm.setSysSiteCodeMap(siteCodeMap);
+				
+		// Get Site Group list.
+		List<SiteGroups> siteGroupList = siteService.findAll();
+		Map<String, String> siteGroupMap = new LinkedHashMap<String, String>();
+		if(null != siteGroupList) {
+			for(SiteGroups siteGroup : siteGroupList) {
+				siteGroupMap.put(siteGroup.getGroupId(), siteGroup.getGroupName());
+			}
+		}
+		eppSiteRepoForm.setSysSiteGroupMap(siteGroupMap);
+		
+		// Get nationality list
+		List<CodeValues> countryList = codesService.findAllByCodeId(COUNTRY);
+		Map<String, String> conutryMap = new LinkedHashMap<String, String>();
+		if(null != countryList) {
+			for(CodeValues codeValue : countryList) {
+				conutryMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		eppSiteRepoForm.setSysNationalityMap(conutryMap);
+		
+		// Get Region list
+		List<CodeValues> regionList = codesService.findAllByCodeId(REGION);
+		Map<String, String> regionMap = new LinkedHashMap<String, String>();
+		if(null != regionList) {
+			for(CodeValues codeValue : regionList) {
+				regionMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		eppSiteRepoForm.setSysRegionMap(regionMap);
+		
+		// Get Function type list
+		List<CodeValues> functionTypeList = codesService.findAllByCodeId(SITE_FUNCTION_TYPE);
+		Map<String, String> functionTypeMap = new LinkedHashMap<String, String>();
+		if(null != functionTypeList) {
+			for(CodeValues codeValue : functionTypeList) {
+				functionTypeMap.put(codeValue.getId().getCodeValue(), codeValue.getCodeValueDesc());
+			}
+		}
+		
+		eppSiteRepoForm.setSysSiteFunctionTypeMap(functionTypeMap);
+		
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		return new ModelAndView ("siteMgmt.addEditSiteRepo","siteRepoForm",eppSiteRepoForm);
+	}
+	
+	@RequestMapping(value = {"/delSiteRepo/{siteId}"})
+	@ResponseBody
+	@ExceptionHandler
+	public ModelAndView delSiteRepository(HttpServletRequest httpRequest, @ModelAttribute("siteRepoForm")EppSiteRepoForm siteRepoForm, @PathVariable String siteId, Model model) throws Exception {
+		long startTimeMs = System.currentTimeMillis();
+		Throwable throwable = null;		
+		int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		int pageNo = 1;
+		ParametersId id = new ParametersId();
+		id.setParaName(Parameters.MAX_RECORDS_PER_PAGE);
+		id.setParaScope(Parameters.SCOPE_SYSTEM);
+		String tableId = "row";		
+		
+		EppSiteRepoForm eppSiteRepoForm = new EppSiteRepoForm();
+		eppSiteRepoForm.setSiteId(siteId);
+		eppSiteRepoForm.setGroupId(siteRepoForm.getGroupId());
+		
+		String status = siteService.delSiteRepository(siteId);
+		eppSiteRepoForm.setStatus(status);
+		if(status.equals("success")) {
+			eppSiteRepoForm.setMessage(siteId +" Deleted Successfully");
+		} else {
+			eppSiteRepoForm.setMessage(siteId +" Failed to Delete");
+		}
+
+		Parameters parameter = parametersService.findById(id);
+		if (parameter != null) {
+			String pageSizeDb = parameter.getParaShortValue();
+
+			if (StringUtils.isNotBlank(pageSizeDb) && StringUtils.isNumeric(pageSizeDb)) {
+				pageSize = Integer.parseInt(pageSizeDb);
+			}
+		}
+		String pageNumber = httpRequest
+				.getParameter((new ParamEncoder(tableId).encodeParameterName(TableTagParameters.PARAMETER_PAGE)));
+
+		if (StringUtils.isNotBlank(pageNumber) && StringUtils.isNumeric(pageNumber)) {
+			pageNo = Integer.parseInt(pageNumber);
+		}		
+		
+		PaginatedResult<SiteRepository> prSiteRepoList = siteService.getAllSiteRepoByGroupId(siteRepoForm.getGroupId(), pageNo, pageSize);
+		List<SiteRepository> list = new ArrayList<SiteRepository>();
+		list = prSiteRepoList.getRows();
+		Map<String, Object> siteRepoList = new HashMap<String, Object>();
+		siteRepoList.put("siteRepoList", list);
+		siteRepoList.put("totalRecords", prSiteRepoList.getTotal());
+		siteRepoList.put("pageSize", pageSize);
+		ModelAndView modelView = new ModelAndView("siteMgmt.siteRepoView", siteRepoList);
+		modelView.addObject("siteRepoForm", eppSiteRepoForm);
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+		
+		try {
+			String functionName = "Xóa trung tâm";
+			Object[] args = { eppSiteRepoForm };
+			long timeMs = System.currentTimeMillis() - startTimeMs;
+			auditAccessLogService.saveAuditAccessLogForWeb(httpRequest, functionName, args, throwable, timeMs);
+		} catch(Exception exp) {}
+		
+		return modelView;
+	}
+	
+	@RequestMapping(value = {"/saveSiteRepo"} )
+	@ResponseBody
+	@ExceptionHandler
+	public String saveSiteRepository(HttpServletRequest httpRequest,@ModelAttribute("siteRepoForm")EppSiteRepoForm siteRepoForm, BindingResult result) throws Exception {
+		long startTimeMs = System.currentTimeMillis();
+		Throwable throwable = null;
+		
+		SiteRepository siteRepo = siteRepoForm.getSiteRepository();
+		String status = siteService.updateSiteRepository(siteRepo);
+		try {
+			String functionName = "Cập nhật trung tâm";
+			Object[] args = { siteRepoForm };
+			long timeMs = System.currentTimeMillis() - startTimeMs;
+			auditAccessLogService.saveAuditAccessLogForWeb(httpRequest, functionName, args, throwable, timeMs);
+		} catch(Exception exp) {}
+		
+		return status;
+	}
+	
+	@RequestMapping(value = {"/searchRepo"})
+	@ResponseBody
+	@ExceptionHandler
+	public ModelAndView searchRepository(WebRequest request, @ModelAttribute("siteRepoForm")EppSiteRepoForm siteRepoForm, Model model)
+			throws Exception {
+		int pageSize = Constants.PAGE_SIZE_DEFAULT;
+		int pageNo = 1;
+		ParametersId id = new ParametersId();
+		id.setParaName(Parameters.MAX_RECORDS_PER_PAGE);
+		id.setParaScope(Parameters.SCOPE_SYSTEM);
+		String tableId = "row";
+
+		Parameters parameter = parametersService.findById(id);
+		if (parameter != null) {
+			String pageSizeDb = parameter.getParaShortValue();
+
+			if (StringUtils.isNotBlank(pageSizeDb) && StringUtils.isNumeric(pageSizeDb)) {
+				pageSize = Integer.parseInt(pageSizeDb);
+			}
+		}
+		String pageNumber = request
+				.getParameter((new ParamEncoder(tableId).encodeParameterName(TableTagParameters.PARAMETER_PAGE)));
+
+		if (StringUtils.isNotBlank(pageNumber) && StringUtils.isNumeric(pageNumber)) {
+			pageNo = Integer.parseInt(pageNumber);
+		}
+		
+		PaginatedResult<SiteRepository> prSiteRepoList = siteService.search(siteRepoForm.getGroupId(), siteRepoForm.getSearchText(), pageNo, pageSize);
+		List<SiteRepository> list = new ArrayList<SiteRepository>();
+		list = prSiteRepoList.getRows();
+		Map<String, Object> siteRepoList = new HashMap<String, Object>();
+		siteRepoList.put("siteRepoList", list);
+		siteRepoList.put("totalRecords", prSiteRepoList.getTotal());
+		siteRepoList.put("pageSize", pageSize);
+		ModelAndView modelView = new ModelAndView("siteMgmt.siteRepoView", siteRepoList);
+		modelView.addObject("siteRepoForm", siteRepoForm);
+		model.addAttribute("fnSelected", Constants.HEADING_EPP_SITE_MANAGEMENT);
+
+		return modelView;
+	}
+	
+	private boolean isSiteGroupExist(String groupId) throws Exception {
+		
+		try {
+			SiteGroups siteGroup = siteService.getSiteGroupById(groupId);
+			if(siteGroup != null) {
+				return true;
+			}
+			return false;
+		} catch(Exception exp) {
+			return false;
+		}
+		
+	}
+}

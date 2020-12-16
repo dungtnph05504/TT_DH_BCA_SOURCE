@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 1:09:15 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.dispatch.domain.DispatchQueueData" table="DISPATCH_QUEUE_DATA" optimistic-lock="version">
+		<id name="queueId" type="long">
+			<column name="QUEUE_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">SEQ_DISPATCH_QUEUE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="batchNumber" type="string">
+			<column name="BATCH_NUMBER" length="40" not-null="true" />
+		</property>
+		<property name="documentType" type="string">
+			<column name="DOCUMENT_TYPE" length="32" />
+		</property>
+		<property name="priority" type="int">
+			<column name="PRIORITY" precision="10" scale="0" not-null="true" />
+		</property>
+		<property name="batchSize" type="int">
+			<column name="BATCH_SIZE" precision="10" scale="0" not-null="true" />
+		</property>
+		<property name="collectionSite" type="string">
+			<column name="COLLECTION_SITE" length="5" not-null="true" />
+		</property>
+		<property name="collectionDate" type="timestamp">
+			<column name="COLLECTION_DATE" length="7" />
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="16" not-null="true" />
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" not-null="true" />
+		</property>
+		<property name="packageNo" type="string">
+			<column name="PACKAGE_NO" length="30" />
+		</property>
+		<property name="status" type="java.lang.Character">
+			<column name="STATUS" length="1" />
+		</property>
+	</class>
+</hibernate-mapping>

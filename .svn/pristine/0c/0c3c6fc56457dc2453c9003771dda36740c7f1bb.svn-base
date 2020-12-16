@@ -1,0 +1,23 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns = "http://common.dx.nic.asia.nec.com/" targetNamespace = "http://common.dx.nic.asia.nec.com/">
+<!--  -->
+  <xs:element name="LogInfo" type="tns:LogInfo"/>
+  <xs:complexType name="LogInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Reason" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string" name="Remark" maxOccurs = "1" minOccurs = "0"/>
+	</xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="FaultDetail">
+    <xs:sequence>
+      <xs:element type="xs:string" name="code" minOccurs="0" />
+      <xs:element type="xs:string" name="detailMessage" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name = "ResponseCode">
+    <xs:sequence>
+      <xs:element type = "xs:string" name = "description" minOccurs = "0" />
+      <xs:element type = "xs:string" name = "statusCode" minOccurs = "0" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

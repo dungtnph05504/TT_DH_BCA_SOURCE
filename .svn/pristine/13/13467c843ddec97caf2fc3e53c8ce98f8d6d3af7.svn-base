@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nec.asia</groupId>
+        <artifactId>nic-parent</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>nic-applet</artifactId>
+    <packaging>jar</packaging>
+
+    <name>NIC Applet</name>
+    <url>http://www.nec.com.sg</url>
+    
+    <!-- properties for applet -->
+    <properties>
+        <fest.version>1.2.1</fest.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+             <groupId>com.nec.spid</groupId>
+             <artifactId>spid6</artifactId>
+        </dependency>
+        <!-- <dependency>
+             <groupId>commons-codec</groupId>
+             <artifactId>commons-codec</artifactId>
+        </dependency> -->
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <!-- FEST GUI testing -->
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-test</artifactId>
+            <version>${fest.version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-util</artifactId>
+            <version>${fest.version}</version><!--1.1.4-->
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-swing</artifactId>
+            <version>${fest.version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Permissions>all-permissions</Permissions>
+                            <Codebase>*</Codebase>
+                            <Application-Name>ePassport Application</Application-Name>
+                            <Application-Library-Allowable-Codebase>*</Application-Library-Allowable-Codebase>
+                            <Caller-Allowable-Codebase>*</Caller-Allowable-Codebase>
+                            <Trusted-Only>true</Trusted-Only>
+                            <Trusted-Library>true</Trusted-Library>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- to handle with jdk 7
+            Permissions Attribute
+            all-permissions - Indicates that the RIA requires access to the user's system resources. 
+            
+            Codebase Attribute
+            * - All domains 
+             -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                  <execution>
+                    <goals>
+                      <goal>sign</goal>
+                    </goals>
+                    <phase>package</phase>
+                    <configuration>
+                      <keystore>${basedir}/src/main/resources/keystore/eaf-keystore.jks</keystore>
+                      <alias>EAF</alias>
+                      <storepass>password</storepass>
+                      <keypass>password</keypass>
+                    </configuration>
+                  </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        
+        <resources>
+          <resource>
+            <directory>src/main/resources</directory>
+            <filtering>false</filtering>
+            <excludes>
+              <exclude>keystore/*.*</exclude>
+            </excludes>
+          </resource>
+        </resources>
+    </build>
+</project>

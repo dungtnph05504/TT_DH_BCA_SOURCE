@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppArchiveCode" table="EPP_CENTRAL.EPP_ARCHIVE_CODE">
+  <id name="id" type="long">
+	<column name="ID" precision="10" scale="0" />
+	<generator class="sequence">
+		<param name="sequence">EPP_CENTRAL.EPP_ARCHIVE_CODE_ID</param>
+		<param name="allocationSize">100</param>
+	</generator>
+  </id>
+  <property generated="never" name="docType" lazy="false" type="java.lang.String">
+   <column name="DOC_TYPE" length="10"/>
+  </property>
+  <property generated="never" name="nYear" lazy="false">
+   <column name="N_YEAR" precision="2" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="officeCode" type="java.lang.String">
+   <column name="OFFICE_CODE" length="10"/>
+  </property>
+  <property generated="never" lazy="false" name="incNo">
+   <column name="INC_NO"  precision="5" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="count">
+   <column name="COUNT"  precision="3" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="closed">
+   <column name="CLOSED"  precision="1" scale="0"/>
+  </property>
+ </class>
+</hibernate-mapping>

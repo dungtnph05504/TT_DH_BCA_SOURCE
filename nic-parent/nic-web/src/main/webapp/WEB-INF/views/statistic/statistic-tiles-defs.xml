@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="trpStatistic.init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/epp_trp_stats_report.jsp" />		
+	</definition>
+	
+	<definition name="sftpStatistic.init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/sftp/sftp_stats_report.jsp" />		
+	</definition>
+	
+	<definition name="issuanceStatistic" extends="global.layout.standard">
+		<put-attribute name="title" value="Báo cáo thống kê" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/passportStatistic/issuance_statistic.jsp" />		
+	</definition>
+	
+	<definition name="errorPassportStatistic" extends="global.layout.standard">
+		<put-attribute name="title" value="Báo cáo thống kê" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/passportStatistic/error_passport_st.jsp" />		
+	</definition>
+	
+	<definition name="transRegisStatistic" extends="global.layout.standard">
+		<put-attribute name="title" value="Báo cáo thống kê" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/passportStatistic/trans_regis_statistic.jsp" />		
+	</definition>
+	
+	<definition name="errorPassportReport"
+		template="/WEB-INF/views/statistic/passportReport/error_passport_rp.jsp" />
+		
+	<definition name="issuanceReport"
+		template="/WEB-INF/views/statistic/passportReport/issuance_report.jsp" />
+		
+	<definition name="transRegisReport"
+		template="/WEB-INF/views/statistic/passportReport/trans_regis_report.jsp" />
+	
+</tiles-definitions>

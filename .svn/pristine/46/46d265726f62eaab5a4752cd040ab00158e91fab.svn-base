@@ -1,0 +1,95 @@
+package com.nec.asia.nic.comp.trans.dto;
+
+import java.util.Date;
+
+public class BorderGateDto {
+	private int stt;
+	private Long id;
+	private String createBy;
+	private String lastModifiedBy;
+	private Date createDate;
+	private Date lastModifiedDate;
+	private String code;
+	private String name;
+	private Long borderGateKind;
+	private String nameborderGateKind;
+	private String description;
+	private String syncDataFlag;
+	
+	
+	
+	public String getNameborderGateKind() {
+		return nameborderGateKind;
+	}
+	public void setNameborderGateKind(String nameborderGateKind) {
+		this.nameborderGateKind = nameborderGateKind;
+	}
+	public int getStt() {
+		return stt;
+	}
+	public void setStt(int stt) {
+		this.stt = stt;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+	public String getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+	public void setLastModifiedBy(String lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Long getBorderGateKind() {
+		return borderGateKind;
+	}
+	public void setBorderGateKind(Long borderGateKind) {
+		this.borderGateKind = borderGateKind;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getSyncDataFlag() {
+		return syncDataFlag;
+	}
+	public void setSyncDataFlag(String syncDataFlag) {
+		this.syncDataFlag = syncDataFlag;
+	}
+
+}

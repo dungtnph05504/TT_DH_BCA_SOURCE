@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 28, 2013 2:53:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.comp.legacy.domain.NicTabCitizens" table="NIC_TAB_CITIZENS" schema="NIC">
+        <id name="nicId" type="long">
+            <column name="NIC_ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+            <property name="nicUsrId" type="string">
+                <column name="NIC_USR_ID" length="30" />
+            </property>
+            <property name="nicDatecreated" type="java.util.Date">
+                <column name="NIC_DATECREATED" length="7" />
+            </property>
+            <property name="nicDatemodify" type="java.util.Date">
+                <column name="NIC_DATEMODIFY" length="7" />
+            </property>
+            <property name="nicNumber" type="string">
+                <column name="NIC_NUMBER" length="14" />
+            </property>
+            <property name="nicSurname" type="string">
+                <column name="NIC_SURNAME" length="105" />
+            </property>
+            <property name="nicNames" type="string">
+                <column name="NIC_NAMES" length="105" />
+            </property>
+            <property name="nicMaidenname" type="string">
+                <column name="NIC_MAIDENNAME" length="105" />
+            </property>
+            <property name="nicAddr1" type="string">
+                <column name="NIC_ADDR1" length="100" />
+            </property>
+            <property name="nicAddr2" type="string">
+                <column name="NIC_ADDR2" length="100" />
+            </property>
+            <property name="nicAddr3" type="string">
+                <column name="NIC_ADDR3" length="100" />
+            </property>
+            <property name="nicAddr4" type="string">
+                <column name="NIC_ADDR4" length="100" />
+            </property>
+            <property name="nicSex" type="string">
+                <column name="NIC_SEX" length="1" />
+            </property>
+            <property name="nicDateofbirth" type="java.util.Date">
+                <column name="NIC_DATEOFBIRTH" length="7" />
+            </property>
+            <property name="nicDobApprox" type="string">
+                <column name="NIC_DOB_APPROX" length="20" />
+            </property>
+            <property name="nicBloodgroup" type="string">
+                <column name="NIC_BLOODGROUP" length="10" />
+            </property>
+            <property name="nicIssuedate" type="java.util.Date">
+                <column name="NIC_ISSUEDATE" length="7" />
+            </property>
+            <property name="nicPrevIssuedate" type="java.util.Date">
+                <column name="NIC_PREV_ISSUEDATE" length="7" />
+            </property>
+            <property name="nicOfrId" type="long">
+                <column name="NIC_OFR_ID" precision="22" scale="0" />
+            </property>
+            <property name="nicOfcId" type="long">
+                <column name="NIC_OFC_ID" precision="22" scale="0" />
+            </property>
+            <property name="nicPhoto" type="com.nec.asia.nic.framework.dataAccess.type.ByteBlobType">
+                <column name="NIC_PHOTO" />
+            </property>
+            <property name="nicSign" type="com.nec.asia.nic.framework.dataAccess.type.ByteBlobType">
+                <column name="NIC_SIGN" />
+            </property>
+            <property name="nicThumbprint" type="com.nec.asia.nic.framework.dataAccess.type.ByteBlobType">
+                <column name="NIC_THUMBPRINT" />
+            </property>
+            <property name="nicRemarks" type="string">
+                <column name="NIC_REMARKS" length="102" />
+            </property>
+            <property name="nicSignFlag" type="string">
+                <column name="NIC_SIGN_FLAG" length="1" />
+            </property>
+            <property name="nicPrintCounter" type="long">
+                <column name="NIC_PRINT_COUNTER" precision="22" scale="0" />
+            </property>
+            <property name="nicPrintDob" type="string">
+                <column name="NIC_PRINT_DOB" length="20" />
+            </property>
+            <property name="nicIssuetime" type="java.util.Date">
+                <column name="NIC_ISSUETIME" length="7" />
+            </property>
+    </class>
+</hibernate-mapping>

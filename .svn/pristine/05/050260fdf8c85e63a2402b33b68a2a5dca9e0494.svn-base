@@ -1,0 +1,343 @@
+/**
+ * 
+ */
+package com.nec.asia.nic.framework.admin.code.service.impl;
+
+import java.net.InetAddress;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.dao.CodeValuesDao;
+import com.nec.asia.nic.framework.admin.code.dao.CodesDao;
+import com.nec.asia.nic.framework.admin.code.domain.CodeValues;
+import com.nec.asia.nic.framework.admin.code.domain.CodeValuesId;
+import com.nec.asia.nic.framework.admin.code.domain.Codes;
+import com.nec.asia.nic.framework.admin.code.service.CodesService;
+import com.nec.asia.nic.framework.report.form.CodeValueForm;
+import com.nec.asia.nic.framework.service.impl.DefaultBusinessServiceImpl;
+import com.nec.asia.nic.utils.DateUtil;
+
+/**
+ * @author prasad_karnati
+ *
+ */
+
+/* 
+* Modification History:
+*  
+* 08 Oct 2013 (Chris Lai): Update to save/update the ParentCodeValue
+* 13 Jan 2016 (TueNV): Update to save/update the Code
+*/
+
+@Service("codesService")
+public class CodesServiceImpl extends
+DefaultBusinessServiceImpl<Codes, String, CodesDao> implements CodesService {
+	
+	@Autowired
+	private CodesDao codesDao;
+	
+	@Autowired
+	private CodeValuesDao codeValuesDao;
+	
+
+	/** must define the non-argument constructor because we use CGLib proxy */
+	public CodesServiceImpl() {
+	}
+
+	@Autowired
+	public CodesServiceImpl(CodesDao dao) {
+		this.dao = dao;
+	}
+	
+	public PaginatedResult<Codes> getAllcodes(int pageNo,int pageSize){
+		
+		PaginatedResult<Codes> codeList = codesDao.getAllCodes(pageNo, pageSize);
+		
+		return codeList;
+	}
+	
+	public PaginatedResult<CodeValues> getCodevalueByCodeId(String codeId ,int pageNo,int pageSize){
+		
+		PaginatedResult<CodeValues> pegCodeValueList=null;
+		CodeValues codeValueObj = new CodeValues();
+		CodeValuesId codeValueIdObj= new CodeValuesId();
+		codeValueIdObj.setCodeId(codeId);
+		codeValueObj.setId(codeValueIdObj);
+		
+		DetachedCriteria criteria = DetachedCriteria.forClass(CodeValues.class);
+		criteria.add(Restrictions.eq("id", codeValueIdObj));
+		criteria.add(Restrictions.ne("deleteFlag", true));
+		criteria.addOrder(Order.asc("codePriority"));
+
+		pegCodeValueList=codeValuesDao.getCodevalues(codeId, pageNo, pageSize);
+
+		return pegCodeValueList;
+
+	}
+	
+	public String saveCodeDefinition(CodeValueForm codeValueForm, String createBy, Date createDate, String createWkstnId) {
+
+		String status = "";
+		try {
+			java.net.InetAddress localMachine = InetAddress.getLocalHost();
+			Codes code = new Codes();
+			code.setCodeId(codeValueForm.getCodeId());
+			code.setCodeDesc(codeValueForm.getCodeValueDesc());
+			code.setCreateBy(createBy);
+			code.setCreateDate(createDate);
+			code.setCreateWkstnId(createWkstnId);
+			
+			code.setAdminAccessibleFlag(Boolean.TRUE);
+			code.setUserAccessibleFlag(Boolean.FALSE);
+			code.setDeleteFlag(Boolean.FALSE);
+			
+			CodeValues codeValue = new CodeValues();
+			CodeValuesId codValId = new CodeValuesId();
+
+			codValId.setCodeId(codeValueForm.getCodeId());
+			codValId.setCodeValue(codeValueForm.getCodeValue());
+			codeValue.setId(codValId);
+			codeValue.setCodeValueDesc(codeValueForm.getCodeValueDesc());
+			codeValue.setAdminAccessibleFlag(Boolean.TRUE);			
+			codeValue.setDeleteFlag(Boolean.FALSE);
+			
+			//08 Jan 2014 (chris lai) : update to check no value returned
+			if (!StringUtils.isEmpty(codeValueForm.getCodePriority())) {
+				codeValue.setCodePriority(Integer.valueOf(codeValueForm.getCodePriority()));
+			}
+			codeValue.setCreateBy("ADMIN");
+			codeValue.setCreateDate(DateUtil.getSystemTimestamp());
+			codeValue.setCreateWkstnId(localMachine.getHostName());
+			//08 Oct 2013 (Chris Lai): Update to save/update the ParentCodeValue
+			//08 Jan 2014 (chris lai) : update to check no value returned
+			if (!StringUtils.isEmpty(codeValueForm.getParentCodeValue())) {
+				codeValue.setParentCodeValue(codeValueForm.getParentCodeValue());
+			} else {
+				codeValue.setParentCodeValue("");
+			}
+
+			Codes codeObj = codesDao.findById(codeValueForm.getCodeId());
+			if (codeObj == null) {
+				codesDao.save(code);
+			}
+			CodeValues codeValueObject = codeValuesDao.findById(codValId);
+			if (codeValueObject == null) {
+				codeValuesDao.save(codeValue);
+				status = "success";
+			} else {
+				status = "exist";
+			}
+
+		} catch (Exception exp) {
+			status = "fail";
+			exp.printStackTrace();
+		}
+		return status;
+	}
+	
+	//[tuenv][13 Jan 2016] - add
+	public String deleteCode(String codeId, String deleteBy, Date deleteDate, String deleteWkstnId) {
+		String status="";
+	
+		try{
+			java.net.InetAddress localMachine = InetAddress.getLocalHost();
+			Codes codeEntity = codesDao.findById(codeId);	
+			codeEntity.setDeleteBy("ADMIN");
+			codeEntity.setDeleteDate(DateUtil.getSystemTimestamp());
+			codeEntity.setDeleteWkstnId(localMachine.getHostName());
+			codeEntity.setDeleteFlag(true);
+			codesDao.saveOrUpdate(codeEntity);
+			 
+			status="success";
+		} catch(Exception exp){
+			status="fail";
+		}
+		
+		return status;
+	}
+
+	
+	public String deleteCodeValue(String codeId, String codeName, String deleteBy, Date deleteDate, String deleteWkstnId){
+		String status="";
+	
+		try{
+			java.net.InetAddress localMachine = InetAddress.getLocalHost();
+	
+			CodeValuesId codValId = new CodeValuesId();		
+			codValId.setCodeId(codeId);
+			codValId.setCodeValue(codeName);
+			 
+			CodeValues codeValueEntity = codeValuesDao.findById(codValId);	
+			codeValueEntity.setDeleteBy(deleteBy);
+			codeValueEntity.setDeleteDate(deleteDate);
+			codeValueEntity.setDeleteWkstnId(deleteWkstnId);
+			codeValueEntity.setDeleteFlag(true);
+			codeValuesDao.saveOrUpdate(codeValueEntity);
+			 
+			status="success";
+		} catch(Exception exp){
+			status="fail";
+		}
+
+		return status;
+	}
+	//add
+	public CodeValues findByStringCodeId(String codeId,String codeValue){
+		try {
+			CodeValues codeValues =  new CodeValues();
+			codeValues = this.codeValuesDao.findByStringCodeId(codeId, codeValue);
+			return codeValues;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	public CodeValues getCodeValueByIdName(String codeId ,String codeVal){
+	
+		CodeValues codeValue = new CodeValues();
+		
+		CodeValuesId codValId = new CodeValuesId();		
+		codValId.setCodeId(codeId);
+		codValId.setCodeValue(codeVal);	
+		
+	    codeValue = codeValuesDao.findById(codValId);
+		return codeValue;
+	}
+	
+	public String updateCodeValue(CodeValueForm codeValueForm, String updateBy, Date updateDate, String updateWkstnId) {
+		
+		String status="";
+		try{
+			CodeValuesId codValId = new CodeValuesId(codeValueForm.getCodeId(), codeValueForm.getCodeValue());
+			CodeValues codeValueEntity = codeValuesDao.findById(codValId);
+
+			codeValueEntity.setCodeValueDesc(codeValueForm.getCodeValueDesc());
+			// 08 jan 14 : not null check add by Prasad
+			if (codeValueForm.getCodePriority() != null) {
+				codeValueEntity.setCodePriority(Integer.valueOf(codeValueForm.getCodePriority()));
+			}
+
+			if (StringUtils.isNotBlank(updateBy)) {
+				codeValueEntity.setUpdateBy(updateBy);
+			}
+			if (updateDate!=null) {
+				codeValueEntity.setUpdateDate(updateDate);
+			}
+			if (StringUtils.isNotBlank(updateWkstnId)) {
+				codeValueEntity.setUpdateWkstnId(updateWkstnId);
+			}
+			
+			// 08 Jan 2014 (chris lai) : update to check no value returned
+			if (StringUtils.isNotEmpty(codeValueForm.getParentCodeValue())) {
+				codeValueEntity.setParentCodeValue(codeValueForm.getParentCodeValue());
+			} else {
+				codeValueEntity.setParentCodeValue("");
+			}
+			
+			codeValuesDao.saveOrUpdate(codeValueEntity);
+			status = "Success";
+		} catch(Exception e){
+			status="fail";
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	public List<CodeValues>  findAllByCodeId(String codeId){
+		List<CodeValues>  list = codeValuesDao.findAllByCodeId(codeId);
+	
+		return list;
+	}
+	
+	public List<CodeValues>  getParentCodeValues(String parentId){
+		List<CodeValues>  list = codeValuesDao.getParentCodeValues(parentId);
+		
+		return list;
+	}
+	
+	public Map<String, String> getCodeValues(String codeName) {
+		Map<String, String> result = null;
+		try {
+			result = codesDao.getCodeValuesByCodeID(codeName);
+		} catch (Exception ex) {
+		}
+		return result;
+	}
+
+	public PaginatedResult<Codes> getAllForPagination(int pageNo,int pageSize,Order... order){
+		PaginatedResult<Codes> results = codesDao.findAllForPagination(pageNo, pageSize, order);
+		return results;
+	}
+
+	@Override
+	public Map<String, String> getAllCodeValues() {
+		Map<String, String> result = null;
+		try {
+			result = codeValuesDao.getAllCodeValues();
+		} catch (Exception ex) {
+		}
+		return result;
+	}
+
+	public List<CodeValues>  getAllCodeValues(String codeId,String[] codeNames) {
+		try {
+			return  codeValuesDao.getAllCodeValues(codeId,codeNames );
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+	public Map<String, String> getRICCodeValues(String codeName){
+		Map<String, String> result = null;
+		try {
+			result = codesDao.getCodeValuesByCodeID(codeName);
+			if(result.containsKey("CON")){
+				result.remove("CON");			
+			}
+		} catch (Exception ex) {
+		}
+		return result;
+	} 
+
+	@Override
+	public String getCodeValueDescByIdName(String codeId, String codeVal, String defaultValOnExceptionOrNull) {
+
+		try {
+			String value = this.getCodeValueByIdName(codeId, codeVal).getCodeValueDesc();
+			if (value == null) {
+				return defaultValOnExceptionOrNull;
+			}
+			return value;
+		} catch (Exception e) {
+			return defaultValOnExceptionOrNull;
+		}
+	}
+
+	@Override
+	public CodeValues getCountryByA08Id(String a08Id) throws Exception {
+		try {
+			return this.codeValuesDao.findByCodeIdAndA08Id(CodeValues.CODE_ID_COUNTRY ,a08Id);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Override
+	public CodeValues findByCodeIdAndA08Id(String codeId, String a08Id)
+			throws Exception {
+		try {
+			return this.codeValuesDao.findByCodeIdAndA08Id(codeId ,a08Id);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+}

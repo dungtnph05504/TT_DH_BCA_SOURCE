@@ -1,0 +1,455 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:txn = "http://trans.dx.nic.asia.nec.com/" xmlns:cmn = "http://common.dx.nic.asia.nec.com/" targetNamespace = "http://trans.dx.nic.asia.nec.com/">
+<!-- 
+/* 
+ * Modification History:
+ * 
+ * 05 Jan 2016 chris: change [1] Priority from string to int, [2] PrevDateOfIssue, DateOfBirth, DateOfIssue, DateOfExpiry, birthDate  from datetime to date
+ * 03 Jun 2016 chris: add [1] PersonDetail.Aliasname
+ * 26 Apr 2017 chris: add TransactionLogUpload
+ */
+-->
+  <xs:import namespace="http://common.dx.nic.asia.nec.com/" schemaLocation="common.xsd"/>
+  <xs:element name="MainTransaction" type="txn:MainTransaction"/>
+  <xs:element name="RegistrationData" type="txn:RegistrationData"/>
+  <xs:element name="PersonDetail" type="txn:PersonDetail"/>
+  <xs:element name="FacialInfo" type="txn:FacialInfo"/>
+  <xs:element name="FacialImage" type="txn:FacialImage"/>
+  <xs:element name="FingerprintInfo" type="txn:FingerprintInfo"/>
+  <xs:element name="Fingerprint" type="txn:Fingerprint"/>
+  <xs:element name="PaymentInfo" type="txn:PaymentInfo"/>
+  <xs:element name="SignatureInfo" type="txn:SignatureInfo"/>
+  <xs:element name="IssuanceData" type="txn:IssuanceData"/>
+  <xs:element name="RejectionData" type="txn:RejectionData"/>
+  <xs:element name="TransactionLog" type="txn:TransactionLog"/>
+  
+  <!-- web service input and output -->
+  <xs:element name="TransactionRetrievalFilter" type="txn:TransactionRetrievalFilter"/>
+  <xs:element name="TransactionRetrievalResult" type="txn:TransactionRetrievalResult"/>
+  
+  <xs:complexType name="MainTransaction">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="TransactionID" type="xs:string"/>     
+      <xs:element minOccurs="0" name="ApplnRefNo" type="xs:string"/>   
+      <xs:element minOccurs="0" name="NIN" type="xs:string"/>   
+      <xs:element minOccurs="0" name="DateOfApplication" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="EstDateOfCollection" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="PassportType" type="xs:string"/>
+      <xs:element minOccurs="0" name="ValidatyPeriod" type="xs:int"/>
+      <xs:element minOccurs="0" name="IssuingAuthority" type="xs:string"/>
+      <xs:element minOccurs="0" name="Priority" type="xs:int"/>
+      <xs:element minOccurs="0" name="RegSiteCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="IssSiteCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string"/> 
+      <xs:element minOccurs="0" name="TransactionStatus" type="xs:string"/>
+      <xs:element minOccurs="0" name="PrevPassportNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="PrevDateOfIssue" type="xs:date"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateWkstnID" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDateTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateWkstnID" type="xs:string"/>
+      <xs:element minOccurs="0" name="RegistrationData" type="txn:RegistrationData"/>
+      <xs:element minOccurs="0" name="IssuanceData" type="txn:IssuanceData"/>
+      <xs:element minOccurs="0" name="RejectionData" type="txn:RejectionData"/>
+      <xs:element minOccurs="0" name="TransactionLogs" type="txn:TransactionLog" maxOccurs="unbounded" nillable="true"/>
+      <xs:element minOccurs="0" name="Checksum" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="RegistrationData">
+  <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionID" type="xs:string"/>
+      <xs:element minOccurs="0" name="WorkflowJobId" type="xs:string"/>
+      <xs:element minOccurs="0" name="WorkflowJobCompleteFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateWkstnID" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDateTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateWkstnID" type="xs:string"/>  
+      
+      <xs:element minOccurs="0" name="PrintRemark1" type="xs:string"/>
+      <xs:element minOccurs="0" name="PrintRemark2" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine1" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine2" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine3" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine4" type="xs:string"/>
+      <xs:element minOccurs="0" name="OverseasAddress" type="xs:string"/>
+      <xs:element minOccurs="0" name="OverseasCountry" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="TravelPurpose" type="xs:string"/>
+      <xs:element minOccurs="0" name="AcquiredCitizenship" type="xs:string"/>
+      <xs:element minOccurs="0" name="ForeignPassportHolder" type="xs:string"/>
+      <xs:element minOccurs="0" name="OccupationDesc" type="xs:string"/>
+      <xs:element minOccurs="0" name="OfficeContactNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="OfficeAddress" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="FpByPassDecision" type="xs:string"/>
+      <xs:element minOccurs="0" name="FpByPassBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="FpByPassDateTime" type="xs:dateTime"/>
+      
+      <xs:element minOccurs="0" name="TotalFp" type="xs:int"/>
+      <xs:element minOccurs="0" name="FpIndicator" type="xs:string"/>
+      <xs:element minOccurs="0" name="FpQuality" type="xs:string"/>
+      <xs:element minOccurs="0" name="FpPattern" type="xs:string"/>
+      <xs:element minOccurs="0" name="FpEncode" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="SignatureFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="FacialIndicator" type="xs:string"/>
+
+      <xs:element minOccurs="0" name="Email" type="xs:string"/>
+      <xs:element minOccurs="0" name="ContactNo" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="PersonDetail" type="txn:PersonDetail"/>
+      <xs:element minOccurs="0" name="ReferenceDocuments" type="txn:ReferenceDocument" maxOccurs="unbounded" nillable="true"/>
+      <xs:element minOccurs="0" name="FacialInfo" type="txn:FacialInfo"/>
+      <xs:element minOccurs="0" name="FingerprintInfo" type="txn:FingerprintInfo"/>
+      <xs:element minOccurs="0" name="SignatureInfo" type="txn:SignatureInfo"/>
+      <xs:element minOccurs="0" name="PaymentInfo" type="txn:PaymentInfo"/>
+      <xs:element minOccurs="0" name="Job" type="xs:string"/>
+      <xs:element minOccurs="0" name="MethodReceive" type="xs:int"/>
+      <xs:element minOccurs="0" name="Prioritize" type="xs:string"/>
+      <xs:element minOccurs="0" name="Religion" type="xs:string"/>
+      <xs:element minOccurs="0" name="Nation" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressNin" type="xs:string"/>
+      <xs:element minOccurs="0" name="DateNin" type="xs:date"/>
+      <xs:element minOccurs="0" name="TypeChild" type="xs:int"/>
+      <xs:element minOccurs="0" name="AddressReceive" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressCompany" type="xs:string"/>
+      <xs:element minOccurs="0" name="FatherDob" type="xs:date"/>
+      <xs:element minOccurs="0" name="MotherDob" type="xs:date"/>
+      <xs:element minOccurs="0" name="SpouseDob" type="xs:date"/>
+      <xs:element minOccurs="0" name="AddressTempNum" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressTempStreet" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressTempGuild" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressTempDistrict" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressTempCity" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressTempNation" type="xs:string"/>
+      <xs:element minOccurs="0" name="StManWorking" type="xs:string"/>
+      <xs:element minOccurs="0" name="NumDecision" type="xs:string"/>
+      <xs:element minOccurs="0" name="GovDecision" type="xs:string"/>
+      <xs:element minOccurs="0" name="SignerDecision" type="xs:string"/>
+      <xs:element minOccurs="0" name="NameDepartment" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressDepartment" type="xs:string"/>
+      <xs:element minOccurs="0" name="PhoneDepartment" type="xs:string"/>
+      <xs:element minOccurs="0" name="Position" type="xs:string"/>
+      <xs:element minOccurs="0" name="Rank" type="xs:string"/>
+      <xs:element minOccurs="0" name="PostionEng" type="xs:string"/>
+      <xs:element minOccurs="0" name="CivilServants" type="xs:string"/>
+      <xs:element minOccurs="0" name="LevelRank" type="xs:string"/>
+      <xs:element minOccurs="0" name="Quantum" type="xs:string"/>
+      <xs:element minOccurs="0" name="ToNation" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransitNation" type="xs:string"/>
+      <xs:element minOccurs="0" name="Purpose" type="xs:string"/>
+      <xs:element minOccurs="0" name="TypeExpense" type="xs:string"/>
+      <xs:element minOccurs="0" name="EstimateFrom" type="xs:date"/>
+      <xs:element minOccurs="0" name="EstimateTo" type="xs:string"/>
+      <xs:element minOccurs="0" name="AddressLine5" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PersonDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SurnameFull" type="xs:string"/>
+      <xs:element minOccurs="0" name="SurnameLine1" type="xs:string"/>
+      <xs:element minOccurs="0" name="SurnameLine2" type="xs:string"/>
+      <xs:element minOccurs="0" name="SurnameLenExceedFlag" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="FirstnameFull" type="xs:string"/>
+      <xs:element minOccurs="0" name="FirstnameLine1" type="xs:string"/>
+      <xs:element minOccurs="0" name="FirstnameLine2" type="xs:string"/>
+      <xs:element minOccurs="0" name="FirstnameLenExceedFlag" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="MiddlenameFull" type="xs:string"/>
+      <xs:element minOccurs="0" name="MiddlenameLine1" type="xs:string"/>
+      <xs:element minOccurs="0" name="MiddlenameLine2" type="xs:string"/>
+      <xs:element minOccurs="0" name="MiddlenameLenExceedFlag" type="xs:string"/>   
+      
+      <xs:element minOccurs="0" name="Aliasname" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="Nationality" type="xs:string"/>
+      <xs:element minOccurs="0" name="DateOfBirth" type="xs:date"/>
+      <xs:element minOccurs="0" name="ApproxDOB" type="xs:string"/>
+      <xs:element minOccurs="0" name="PrintDOB" type="xs:string"/>
+      <xs:element minOccurs="0" name="PlaceOfBirth" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Gender" type="xs:string"/>
+      <xs:element minOccurs="0" name="MaritalStatus" type="xs:string"/> 
+      
+      <xs:element minOccurs="0" name="FatherFirstname" type="xs:string"/>
+      <xs:element minOccurs="0" name="FatherMiddlename" type="xs:string"/>
+      <xs:element minOccurs="0" name="FatherSurname" type="xs:string"/>
+      <xs:element minOccurs="0" name="FatherCitizenship" type="xs:string"/>
+      
+      <xs:element minOccurs="0" name="MotherFirstname" type="xs:string"/>
+      <xs:element minOccurs="0" name="MotherMiddlename" type="xs:string"/>
+      <xs:element minOccurs="0" name="MotherSurname" type="xs:string"/>
+      <xs:element minOccurs="0" name="MotherCitizenship" type="xs:string"/>
+
+      <xs:element minOccurs="0" name="SpouseFirstname" type="xs:string"/>
+      <xs:element minOccurs="0" name="SpouseMiddlename" type="xs:string"/>
+      <xs:element minOccurs="0" name="SpouseSurname" type="xs:string"/>
+      <xs:element minOccurs="0" name="SpouseCitizenship" type="xs:string"/>
+	      
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- 
+  <xs:complexType abstract="true" name="TransactionDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BinaryData" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="DocType" type="xs:string"/>
+      <xs:element minOccurs="0" name="SerialNo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+   -->
+   
+  <xs:complexType name="ReferenceDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocType" type="xs:string"/>
+      <xs:element minOccurs="0" name="SerialNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="DocData" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="Remarks" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateWkstnID" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDateTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateWkstnID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FacialInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FacialImages" type="txn:FacialImage" maxOccurs="unbounded" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FacialImage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FacialData" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="DocType" type="xs:string"/>
+      <!-- PH_CAP, PH_CHIP, PH_PRINT -->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FingerprintInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CmlafTemplate" type="xs:base64Binary" nillable="true"/>
+      <xs:element minOccurs="0" name="Fingerprints" type="txn:Fingerprint" maxOccurs="unbounded" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Fingerprint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FingerprintData" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="FingerprintPosition" type="xs:string"/>
+	  <xs:element minOccurs="0" name="MinutiaData" type="xs:base64Binary" nillable="true" />
+	  <xs:element minOccurs="0" name="MinutiaFormat" type="xs:string" nillable="true" /><!-- CBEFF, PC2, FMP5 -->
+      <!-- 
+      <xs:element minOccurs="0" name="FingerprintEncodeFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="FingerprintQuality" type="xs:string"/>
+      <xs:element minOccurs="0" name="MinutiaType" type="xs:string" nillable="true"/>
+      <xs:element minOccurs="0" name="VerifiedScore" type="xs:string"/>
+	   -->
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PaymentInfo">
+    <xs:sequence>
+      <xs:element name="PaymentID" type="xs:string" minOccurs="0" />
+      <xs:element name="FeeAmount" type="xs:double"/>
+      <xs:element name="NoOfTimeLost" type="xs:int" minOccurs="0" />
+      <xs:element name="ReduceRateFlag" type="xs:string" minOccurs="0" />
+      <xs:element name="ReduceRateAmount" type="xs:double"/>
+      <xs:element name="PaymentAmount" type="xs:double"/>
+      <xs:element name="CollectOfficerID" type="xs:string" minOccurs="0" />
+      <xs:element name="PaymentDateTime" type="xs:dateTime" minOccurs="0" />
+      <xs:element name="ReceiptID" type="xs:string" minOccurs="0" />
+      <xs:element name="WaiverFlag" type="xs:string" minOccurs="0" />
+      <xs:element name="WaiverReason" type="xs:string" minOccurs="0" />
+      <xs:element name="WaiverRemark" type="xs:string" minOccurs="0" />
+      <xs:element name="WaiverOfficerID" type="xs:string" minOccurs="0" />
+      <xs:element name="CashReceived" type="xs:double"/>
+      <xs:element name="Balance" type="xs:double"/>
+      <xs:element name="paymentStatus" type="xs:string" minOccurs="0" />
+      <xs:element name="CreateBy" type="xs:string" minOccurs="0"/>
+      <xs:element name="CreateDateTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="CreateWkstnID" type="xs:string" minOccurs="0"/>
+      <xs:element name="UpdateBy" type="xs:string" minOccurs="0"/>
+      <xs:element name="UpdateDateTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="UpdateWkstnID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SignatureInfo">
+    <xs:sequence>   
+      <xs:element minOccurs="0" name="Signatures" type="txn:Signature" maxOccurs="unbounded" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Signature">
+    <xs:sequence>    
+      <xs:element minOccurs="0" name="SignatureData" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="DocType" type="xs:string"/>     
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="IssuanceData">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="TransactionID" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="PassportNo" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="1" name="ChipSerialNo" type="xs:string" maxOccurs="1"/>
+   	  <xs:element minOccurs="1" name="PrintingSite" type="xs:string" maxOccurs="1"/>
+   	  
+   	  <xs:element minOccurs="0" name="DateOfIssue" type="xs:date"/>
+   	  <xs:element minOccurs="0" name="DateOfExpiry" type="xs:date"/>
+   	  
+   	  <xs:element minOccurs="0" name="Status" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="StatusUpdateTime" type="xs:dateTime"/>
+     
+      <xs:element minOccurs="0" name="PackageID" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="PackageDateTime" type="xs:dateTime"/>
+      <!-- <xs:element minOccurs="0" name="PackageSequence" type="xs:string" maxOccurs="1"/> -->
+      <xs:element minOccurs="0" name="DispatchID" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="DispatchDateTime" type="xs:dateTime" maxOccurs="1"/>
+
+      <xs:element minOccurs="0" name="IssuedFlag" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="ActiveFlag" type="xs:string" maxOccurs="1"/>
+
+      <xs:element minOccurs="0" name="ReceiveBy" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="ReceiveDateTime" type="xs:dateTime" maxOccurs="1"/>
+      
+      <xs:element minOccurs="0" name="IssueDateTime" type="xs:dateTime" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="IssueBy" type="xs:string" maxOccurs="1"/>
+      
+      <xs:element minOccurs="0" name="RejectBy" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="RejectDateTime" type="xs:dateTime" maxOccurs="1"/>
+      
+      <xs:element minOccurs="0" name="CancelBy" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="CancelDateTime" type="xs:dateTime" maxOccurs="1"/>      
+     
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="CreateWkstnID" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="UpdateDateTime" type="xs:dateTime" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="UpdateWkstnID" type="xs:string" maxOccurs="1"/>
+      
+      <xs:element minOccurs="0" name="SyncStatus" type="xs:string" maxOccurs="1"/>
+      <xs:element minOccurs="0" name="LastSyncDateTime" type="xs:dateTime" maxOccurs="1"/>
+    
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RejectionData">
+    <xs:sequence>
+      <xs:element minOccurs = "1" type="xs:string"   name="TransactionID" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:string"   name="TransactionStatus" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:string"   name="RejectionType" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:string"   name="RejectBy" maxOccurs="1"/>
+      <xs:element minOccurs = "0" type="xs:dateTime" name="RejectDateTime" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:string"   name="RejectReason" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:string"   name="RejectRemarks" maxOccurs = "1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionLog">
+    <xs:sequence>
+      <xs:element minOccurs = "1" type="xs:string"   name="TransactionID" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:dateTime" name="LogCreateTime" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:string"   name="TransactionStage" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:string"   name="TransactionStatus" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:string"   name="WkstnID" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:string"   name="OfficerID" maxOccurs = "1"/>
+      <xs:element minOccurs = "1" type="xs:string"   name="SiteCode" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:string"   name="PassportNo" maxOccurs="1"/>
+      <xs:element minOccurs = "0" type="xs:dateTime" name="StartTime" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:dateTime" name="EndTime" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="cmn:LogInfo" name="LogInfo" maxOccurs = "1"/>
+      <xs:element minOccurs = "0" type="xs:string"   name="LogData" maxOccurs = "1"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Service Interface -->
+  <!-- transaction retrieval -->
+  <xs:complexType name="TransactionRetrievalFilter">
+    <xs:sequence>
+      <xs:element type="txn:TransactionRetrievalDataType" name="dataType" maxOccurs = "unbounded" minOccurs = "0"/>
+      <!-- all (default), transaction, persondetail, address, relationship, facial, signature, fingerprint, scanneddocument, payment. -->
+      <xs:element type="txn:TransactionRetrievalRecordType" name="recordType" maxOccurs = "1" minOccurs = "0"/>
+      <!-- all (default), latest. -->
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="PassportNo"/>
+    <xs:attribute type="xs:string" name="NIN" />   
+    <xs:attribute type="xs:string" name="TransactionID"/>
+    <!-- other fields like gender, surname , surname at birth, fullname, and to allow wildcard search -->
+    <xs:attribute type="xs:string" name="Gender"/>
+    <xs:attribute type="xs:string" name="Surname" />
+    <xs:attribute type="xs:string" name="FirstName" />
+    <xs:attribute type="xs:string" name="MiddleName" />
+    <xs:attribute type="xs:date" name="birthDate" />
+    <xs:attribute type="xs:string" name="birthDateApprox" />
+    <xs:attribute type="xs:string" name="regisSite" />
+  </xs:complexType>
+  <xs:simpleType name="TransactionRetrievalDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ALL" />
+      <xs:enumeration value="TRANSACTION_INFO" />
+      <xs:enumeration value="REGISTRATION_DATA" />
+      <xs:enumeration value="TRANSACTION_DOC" />
+      <xs:enumeration value="ISSUANCE_DATA" />
+      <xs:enumeration value="PAYMENT" />
+      <xs:enumeration value="TRANSACTION_LOG" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TransactionRetrievalRecordType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ALL" />
+      <xs:enumeration value="LATEST" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TransactionRetrievalResult">
+    <xs:sequence>
+      <xs:element type="txn:MainTransaction" name="Transactions" maxOccurs = "unbounded" minOccurs = "0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionLogUpload">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="TransactionLogs" type="txn:TransactionLog" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionLogUploadResponse">
+  	<xs:complexContent>
+      <xs:extension base = "cmn:FaultDetail">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="RejectedTransactionLogs" type="txn:TransactionLog" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NicPersoInfoDownloadFilter">
+    <xs:sequence>
+      <xs:element type="xs:string" name="DispatchID" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string" name="PackageID" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string" name="PassportNo" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string" name="NIN" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string" name="WkstnID" maxOccurs = "1" minOccurs="0" />
+      <xs:element type="xs:string" name="OfficerID" maxOccurs = "1" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute type="xs:dateTime" name="StartDate"/>
+    <xs:attribute type="xs:dateTime" name="EndDate"/>
+    <xs:attribute type="xs:string" name="SiteCode"/>
+  </xs:complexType>
+  <xs:complexType name="NicPersoInfoDownloadResult">
+    <xs:sequence>
+      <xs:element type="txn:IssuanceData" name="IssuanceDatas" maxOccurs = "unbounded" minOccurs = "0"/>
+      <xs:element type="txn:RejectionData" name="RejectionDatas" maxOccurs = "unbounded" minOccurs = "0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="NicPersoInfoRef">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionID" type="xs:string"/>
+      <xs:element minOccurs="0" name="PersoRefID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateReceivedNicPersoInfo">
+    <xs:sequence>
+      <xs:element type="txn:NicPersoInfoRef" name="NicPersoInfoRefs" maxOccurs = "unbounded" minOccurs = "0"/>
+      <xs:element type="xs:string" name="WkstnID" maxOccurs = "1" minOccurs = "1" />
+      <xs:element type="xs:string" name="OfficerID" maxOccurs = "1" minOccurs = "1"/>
+      <xs:element type="xs:string" name="SiteCode" maxOccurs = "1" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

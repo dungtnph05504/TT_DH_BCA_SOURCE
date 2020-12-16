@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 17, 2013 1:58:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.audit.domain.AuditSessionLogs" table="AUDIT_SESSION_LOGS">
+        <id name="sessionLogId" type="java.lang.Long">
+            <column name="SESSION_LOG_ID" precision="20" scale="0" />
+            <generator class="sequence">
+            	<param name="sequence">AUDIT_SESSION_LOG_ID</param>
+            </generator>
+        </id>
+        <property name="sessionId" type="java.lang.String">
+            <column name="SESSION_ID" length="100">
+                <comment>HTTP Session Id</comment>
+            </column>
+        </property>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" length="64">
+                <comment>User Id of Officer who access the system</comment>
+            </column>
+        </property>
+        <property name="wkstnId" type="java.lang.String">
+            <column name="WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who access the system</comment>
+            </column>
+        </property>
+        <property name="loginDate" type="java.util.Date">
+            <column name="LOGIN_DATETIME" length="7">
+                <comment>Date Time of User Login to the system</comment>
+            </column>
+        </property>
+        <property name="logoutDate" type="java.util.Date">
+            <column name="LOGOUT_DATETIME" length="7">
+                <comment>Date Time of User Logout from the system</comment>
+            </column>
+        </property>
+        <property name="timeTaken" type="java.lang.Long">
+            <column name="TIME_TAKEN" precision="10" scale="0">
+                <comment>Duration of User Session in milliseconds</comment>
+            </column>
+        </property>
+        <property name="archiveFlag" type="java.lang.String">
+            <column name="ARCHIVE_FLAG" length="1">
+                <comment>Archive Flag to indicate whether the record already archived(Y/N)</comment>
+            </column>
+        </property>
+        <property name="archiveBy" type="java.lang.String">
+            <column name="ARCHIVE_BY" length="64">
+                <comment>Officer or System who archive the record</comment>
+            </column>
+        </property>
+        <property name="archiveDate" type="java.util.Date">
+            <column name="ARCHIVE_DATETIME" length="7">
+                <comment>Date and time when the record was archived</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

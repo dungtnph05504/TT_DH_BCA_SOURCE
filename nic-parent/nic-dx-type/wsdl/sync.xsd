@@ -1,0 +1,99 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:sync = "http://sync.dx.nic.asia.nec.com/" 
+  targetNamespace = "http://sync.dx.nic.asia.nec.com/">
+  
+<!-- 
+/* 
+ * Modification History:
+ * 
+ * 12 Jan 2016 (chris): add UpdateRequest for TransactionStatus, PassportStatus, PackageStatus
+ */
+-->
+  <!-- (Status Update) -->
+  <xs:complexType name="UpdateRequest">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="TransactionStatusInfo" type="sync:TransStatusUpdate"/>
+      <xs:element minOccurs="0" name="PassportStatusInfo" type="sync:PassportStatusUpdate"/>
+      <xs:element minOccurs="0" name="PackageInfo" type="sync:PackageInfoStatusUpdate"/>
+      <xs:element minOccurs="0" name="DispatchInfo" type="sync:DispatchInfoStatusUpdate"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="TransStatusUpdate">
+  	<xs:sequence>		
+      <xs:element type="xs:string"   name="TransactionID" maxOccurs = "1" minOccurs = "1"/>
+      <xs:element type="xs:string"   name="TransactionStatus" maxOccurs = "1" minOccurs = "1"/>
+      <xs:element type="xs:string"   name="UpdateBy" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:dateTime" name="UpdateDateTime" maxOccurs = "1" minOccurs="0" />
+      <xs:element type="xs:string"   name="UpdateWkstnID" maxOccurs = "1" minOccurs = "0"/>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PassportStatusUpdate">
+  	<xs:sequence>
+      <xs:element type="xs:string"   name="PassportNo"      maxOccurs = "1" minOccurs = "1"/>
+      <xs:element type="xs:string"   name="Status"          maxOccurs = "1" minOccurs = "1"/>
+      <!-- to decide later if want to update by backend logic or by front end logic
+      <xs:element type="xs:string"   name="IssuedFlag"      maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:string"   name="ActiveFlag"      maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:string"   name="ReceiveBy"       maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:dateTime" name="ReceiveDateTime" maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:string"   name="IssueBy"         maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:dateTime" name="IssueDateTime"   maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:string"   name="RejectBy"        maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:dateTime" name="RejectDateTime"  maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:string"   name="CancelBy"        maxOccurs = "1" minOccurs = "0" />
+      <xs:element type="xs:dateTime" name="CancelDateTime"  maxOccurs = "1" minOccurs = "0" />  
+       -->
+      <xs:element type="xs:string"   name="UpdateBy" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:dateTime" name="UpdateDateTime" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string"   name="UpdateWkstnID" maxOccurs = "1" minOccurs = "0"/>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PassportInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="TransactionID" maxOccurs = "1" minOccurs = "0"/>
+      <xs:element type="xs:string" name="PassportNo" maxOccurs = "1" minOccurs = "0"/>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PackageInfo">
+    <xs:sequence>
+      <xs:element type="xs:string"         name="PackageID" maxOccurs = "1" minOccurs = "1" />
+      <xs:element type="xs:dateTime"       name="PackageDateTime" maxOccurs = "1" minOccurs = "1" />
+      <xs:element type="sync:PassportInfo" name="PassportInfoList" maxOccurs = "unbounded" minOccurs = "0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DispatchInfo">
+    <xs:sequence>
+      <xs:element type="xs:string"          name="DispatchID" maxOccurs = "1" minOccurs = "1" />
+      <xs:element type="xs:dateTime"        name="DispatchDateTime" maxOccurs = "1" minOccurs = "1" />
+      <xs:element type="sync:PackageInfo"   name="PackageInfoList" maxOccurs = "unbounded" minOccurs = "0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PackageInfoStatusUpdate">
+    <xs:complexContent>
+      <xs:extension base="sync:PackageInfo">
+        <xs:sequence>
+          <xs:element type="xs:string"     name="Status" maxOccurs = "1" minOccurs = "1"/>
+          <xs:element type="xs:string"     name="UpdateBy" maxOccurs = "1" minOccurs = "0"/>
+          <xs:element type="xs:dateTime"   name="UpdateDateTime" maxOccurs = "1" minOccurs = "0"/>
+          <xs:element type="xs:string"     name="UpdateWkstnID" maxOccurs = "1" minOccurs = "0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DispatchInfoStatusUpdate">
+    <xs:complexContent>
+      <xs:extension base="sync:DispatchInfo">
+        <xs:sequence>
+          <xs:element type="xs:string"      name="Status" maxOccurs = "1" minOccurs = "1"/>
+          <xs:element type="xs:string"      name="UpdateBy" maxOccurs = "1" minOccurs = "0"/>
+          <xs:element type="xs:dateTime"    name="UpdateDateTime" maxOccurs = "1" minOccurs="0" />
+          <xs:element type="xs:string"      name="UpdateWkstnID" maxOccurs = "1" minOccurs = "0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

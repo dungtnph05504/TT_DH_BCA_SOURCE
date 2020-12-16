@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+    <New id="NicOracleDatasource" class="org.eclipse.jetty.plus.jndi.Resource">
+	    <Arg>java:/nic_web</Arg>
+	    <Arg>
+	        <New class="org.apache.commons.dbcp.BasicDataSource"><!--  com.mchange.v2.c3p0.ComboPooledDataSource -->
+	        	<Set name="driverClassName">oracle.jdbc.OracleDriver</Set><!-- driverClass -->
+	        	<Set name="url">jdbc:oracle:thin:@localhost:1521:XE</Set><!-- jdbcUrl -->
+	            <Set name="username">PPEPP</Set><!-- user -->
+	            <Set name="password">Password1</Set>
+	        </New>
+	    </Arg>
+    </New>
+</Configure>

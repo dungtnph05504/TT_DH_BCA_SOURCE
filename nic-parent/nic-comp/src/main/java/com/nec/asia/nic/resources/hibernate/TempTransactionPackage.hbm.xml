@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.TempTransactionPackage" table="EPP_CENTRAL.TEMP_TRANSACTION_PACKAGE" optimistic-lock="version">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.TEMP_TRAN_PACK_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="packageId" type="string">
+			<column name="PACKAGE_ID" length="36">
+				<comment>PACKAGE_ID</comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>TRANSACTION_ID</comment>
+			</column>
+		</property>
+		<property name="typeList" type="java.lang.Integer">
+			<column name="TYPE_LIST">
+				<comment>TYPE_LIST</comment>
+			</column>
+		</property>
+		<property name="offerStage" type="string">
+			<column name="OFFER_STAGE" length="20">
+				<comment>OFFER_STAGE </comment>
+			</column>
+		</property>
+		<property name="offerNote" type="string">
+			<column name="OFFER_NOTE" length="2000">
+				<comment>OFFER_NOTE</comment>
+			</column>
+		</property>
+		<property name="approveNote" type="string">
+			<column name="APPROVE_NOTE" length="2000">
+				<comment>APPROVE_NOTE</comment>
+			</column>
+		</property>
+		<property name="approveStage" type="string">
+			<column name="APPROVE_STAGE" length="20">
+				<comment>APPROVE_STAGE</comment>
+			</column>
+		</property>	
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.BufEppPersonInvestigation" table="EPP_CENTRAL.BUF_EPP_PERSON_INVESTIGATION" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.BUF_EPP_PERSON_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Người tạo</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Máy trạm tạo</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="6">
+				<comment>Ngày tạo</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Người thay đổi</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="string">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Máy trạm thay đổi</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="6">
+				<comment>Ngày thay đổi</comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="otherName" type="string">
+			<column name="OTHER_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="string">
+			<column name="DATE_OF_BIRTH">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfBirthName" type="string">
+			<column name="PLACE_OF_BIRTH_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="idNumber" type="string">
+			<column name="ID_NUMBER">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfIdIssue" type="string">
+			<column name="DATE_OF_ID_ISSUE">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ethnic" type="string">
+			<column name="ETHNIC">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="religion" type="string">
+			<column name="RELIGION">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="searchName" type="string">
+			<column name="SEARCH_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nationalityName" type="string">
+			<column name="NATIONALITY_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="residentPlaceName" type="string">
+			<column name="RESIDENT_PLACE_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="residentAddress" type="string">
+			<column name="RESIDENT_ADDRESS">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="tmpAddress" type="string">
+			<column name="TMP_ADDRESS">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="occupation" type="string">
+			<column name="OCCUPATION">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="officeInfo" type="string">
+			<column name="OFFICE_INFO">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fatherName" type="string">
+			<column name="FATHER_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fatherNationality" type="string">
+			<column name="FATHER_NATIONALITY">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fatherOccupation" type="string">
+			<column name="FATHER_OCCUPATION">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="motherName" type="string">
+			<column name="MOTHER_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="motherNationality" type="string">
+			<column name="MOTHER_NATIONALITY">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="motherOccupation" type="string">
+			<column name="MOTHER_OCCUPATION">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="transactionMasterId" type="string">
+			<column name="TRANSACTION_MASTER_ID">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="key" type="long">
+			<column name="KEY_" precision="19" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="personCode" type="string">
+			<column name="PERSON_CODE">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="src" type="string">
+			<column name="SRC">
+				<comment>LOCAL, A08</comment>
+			</column>
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="matchPoint" type="long">
+			<column name="MATCH_POINT" precision="19" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfIdIssueName" type="string">
+			<column name="PLACE_OF_ID_ISSUE_NAME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="photo" type="org.hibernate.type.MaterializedBlobType">
+			<column name="PHOTO">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="isPushQueue" type="string">
+			<column name="IS_PUSH_QUEUE">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maCaNhan" type="string">
+			<column name="MA_CA_NHAN" length="20">
+				<comment>Mã cá nhân hệ thống A08</comment>
+			</column>
+		</property>
+		<property name="orgPerson" type="string">
+			<column name="ORG_PERSON" length="20">
+				<comment>Mã cá nhân gốc</comment>
+			</column>
+		</property>
+		<property name="dataType" type="string">
+			<column name="DATA_TYPE" length="50">
+				<comment>Loại dữ liệu</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

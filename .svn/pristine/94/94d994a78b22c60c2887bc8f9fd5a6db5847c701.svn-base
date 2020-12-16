@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.nec.asia</groupId>
+		<artifactId>nic-parent</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>nic-web</artifactId>
+	<packaging>war</packaging>
+	<name>NIC Web Application</name>
+	<url>http://www.nec.com.sg</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<applet.copyto.dir>${project.basedir}/src/main/webapp/applet</applet.copyto.dir>
+		<org.springframework.webflow.version>2.4.2.RELEASE</org.springframework.webflow.version>
+		<log.dir>log</log.dir>
+	</properties>
+	<dependencies>
+		<!-- nic framework -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>nic-framework</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!--<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>nic-applet</artifactId>
+			<version>${project.version}</version>
+		</dependency>-->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>nic-comp</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>nic-dx-type</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+			<version>${org.springframework.webflow.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<!-- Apache Tiles -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-el</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>tiles-freemarker</artifactId>
+					<groupId>org.apache.tiles</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>tiles-velocity</artifactId>
+					<groupId>org.apache.tiles</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>tiles-servlet-wildcard</artifactId>
+					<groupId>org.apache.tiles</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>tiles-mvel</artifactId>
+					<groupId>org.apache.tiles</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>javassist</artifactId>
+					<groupId>jboss</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Apache commons -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<!-- Aspectj -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<!-- JasperReports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports-fonts</artifactId>
+		    <version>5.6.1</version>
+		</dependency>
+		<!-- MISC -->
+		<dependency>
+			<groupId>org.beanshell</groupId>
+			<artifactId>bsh</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>oscache</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>jms</artifactId>
+					<groupId>javax.jms</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_2.4_spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>jstl-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>1.6.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<!-- for jsp validation on jstl taglib -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.0.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>displaytag</groupId>
+			<artifactId>displaytag</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<!-- <version>1.0.0.GA</version> -->
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<!-- <version>5.0.1.Final</version> -->
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+			<version>2.0</version>
+		</dependency>
+		
+		 <dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-svg-dom</artifactId>
+			<version>1.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jboss-vfs</artifactId>
+			<version>3.0.1.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.fdvs</groupId>
+			<artifactId>DynamicJasper</artifactId>
+			<version>4.0.4</version><!-- 4.0.0 -->
+		</dependency>
+		<dependency>
+	    <groupId>com.github.mhshams</groupId>
+	    <artifactId>jnbis</artifactId>
+	    <version>1.0.4</version>
+	</dependency>
+		<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20160810</version>
+</dependency>
+		<dependency>
+  <groupId>com.squareup.okhttp3</groupId>
+  <artifactId>okhttp</artifactId>
+  <version>3.10.0</version>
+</dependency>
+	</dependencies>
+
+	<build>
+		<!--<finalName>nicweb</finalName> -->
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jstl</artifactId>
+						<version>1.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<parallel>methods</parallel>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<!-- commented, developer to copy manually -->
+					<!-- <execution> <id>copy-applet-jar</id> <phase>process-resources</phase> 
+						<goals> <goal>copy</goal> </goals> <configuration> <artifactItems> <artifactItem> 
+						<groupId>${project.groupId}</groupId> <artifactId>nic-applet</artifactId> 
+						<version>${project.version}</version> <overWrite>true</overWrite> <destFileName>nic-applet.jar</destFileName> 
+						</artifactItem> <artifactItem> <groupId>commons-codec</groupId> <artifactId>commons-codec</artifactId> 
+						<version>${commons-codec.version}</version> <overWrite>true</overWrite> <destFileName>commons-codec-1.3.jar</destFileName> 
+						</artifactItem> <artifactItem> <groupId>com.nec.spid</groupId> <artifactId>spid</artifactId> 
+						<version>${spid.version}</version> <overWrite>true</overWrite> <destFileName>spid6.jar</destFileName> 
+						</artifactItem> </artifactItems> <outputDirectory>${applet.copyto.dir}</outputDirectory> 
+						</configuration> </execution> -->
+					<execution>
+						<id>copy-to-dist</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<!-- <destFileName>nicweb.war</destFileName> -->
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.basedir}/../../dist</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- to sign applet jar if required -->
+			<!-- 
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>update_jars</id>
+						<phase>process-classes</phase>
+						<configuration>
+							<target name="sign-dependent-jars"
+								description="===> to sign library jar.">
+								<signjar destDir="${applet.copyto.dir}"
+									preservelastmodified="false" alias="192.168.112.3"
+									keystore="${project.basedir}/setupfiles/keystore/192.168.112.3.jks"
+									storepass="password">
+									<path>
+										<fileset dir="${applet.copyto.dir}">
+											<include name="nic-applet.jar" />
+											<include name="spid6.jar" />
+										</fileset>
+									</path>
+									<flattenmapper />
+								</signjar>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!--<outputDirectory>C:/jboss-as-7.1.1.Final/standalone/deployments</outputDirectory> -->
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.6.14.v20131031</version>
+				<!-- <dependencies> <dependency> <groupId>com.oracle</groupId> <artifactId>oracle</artifactId> 
+					<version>${oracle.version}</version> <type>jar</type> </dependency> <dependency> 
+					<groupId>javax.validation</groupId> <artifactId>validation-api</artifactId> 
+					<version>1.0.0.GA</version> <type>jar</type> </dependency> <dependency> <groupId>commons-dbcp</groupId> 
+					<artifactId>commons-dbcp</artifactId> <version>1.4</version> </dependency> 
+					</dependencies> -->
+				<configuration>
+				    <systemProperties>
+                        <systemProperty>
+                            <name>jboss.server.log.dir</name>
+                            <value>${project.basedir}/${log.dir}</value>
+                        </systemProperty>
+                    </systemProperties>
+					<jvmArgs>-DMAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=128m
+						-XX:MaxPermSize=512m -XX:+CMSPermGenSweepingEnabled -Dclient.encoding.override=UTF-8"</jvmArgs>
+					<reload>manual</reload>
+					<!-- <webApp> <contextPath>/nicweb</contextPath> <jettyEnvXml>${project.basedir}/src/test/resources/jetty/jetty-env.xml</jettyEnvXml> 
+						<defaultsDescriptor>${project.basedir}/src/test/resources/jetty/webdefault.xml</defaultsDescriptor> 
+						</webApp> -->
+					<!-- <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory> -->
+					<!-- <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml> -->
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<!-- <excludes>
+					<exclude>log4j.xml</exclude>
+				</excludes>  -->
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</testResource>
+			<testResource>
+				<directory>src/main/webapp</directory>
+			</testResource>
+		</testResources>
+	</build>
+</project>

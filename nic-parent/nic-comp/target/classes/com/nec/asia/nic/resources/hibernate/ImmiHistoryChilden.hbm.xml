@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.immihistory.domain.ImmiHistoryChilden" table="EPP_CENTRAL.IMMIHISTORY_CHILDEN" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.IMMIHISTORY_CHILDEN_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" length="120" >
+				<comment>CREATED_BY</comment>
+			</column>
+		</property>
+		<property name="lastModifiedBy" type="string">
+			<column name="LAST_MODIFIED_BY" length="120">
+				<comment>LAST_MODIFIED_BY</comment>
+			</column>
+		</property>
+		<property name="createdTime" type="timestamp">
+			<column name="CREATED_TIME" length="6">
+				<comment>CREATED_TIME</comment>
+			</column>
+		</property>
+		<property name="lastModifiedTime" type="timestamp">
+			<column name="LAST_MODIFIED_TIME" length="6">
+				<comment>LAST_MODIFIED_TIME</comment>
+			</column>
+		</property>
+		<property name="immihistoryId" type="long">
+			<column name="IMMIHISTORY_ID">
+				<comment>IMMIHISTORY_ID</comment>
+			</column>
+		</property>
+		<property name="fullName" type="string">
+			<column name="FULL_NAME" length="120" >
+				<comment>FULL_NAME</comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="java.util.Date">
+			<column name="DATE_OF_BIRTH">
+				<comment>DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="1" >
+				<comment>GENDER</comment>
+			</column>
+		</property>
+		<property name="familyrelationshipCode" type="string">
+			<column name="FAMILY_RELATIONSHIP_CODE" length="2" >
+				<comment>FAMILY_RELATIONSHIP_CODE</comment>
+			</column>
+		</property>
+		<property name="placeOfBirthCode" type="string">
+			<column name="PLACE_OF_BIRTH_CODE" length="20" >
+				<comment>PLACE_OF_BIRTH_CODE</comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="ADDRESS" length="250" >
+				<comment>ADDRESS</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

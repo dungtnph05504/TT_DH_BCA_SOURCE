@@ -1,0 +1,7 @@
+-Xss8m
+
+Above is a sample.
+
+This is especially needed when the browser will be using the ePassport Investigation module.  
+
+This is because an applet  (which uses Spid) may be needing this when doing its processing.

@@ -1,0 +1,1444 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0044)http://192.168.1.15:6965/TiepNhan/QuetToKhai -->
+<html ng-app="e-app" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+   
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="js/moment.min.js"></script>
+
+    <link href="css/jquery-ui.css" rel="stylesheet">
+<link href="plugins/bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/bootstrap-modal.css" rel="stylesheet">
+<link href="css/bootstrap-table.css" rel="stylesheet">
+<link href="css/general.css" rel="stylesheet">
+<link href="css/style-table.css" rel="stylesheet">
+<link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+<link href="css/bootstrap-select.css" rel="stylesheet">
+<link href="css/toastr.css" rel="stylesheet">
+<link href="css/Layout.css" rel="stylesheet">
+<link href="css/simple-sidebar.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+    <link href="css/zTreeStyle.css" rel="stylesheet">
+
+    <script src="js/jquery.min.js"></script>
+
+</head>
+
+
+
+<body class="">
+    <div class="container-fluid banner none-padding">
+        <div class="header">
+            <div class="col-sm-12 banner">
+                <div class="col-sm-2">
+                    <a href="http://192.168.1.15:6965/Sys/HomePage"><img class="logo" src="images/logo1.svg"></a>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="ul-menu navbar-nav nav-menu">
+                                    <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#" aria-expanded="false">Tiếp nhận<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                                <li><a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai">Tiếp nhận hồ sơ</a></li>
+            <li><a href="http://192.168.1.15:6965/TiepNhan/HoSoQuay">Hoàn thiện tờ khai điện tử</a></li>
+            <li><a href="http://192.168.1.15:6965/TiepNhan/QuanLyBanGiao">Quản lý danh sách bàn giao</a></li>
+            <li><a href="http://192.168.1.15:6965/ThuLePhi/Index">Thu lệ phí cấp hộ chiếu</a></li>
+            <li><a href="http://192.168.1.15:6965/TiepNhan/ChupAnhHoChieu">Chụp ảnh hộ chiếu</a></li>
+
+                </ul>
+            </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-5 none-padding">
+                    <ul class="nav navbar-nav navbar-right nav-menu header-right">
+                        <li class="dropdown">
+                            <a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#">
+                                <img src="images/icon-vitri.svg">
+                                <span>PA Hải Phòng</span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#" style="padding:0px;margin-top:13px;">
+                                <span class="none-padding">|</span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/icon-user3.svg">
+                                <span>&nbsp;HP.TIEPNHAN</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu login-infor" role="menu">
+                                <li>
+                                    <a id="btnUser" href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#"><img src="images/canhan.svg">&nbsp;Thông tin cá nhân</a>
+                                </li>
+                                <li>
+                                    <a href="http://192.168.1.15:6965/Sys/Logout"><img src="images/dangxuat.svg">&nbsp;Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="flexbox">
+        <div class="leftpanel">
+            <a class="active" href="http://192.168.1.15:6965/Sys/HomePage"><img src="images/icon_home.svg"><span class="tooltiptext">Trang chủ</span></a>
+            <a onclick="PerformSearch()" id="epp-search"><img src="images/icon_timkiem.svg"><span class="tooltiptext">Tìm kiếm</span></a>
+            <a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#menu2" id="epp_inbox"><img src="images/icon_mail.svg"><span class="tooltiptext"></span></a>
+            <a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#" onclick="window.location.reload()" id="epp_notification"><img src="images/icon_reset2.svg"><span class="tooltiptext">Tải lại trang</span></a>
+            <a onclick="PerformRemove()" href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#" id="epp_remove"><img src="images/icon-delete.svg"><span class="tooltiptext"></span></a>
+            
+        </div>
+        <div class="modal fade" id="UploadDataToPA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ng-scope" role="document" ng-controller="uploaddatatopacontroller as xlhs">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đẩy dữ liệu lên PA</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="height:300px;">
+                        <div class="row" style="padding:20px;">
+                            <label class="col-md-6">Ngày đồng bộ</label>
+                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" customzdatetime="" ng-model="timKiem.fromDate">
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="padding:10PX;">
+                        <button type="button" style="float:right;" class="btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>Đóng</button>
+                        <button type="button" style="float:right;margin-right: 10px;" ng-click="UploadDataToPA()" class="btn color-blue">Đẩy lên</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wrapper" class="main-content">
+            
+
+<style>
+    .btn span, .btn span:hover {
+        color: #000 !important;
+    }
+</style>
+<link href="css/tiepnhan.css" rel="stylesheet">
+<div style="width:100%;" class="ng-scope">
+    <div id="page-content-wrapper" class="content-person-infomation col-xs-12 col-sm-12 col-lg-12">
+        <div  id="quayquaytiepnhan"></div>
+        <div class="content-person-item container-fluid">
+            <div class="content-item-title">
+                <div class="oplog-title__txt">TIẾP NHẬN HỒ SƠ</div>
+            </div>
+
+            <div hidden="hidden">
+                <form method="post" enctype="multipart/form-data" id="frmUpload" class="ng-pristine ng-valid">
+                    <label id="lblFile" for="file">Upload Image:</label>
+                    <input type="file" name="file" id="file" style="width: 100%;" onchange="UpAnh()">
+                    <input type="submit" value="Upload" class="submit">
+                </form>
+            </div>
+
+            <div hidden="hidden">
+                <form method="post" enctype="multipart/form-data" id="frmUploadAttachment" class="ng-pristine ng-valid">
+                    <label id="lblFile" for="file">Upload Image:</label>
+                    <input type="file" name="fileAttachment" id="fileAttachment" style="width: 100%;" onchange="UpDinhKem()" accept="image/*" multiple="">
+                    <input type="submit" value="Upload" class="submit">
+                </form>
+            </div>
+
+            <div class="content-item-main">
+                <div class="content-item-information">
+                    <div class="content-item-panel" style="padding:0px;">
+                        <div class="content-item-panel-txt text-center">
+
+                        </div>
+                    </div>
+                    <div class="content-item-data">
+
+                        <div class="col-xs-10 none-padding">
+                            <form id="e-tokhai"  class="ng-pristine ng-valid ng-valid-maxlength ng-valid-min">
+                                <input type="hidden"  autocomplete="off" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <div class="form-horizontal form-profile">
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space: nowrap;padding-right:0px;width:11%;">Số biên nhận</label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <input type="hidden"  autocomplete="off" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                            <input type="text" readonly="readonly" class="form-control ng-pristine ng-untouched ng-valid ng-empty" value="" id="txtBienNhan" placeholder="" ng-model="tokhai.RECEIPT_NO">
+                                        </div>
+
+                                        <label class="col-sm-2 control-label text-right" style="padding-left: 0px;">Người tiếp nhận</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" readonly="readonly" placeholder="" value="HP cán bộ tiếp nhận">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space: nowrap;padding-right:0px;width:11%;">Ngày hẹn trả</label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" customzdatetime=""  placeholder="">
+                                        </div>
+
+                                        <label class="col-sm-2 control-label text-right">Ngày trong tuần</label>
+                                        <div class="col-sm-2" style="padding-right: 0px;">
+                                            <div class="form-group">
+                                                <div class="dropdown bootstrap-select">
+                                                    <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-not-empty"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Thứ năm"><span class="filter-option pull-left">Thứ năm</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Chủ nhật</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Thứ hai</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Thứ ba</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Thứ tư</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Thứ năm</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Thứ sáu</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Thứ bảy</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-not-empty" ng-disabled="CheckTiepNhan" ng-model="tokhai.DATE_IN_WEEK" ng-options="x as x.name for x in ListDayInWeek track by x.id" tabindex="-98"><option label="Chủ nhật" value="0">Chủ nhật</option><option label="Thứ hai" value="1">Thứ hai</option><option label="Thứ ba" value="2">Thứ ba</option><option label="Thứ tư" value="3">Thứ tư</option><option label="Thứ năm" value="4" selected="selected">Thứ năm</option><option label="Thứ sáu" value="5">Thứ sáu</option><option label="Thứ bảy" value="6">Thứ bảy</option></select></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" ng-disabled="CheckTiepNhan" class="form-check-input ng-pristine ng-untouched ng-valid ng-empty" style="display: initial;" ng-model="tokhai.IS_POST_OFFICE">
+                                                Tiếp nhận qua bưu điện
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space: nowrap;padding-right:0px;width:11%;">
+                                            Họ tên
+                                            <span class="required-text">*</span>
+                                        </label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <input type="text" style="text-transform: uppercase;" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="tokhai.FULL_NAME" placeholder="" validate="true" ng-change="UpdateToKhai(&#39;FULL_NAME&#39;, tokhai.FULL_NAME)">
+                                        </div>
+
+                                        <label class="col-sm-2 control-label text-right">Ngày sinh</label>
+                                        <div class="col-sm-2" style="padding-right: 0px;">
+                                            
+                                            <input type="text" ng-disabled="CheckTiepNhan" ng-model="tokhai.DATE_OF_BIRTH" id="dtpNgaySinh" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="__/__/____" ng-change="UpdateToKhai(&#39;DATE_OF_BIRTH&#39;, tokhai.DATE_OF_BIRTH)">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="dropdown bootstrap-select">
+                                                    <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-not-empty"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Đầy đủ ngày, tháng, năm"><span class="filter-option pull-left">Đầy đủ ngày, tháng, năm</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Đầy đủ ngày, tháng, năm</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Chỉ có tháng và năm sinh</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Chỉ có năm sinh</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-not-empty" ng-disabled="CheckTiepNhan" ng-model="NgaySinh" ng-change="ChangeNgaySinh()" ng-options="x as x.type for x in ListTypeNgaySinh track by x.id" tabindex="-98"><option label="Đầy đủ ngày, tháng, năm" value="0" selected="selected">Đầy đủ ngày, tháng, năm</option><option label="Chỉ có tháng và năm sinh" value="1">Chỉ có tháng và năm sinh</option><option label="Chỉ có năm sinh" value="2">Chỉ có năm sinh</option></select></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space: normal;padding-right:0px;width:11%;">
+                                            Số CMND/CCCD
+                                            <span class="required-text">*</span>
+                                        </label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <input type="text" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" maxlength="12" onkeypress="return event.charCode &gt;= 48 &amp;&amp; event.charCode &lt;= 57" ng-model="tokhai.PID_NO" validate="true" ng-change="UpdateToKhai(&#39;PID_NO&#39;, tokhai.PID_NO)">
+                                        </div>
+                                        <label class="col-sm-2 control-label text-right">Địa chỉ</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="tokhai.ADDRESS" ng-change="UpdateToKhai(&#39;ADDRESS&#39;, tokhai.ADDRESS)">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space: nowrap;padding-right:0px;width:11%;">Số HC cũ</label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <input type="text" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="tokhai.PREV_PASSPORT_NO" ng-change="UpdateToKhai(&#39;PREV_PASSPORT_NO&#39;, tokhai.PREV_PASSPORT_NO)" onkeypress="return (event.charCode &gt;= 65 &amp;&amp; event.charCode &lt;= 90) || (event.charCode &gt;= 97 &amp;&amp; event.charCode &lt;= 122) || (event.charCode &gt;= 48 &amp;&amp; event.charCode &lt;= 57)" placeholder="">
+                                        </div>
+                                        <label class="col-sm-2 control-label text-right" style="padding-left: 0px;">Số lượng HC</label>
+                                        <div class="col-sm-2" style="padding-right: 0px;">
+                                            <input type="number" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-min" min="1" onkeyup="this.value=this.value.replace(/[^\d]/,&#39;&#39;)" ng-model="tokhai.AMOUNT_OF_PASSPORT" placeholder="" ng-change="UpdateToKhai(&#39;AMOUNT_OF_PASSPORT&#39;, tokhai.AMOUNT_OF_PASSPORT)">
+                                        </div>
+                                        <label class="col-sm-2 control-label text-right" style="padding-left: 0px;">Số lượng TK</label>
+                                        <div class="col-sm-2">
+                                            <input type="number" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-min" min="1" onkeyup="this.value=this.value.replace(/[^\d]/,&#39;&#39;)" ng-model="tokhai.AMOUNT_OF_REGISTRATION" placeholder="" ng-change="UpdateToKhai(&#39;AMOUNT_OF_REGISTRATION&#39;, tokhai.AMOUNT_OF_REGISTRATION)">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left: 0px; white-space: nowrap;padding-right:0px;width:11%;">Giấy tờ khác</label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <input type="text" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="tokhai.ADDED_DOCUMENTS" placeholder="" ng-change="UpdateToKhai(&#39;ADDED_DOCUMENTS&#39;, tokhai.ADDED_DOCUMENTS)">
+                                        </div>
+                                        <label class="col-sm-2 control-label text-right" style="padding-left: 0px;">Số công văn</label>
+                                        <div class="col-sm-2" style="padding-right: 0px;">
+                                            <input type="text" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="tokhai.DOCUMENTARY_NO" placeholder="" ng-change="UpdateToKhai(&#39;DOCUMENTARY_NO&#39;, tokhai.DOCUMENTARY_NO)">
+                                        </div>
+                                        <label class="col-sm-2 control-label text-right" style="padding-left: 0px;">Ngày ký</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" ng-disabled="CheckTiepNhan" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" customzdatetime="" ng-model="tokhai.DOCUMENTARY_ISSUED" placeholder="" ng-change="UpdateToKhai(&#39;DOCUMENTARY_ISSUED&#39;, tokhai.DOCUMENTARY_ISSUED)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left: 0px; white-space: nowrap;padding-right:0px;width:11%;">Loại TK</label>
+                                        <div class="col-sm-3" style="padding-left:0px;">
+                                            <select class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-disabled="CheckTiepNhan" ng-change="UpdateToKhai(&#39;DOCUMENT_TYPE&#39;, tokhai.DOCUMENT_TYPE)" ng-model="tokhai.DOCUMENT_TYPE">
+                                                <!-- ngRepeat: item in ListType --><option ng-repeat="item in ListType" value="ONLINE" class="ng-binding ng-scope" selected="selected">Hộ chiếu điện tử</option><!-- end ngRepeat: item in ListType --><option ng-repeat="item in ListType" value="NORMAL" class="ng-binding ng-scope">Hộ chiếu thường</option><!-- end ngRepeat: item in ListType --><option ng-repeat="item in ListType" value="HNDWRT" class="ng-binding ng-scope">Viết tay</option><!-- end ngRepeat: item in ListType -->
+                                            </select>
+                                            
+                                        </div>
+                                        <label class="col-sm-2 control-label text-right">Nơi nhận KQ</label>
+                                        <div class="col-sm-4" style="padding-right: 0px;">
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-disabled="CheckTiepNhan" ng-model="tokhai.PLACE_OF_RECEIPT" ng-change="ChangeNoiNhanKetQua()" placeholder="">
+                                        </div>
+                                        <div class="col-sm-2" style="text-align:right;">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" ng-disabled="CheckTiepNhan" class="form-check-input ng-pristine ng-untouched ng-valid ng-not-empty" style="display: initial;" ng-model="CheckNopHS" ng-change="CheckNoiNhanHS()">
+                                                Tại nơi nộp HS
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space:nowrap;padding-right:0px;width:11%;">Ghi chú</label>
+                                        <div class="col-sm-11" style="padding-left:0px;">
+                                            <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-disabled="CheckTiepNhan" id="txtGhiChu" ng-model="tokhai.NOTE" style="height: 70px;" rows="5" ng-change="UpdateToKhai(&#39;NOTE&#39;, tokhai.NOTE)"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space:nowrap;padding-right:0px;width:11%;">
+                                            Đề nghị
+                                            <span class="required-text">*</span>
+                                        </label>
+                                        <div class="col-sm-11" style="padding-left:0px;">
+                                            <div class="col-sm-12 none-padding" style="padding-top: 5px; height: 180px; max-height: 180px; overflow: auto;">
+                                                
+                                            <table class="table e-grid-table table-bordered table-hover e-table-fix-head">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        
+                                                        <col width="6%">
+                                                        <col width="10%">
+                                                        <col width="6%">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
+                                                            <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                                                <div class="e-th-table-boder">Nội dung đề nghị</div>
+                                                            </th>
+                                                            <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;"><div class="e-th-table-boder">Mã đề nghị </div></th>
+                                                            <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;"><div class="e-th-table-boder">Số tiền</div></th>
+                                                            
+                                                            <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;"><div class="e-th-table-boder">Số lượng</div></th>
+                                                            <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;"><div class="e-th-table-boder">Tổng tiền</div></th>
+                                                            <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;"><div class="e-th-table-boder">Thao tác</div></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- ngRepeat: item in ListDeNghiChon track by $index --><tr ng-repeat="item in ListDeNghiChon track by $index" class="ng-scope">
+                                                            <td>
+                                                                <input type="text" list="autocompleList" ng-change="ChonDeNghi($index,item)" placeholder="Chọn đề nghị" ng-model="item.TENDENGHI" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                                <datalist id="autocompleList">
+                                                                    <!-- ngRepeat: item in ListDeNghi --><option ng-repeat="item in ListDeNghi" value="M( ABTC1234 )" class="ng-scope">
+                                                                </option><!-- end ngRepeat: item in ListDeNghi --><option ng-repeat="item in ListDeNghi" value="O( ABTC2 )" class="ng-scope">
+                                                                </option><!-- end ngRepeat: item in ListDeNghi --><option ng-repeat="item in ListDeNghi" value="Q( QC )" class="ng-scope">
+                                                                </option><!-- end ngRepeat: item in ListDeNghi --><option ng-repeat="item in ListDeNghi" value="AF( HC )" class="ng-scope">
+                                                                </option><!-- end ngRepeat: item in ListDeNghi --><option ng-repeat="item in ListDeNghi" value="C( Miễn phí )" class="ng-scope">
+                                                                </option><!-- end ngRepeat: item in ListDeNghi --></datalist>
+                                                            </td>
+                                                            <td class="ng-binding">
+                                                                0
+                                                            </td>
+                                                            <td align="right" class="ng-binding">0</td>
+                                                            
+                                                            <td style="width:100px;"><input ng-disabled="CheckTiepNhan" style="width:100%; text-align:center;" onkeypress="return event.charCode &gt;= 48 &amp;&amp; event.charCode &lt;= 57" type="number" min="1" ng-model="item.SOLUONG" ng-change="UpdateSoLuongDeNghi($index,item.SOLUONG)" class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min"></td>
+                                                            <td align="right" class="ng-binding">0</td>
+                                                            <td align="center"><a style="cursor:pointer; color:blue;" ng-hide="CheckBN" ng-click="XoaDeNghi(item.MADENGHI,$index)">Xóa</a></td>
+                                                        </tr><!-- end ngRepeat: item in ListDeNghiChon track by $index -->
+                                                    </tbody>
+                                                </table></div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1" style="padding-left:0px; white-space:nowrap;padding-right:0px;width:11%;">
+                                            Tổng tiền
+                                        </label>
+                                        <div class="col-sm-11" style="padding-left:0px;">
+                                            <div class="col-sm-12 none-padding" style="padding-top: 5px; height: 70px; max-height: 70px; overflow: auto;">
+                                                
+                                            <table class="table e-grid-table table-bordered table-hover e-table-fix-head" style="border:none;">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        
+                                                        <col width="6%">
+                                                        <col width="10%">
+                                                        <col width="6%">
+                                                    </colgroup>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="border:none;"></td>
+                                                            <td style="border:none;"></td>
+                                                            <td style="border:none;"></td>
+                                                            <td style="border:none;"></td>
+                                                            <td style="border:none;" align="right" class="ng-binding">0</td>
+                                                            <td style="border:none;"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-2 none-padding">
+
+                            <div class="form-group">
+                                <div class="col-xs-12 none-padding" style="text-align:center;">
+                                    <div class="show-image" style="width: 100%; height: 190px;">
+                                        <img class="divImageTK" style="border: 1px solid rgb(105, 105, 105); width: 80%; height: 100%; cursor: pointer;" id="imgToKhai1">
+                                        <input class="delete btn-danger" type="button" value="Xóa" ng-click="XoaToKhai()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12 none-padding" style="text-align:center; height: 235px; max-height: 235px; overflow: auto;">
+                                    <div style="width: 100%; height: 150px; text-align: center;">
+                                        <img class="divImage" id="imgPerson" style="width: 60%; height: 100%; border: 1px solid rgb(105, 105, 105); cursor: pointer;">
+                                    </div>
+                                    <!-- ngRepeat: item in ListGiayToKhac -->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12 none-padding ng-binding" style="text-align:center;">
+                                    Tệp đính kèm: 0
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-xs-12 none-padding">
+
+                                    <div class="col-xs-3 none-padding">
+                                        <div style="width: 100%; text-align: center">
+                                            <button class="btn btn-default" style="height: 35px; font-weight: bold; color: black;" ng-disabled="DisabledPrevTK" ng-click="ChuyenToKhai(1)" disabled="disabled">&lt;&lt;</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 none-padding">
+                                        <div class="form-group">
+                                            <div class="col-xs-5 none-padding">
+                                                <label style="font-weight:bold; width: 100%; text-align: center; border: 1px solid black; font-size: 14px; padding: 4px;" class="ng-binding">0</label>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                /
+                                            </div>
+                                            <div class="col-xs-5 none-padding">
+                                                <label style="font-weight:bold; width: 100%; text-align: center;border: 1px solid black; font-size: 14px; padding: 4px;" class="ng-binding">0</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-3 none-padding">
+                                        <div style="width: 100%; text-align: center">
+                                            <button class="btn btn-default" style="height: 35px; font-weight: bold; color: black;" ng-disabled="DisabledNextTK" ng-click="ChuyenToKhai(0)" disabled="disabled">&gt;&gt;</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar-btn">
+                <a href="http://192.168.1.15:6965/TiepNhan/QuetToKhai#menu-toggle" id="menu-toggle">
+                    <span style="font-size: 18px;" id="sb-on-off" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+        <div class="footer" ng-show="RoleBtnQuetToKhai == true || RoleBtnChupVanTay == true || RoleBtnAddAttachment == true || RoleBtnAddImageChild == true || RoleBtnLichSuCapPhatHC == true || RoleBtnInBienNhan == true || RoleBtnInLaiBienNhan == true || RoleBtnCancel == true || RoleBtnCreateDS == true">
+            <div id="btm-toolbar">
+                <ul class="line" style="margin-bottom: 2px;" ng-init="cvt=true">
+                    <li ng-show="RoleBtnQuetToKhai" class="">
+                        <button class="btn color-blue" ng-disabled="DisableQuetTK" onclick="document.getElementById(&#39;file&#39;).click();"><i class="glyphicon glyphicon-camera"></i>&nbsp;&nbsp;Quét tờ khai</button>
+                    </li>
+                    <li ng-show="RoleBtnChupVanTay" class="">
+                        <button class="btn color-blue" data-toggle="modal" data-target="#quetvantay" ng-disabled="cvt" disabled="disabled"><i class="glyphicon glyphicon-camera"></i>&nbsp;&nbsp;Chụp vân tay</button>
+                    </li>
+                    <li style="padding-left: 10px; cursor: pointer;" ng-show="RoleBtnAddAttachment == true || RoleBtnAddImageChild == true" class="">
+                        <div class="btn-group">
+                            <button type="button" class="btn color-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Thêm tệp tin <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" style="background: #3b7c44;">
+                                <li ng-show="RoleBtnAddAttachment" class=""><button ng-disabled="CheckTiepNhan" class="btn color-blue" onclick="document.getElementById(&#39;fileAttachment&#39;).click();"><span ng-disabled="CheckTiepNhan" style="color: #FFF;"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Thêm tệp đính kèm</span></button></li>
+                                <li ng-show="RoleBtnAddImageChild" class=""><button data-toggle="modal" class="btn color-blue" data-target="#modalTreEm"><span style="color: #FFF;"><i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;Quét ảnh trẻ em</span></button></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li style="display:none;" ng-show="RoleBtnLichSuCapPhatHC" class="">
+                        <button class="btn color-blue" data-toggle="modal" data-target="#modalHC"><i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;Lịch sử cấp phát HC</button>
+                    </li>
+                    <li ng-show="RoleBtnInBienNhan" class="">
+                        <button class="btn color-blue" id="btnInBienNhan" ng-click="InBienNhan(tokhai)" disabled=""><i class="glyphicon glyphicon-print"></i>&nbsp;&nbsp;In biên nhận</button>
+                    </li>
+                    <li style="padding-left: 10px; cursor: pointer;" ng-show="RoleBtnInLaiBienNhan == true || RoleBtnCancel == true" class="">
+                        <div class="btn-group">
+                            <button type="button" class="btn color-blue dropdown-toggle" data-toggle="dropdown">
+                                Chỉnh sửa <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" style="background: #3b7c44;">
+                                <li ng-show="RoleBtnInLaiBienNhan" class=""><a data-toggle="modal" data-target="#modalBienNhan" id="btnInLai"><span style="color: #FFF;"><i class="glyphicon glyphicon-inbox"></i>&nbsp;&nbsp;In lại biên nhận</span></a></li>
+                                <li class="DisabledButton" id="liHuy" ng-show="RoleBtnCancel"><a id="btnHuy" ng-click="HuyBienNhan()"><span style="color: #FFF;"><i class="glyphicon glyphicon-warning-sign"></i>&nbsp;&nbsp;Hủy</span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li ng-show="RoleBtnCreateDS" class="">
+                        <button class="btn color-blue" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;Lập DS tiếp nhận hồ sơ</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="hangdoi">
+        <style scoped="">
+    #divHD .pagination > li > a, .pagination > li > span {
+        padding: 2px !important;
+        /*margin-left: 2px;*/
+    }
+</style>
+
+<div id="sidebar-wrapper">
+    <div id="">
+        <div class="col-sm-12 tieude" style="background: #e6e6e6; color: #131212; ">
+            <label class="bold-label" style="margin-top: 5px; font-size: 13px;">DANH SÁCH HỒ SƠ</label>
+        </div>
+        <div class="col-xs-12 none-padding form-horizontal pad-top-10">
+            <div class="form-group">
+
+                <div class="col-xs-12">
+                    <input type="text" value="" ng-model="hangdoi.TimKiem" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Nhập số biên nhận/ số tờ khai/ họ tên">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 none-padding form-horizontal ">
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" customzdatetime="" ng-model="hangdoi.TuNgay">
+                </div>
+                -
+                <div class="col-xs-6">
+                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" customzdatetime="" ng-model="hangdoi.DenNgay">
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="col-xs-12 none-padding form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <div class="form-group">
+                        <div class="dropdown bootstrap-select">
+                            <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-not-empty"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Chưa tiếp nhận"><span class="filter-option pull-left">Chưa tiếp nhận</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Tất cả</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Đã tiếp nhận</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Chưa tiếp nhận</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Đã hủy</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="hangdoi.TrangThai" ng-init="hangdoi.TrangThai = &#39;N&#39;" tabindex="-98">
+                                <option value="">Tất cả</option>
+                                <option value="Y">Đã tiếp nhận</option>
+                                <option value="N" selected="selected">Chưa tiếp nhận</option>
+                                <option value="C">Đã hủy</option>
+                            </select></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 text-right">
+                    <input type="submit" id="btnSearchHangDoi" ng-hide="RoleBtnSearch == false" class="btn color-blue e-btn" value="Tìm kiếm" ng-click="SearchHangDoi()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12 form-horizontal none-padding" style="margin-top: 10px;" id="divDanhSachHangDoi">
+        <div style="width: 100%; height: 440px; max-height: 440px; overflow: auto;">
+            
+
+        <table class="table e-grid-table table-bordered table-hover e-table-fix-head">
+                <thead>
+                    <tr style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
+                        
+                        <th class="e-cursor-pointer tblHeader tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                            <label class="lblHeader">Số BN</label>
+                        </th>
+                        <th class="e-cursor-pointer tblHeader tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                            <label class="lblHeader">Họ tên</label>
+                        </th>
+                        <th class="e-cursor-pointer tblHeader tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                            <label class="lblHeader">Trạng thái</label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ngRepeat: tn in ListHangDoi | filter:q| itemsPerPage: pageSize : 'PageHangDoi'| totalRecord: totalRecordHangDoi -->
+                </tbody>
+            </table></div>
+        <table class="table e-grid-table e-border">
+            <tfoot>
+                <tr>
+                    <th style="font-weight: normal;">
+                        <div data-role="display" class="e-page-rigth">
+                            <div id="divHD">
+                                <dir-pagination-controls pagination-id="PageHangDoi" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/app/directives/dirPagination.tpl.html" class="ng-isolate-scope"><!-- ngIf: 1 < pages.length || !autoHide -->
+</dir-pagination-controls>
+                            </div>
+                        </div>
+                        <div data-role="display" class="e-page-left">
+                            <div data-role="record-total" style="margin-right: 5px;" class="ng-binding">
+                                Tổng: 0 hồ sơ
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+    </div>
+
+    
+
+    <div id="report" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" style="width: 1200px;">
+            <!-- Modal content-->
+            <div class="modal-content" style="height: 550px; max-height: 550px; overflow-x: auto; overflow-y: hidden;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">IN BIÊN NHẬN</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="WrapIframe" style="width: 100%; height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalBienNhan" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">IN BIÊN NHẬN</h4>
+                </div>
+                <div class="modal-body" style="height :500px;overflow-y:scroll;">
+                    <div style="font-family:&#39;Times New Roman&#39;;font-size:15px !important;margin:auto;border: solid 1px #000000; margin: 20px auto; box-shadow: 10px 10px #888888; padding:10px;width: 759px; height: 559px;" id="print-content">
+    <style type="text/css">
+        .tableReportLDS tr:hover {
+            background-color: white;
+        }
+    </style>
+    <div style="width:100%;height:146px;">
+        <div style="width:15%; float:left;height:146px;">
+            <img src="images/logo_xnc_report.png">
+        </div>
+        <div style="width:80%; float:left;text-align:center;">
+            <p style="font-size:18px;margin:0px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+            <p style="text-decoration:underline;font-weight:bold;margin:0px;">Độc lập - Tự do - Hạnh phúc</p>
+            <p style="font-weight:bold;font-size:18px;margin:0px;">GIẤY BIÊN NHẬN</p>
+            <div style="">
+                <img style="width:168px;height:30px;" src="http://192.168.1.15:6965/TiepNhan/QuetToKhai">
+            </div>
+            <p style="font-size:22px;margin:0px;" class="ng-binding"></p>
+            <p style="font-size:16px;font-weight:bold;margin:0px;" class="ng-binding"></p>
+        </div>
+    </div>
+    <div style="width:100%;text-align:left;">
+        <span style="width:60%; float:left;" class="ng-binding">Ông (Bà):  </span>
+        <span style="width:40%; float:right;" class="ng-binding">Số CMND/CCCD:  </span>
+    </div>
+    <div style="width:100%;">
+        <p style="margin:0px;float:left;" class="ng-binding">Địa chỉ/cơ quan, tổ chức: </p>
+    </div>
+    <div style="width:100%;float:left;">
+        <p style="font-weight:bold;margin:0px;">Hồ sơ gồm:</p>
+        <p style="padding-left:20px;margin:0px;">- Công văn số/ Đơn đề nghị:</p>
+        <p style="padding-left:20px;margin:0px;" class="ng-binding">- Kèm theo: </p>
+    </div>
+    <div style="width:100%;float:left;margin-bottom:3px;">
+        <p style="font-weight:bold;margin:0px;">Nội dung đề nghị:</p>
+        <!-- ngRepeat: item in ListDeNghiChonBN -->
+        <p style="margin:0px;float:left;" class="ng-binding">Mời ông/bà nhận kết quả vào hồi 10 giờ 00 phút ngày  tại quầy số 4.</p>
+        <p style="margin:0px;float:left;">Khi nhận kết quả, đề nghị ông/ bà mang theo: CMND/CCCD và Giấy biên nhận này.</p>
+    </div>
+    <div style="width:100%;float:left;">
+        <div style="width:60%;float:left;white-space: pre-line;" class="ng-binding"><span style="font-style: italic;">Ghi chú:</span> </div>
+        <div style="width:40%;float:right;text-align:center;">
+            <p style="margin:0px;" class="ng-binding">	</p>
+            <p style="margin:0px;">Người nhận hồ sơ</p>
+            <p style="margin:0px;">Ký, ghi rõ họ tên</p>
+            <br>
+            <br>
+            <p style="margin:0px;" class="ng-binding"></p>
+        </div>
+    </div>
+</div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right" style="padding-right : 10px;">
+                        <ul class="line">
+                            <li>
+                                <button type="button" class="btn color-blue" ng-click="printData(&#39;print-content&#39;);"><i class="glyphicon glyphicon-print" aria-hidden="true"></i>&nbsp;In</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn color-orangeyellow" data-dismiss="modal">Đóng</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="quetvantay" class="modal fade ep-v3 epp-vt" role="dialog">
+        <div class="modal-dialog modal-lg" style="width: 1000px">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Chụp vân tay</h4>
+                </div>
+                <div class="modal-body e-ascreen">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ep-box">
+                                <div class="e-label-title">
+                                    <span>Chụp vân tay</span>
+                                </div>
+                            </div>
+                            <div class="ep-table">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th style="text-align: center;">Ngón cái phải</th>
+                                            <th style="text-align: center;">Ngón trỏ phải</th>
+                                            <th style="text-align: center;">Ngón giữa phải</th>
+                                            <th style="text-align: center;">Ngón áp út phải</th>
+                                            <th style="text-align: center;">Ngón út phải</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-count" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="gross-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="net-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="net-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="net-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center;">Ngón cái trái</th>
+                                            <th style="text-align: center;">Ngón trỏ trái</th>
+                                            <th style="text-align: center;">Ngón giữa trái</th>
+                                            <th style="text-align: center;">Ngón áp út trái</th>
+                                            <th style="text-align: center;">Ngón út trái</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="order-count" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="gross-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="net-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="net-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="net-revenue" style="text-align: center;">
+                                                <div class="cm-image fw">
+                                                    <div class="image-box ep-image-box ep-img-hc">
+                                                        <span class="icon" ng-show="!cn.isfp">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                                                        <img ng-show="cn.isfp" class="ng-hide">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right" style="padding: 10px">
+                        <button class="btn color-blue" type="submit" data-flag="false" ng-click="cn.TenPrintCapture(tokhai.DOC_ID, tokhai.FULL_NAME)"><span class="glyphicon glyphicon-camera"></span>&nbsp;&nbsp;Chụp vân tay</button>
+                        <button class="btn color-blue" type="submit" data-flag="false" ng-click="cn.eppSave()"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Lưu</button>
+                        <button class="btn color-orangeyellow" data-dismiss="modal" tabindex="13"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divHC">
+        <div class="modal fade" id="modalHC" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><img src="images/dong.svg" class="width-17"></button>
+                <h5 class="modal-title"><label>LỊCH SỬ CẤP PHÁT HỘ CHIẾU</label></h5>
+            </div>
+            <div class="modal-body e-ascreen" style="overflow-x:scroll;">
+                <div class="col-lg-12 mar-bottom-10 mar-top-15">
+                    <div class="" style="max-height: 300px; overflow: auto;">
+                        
+
+                    <table class="table e-grid-table table-bordered table-hover e-table-fix-head">
+                            <thead>
+                                <tr style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Họ tên</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Giới tính</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Ngày sinh</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Nơi sinh</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Số CMND/CCCD</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Số TN</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Ngày TN</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Cơ quan TN</div>
+                                    </th>
+                                    <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                        <div class="e-th-table-boder">Trạng thái</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ngRepeat: item in LichSuCapPhat -->
+                            </tbody>
+                        </table></div>
+                </div>
+                <div class="col-lg-12 mar-bottom-10 mar-top-15">
+                    <div class="form-horizontal form-profile">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-sm-12">Ghi chú</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.GHI_CHU" style="height:50px;" ng-disabled="true" disabled="disabled"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4">Loại đề xuất</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.KET_QUA_HS_TEXT" type="text" ng-disabled="true" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Nội dung đề xuất</label>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.NOI_DUNG_DE_XUAT" style="height:50px;" ng-disabled="true" disabled="disabled"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <fieldset class="scheduler-border none-pad-right">
+                                    <legend class="scheduler-border"><label class="bold-label">Thông tin hộ chiếu</label></legend>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Số HC</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.PASSPORT_NO" type="text" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                        <label class="col-sm-2">Loại HC</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.TYPE_TEXT" type="text" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Ngày phát hành</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.DATE_OF_ISSUE_TEXT" type="text" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                        <label class="col-sm-2">Ngày hết hạn</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.DATE_OF_EXPIRY_TEXT" type="text" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Ngày trả</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.NGAY_TRA_TEXT" type="text" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                        <label class="col-sm-2">Nơi trả</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.NOI_TRA" type="text" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Ghi chú trả</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.GHI_CHU_TRA" style="height:50px;" ng-disabled="true" disabled="disabled"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Là HC điện tử</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="LichSuCapPhatDetail.IS_EPASSPORT_Bool" style="margin-left:-48%;" type="checkbox" ng-disabled="true" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="padding: 10px 15px 10px 15px;">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6" style="text-align: right;">
+                        <button class="btn btn-warning" id="btnHuy" data-dismiss="modal"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>&nbsp;&nbsp;Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <div id="divTreEm">
+        <div class="modal fade" id="modalTreEm" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-lg" style="width: 800px;">
+        <div class="modal-content">
+            <div hidden="hidden">
+                <form method="post" enctype="multipart/form-data" id="frmUploadTreEm" class="ng-pristine ng-valid">
+                    <label id="lblFile" for="file">Upload Image:</label>
+                    <input type="file" name="fileTreEm" id="fileTreEm" style="width: 100%;" onchange="UpAnhTreEm()">
+                    <input type="submit" value="Upload" class="submit">
+                </form>
+            </div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><img src="images/dong.svg" class="width-17"></button>
+                <h5 class="modal-title"><label>QUÉT ẢNH HỒ SƠ TRẺ EM</label></h5>
+            </div>
+            <div class="form-horizontal form-profile">
+                <div style="margin-top: 10px;"></div>
+                <div class="form-group" id="divTE_TK" style="display: none;">
+                    <div class="col-lg-12">
+                        <label class="col-sm-2 control-label text-left">Số tờ khai</label>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="dropdown bootstrap-select">
+                                    <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-empty"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="-- Tất cả --"><span class="filter-option pull-left">-- Tất cả --</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text"></span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-empty" ng-model="RegNoTE" ng-change="ChangeRegNoTE()" ng-options="x as x.REG_NO_TE for x in ListToKhai track by x.DOC_ID" tabindex="-98"><option value="?" selected="selected"></option></select></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="divTE_Ten">
+                    <div class="col-lg-12">
+                        <label class="col-sm-2 control-label text-left">Tên trẻ em</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-keypress="TenTreEmPress($event)" ng-model="TenTreEm">
+                        </div>
+                        <div class="col-sm-4" style="padding-left: 0px;">
+                            <button class="btn color-blue e-btn" ng-click="ThemTreEm()">Thêm</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-9">
+                        <div class="" style="height: 200px; max-height: 200px; overflow: auto;">
+                            
+                        <table class="table e-grid-table table-bordered table-hover e-table-fix-head">
+                                <thead>
+                                    <tr style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
+                                        <th class="e-cursor-pointer tblTH" style="width: 20px; background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                            <div class="e-th-table-boder">STT</div>
+                                        </th>
+                                        <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                            <div class="e-th-table-boder">Họ tên</div>
+                                        </th>
+                                        <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                            <div class="e-th-table-boder">Thao tác</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ngRepeat: item in ListTreEm | filter:search -->
+                                </tbody>
+                            </table></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="width: 100%; text-align: center">
+                            <img style="border: 1px solid #696969; width: 90%; height: 200px; cursor: pointer;" id="imgTreEm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mar-bottom-10">
+
+            </div>
+
+
+            <div class="modal-footer">
+                <div class="row" style="padding: 10px 15px 10px 15px;">
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6" style="text-align: right;">
+                        <button class="btn color-blue" ng-disabled="CheckTiepNhan" id="btnQuetAnhTreEm" onclick="document.getElementById(&#39;fileTreEm&#39;).click();"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp;&nbsp;Quét ảnh</button>
+                        <button class="btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i>&nbsp;&nbsp;Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+    
+</div>
+
+<div id="divBanGiao">
+    
+
+<div ng-controller="bangiaocontroller as bg" class="modal fade ng-scope" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="width: 1300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><img src="images/dong.svg" class="width-17"></button>
+                <h5 class="modal-title"><label>LẬP DANH SÁCH TIẾP NHẬN HỒ SƠ</label></h5>
+            </div>
+            <form id="e-bangiao" ng-submit="tn.SubmitPerson(bangiao)" class="ng-pristine ng-valid">
+                <div class="form-horizontal form-profile">
+                    <div style="margin-top: 10px;"></div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="col-sm-4 control-label text-left" style="padding-left: 0px;">Số tiếp nhận</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="" ng-model="bangiao.SoTiepNhan" validate="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="col-sm-4 control-label text-left" style="padding-left: 0px;">Từ ngày</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" customzdatetime="" ng-model="bangiao.TuNgay" placeholder="" ng-change="CheckDateTuNgay()">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="col-sm-4 control-label text-left">Đến ngày</label>
+                            <div class="col-sm-8 @*none-pad-right*@">
+                                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" customzdatetime="" ng-model="bangiao.DenNgay" placeholder="" ng-change="CheckDateDenNgay()">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 none-padding">
+                            <label class="col-sm-4 control-label text-left">Tình trạng</label>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="dropdown bootstrap-select">
+                                        <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-not-empty"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Chưa lập danh sách"><span class="filter-option pull-left">Chưa lập danh sách</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Tất cả</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Chưa lập danh sách</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Đã lập danh sách</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-not-empty" ng-init="bangiao.TinhTrang = &#39;N&#39;" ng-model="bangiao.TinhTrang" tabindex="-98">
+                                            <option value="">Tất cả</option>
+                                            <option value="N" selected="selected">Chưa lập danh sách</option>
+                                            <option value="Y">Đã lập danh sách</option>
+                                        </select></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label class="col-sm-4 control-label text-left" style="padding-left: 0px;">Người tiếp nhận</label>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="dropdown bootstrap-select">
+                                        <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-not-empty"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" title="Tất cả"><span class="filter-option pull-left">Tất cả</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Tất cả</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Nguyễn Huyền</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Nguyễn Thùy Linh</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">lê thu an</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">thu phi</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">tiếp nhận a72</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">trần mạnh ninh</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="bangiao.nguoinhap" ng-options="x as x.NAME for x in ListNguoiNhap track by x.ID" tabindex="-98"><option label="Tất cả" value="" selected="selected">Tất cả</option><option label="Nguyễn Huyền" value="173">Nguyễn Huyền</option><option label="Nguyễn Thùy Linh" value="118">Nguyễn Thùy Linh</option><option label="lê thu an" value="167">lê thu an</option><option label="thu phi" value="171">thu phi</option><option label="tiếp nhận a72" value="91">tiếp nhận a72</option><option label="trần mạnh ninh" value="168">trần mạnh ninh</option></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="col-sm-4 control-label text-left" style="padding-left: 0px;">Người lập</label>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="dropdown bootstrap-select">
+                                        <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-not-empty"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" title="Tất cả"><span class="filter-option pull-left">Tất cả</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Tất cả</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Nguyễn Huyền</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Nguyễn Thùy Linh</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">lê thu an</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">thu phi</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">tiếp nhận a72</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">trần mạnh ninh</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="bangiao.nguoibangiao" ng-options="x as x.NAME for x in ListNguoiBanGiao track by x.ID" tabindex="-98"><option label="Tất cả" value="" selected="selected">Tất cả</option><option label="Nguyễn Huyền" value="173">Nguyễn Huyền</option><option label="Nguyễn Thùy Linh" value="118">Nguyễn Thùy Linh</option><option label="lê thu an" value="167">lê thu an</option><option label="thu phi" value="171">thu phi</option><option label="tiếp nhận a72" value="91">tiếp nhận a72</option><option label="trần mạnh ninh" value="168">trần mạnh ninh</option></select></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="col-sm-4 control-label text-left">Số danh sách</label>
+                            <div class="col-sm-8" validate="true">
+                                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="bangiao.SoBangiao" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 none-padding">
+                            <label class="col-sm-4 control-label text-left">Loại TK</label>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="dropdown bootstrap-select">
+                                        <div class="btn-group bootstrap-select ng-pristine ng-untouched ng-valid ng-empty"><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" title="Tất cả"><span class="filter-option pull-left">Tất cả</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Tất cả</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Điện tử</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Viết tay</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Bưu điện</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Thường</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker ng-pristine ng-untouched ng-valid ng-empty" ng-model="bangiao.IS_ONLINE" tabindex="-98">
+                                            <option value="" selected="selected">Tất cả</option>
+                                            <option value="Y">Điện tử</option>
+                                            <option value="N">Viết tay</option>
+                                            <option value="BD">Bưu điện</option>
+                                            <option value="NORMAL">Thường</option>
+                                        </select></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <div class="col-ms-8">
+                                    <button class="btn color-blue" ng-hide="RoleBtnSearchBG == false" type="submit" id="btnTimkiem" ng-click="TimKiemBG()"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>&nbsp;&nbsp;Tìm kiếm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            
+            <div class="col-lg-12 mar-bottom-10">
+                <div class="" style="height: 340px; max-height: 340px; overflow: auto;">
+                    
+
+                <table class="table e-grid-table table-bordered table-hover e-table-fix-head">
+                        <thead>
+                            <tr style="background-color: rgb(255, 255, 255); position: relative; top: 0px;">
+                                <th class="e-cursor-pointer tblTH" style="width: 20px; background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">STT</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="width: 40px; background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">
+                                        <input type="checkbox" ng-model="checkall" ng-change="CheckAll()" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                    </div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Số tiếp nhận</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Họ tên</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Người TN</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Ngày TN</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Hồ sơ</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Người</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Ảnh</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Tờ khai</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Số danh sách</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Người lập</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Ngày lập</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Loại TK</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Trạng thái</div>
+                                </th>
+                                <th class="e-cursor-pointer tblTH" style="background-color: rgb(230, 230, 230); position: relative; top: -0.7px;">
+                                    <div class="e-th-table-boder">Trạng thái ký</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ngRepeat: bg in ListBanGiao | filter:q| itemsPerPage: pageSize | totalRecord : totalRecord -->
+                        </tbody>
+                    </table></div>
+                <table class="table e-grid-table e-border">
+                    <tfoot>
+                        <tr>
+                            <th style="font-weight: normal;">
+                                <div data-role="display" class="e-page-rigth">
+                                    <div>
+                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/app/directives/dirPagination.tpl.html" class="ng-isolate-scope"><!-- ngIf: 1 < pages.length || !autoHide -->
+</dir-pagination-controls>
+                                    </div>
+
+                                </div>
+                                <div data-role="display" class="e-page-left" style="font-weight: normal;">
+                                    <div>Hiển thị &nbsp;</div>
+                                    <div data-role="record-first" class="ng-binding">
+                                        1
+                                    </div>
+                                    <div>&nbsp; - &nbsp;</div>
+                                    <div data-role="record-last" class="ng-binding">
+                                        10
+                                    </div>
+                                    <div>&nbsp; của &nbsp;</div>
+                                    <div data-role="record-total" style="margin-right: 5px;" class="ng-binding">
+                                        10
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+
+            <div class="modal-footer">
+                <div class="row" style="padding: 10px 15px 10px 15px;">
+                    <div class="col-md-6">
+                        <div id="divThongBao" hidden="">
+                            <span style="font-weight: bold; color: blue; font-size: 14px;" class="ng-binding"></span>
+                            |
+                            <img style="width: 12px; height: 12px; cursor: pointer;" src="images/dong.svg" ng-click="AnThongBao()">
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="text-align: right;">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input ng-pristine ng-untouched ng-valid ng-not-empty" style="display: initial;" ng-model="XemTruocKhiIn">
+                            Xem trước khi in
+                        </label>
+                        <button style="margin-left: 20px;" ng-show="RoleBtnSignerBG" ng-disabled="DisabledKySo" class="btn color-blue" id="btn_KySods" ng-click="KySoDanhSachBG()" disabled="disabled"><img src="images/ql_bao_cao.svg" class="width-17 mar-right-5">Ký số</button>
+                        
+                        <button class="btn color-blue" id="btn_Lapds" ng-show="RoleBtnCreateDSBG" ng-disabled="DisabledLapDS" ng-click="LapDanhSachBG()" disabled="disabled"><img src="images/ql_bao_cao.svg" class="width-17 mar-right-5">Lập danh sách</button>
+                        <button class="btn color-blue" type="submit" ng-show="RoleBtnExportExcelBG" ng-click="ExportExcel()" id="btnXem_bc"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;Kết xuất excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportBG" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" style="width: 1200px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="HidePopupReportBG()"><img src="images/dong.svg" class="width-17"></button>
+                    <h4 class="modal-title">DANH SÁCH BÀN GIAO HỒ SƠ</h4>
+                </div>
+                <div class="modal-body" style="height :500px;overflow-y:scroll;">
+                    <div style="font-family:&#39;Times New Roman&#39;;font-size:15px !important;margin:auto;border: solid 1px #000000; margin: 20px auto; padding:10px;width: 727px;  height: auto;min-height:500px;" id="print-contentBG">
+    <style type="text/css">
+        .tableReportLDS tr:hover {
+            background-color: white;
+        }
+
+        .tableReportLDS {
+            border-collapse: collapse;
+        }
+
+            .tableReportLDS, .tableReportLDS tr td, .tableReportLDS tr th {
+                border: 1px solid black;
+                padding: 8px;
+                font-size: 15px;
+            }
+
+                .tableReportLDS tr th {
+                    font-weight: bold;
+                    text-align: center;
+                    background: #ffffff;
+                    font-size: 15px;
+                }
+    </style>
+    <div style="width:100%;height:146px;text-align:center;">
+        <p style="margin:0px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+        <p style="text-decoration:underline;font-weight:bold;margin:0px;">Độc lập - Tự do - Hạnh phúc</p>
+        <p style="font-weight:bold;font-size:18px;margin:0px;padding-top: 15px;">DANH SÁCH BÀN GIAO HỒ SƠ</p>
+        <p style="margin:0px;padding-left: 30%;" class="ng-binding"></p>
+        <p style="margin:0px;padding-left: 60%;" class="ng-binding">Số: </p>
+    </div>
+    <div style="width:100%;">
+        <table class="tableReportLDS" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Số biên nhận</th>
+                    <th>Người nộp</th>
+                    <th>SL HC</th>
+                    <th>Hẹn trả</th>
+                    <th>Cơ quan/Địa chỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ngRepeat: item in ListBangiaoChonReport -->
+            </tbody>
+        </table>
+    </div>
+    <div style="width:100%;height:146px;">
+        <div style="width:100%;">
+            <span style="float:left;padding-right:15%;padding-left: 30px;" class="ng-binding">Tổng số: </span>
+            <span style="float:left;" class="ng-binding">Tổng HC: </span>
+        </div>
+        <div style="width:100%;float:left;text-align:center;padding-top:15px;">
+            <span style="width:50%; float:left;font-weight:bold;">Cán bộ giao</span>
+            <span style="width:50%; float:right;font-weight:bold;">Cán bộ nhận</span>
+        </div>
+        <div style="width:100%;float:left;text-align:center;padding-top:20px;">
+            <span style="width:50%; float:left;" class="ng-binding"></span>
+            <span style="width:50%; float:right;"></span>
+        </div>
+    </div>
+</div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right" style="padding-right : 10px;">
+                        <ul class="line">
+                            <li>
+                                <button type="button" class="btn btn-default color-blue" ng-click="printData(&#39;print-contentBG&#39;);"><i class="glyphicon glyphicon-print" aria-hidden="true"></i>&nbsp;In</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-default color-orangeyellow" ng-click="HidePopupReportBG()">Đóng</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+        </div>
+    </div>
+
+
+
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/tableHeadFixer.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/jquery.mask.min.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<script src="js/jquery.datetimepicker.full.min.js"></script>
+<script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap.min.js"></script>
+<script src="js/Common.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/date.js"></script>
+
+<script src="js/authData.js"></script>
+<script src="js/authenticationService.js"></script>
+
+<script src="js/pagerDirective.js"></script>
+<script src="js/dirPagination.js"></script>
+
+<script src="js/bootstrap-confirmation.js"></script>
+<script src="js/bootbox.min.js"></script>
+<script src="js/g-box.js"></script>
+
+<script src="js/jquery.ztree.core.js"></script>
+<script src="js/jquery.ztree.excheck.js"></script>
+
+</body></html>

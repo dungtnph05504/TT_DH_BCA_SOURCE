@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.EppDetailReciept" table="EPP_CENTRAL.EPP_DETAIL_RECIEPT">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_DETAIL_RECIEPT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+  		<property name="recieptNo" type="string">
+			<column name="RECIEPT_NO" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="authenticationCode" type="string">
+			<column name="AUTHENTICATION_CODE" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFY_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyBy" type="string">
+			<column name="MODIFY_BY" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="4000">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="serialNo" type="int">
+			<column name="SERIAL_NO" precision="1" scale="0" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fullname" type="string">
+			<column name="FULL_NAME" length="250">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dob" type="timestamp">
+			<column name="DOB" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nin" type="string">
+			<column name="NIN" length="15" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="ADDRESS" length="450" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="checkTxn" type="string">
+			<column name="CHECK_TXN" length="20" >
+				<comment></comment>
+			</column>
+		</property>
+ 	</class>
+</hibernate-mapping>

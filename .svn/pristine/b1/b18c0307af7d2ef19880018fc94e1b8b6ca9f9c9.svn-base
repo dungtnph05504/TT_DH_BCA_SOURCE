@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.LogJobSchedule" table="EPP_CENTRAL.LOG_JOB_SCHEDULE" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.LOG_JOB_SCHEDULE_SEQ</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="recordId" type="long">
+			<column name="RECORD_ID" length="20">
+				<comment>Số Id bản ghi</comment>
+			</column>
+		</property>
+		<property name="code" type="string">
+			<column name="CODE" length="50">
+				<comment>Mã bản ghi</comment>
+			</column>
+		</property>
+		<property name="guid" type="string">
+			<column name="GUID" length="5">
+				<comment>guid</comment>
+			</column>
+		</property>
+		<property name="hrefJob" type="string">
+			<column name="HREF_JOB" length="150">
+				<comment>Đường dẫn API </comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment>Ngày tạo mới</comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFY_DATE" length="7">
+				<comment>Ngày chỉnh sửa</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="4000">
+				<comment>Mô tả thêm</comment>
+			</column>
+		</property>
+		<property name="typeLogJob" type="string">
+			<column name="TYPE_LOG_JOB" length="20">
+				<comment>Loại Job</comment>
+			</column>
+		</property>
+		<property name="typeTransaction" type="string">
+			<column name="TYPE_TRANSACTION" length="5">
+				<comment>Loại giao dịch</comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="20">
+				<comment>Trạng thái</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

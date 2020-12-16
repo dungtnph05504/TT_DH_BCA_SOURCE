@@ -1,0 +1,145 @@
+#page_heading {
+    text-align: center;
+    color: rgb(25, 25, 112);
+    font-family: 'Times New Roman';
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 25px;
+}
+
+.bg_images_hihi {
+    background: url(../images/icon_welcome/bgtrongdong-new.jpg) no-repeat;
+    background-color: #F3E2A9 !important;
+}
+
+.ov_hidden {
+    overflow: hidden;
+}
+
+.m_top_15 {
+    margin-top: 15px;
+}
+
+.roundedBorder {
+    margin: 30px 0 0;
+    margin-top: 0px;
+    padding: 0px;
+    padding-bottom: 0px;
+    border-image: none;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 5px 10px #392f2f;
+    box-shadow: 0px 5px 10px #392f2f;
+    padding-bottom: 15px;
+}
+
+.left_pane {
+    width: 50%;
+    float: left;
+    text-align: center;
+    min-height: 360px;
+}
+
+.right_pane {
+    width: 50%;
+    float: left;
+}
+
+.left_pane img {
+    max-width: 100%;
+    max-height: 350px;
+}
+
+.icon_button {
+    background-color: #337ab7;
+    /*background-color: #a90329;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a90329), color-stop(100%, #6d0019));
+	background-image: -webkit-linear-gradient(top, #a90329, #6d0019);
+	background-image: -moz-linear-gradient(top, #a90329, #6d0019);
+	background-image: -ms-linear-gradient(top, #a90329, #6d0019);
+	background-image: -o-linear-gradient(top, #a90329, #6d0019);
+	background-image: linear-gradient(top, #a90329, #6d0019);*/
+    /*filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a90329, endColorstr=#6d0019);*/
+    border: 5px solid #2e6da4;
+    border-radius: 15px;
+    text-align: center;
+    overflow: hidden;
+}
+
+    .icon_button:hover {
+        background-color: #fff;
+        border: 5px solid #337ab7;
+        color: #337ab7;
+    }
+
+        .icon_button:hover a {
+            color: #337ab7;
+        }
+
+.img_title2 {
+    display: none;
+}
+
+.m_top_30 {
+    margin-top: 30px;
+}
+
+.name_title {
+    color: #f7f7f7;
+    padding: 10px;
+    text-align: center;
+}
+
+    .name_title:hover a {
+        color: #337ab7;
+        text-decoration: none;
+    }
+
+    .name_title h2 {
+        font-variant: normal;
+        margin-top: 10px;
+    }
+
+        .name_title h2 a {
+            color: #f7f7f7;
+            font-size: 20px;
+        }
+
+    .name_title a:hover {
+        color: #337ab7;
+    }
+
+.img_title, .img_title2 {
+    padding: 10px;
+}
+
+    .img_title img, .img_title2 img {
+        width: auto;
+        max-height: 60px;
+    }
+
+.icon_button:hover .img_title {
+    display: none;
+}
+
+.icon_button:hover .img_title2 {
+    display: block;
+    color: #337ab7;
+}
+
+.logo img {
+    max-height: 100px;
+}
+/*Chi tiết phê duyệt*/
+.data_table2{
+	    float: left;
+    margin-right: 30px;
+    width: 37%;
+    
+}
+#dialog-image_photoCompare{
+	    width: 25%;
+    float: left;
+}
+/*===/*/

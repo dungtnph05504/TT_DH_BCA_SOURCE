@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="codeMgmt.codeView" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/code/nic_code_value.jsp" />
+	</definition>
+	
+	<definition name="codeMgmt.codeValView" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/code/nic_code_list.jsp" />
+	</definition>
+	
+	<definition name="batchJobMgmt.jobView" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/admin/job_admin_list.jsp" />
+	</definition>
+	
+	<definition name="batchJobMgmt.jobSave" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/admin/job_admin_save.jsp" />
+	</definition>
+	
+	<definition name="display.scheView" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/admin/job_admin_sche_list.jsp" />
+	</definition>
+	
+	<definition name="display.scheSave" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/admin/job_admin_sche_save.jsp" />
+	</definition>
+	
+	<definition name="batchJobMnt.jobView" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/monitor/job_monitor_view.jsp" />
+	</definition>
+	
+	<definition name="batchJobMnt.scheDetail" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/monitor/job_monitor_sche_detail.jsp" />
+	</definition>
+	
+	<definition name="batchJobMnt.scheLog" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/job/monitor/job_monitor_sche_log_detail.jsp" />
+	</definition>
+	
+	<definition name="report.upload" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/upload_template.jsp" />
+	</definition>
+	
+	<definition name="reportmgmt.customReport" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/custom_report.jsp" />
+	</definition>
+	
+	<definition name="report.customizedRpt.update" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/customized_report_save.jsp" />
+	</definition>
+	
+	<definition name="reportmgmt.queryResult" template="/WEB-INF/views/adminconsole/report/queryResult.jsp" />
+	
+	<definition name="report.definition" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/report_definition.jsp" />
+	</definition>
+	
+	<definition name="report.edit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/report_definition.jsp" />
+	</definition>
+	
+	<definition name="reportmgmt.reportGeneration" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/generate_report_menu.jsp" />
+	</definition>
+	
+	<definition name="reportmgmt.generateStaticReport" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/statistics-report.jsp" />
+	</definition>
+	
+	<definition name="reportmgmt.generateStaticParamReport" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/static-param-report.jsp" />
+	</definition>
+	
+	 <definition name="report.defPage" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/report_definition_save.jsp" />
+	</definition>
+	
+	<definition name="reportmgmt.generation" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/report/generate_report.jsp" />
+	</definition>
+	
+	<definition name="codeMgmt.saveorupdate" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/code/nic_code_save.jsp" />
+	</definition>
+	
+	<!-- payment matrix management -->
+	<definition name="payment-matrix" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/payment/payment-matrix.jsp" />
+	</definition>
+		
+	<definition name="add-payment-matrix" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/payment/add-payment-matrix.jsp" />
+	</definition>
+	
+	<definition name="payment-matrix-edit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/payment/payment-matrix-edit.jsp" />
+	</definition>  
+	
+	<!-- proof doc management -->
+	<definition name="proof-doc-matrix" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/proofDoc/proof-doc-matrix.jsp" />
+	</definition>
+	
+	<definition name="addproof-doc" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/proofDoc/addproof-doc.jsp" />
+	</definition> 
+	
+	<definition name="proof-doc-edit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/proofDoc/proof-doc-edit.jsp" />
+	</definition> 
+	
+	<!-- removed as not using originated from PaymentMatrixController
+	<definition name="parameter-mgmt-add" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/parameter-mgmt-add.jsp" />
+	</definition> 
+	
+	<definition name="parameter-mgmt-edit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/parameter-mgmt-edit.jsp" />
+	</definition> 
+	 -->
+	 
+	<!-- /parameterController/getParamList -->
+	<definition name="viewParamList" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/parameter/nic_parameter_list.jsp" />
+	</definition>
+	
+	<!-- /parameterController/editParam/{params} -->
+	<definition name="updateParam" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/parameter/nic_parameter_update.jsp" />
+	</definition>
+	
+	<!-- /parameterController/addParam -->
+	<definition name="newParam" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/parameter/nic_parameter_save.jsp" />
+	</definition>
+	
+    <definition name="siteMgmt.viewSiteGroup" extends="global.layout.standard">
+        <put-attribute name="queue" value="" />
+        <put-attribute name="transaction" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/adminconsole/site/site_groups_list.jsp" />
+    </definition>
+    
+    <definition name="siteMgmt.siteRepoView" extends="global.layout.standard">
+        <put-attribute name="queue" value="" />
+        <put-attribute name="transaction" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/adminconsole/site/site_repository_list.jsp" />
+    </definition>
+    
+    <definition name="siteMgmt.addEditSiteGroup" extends="global.layout.standard">
+        <put-attribute name="queue" value="" />
+        <put-attribute name="transaction" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/adminconsole/site/site_groups_save.jsp" />
+    </definition>
+    
+    <definition name="siteMgmt.addEditSiteRepo" extends="global.layout.standard">
+        <put-attribute name="queue" value="" />
+        <put-attribute name="transaction" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/adminconsole/site/site_repository_save.jsp" />
+    </definition>
+    
+    <!--  singer Gov management -->
+	<definition name="signer-govs" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/signerGov/signer-govs.jsp" />
+	</definition>
+	
+	<definition name="add-signer-govs" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/signerGov/add-signer-govs.jsp" />
+	</definition>
+	
+	<definition name="signer-govs-edit" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/signerGov/signer-govs-edit.jsp" />
+	</definition> 
+	
+	</tiles-definitions>

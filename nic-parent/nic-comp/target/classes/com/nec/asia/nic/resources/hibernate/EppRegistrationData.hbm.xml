@@ -1,0 +1,859 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicRegistrationData" table="EPP_REGISTRATION_DATA" optimistic-lock="version">
+		<id name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" />
+			<generator class="assigned" />
+		</id>
+		<property name="workflowJobId" type="long">
+			<column name="WORKFLOW_JOB_ID" precision="20" scale="0">
+				<comment>Workflow Job Id</comment>
+			</column>
+		</property>
+		<property name="workflowJobCompleteFlag" type="yes_no">
+			<column name="WORKFLOW_JOB_COMPLETE_FLAG" length="1">
+				<comment>Workflow Job Completed Flag</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Create Workstation Id</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Update By</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="string">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Update Workstation Id</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+		<property name="surnameFull" type="string">
+			<column name="SURNAME_FULL">
+				<comment>Surname Full</comment>
+			</column>
+		</property>
+		<property name="surnameLine1" type="string">
+			<column name="SURNAME_LINE1">
+				<comment>Surname for print (if surname_full exceed 20 letters)</comment>
+			</column>
+		</property>
+		<property name="surnameLine2" type="string">
+			<column name="SURNAME_LINE2">
+				<comment>No Applicable</comment>
+			</column>
+		</property>
+		<property name="surnameLenExceedFlag" type="yes_no">
+			<column name="SURNAME_LEN_EXCEED_FLAG" length="1">
+				<comment>No Applicable</comment>
+			</column>
+		</property>
+		<property name="firstnameFull" type="string">
+			<column name="FIRSTNAME_FULL">
+				<comment>Firstname Full</comment>
+			</column>
+		</property>
+		<property name="firstnameLine1" type="string">
+			<column name="FIRSTNAME_LINE1">
+				<comment>Firstname for print (if firstname_full exceed 20 letters)</comment>
+			</column>
+		</property>
+		<property name="firstnameLine2" type="string">
+			<column name="FIRSTNAME_LINE2">
+				<comment>No Applicable</comment>
+			</column>
+		</property>
+		<property name="firstnameLenExceedFlag" type="yes_no">
+			<column name="FIRSTNAME_LEN_EXCEED_FLAG" length="1">
+				<comment>No Applicable</comment>
+			</column>
+		</property>
+		<property name="middlenameFull" type="string">
+			<column name="MIDDLENAME_FULL">
+				<comment>Middlename Full</comment>
+			</column>
+		</property>
+		<property name="middlenameLine1" type="string">
+			<column name="MIDDLENAME_LINE1">
+				<comment>Middlename for print (if middlename_full exceed 20 letters)</comment>
+			</column>
+		</property>
+		<property name="middlenameLine2" type="string">
+			<column name="MIDDLENAME_LINE2">
+				<comment>No Applicable</comment>
+			</column>
+		</property>
+		<property name="middlenameLenExceedFlag" type="yes_no">
+			<column name="MIDDLENAME_LEN_EXCEED_FLAG" length="1">
+				<comment>No Applicable</comment>
+			</column>
+		</property>
+		<property name="aliasName" type="string">
+			<column name="ALIAS_NAME" length="500">
+				<comment>From DCM - AKA / ALSO KNOWN AS (Print on Limitation Page) - Max 2 Lines x 56 letters</comment>
+			</column>
+		</property>
+		<property name="nationality" type="string">
+			<column name="NATIONALITY" length="30">
+				<comment>Nationality Code (3 Letter ISO Country Code)</comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="timestamp">
+			<column name="DATE_OF_BIRTH" length="7">
+				<comment>Date of birth</comment>
+			</column>
+		</property>
+		<property name="defDateOfBirth" type="string">
+			<column name="DEF_DATE_OF_BIRTH" length="1">
+				<comment>Date of birth</comment>
+			</column>
+		</property>
+		<property name="approxDob" type="string">
+			<column name="APPROX_DOB" length="20">
+				<comment>Date of birth (approx)</comment>
+			</column>
+		</property>
+		<property name="printDob" type="string">
+			<column name="PRINT_DOB" length="8">
+				<comment>Date of birth (print) : The format should be YYYYMMDD. If the element is unknown, use X to replace the element.</comment>
+			</column>
+		</property>
+		<property name="placeOfBirth" type="string">
+			<column name="PLACE_OF_BIRTH" length="255">
+				<comment>Place of birth</comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="1">
+				<comment>Gender</comment>
+			</column>
+		</property>
+		<property name="maritalStatus" type="string">
+			<column name="MARITAL_STATUS" length="1">
+				<comment>Civil Status</comment>
+			</column>
+		</property>
+		<property name="printRemarks1" type="string">
+			<column name="PRINT_REMARKS1" length="1000">
+				<comment>Remarks to print as Limitation</comment>
+			</column>
+		</property>
+		<property name="printRemarks2" type="string">
+			<column name="PRINT_REMARKS2" length="1000">
+				<comment>Remarks to print as Fullname</comment>
+			</column>
+		</property>
+		<property name="addressLine1" type="string">
+			<column name="ADDRESS_LINE1" length="100">
+				<comment>Complete Address</comment>
+			</column>
+		</property>
+		<property name="addressLine2" type="string">
+			<column name="ADDRESS_LINE2" length="100">
+				<comment>Address City</comment>
+			</column>
+		</property>
+		<property name="addressLine3" type="string">
+			<column name="ADDRESS_LINE3" length="100">
+				<comment>Address Province</comment>
+			</column>
+		</property>
+		<property name="addressLine4" type="string">
+			<column name="ADDRESS_LINE4" length="100">
+				<comment>Address Spare for Country or Portal Code</comment>
+			</column>
+		</property>
+		<property name="addressLine5" type="string">
+			<column name="ADDRESS_LINE5" length="100">
+				<comment>ADDRESS_LINE5</comment>
+			</column>
+		</property>
+		<property name="addressTempDetail" type="string">
+			<column name="ADDRESS_TEMP_DETAIL" length="255">
+				<comment>ADDRESS_TEMP_DETAIL</comment>
+			</column>
+		</property>
+		<property name="addressTempVillage" type="string">
+			<column name="ADDRESS_TEMP_VILLAGE" length="20">
+				<comment>ADDRESS_TEMP_VILLAGE</comment>
+			</column>
+		</property>
+		<property name="addressTempDistrict" type="string">
+			<column name="ADDRESS_TEMP_DISTRICT" length="20">
+				<comment>ADDRESS_TEMP_DISTRICT</comment>
+			</column>
+		</property>
+		<property name="addressTempProvince" type="string">
+			<column name="ADDRESS_TEMP_PROVINCE" length="20">
+				<comment>ADDRESS_TEMP_PROVINCE</comment>
+			</column>
+		</property>
+		<property name="addressTempNation" type="string">
+			<column name="ADDRESS_TEMP_NATION" length="20">
+				<comment>ADDRESS_TEMP_NATION</comment>
+			</column>
+		</property>
+		<property name="overseasAddress" type="string">
+			<column name="OVERSEAS_ADDRESS" length="100">
+				<comment>Full overseas Address</comment>
+			</column>
+		</property>
+		<property name="overseasCountry" type="string">
+			<column name="OVERSEAS_COUNTRY" length="30">
+				<comment>Overseas Address Country</comment>
+			</column>
+		</property>
+		<property name="dateNin" type="timestamp">
+			<column name="NIN_DATE_OF_ISSUE" length="7">
+				<comment>ngay cap cmnd/cccd</comment>
+			</column>
+		</property>
+		<property name="addressNin" type="string">
+			<column name="NIN_PLACE_OF_ISSUE_CODE" length="255">
+				<comment>ma noi cap cmnd/cccd</comment>
+			</column>
+		</property>
+		<property name="job" type="string">
+			<column name="JOB" length="255">
+				<comment>JOB</comment>
+			</column>
+		</property>
+		<property name="religion" type="string">
+			<column name="RELIGION" length="255">
+				<comment>RELIGION</comment>
+			</column>
+		</property>
+		<property name="nation" type="string">
+			<column name="NATION" length="255">
+				<comment>NATION</comment>
+			</column>
+		</property>
+		<property name="travelPurpose" type="string">
+			<column name="TRAVEL_PURPOSE" length="2">
+				<comment>TRAVEL_PURPOSE</comment>
+			</column>
+		</property>
+		<property name="acquiredCitizenship" type="string">
+			<column name="ACQUIRED_CITIZENSHIP" length="2">
+				<comment>ACQUIRED_CITIZENSHIP</comment>
+			</column>
+		</property>
+		<property name="foreignPassportHolder" type="string">
+			<column name="FOREIGN_PASSPORT_HOLDER" length="1">
+				<comment>FOREIGN_PASSPORT_HOLDER</comment>
+			</column>
+		</property>
+		<property name="occupationDesc" type="string">
+			<column name="OCCUPATION_DESC" length="100">
+				<comment>OCCUPATION_DESC</comment>
+			</column>
+		</property>
+		<property name="officeContactNo" type="string">
+			<column name="OFFICE_CONTACT_NO" length="20">
+				<comment>OFFICE_CONTACT_NO</comment>
+			</column>
+		</property>
+		<property name="officeAddress" type="string">
+			<column name="OFFICE_ADDRESS" length="255">
+				<comment>OFFICE_ADDRESS</comment>
+			</column>
+		</property>
+		<property name="contactNo" type="string">
+			<column name="CONTACT_NO" length="100">
+				<comment>CONTACT_NO</comment>
+			</column>
+		</property>
+		<property name="email" type="string">
+			<column name="EMAIL" length="100">
+				<comment>EMAIL</comment>
+			</column>
+		</property>
+		<property name="fpBypassDecision" type="yes_no">
+			<column name="FP_BYPASS_DECISION" length="1">
+				<comment>FP_BYPASS_DECISION</comment>
+			</column>
+		</property>
+		<property name="fpBypassBy" type="string">
+			<column name="FP_BYPASS_BY" length="64">
+				<comment>FP_BYPASS_BY</comment>
+			</column>
+		</property>
+		<property name="fpBypassDatetime" type="date">
+			<column name="FP_BYPASS_DATETIME">
+				<comment>FP_BYPASS_DATETIME</comment>
+			</column>
+		</property>
+		<property name="totalFp" type="int">
+			<column name="TOTAL_FP" precision="10" scale="0">
+				<comment>TOTAL_FP</comment>
+			</column>
+		</property>
+		<property name="fpIndicator" type="string">
+			<column name="FP_INDICATOR" length="100">
+				<comment>FP_INDICATOR</comment>
+			</column>
+		</property>
+		<property name="fpQuality" type="string">
+			<column name="FP_QUALITY" length="100">
+				<comment>FP_QUALITY</comment>
+			</column>
+		</property>
+		<property name="fpPattern" type="string">
+			<column name="FP_PATTERN" length="100">
+				<comment>FP_PATTERN</comment>
+			</column>
+		</property>
+		<property name="fpEncode" type="string">
+			<column name="FP_ENCODE" length="100">
+				<comment>FP_ENCODE</comment>
+			</column>
+		</property>
+		<property name="signatureFlag" type="yes_no">
+			<column name="SIGNATURE_FLAG" length="1">
+				<comment>SIGNATURE_FLAG</comment>
+			</column>
+		</property>
+		<property name="facialIndicator" type="yes_no">
+			<column name="FACIAL_INDICATOR" length="1">
+				<comment>FACIAL_INDICATOR</comment>
+			</column>
+		</property>
+		<property name="fatherFullname" type="string">
+			<column name="FATHER_FULLNAME" length="255">
+				<comment>FATHER_FULLNAME</comment>
+			</column>
+		</property>
+		<property name="fatherDateOfBirth" type="date">
+			<column name="FATHER_DATE_OF_BIRTH">
+				<comment>FATHER_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="fatherDefDateOfBirth" type="string">
+			<column name="FATHER_DEF_DATE_OF_BIRTH" length="1">
+				<comment>FATHER_DEF_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="fatherCitizenship" type="string">
+			<column name="FATHER_CITIZENSHIP" length="100">
+				<comment>FATHER_CITIZENSHIP</comment>
+			</column>
+		</property>
+		<property name="fatherLost" type="string">
+			<column name="FATHER_LOST" length="1">
+				<comment>FATHER_LOST</comment>
+			</column>
+		</property>
+		<property name="motherFullname" type="string">
+			<column name="MOTHER_FULLNAME" length="255">
+				<comment>MOTHER_FULLNAME</comment>
+			</column>
+		</property>
+		<property name="motherDateOfBirth" type="timestamp">
+			<column name="MOTHER_DATE_OF_BIRTH" length="7">
+				<comment>MOTHER_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="motherDefDateOfBirth" type="string">
+			<column name="MOTHER_DEF_DATE_OF_BIRTH" length="1">
+				<comment>MOTHER_DEF_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="motherCitizenship" type="string">
+			<column name="MOTHER_CITIZENSHIP" length="100">
+				<comment>MOTHER_CITIZENSHIP</comment>
+			</column>
+		</property>
+		<property name="motherLost" type="string">
+			<column name="MOTHER_LOST" length="1">
+				<comment>MOTHER_LOST</comment>
+			</column>
+		</property>
+		<property name="spouseFullname" type="string">
+			<column name="SPOUSE_FULLNAME" length="255">
+				<comment>SPOUSE_FULLNAME</comment>
+			</column>
+		</property>
+		<property name="spouseDateOfBirth" type="timestamp">
+			<column name="SPOUSE_DATE_OF_BIRTH" length="7">
+				<comment>SPOUSE_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="spouseDefDateOfBirth" type="string">
+			<column name="SPOUSE_DEF_DATE_OF_BIRTH" length="1">
+				<comment>SPOUSE_DEF_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="spouseCitizenship" type="string">
+			<column name="SPOUSE_CITIZENSHIP" length="100">
+				<comment>SPOUSE_CITIZENSHIP</comment>
+			</column>
+		</property>
+		<property name="numDecision" type="string">
+			<column name="NUM_DECISION" length="50">
+				<comment>NUM_DECISION</comment>
+			</column>
+		</property>
+		<property name="nameDepartment" type="string">
+			<column name="NAME_DEPARTMENT" length="250">
+				<comment>NAME_DEPARTMENT</comment>
+			</column>
+		</property>
+		<property name="position" type="string">
+			<column name="POSITION" length="250">
+				<comment>POSITION</comment>
+			</column>
+		</property>
+		<property name="ownerType" type="string">
+			<column name="OWNER_TYPE" length="10">
+				<comment>OWNER_TYPE</comment>
+			</column>
+		</property>
+		<property name="dayDecision" type="timestamp">
+			<column name="DAY_DECISION" length="7">
+				<comment>Ngày ký quyết định</comment>
+			</column>
+		</property>
+		<property name="createByName" type="string">
+			<column name="CREATE_BY_NAME" length="120">
+				<comment>CREATE_BY_NAME</comment>
+			</column>
+		</property>
+		<property name="searchName" type="string">
+			<column name="SEARCH_NAME" length="120">
+				<comment>SEARCH_NAME</comment>
+			</column>
+		</property>
+		<property name="spouseLost" type="string">
+			<column name="SPOUSE_LOST" length="1">
+				<comment>SPOUSE_LOST</comment>
+			</column>
+		</property>
+		<!-- <property name="overseasAddress" type="string">
+			<column name="OVERSEAS_ADDRESS" length="100">
+				<comment>Full overseas Address</comment>
+			</column>
+		</property>
+		<property name="overseasCountry" type="string">
+			<column name="OVERSEAS_COUNTRY" length="30">
+				<comment>Overseas Address Country</comment>
+			</column>
+		</property>
+		
+		<property name="fatherSurname" type="string">
+			<column name="FATHER_SURNAME">
+				<comment>Father lastname</comment>
+			</column>
+		</property>
+		<property name="fatherFirstname" type="string">
+			<column name="FATHER_FIRSTNAME">
+				<comment>Father firstname</comment>
+			</column>
+		</property>
+		<property name="fatherMiddlename" type="string">
+			<column name="FATHER_MIDDLENAME">
+				<comment>Father midllename</comment>
+			</column>
+		</property>
+		<property name="fatherCitizenship" type="string">
+			<column name="FATHER_CITIZENSHIP">
+				<comment>Father Citizenship</comment>
+			</column>
+		</property>
+		<property name="motherSurname" type="string">
+			<column name="MOTHER_SURNAME">
+				<comment>Mother lastname</comment>
+			</column>
+		</property>
+		<property name="motherFirstname" type="string">
+			<column name="MOTHER_FIRSTNAME">
+				<comment>Mother firstname</comment>
+			</column>
+		</property>
+		<property name="motherMiddlename" type="string">
+			<column name="MOTHER_MIDDLENAME">
+				<comment>Mother middlename</comment>
+			</column>
+		</property>
+		<property name="motherCitizenship" type="string">
+			<column name="MOTHER_CITIZENSHIP">
+				<comment>Mother Citizenship</comment>
+			</column>
+		</property>
+		<property name="spouseSurname" type="string">
+			<column name="SPOUSE_SURNAME">
+				<comment>Spouse lastname</comment>
+			</column>
+		</property>
+		<property name="spouseFirstname" type="string">
+			<column name="SPOUSE_FIRSTNAME">
+				<comment>Spouse firstname</comment>
+			</column>
+		</property>
+		<property name="spouseMiddlename" type="string">
+			<column name="SPOUSE_MIDDLENAME">
+				<comment>Spouse middlename</comment>
+			</column>
+		</property>
+		<property name="spouseCitizenship" type="string">
+			<column name="SPOUSE_CITIZENSHIP">
+				<comment>Spouse citizenship</comment>
+			</column>
+		</property>
+		<property name="travelPurpose" type="string">
+			<column name="TRAVEL_PURPOSE" length="2">
+				<comment>From DCM - Travel Purpose</comment>
+			</column>
+		</property>
+		<property name="acquiredCitizenship" type="string">
+			<column name="ACQUIRED_CITIZENSHIP" length="2">
+				<comment>From DCM - Acquired Citizenship</comment>
+			</column>
+		</property>
+		<property name="foreignPassportHolder" type="string">
+			<column name="FOREIGN_PASSPORT_HOLDER" length="1">
+				<comment>From DCM - Foreign Passport Holder</comment>
+			</column>
+		</property>
+		<property name="occupationDesc" type="string">
+			<column name="OCCUPATION_DESC" length="100">
+				<comment>From DCM - Occupation Desc</comment>
+			</column>
+		</property>
+		<property name="officeContactNo" type="string">
+			<column name="OFFICE_CONTACT_NO" length="20">
+				<comment>From DCM - Office Contact No</comment>
+			</column>
+		</property>
+		<property name="officeAddress" type="string">
+			<column name="OFFICE_ADDRESS">
+				<comment>From DCM - Office Address</comment>
+			</column>
+		</property>
+		<property name="fpBypassDecision" type="yes_no">
+			<column name="FP_BYPASS_DECISION" length="1">
+				<comment>Fingerprint Bypass Decision if low quality (Y/N)</comment>
+			</column>
+		</property>
+		<property name="fpBypassBy" type="string">
+			<column name="FP_BYPASS_BY" length="64">
+				<comment>Fingerprint Bypass By Officer ID</comment>
+			</column>
+		</property>
+		<property name="fpBypassDatetime" type="timestamp">
+			<column name="FP_BYPASS_DATETIME" length="7">
+				<comment>Fingerprint Bypass Datetime</comment>
+			</column>
+		</property>
+		<property name="totalFp" type="int">
+			<column name="TOTAL_FP" precision="10" scale="0">
+				<comment>Total Number of Fingerprint Capture</comment>
+			</column>
+		</property>
+		<property name="fpIndicator" type="string">
+			<column name="FP_INDICATOR" length="100">
+				<comment>Fingerprint Indicators, separate by comma. : N: Normal, B: Blank/Not Captured, A:Amputated</comment>
+			</column>
+		</property>
+		<property name="fpQuality" type="string">
+			<column name="FP_QUALITY" length="100">
+				<comment>Fingerprint Quality, separate by comma. : 0~100</comment>
+			</column>
+		</property>
+		<property name="fpPattern" type="string">
+			<column name="FP_PATTERN" length="100">
+				<comment>Fingerprint Pattern (W,R,L,A,S)</comment>
+			</column>
+		</property>
+		<property name="fpEncode" type="string">
+			<column name="FP_ENCODE" length="100">
+				<comment>Fingerprint Encode, separated by comma (Maximum: 2 fingers)</comment>
+			</column>
+		</property>
+		<property name="signatureFlag" type="yes_no">
+			<column name="SIGNATURE_FLAG" length="1">
+				<comment>Signature Captured Flag (Y/N)</comment>
+			</column>
+		</property>
+		<property name="facialIndicator" type="yes_no">
+			<column name="FACIAL_INDICATOR" length="1">
+				<comment>ICAO Facial compliance (Y/N), to indicate QTF pass or failed</comment>
+			</column>
+		</property>
+		<property name="email" type="string">
+			<column name="EMAIL" length="100">
+				<comment>Email</comment>
+			</column>
+		</property>
+		<property name="contactNo" type="string">
+			<column name="CONTACT_NO" length="20">
+				<comment>Contact No</comment>
+			</column>
+		</property>
+		<property name="job" type="string">
+			<column name="JOB">
+				<comment>job</comment>
+			</column>
+		</property>
+		<property name="methodReceive" type="int">
+			<column name="METHOD_RECEIVE">
+				<comment>METHOD_RECEIVE</comment>
+			</column>
+		</property>
+		<property name="prioritize" type="yes_no">
+			<column name="PRIORITIZE" length="1">
+				<comment>PRIORITIZE</comment>
+			</column>
+		</property>
+		<property name="religion" type="string">
+			<column name="RELIGION">
+				<comment>RELIGION</comment>
+			</column>
+		</property>
+		<property name="nation" type="string">
+			<column name="NATION">
+				<comment>NATION</comment>
+			</column>
+		</property>
+		<property name="addressReceive" type="string">
+			<column name="ADDRESS_RECEIVE">
+				<comment>ADDRESS_RECEIVE</comment>
+			</column>
+		</property>
+		<property name="typeChild" type="int">
+			<column name="TYPE_CHILD">
+				<comment>TYPE_CHILD</comment>
+			</column>
+		</property>
+		<property name="addressCompany" type="string">
+			<column name="ADDRESS_COMPANY">
+				<comment>ADDRESS_COMPANY</comment>
+			</column>
+		</property>
+		<property name="fatherDob" type="timestamp">
+			<column name="FATHER_DOB" length="7">
+				<comment>FATHER_DOB</comment>
+			</column>
+		</property>
+		<property name="motherDob" type="timestamp">
+			<column name="MOTHER_DOB" length="7">
+				<comment>MOTHER_DOB</comment>
+			</column>
+		</property>
+		<property name="spouseDob" type="timestamp">
+			<column name="SPOUSE_DOB" length="7">
+				<comment>SPOUSE_DOB</comment>
+			</column>
+		</property>
+		<property name="addressTempNum" type="string">
+			<column name="ADDRESS_TEMP_NUM">
+				<comment>ADDRESS_TEMP_NUM</comment>
+			</column>
+		</property>
+		<property name="addressTempStreet" type="string">
+			<column name="ADDRESS_TEMP_STREET">
+				<comment>ADDRESS_TEMP_STREET</comment>
+			</column>
+		</property>
+		<property name="addressTempGuild" type="string">
+			<column name="ADDRESS_TEMP_GUILD">
+				<comment>ADDRESS_TEMP_GUILD</comment>
+			</column>
+		</property>
+		<property name="addressTempDistrict" type="string">
+			<column name="ADDRESS_TEMP_DISTRICT">
+				<comment>ADDRESS_TEMP_DISTRICT</comment>
+			</column>
+		</property>
+		<property name="addressTempCity" type="string">
+			<column name="ADDRESS_TEMP_CITY">
+				<comment>ADDRESS_TEMP_CITY</comment>
+			</column>
+		</property>
+		<property name="addressTempNation" type="string">
+			<column name="ADDRESS_TEMP_NATION">
+				<comment>ADDRESS_TEMP_NATION</comment>
+			</column>
+		</property>
+		<property name="stManWorking" type="string">
+			<column name="ST_MAN_WORKING">
+				<comment>ST_MAN_WORKING</comment>
+			</column>
+		</property>
+		<property name="numDecision" type="string">
+			<column name="NUM_DECISION">
+				<comment>NUM_DECISION</comment>
+			</column>
+		</property>
+		<property name="govDecision" type="string">
+			<column name="GOV_DECISION">
+				<comment>GOV_DECISION</comment>
+			</column>
+		</property>
+		<property name="signerDecision" type="string">
+			<column name="SIGNER_DECISION">
+				<comment>SIGNER_DECISION</comment>
+			</column>
+		</property>
+		<property name="nameDepartment" type="string">
+			<column name="NAME_DEPARTMENT">
+				<comment>NAME_DEPARTMENT</comment>
+			</column>
+		</property>
+		<property name="addressDepartment" type="string">
+			<column name="ADDRESS_DEPARTMENT">
+				<comment>ADDRESS_DEPARTMENT</comment>
+			</column>
+		</property>
+		<property name="phoneDepartment" type="string">
+			<column name="PHONE_DEPARTMENT">
+				<comment>PHONE_DEPARTMENT</comment>
+			</column>
+		</property>
+		<property name="position" type="string">
+			<column name="POSITION">
+				<comment>POSITION</comment>
+			</column>
+		</property>
+		<property name="rank" type="string">
+			<column name="RANK">
+				<comment>RANK</comment>
+			</column>
+		</property>
+		<property name="postionEng" type="string">
+			<column name="POSITION_ENG">
+				<comment>POSITION_ENG</comment>
+			</column>
+		</property>
+		<property name="civilServants" type="string">
+			<column name="CIVIL_SERVANTS">
+				<comment>CIVIL_SERVANTS</comment>
+			</column>
+		</property>
+		<property name="levelRank" type="string">
+			<column name="LEVEL_RANK">
+				<comment>LEVEL_RANK</comment>
+			</column>
+		</property>
+		<property name="quantum" type="string">
+			<column name="QUANTUM">
+				<comment>QUANTUM</comment>
+			</column>
+		</property>
+		<property name="toNation" type="string">
+			<column name="TO_NATION">
+				<comment>TO_NATION</comment>
+			</column>
+		</property>
+		<property name="transitNation" type="string">
+			<column name="TRANSIT_NATION">
+				<comment>TRANSIT_NATION</comment>
+			</column>
+		</property>
+		<property name="purpose" type="string">
+			<column name="PURPOSE">
+				<comment>PURPOSE</comment>
+			</column>
+		</property>
+		<property name="typeExpense" type="string">
+			<column name="TYPE_EXPENSE">
+				<comment>TYPE_EXPENSE</comment>
+			</column>
+		</property>
+		<property name="estimateFrom" type="timestamp">
+			<column name="ESTIMATE_FROM" length="7">
+				<comment>ESTIMATE_FROM</comment>
+			</column>
+		</property>
+		<property name="estimateTo" type="string">
+			<column name="ESTIMATE_TO">
+				<comment>ESTIMATE_TO</comment>
+			</column>
+		</property>
+		
+		ENTITY NEW FOR LOST/DAMAGE PASSPORT CASE 
+		<property name="datePassport" type="timestamp">
+			<column name="DATE_PASSPORT" length="7">
+				<comment>DATE_PASSPORT</comment>
+			</column>
+		</property>
+		<property name="nameProvider" type="string">
+			<column name="NAME_PROVIDER" length="250">
+				<comment>NAME_PROVIDER</comment>
+			</column>
+		</property>
+		<property name="dateCountry" type="timestamp">
+			<column name="DATE_COUNTRY" length="7">
+				<comment>DATE_COUNTRY</comment>
+			</column>
+		</property>
+		<property name="purposeKind" type="string">
+			<column name="PURPOSE_KIND" length="4000">
+				<comment>PURPOSE_KIND</comment>
+			</column>
+		</property>
+		<property name="reasonKind" type="string">
+			<column name="REASON_KIND" length="4000">
+				<comment>REASON_KIND</comment>
+			</column>
+		</property>
+		<property name="styleDob" type="string">
+			<column name="STYLE_DOB" length="2">
+			</column>
+		</property>
+		<property name="fatherLost" type="yes_no">
+			<column name="FATHER_LOST" length="1">
+				<comment>FATHER_LOST</comment>
+			</column>
+		</property>
+		<property name="motherLost" type="yes_no">
+			<column name="MOTHER_LOST" length="1">
+			</column>
+		</property>
+		<property name="sfDob" type="string">
+			<column name="SF_DOB" length="2">
+				
+			</column>
+		</property>
+		<property name="smDob" type="string">
+			<column name="SM_DOB" length="2">
+				
+			</column>
+		</property>
+		<property name="ssDob" type="string">
+			<column name="SS_DOB" length="2">
+				
+			</column>
+		</property> -->
+	</class>
+	<sql-query name="epp.getLookOutList">
+		<return-scalar column="RESULT" type="string" />
+            <![CDATA[
+            
+            SELECT DISTINCT 'true' as result
+			FROM LOL.LOOKOUTLIST
+			WHERE ( FNAME=:firstName OR :firstName IS NULL ) AND ( LNAME=:lastName OR :lastName IS NULL ) AND (MNAME=:middleName OR :middleName IS NULL)
+			            
+            ]]>
+	</sql-query>
+
+</hibernate-mapping>

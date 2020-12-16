@@ -1,0 +1,438 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns = "http://admin.dx.nic.asia.nec.com/" targetNamespace = "http://admin.dx.nic.asia.nec.com/">
+
+<!-- 
+/* 
+ * Modification History:
+ *
+ * 15 Jun 2017 (chris): code merge, clean up, change to NoOfTimeLost
+ */
+-->
+  <!-- (Proof Document Retrieval) -->
+  <xs:complexType name="GetProofDocumentMatrix">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransactionSubtype" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetProofDocumentMatrixResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ProofDocuments" type="tns:ProofDocument"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProofDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentID" type="xs:string"/>
+      <xs:element minOccurs="0" name="DocumentName" type="xs:string"/>
+      <xs:element minOccurs="0" name="RequireIndicator" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransactionSubtype" type="xs:string"/>
+      <!--
+	  <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateWkstnID" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateWkstnID" type="xs:string"/>
+	  -->
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- (Payment Retrieval) -->
+  <xs:complexType name="GetPaymentMatrix">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransactionSubtype" type="xs:string"/>
+      <xs:element minOccurs="0" name="NoOfTimeLost" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetPaymentMatrixResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Payments" type="tns:Payment"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Payment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionType" type="xs:string"/>
+      <xs:element minOccurs="0" name="TransactionSubtype" type="xs:string"/>
+      <xs:element minOccurs="0" name="NoOfTimeLost" type="xs:int"/>
+      <xs:element minOccurs="0" name="FeeAmount" type="xs:double"/>
+      <xs:element minOccurs="0" name="ReduceRateFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="WaivableFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="ReduceRateFeeAmount" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="FunctionDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FunctionID" type="xs:string" />
+      <xs:element minOccurs="0" name="FunctionURL" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAuthorizedFunctions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserID" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkstationID" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAuthorizedFunctionsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="functions" type="tns:FunctionDto" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetConfigurations">
+    <xs:sequence>
+      <!-- configType: code, parameter. -->
+      <xs:element minOccurs="0" name="configType" type="tns:ConfigurationType"/>
+      <!-- retrievalType: delta, full. -->
+      <xs:element minOccurs="0" name="retrievalType" type="tns:RetrievalType"/>
+      <xs:element minOccurs="0" name="previousRetrievalDate" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ConfigurationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CODE"/>
+      <xs:enumeration value="CODE_VALUE"/>
+      <xs:enumeration value="PARAMETER"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RetrievalType">
+    <xs:restriction base="xs:string">
+      <!-- <xs:enumeration value="DELTA" /> -->
+      <xs:enumeration value="FULL"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GetConfigurationsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="configType" type="tns:ConfigurationType"/>
+      <xs:element minOccurs="0" name="configDataXml" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- (Change User Password) -->
+  <xs:complexType name="ChangeUserPassword">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="userId" type="xs:string"/>
+      <xs:element minOccurs="1" name="currentPwd" type="xs:string"/>
+      <xs:element minOccurs="1" name="newPwd" type="xs:string"/>
+      <xs:element minOccurs="0" name="officerId" type="xs:string"/>
+      <xs:element minOccurs="0" name="workstationId" type="xs:string"/>
+      <xs:element minOccurs="0" name="siteCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeUserPasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="statusCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="statusDescription" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Dành cho công hàm -->
+  <xs:complexType name="OfficalNationTransaction">
+    <xs:sequence>      
+      <!-- Thông tin công hàm -->
+      <xs:element minOccurs="0" name="OfficalNationNo" type="xs:string"/>     
+      <xs:element minOccurs="0" name="BusinessID" type="xs:long"/>   
+      <xs:element minOccurs="0" name="PassportNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="PassportType" type="xs:string"/>
+      <xs:element minOccurs="0" name="PassportExpireDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="PassportIssueDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="PassportIssuePlace" type="xs:string"/>
+      <xs:element minOccurs="0" name="VisaNo" type="xs:string"/>      
+      <xs:element minOccurs="0" name="NationCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="DescriptionON" type="xs:string"/>
+      
+      <!-- Thông tin cho quyết định -->  
+      <xs:element minOccurs="0" name="DecisionNumber" type="xs:string"/>   
+      <xs:element minOccurs="0" name="Signer" type="xs:string"/>   
+      <xs:element minOccurs="0" name="SignDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CompetentAuthorities" type="xs:string"/>
+      <xs:element minOccurs="0" name="CompetentAuthoritiesEng" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Purpose" type="xs:string"/>      
+      <xs:element minOccurs="0" name="TimePlan" type="xs:string"/>      
+      <xs:element minOccurs="0" name="TripCost" type="xs:string"/>      
+      <xs:element minOccurs="0" name="InvitingAgency" type="xs:string"/>      
+      <xs:element minOccurs="0" name="TransitNation" type="xs:string"/>      
+      <xs:element minOccurs="0" name="TimeLasts" type="xs:string"/>      
+      <xs:element minOccurs="0" name="CountryPlan" type="xs:string"/>   
+      <xs:element minOccurs="0" name="Data" type="xs:base64Binary"/>   
+      <xs:element minOccurs="0" name="DescriptionQD" type="xs:string"/>
+      
+      <!-- Thông tin cho người cử đi -->  
+      <xs:element minOccurs="0" name="Serial" type="xs:int"/>   
+      <xs:element minOccurs="0" name="Fullname" type="xs:string"/>
+      <xs:element minOccurs="0" name="Gender" type="xs:string"/>
+      <xs:element minOccurs="0" name="DOB" type="xs:dateTime"/>      
+      <xs:element minOccurs="0" name="POB" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Address" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Agency" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Position" type="xs:string"/>      
+      <xs:element minOccurs="0" name="PositionEng" type="xs:string"/>      
+      <xs:element minOccurs="0" name="AddressAgency" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Phone" type="xs:string"/>   
+      <xs:element minOccurs="0" name="Type" type="xs:string"/>
+      <xs:element minOccurs="0" name="Rank" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Curb" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Jaw" type="xs:string"/>    
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Dành cho chữ ký quyết định -->
+   <xs:complexType name="ParaSignerCompareRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParaSignerCompareResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ParaSignerCompares" type="tns:ParaSignerCompare"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParaSignerCompare">
+    <xs:sequence>      
+      <!-- Thông tin công hàm -->
+      <xs:element minOccurs="0" name="CodeSigner" type="xs:string"/>     
+      <xs:element minOccurs="0" name="DocData" type="xs:base64Binary" nillable="true"/>   
+      <xs:element minOccurs="0" name="Active" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+      <xs:element minOccurs="0" name="NameSigner" type="xs:string"/>
+      <xs:element minOccurs="0" name="CodeGovernment" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="DetailRecieptFee">
+    <xs:sequence>      
+      <!-- Thông tin công hàm -->
+      <xs:element minOccurs="0" name="RecieptNo" type="xs:string"/>     
+      <xs:element minOccurs="0" name="CodeBill" type="xs:string"/>   
+      <xs:element minOccurs="0" name="NumberBill" type="xs:string"/>
+      <xs:element minOccurs="0" name="Price" type="xs:double"/>
+      <xs:element minOccurs="0" name="PriceFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="ModifyDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="ModifyBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+      <xs:element minOccurs="0" name="Reason" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="EppDetailReciept">
+    <xs:sequence>      
+      <!-- Chi tiet bien nhan -->
+      <xs:element minOccurs="0" name="RecieptNo" type="xs:string"/>     
+      <xs:element minOccurs="0" name="AuthenticationCode" type="xs:string"/>   
+      <xs:element minOccurs="0" name="TransactionId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="ModifyDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="ModifyBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+      <xs:element minOccurs="0" name="SerialNo" type="xs:int"/>
+      <xs:element minOccurs="0" name="Fullname" type="xs:string"/>
+      <xs:element minOccurs="0" name="Dob" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="Nin" type="xs:string"/>
+      <xs:element minOccurs="0" name="Address" type="xs:string"/>
+      <xs:element minOccurs="0" name="Checktxn" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="EppRecieptManager">
+    <xs:sequence>      
+      <!-- Thong tin bien nhan -->
+      <xs:element minOccurs="0" name="RecieptNo" type="xs:string"/> 
+      <xs:element minOccurs="0" name="RecieptName" type="xs:string"/>       
+      <xs:element minOccurs="0" name="AuthenticationCode" type="xs:string"/>   
+      <xs:element minOccurs="0" name="Fullname" type="xs:string"/>
+      <xs:element minOccurs="0" name="Dob" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="Status" type="xs:string"/>
+      <xs:element minOccurs="0" name="Phone" type="xs:string"/>
+      <xs:element minOccurs="0" name="CompetentAuthorities" type="xs:string"/>
+      <xs:element minOccurs="0" name="ReferPersonNo" type="xs:string"/>
+      <xs:element minOccurs="0" name="NationPlan" type="xs:string"/>
+      <xs:element minOccurs="0" name="PayPlan" type="xs:string"/>
+      <xs:element minOccurs="0" name="DateResultPlan" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="Note" type="xs:string"/>
+      <xs:element minOccurs="0" name="Officers" type="xs:string"/>
+      <xs:element minOccurs="0" name="Submitter" type="xs:string"/>
+      <xs:element minOccurs="0" name="DataPrint" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="ModifyDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="ModifyBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+      <xs:element minOccurs="0" name="NinNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="PaymentFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="ReasonPayment" type="xs:string"/>
+      <xs:element minOccurs="0" name="CodeBill" type="xs:string"/>
+      <xs:element minOccurs="0" name="NumberBill" type="xs:string"/>
+      <xs:element minOccurs="0" name="PaymentAmount" type="xs:double"/>
+      <xs:element minOccurs="0" name="Count" type="xs:int"/>
+      <xs:element minOccurs="0" name="ReceiveFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="DateDob" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="EppRecieptPayment">
+    <xs:sequence>      
+      <!-- Thu chi bien nhan -->
+      <xs:element minOccurs="0" name="RecieptNo" type="xs:string"/>     
+      <xs:element minOccurs="0" name="TypePayment" type="xs:string"/>   
+      <xs:element minOccurs="0" name="Description" type="xs:string"/>
+      <xs:element minOccurs="0" name="Price" type="xs:double"/>
+      <xs:element minOccurs="0" name="Unit" type="xs:string"/>
+      <xs:element minOccurs="0" name="Amount" type="xs:int"/>
+      <xs:element minOccurs="0" name="Total" type="xs:double"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="RmPaymentFlag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="ListEppDetailReciept">
+    <xs:sequence>
+      
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetRecieptAllRequest">
+    <xs:sequence>
+    	<xs:element maxOccurs="unbounded" minOccurs="0" name="EppDetailReciepts" type="tns:EppDetailReciept"/>
+    	<xs:element maxOccurs="unbounded" minOccurs="0" name="DetailRecieptFees" type="tns:DetailRecieptFee"/>
+    	<xs:element maxOccurs="unbounded" minOccurs="0" name="EppRecieptManagers" type="tns:EppRecieptManager"/>
+     	<xs:element maxOccurs="unbounded" minOccurs="0" name="EppRecieptPayments" type="tns:EppRecieptPayment"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- (Payment ALL Retrieval) -->
+  <xs:complexType name="GetPaymentMatrixAllRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetPaymentMatrixAllResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Payments" type="tns:Payment"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="UserRequest">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="SiteCode" type="xs:string"/>     
+      <xs:element minOccurs="0" name="SystemId" type="xs:string"/>   
+      <xs:element minOccurs="0" name="UserId" type="xs:string"/>
+      <xs:element minOccurs="0" name="Workstation" type="xs:string"/>
+      <xs:element minOccurs="0" name="Role" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Functions">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="FunctionId" type="xs:string"/>     
+      <xs:element minOccurs="0" name="FunctionDesc" type="xs:string"/>   
+      <xs:element minOccurs="0" name="FunctionCategory" type="xs:string"/>
+      <xs:element minOccurs="0" name="FunctionUrl" type="xs:string"/>
+      <xs:element minOccurs="0" name="SystemId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="updateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteFlag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Roles">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="RoleId" type="xs:string"/>     
+      <xs:element minOccurs="0" name="RoleDesc" type="xs:string"/>   
+      <xs:element minOccurs="0" name="SystemId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteFlag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Users">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="UserId" type="xs:string"/>     
+      <xs:element minOccurs="0" name="SysAdminFlag" type="xs:string"/>   
+      <xs:element minOccurs="0" name="SiteCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="UserStartDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UserEndDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="ActiveIndicator" type="xs:string"/>
+      <xs:element minOccurs="0" name="SystemId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="DateOfPwdExpiry" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="SiteGroupCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="UserName" type="xs:string"/>
+      <xs:element minOccurs="0" name="Position" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+   <xs:complexType name="Workstations">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="WkstnId" type="xs:string"/>     
+      <xs:element minOccurs="0" name="WkstnDesc" type="xs:string"/>   
+      <xs:element minOccurs="0" name="WkstnType" type="xs:string"/>
+      <xs:element minOccurs="0" name="AccessibleFlag" type="xs:string"/>
+      <xs:element minOccurs="0" name="CounterPriority" type="xs:string"/>
+      <xs:element minOccurs="0" name="SiteCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="SystemId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UpdateBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteWkstnId" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeleteDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="DeleteFlag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+   <xs:complexType name="UserData">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="LstFunc" type="tns:Functions" maxOccurs="unbounded" nillable="true"/>     
+      <xs:element minOccurs="0" name="LstRole" type="tns:Roles" maxOccurs="unbounded" nillable="true"/>   
+      <xs:element minOccurs="0" name="LstUser" type="tns:Users" maxOccurs="unbounded" nillable="true"/>
+      <xs:element minOccurs="0" name="LstWkst" type="tns:Workstations" maxOccurs="unbounded" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="MappingAuthenData">
+    <xs:sequence>      
+      <xs:element minOccurs="0" name="RolesUser" type="xs:string" maxOccurs="unbounded" nillable="true"/>     
+      <xs:element minOccurs="0" name="RolesWorkstation" type="xs:string" maxOccurs="unbounded" nillable="true"/>   
+      <xs:element minOccurs="0" name="FunctionsRole" type="xs:string" maxOccurs="unbounded" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

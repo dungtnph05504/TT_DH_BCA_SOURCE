@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.EppListHandoverDetail" table="EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL" optimistic-lock="version">		
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+ 		<many-to-one name="packageHandover" class="com.nec.asia.nic.comp.listHandover.domain.NicListHandover" lazy="false" fetch="select" insert="false" update="false">
+			<column name="PACKAGE_ID" length="40">
+				<comment>Mã danh sách</comment>
+			</column>
+			<column name="TYPE_LIST"  length="10" >
+				<comment>Loại danh sách: A,B,C</comment>
+			</column>
+		</many-to-one>
+		<!-- <id column="ROWID" type="string" /> -->
+		<property name="packageId" type="string">
+			<column name="PACKAGE_ID" length="40">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Mã giao dịch</comment>
+			</column>
+		</property>
+		<property name="proposalStage" type="string">
+			<column name="PROPOSAL_STAGE" length="20">
+				<comment>Trạng thái</comment>
+			</column>
+		</property>	
+		<property name="proposalNote" type="string">
+			<column name="PROPOSAL_NOTE" length="4000">
+				<comment></comment>
+			</column>
+		</property>	
+		<property name="approveStage" type="string">
+			<column name="APPROVE_STAGE" length="20">
+				<comment></comment>
+			</column>
+		</property>	
+		<property name="approveNote" type="string">
+			<column name="APPROVE_NOTE" length="4000">
+				<comment></comment>
+			</column>
+		</property>	
+		<property name="typeList" type="string">
+			<column name="TYPE_LIST"  length="10" >
+				<comment>Loại danh sách: A,B,C</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

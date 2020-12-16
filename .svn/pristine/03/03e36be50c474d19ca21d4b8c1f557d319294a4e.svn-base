@@ -1,0 +1,23 @@
+##
+# Modification History:
+# 24 Jul 2017 (chris): set default to hanoi dev environment NPRCDB
+##
+
+nic.db.url=jdbc:oracle:thin:@192.168.1.58:1521:TTLTDBTEST
+nic.job.threadpool=5
+datasource.jndi=java:/eppDatasource
+
+############# JDBC Datasource #############
+jdbc.server=192.168.1.58
+jdbc.database=TTLTDBTEST
+jdbc.port=1521
+jdbc.loginuser=PPAPP
+jdbc.password=Password1
+jdbc.maxlimit=5
+jdbc.minlimit=1
+jdbc.cachescheme=2
+
+
+############# datasource #############
+#datasource=jdbcDatasource
+datasource=jndiDatasource

@@ -1,0 +1,613 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.immihistory.domain.ImmiHistory" table="EPP_CENTRAL.IMMIHISTORY" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.SEQ_IMMIHISTORY_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" length="120">
+				<comment>CREATED_BY</comment>
+			</column>
+		</property>
+		<property name="lastModifiedBy" type="string">
+			<column name="LAST_MODIFIED_BY" length="120">
+				<comment>LAST_MODIFIED_BY</comment>
+			</column>
+		</property>
+		<property name="createdTime" type="timestamp">
+			<column name="CREATED_TIME" length="6">
+				<comment>CREATED_TIME</comment>
+			</column>
+		</property>
+		<property name="lastModifiedTime" type="timestamp">
+			<column name="LAST_MODIFIED_TIME" length="6">
+				<comment>LAST_MODIFIED_TIME</comment>
+			</column>
+		</property>
+		<property name="immigrationTime" type="timestamp">
+			<column name="IMMIGRATION_TIME" length="6">
+				<comment>IMMIGRATION_TIME</comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>TRANSACTION_ID</comment>
+			</column>
+		</property>
+		<property name="immiType" type="string">
+			<column name="IMMI_TYPE" length="1">
+				<comment>IMMI_TYPE</comment>
+			</column>
+		</property>
+		<property name="workstationCode" type="int">
+			<column name="WORKSTATION_CODE" precision="10" scale="0">
+				<comment>WORKSTATION_CODE</comment>
+			</column>
+		</property>
+		<property name="borderGateCode" type="string">
+			<column name="BORDER_GATE_CODE" length="20">
+				<comment>BORDER_GATE_CODE</comment>
+			</column>
+		</property>
+		<property name="firstName" type="string">
+			<column name="FIRST_NAME" length="40">
+				<comment>FIRST_NAME</comment>
+			</column>
+		</property>
+		<property name="middleName" type="string">
+			<column name="MIDDLE_NAME" length="40">
+				<comment>MIDDLE_NAME</comment>
+			</column>
+		</property>
+		<property name="lastName" type="string">
+			<column name="LAST_NAME" length="40">
+				<comment>LAST_NAME</comment>
+			</column>
+		</property>
+		<property name="fullName" type="string">
+			<column name="FULL_NAME" length="120">
+				<comment>FULL_NAME</comment>
+			</column>
+		</property>
+		<property name="fullNameWithout" type="string">
+			<column name="FULL_NAME_WITHOUT" length="120">
+				<comment>FULL_NAME_WITHOUT</comment>
+			</column>
+		</property>
+		<property name="placeOfBirthCode" type="string">
+			<column name="PLACE_OF_BIRTH_CODE" length="20">
+				<comment>PLACE_OF_BIRTH_CODE</comment>
+			</column>
+		</property>
+		<property name="identityCardNo" type="string">
+			<column name="IDENTITY_CARD_NO" length="20">
+				<comment>IDENTITY_CARD_NO</comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="java.util.Date">
+			<column name="DATE_OF_BIRTH" >
+				<comment>DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="defDateOfBirth" type="string">
+			<column name="DEF_DATE_OF_BIRTH" length="1">
+				<comment>DEF_DATE_OF_BIRTH</comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="1">
+				<comment>GENDER</comment>
+			</column>
+		</property>
+		<property name="countryCode" type="string">
+			<column name="COUNTRY_CODE" length="10">
+				<comment>COUNTRY_CODE</comment>
+			</column>
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="20">
+				<comment>PASSPORT_NO</comment>
+			</column>
+		</property>
+		<property name="passportType" type="string">
+			<column name="PASSPORT_TYPE" length="10">
+				<comment>PASSPORT_TYPE</comment>
+			</column>
+		</property>
+		<property name="passportIssuePlaceCode" type="string">
+			<column name="PASSPORT_ISSUE_PLACE_CODE" length="20">
+				<comment>PASSPORT_ISSUE_PLACE_CODE</comment>
+			</column>
+		</property>
+		<property name="passportExpiredDate" type="java.util.Date">
+			<column name="PASSPORT_EXPIRED_DATE" >
+				<comment>PASSPORT_EXPIRED_DATE</comment>
+			</column>
+		</property>
+		<property name="icaoLine" type="string">
+			<column name="ICAO_LINE" length="90">
+				<comment>ICAO_LINE</comment>
+			</column>
+		</property>
+		<property name="personId" type="string">
+			<column name="PERSON_CODE" length="20">
+				<comment>PERSON_ID</comment>
+			</column>
+		</property>
+		<property name="personType" type="string">
+			<column name="PERSON_TYPE" length="2">
+				<comment>PERSON_TYPE</comment>
+			</column>
+		</property>
+		<property name="caSerialNumber" type="string">
+			<column name="CA_SERIAL_NUMBER" length="30">
+				<comment>CA_SERIAL_NUMBER</comment>
+			</column>
+		</property>
+		<property name="caSignedDate" type="java.util.Date">
+			<column name="CA_SIGNED_DATE" >
+				<comment>CA_SIGNED_DATE</comment>
+			</column>
+		</property>
+		<property name="caValidFromDate" type="java.util.Date">
+			<column name="CA_VALID_FROM_DATE" >
+				<comment>CA_VALID_FROM_DATE</comment>
+			</column>
+		</property>
+		<property name="caValidToDate" type="java.util.Date">
+			<column name="CA_VALID_TO_DATE" >
+				<comment>CA_VALID_TO_DATE</comment>
+			</column>
+		</property>
+		<property name="visaNo" type="string">
+			<column name="VISA_NO" length="30">
+				<comment>VISA_NO</comment>
+			</column>
+		</property>
+		<property name="visaTypeCode" type="string">
+			<column name="VISA_TYPE_CODE" length="2">
+				<comment>VISA_TYPE_CODE</comment>
+			</column>
+		</property>
+		<property name="visaValue" type="string">
+			<column name="VISA_VALUE" length="30">
+				<comment>VISA_VALUE</comment>
+			</column>
+		</property>
+		<property name="visaSymbolCode" type="string">
+			<column name="VISA_SYMBOL_CODE" length="20">
+				<comment>VISA_SYMBOL_CODE</comment>
+			</column>
+		</property>
+		<property name="visaIssuePlaceCode" type="string">
+			<column name="VISA_ISSUE_PLACE_CODE" length="20">
+				<comment>VISA_ISSUE_PLACE_CODE</comment>
+			</column>
+		</property>
+		<property name="visaIssueDate" type="java.util.Date">
+			<column name="VISA_ISSUE_DATE" >
+				<comment>VISA_ISSUE_DATE</comment>
+			</column>
+		</property>
+		<property name="freeVisaId" type="java.lang.Integer">
+			<column name="FREE_VISA_ID" >
+				<comment>FREE_VISA_ID</comment>
+			</column>
+		</property>
+		<property name="residenceUntilDate" type="java.util.Date">
+			<column name="RESIDENCE_UNTIL_DATE" >
+				<comment>RESIDENCE_UNTIL_DATE</comment>
+			</column>
+		</property>
+		<property name="flightNo" type="string">
+			<column name="FLIGHT_NO" length="20">
+				<comment>FLIGHT_NO</comment>
+			</column>
+		</property>
+		<property name="purposeCode" type="string">
+			<column name="PURPOSE_CODE" length="10">
+				<comment>PURPOSE_CODE</comment>
+			</column>
+		</property>
+		<property name="purposeName" type="string">
+			<column name="PURPOSE_NAME" length="150">
+				<comment>PURPOSE_NAME</comment>
+			</column>
+		</property>
+		<property name="preprocessSkey" type="long">
+			<column name="PREPROCESS_SKEY" >
+				<comment>PREPROCESS_SKEY</comment>
+			</column>
+		</property>
+		<property name="gateNote" type="string">
+			<column name="GATE_NOTE" length="1000">
+				<comment>GATE_NOTE</comment>
+			</column>
+		</property>
+		<property name="checkCaResult" type="string">
+			<column name="CHECK_CA_RESULT" length="1000">
+				<comment>CHECK_CA_RESULT</comment>
+			</column>
+		</property>
+		<property name="checkBlackListResult" type="string">
+			<column name="CHECK_BLACKLIST_RESULT" length="4000">
+				<comment>CHECK_BLACKLIST_RESULT</comment>
+			</column>
+		</property>
+		<property name="checkBlackListIdStr" type="string">
+			<column name="CHECK_BLACKLIST_ID_STR" length="100">
+				<comment>CHECK_BLACKLIST_ID_STR</comment>
+			</column>
+		</property>
+		<property name="checkDocumentResult" type="string">
+			<column name="CHECK_DOCUMENT_RESULT" length="1000">
+				<comment>CHECK_DOCUMENT_RESULT</comment>
+			</column>
+		</property>
+		<property name="systemCheckResult" type="java.lang.Integer">
+			<column name="SYSTEM_CHECK_RESULT">
+				<comment>SYSTEM_CHECK_RESULT</comment>
+			</column>
+		</property>
+		<property name="supervisorFullname" type="string">
+			<column name="SUPERVISOR_FULLNAME" length="120">
+				<comment>SUPERVISOR_FULLNAME</comment>
+			</column>
+		</property>
+		<property name="supervisorResult" type="java.lang.Integer">
+			<column name="SUPERVISOR_RESULT">
+				<comment>SUPERVISOR_RESULT</comment>
+			</column>
+		</property>
+		<property name="supervisorNote" type="string">
+			<column name="SUPERVISOR_NOTE" length="1000">
+				<comment>SUPERVISOR_NOTE</comment>
+			</column>
+		</property>
+		<property name="adminFullname" type="string">
+			<column name="ADMIN_FULLNAME" length="120">
+				<comment>ADMIN_FULLNAME</comment>
+			</column>
+		</property>
+		<property name="adminResult" type="java.lang.Integer">
+			<column name="ADMIN_RESULT" >
+				<comment>ADMIN_RESULT</comment>
+			</column>
+		</property>
+		<property name="adminNote" type="string">
+			<column name="ADMIN_NOTE" length="1000">
+				<comment>ADMIN_NOTE</comment>
+			</column>
+		</property>
+		<property name="deleteFlag" type="string">
+			<column name="DELETED_FLAG" length="1">
+				<comment>DELETED_FLAG</comment>
+			</column>
+		</property>
+		<!-- <one-to-one name="immiResult" class="com.nec.asia.nic.comp.immihistory.domain.ImmiHistoryResult"
+			cascade="save-update"></one-to-one> -->
+	</class>
+	<!-- Phúc đóng do thay đổi lại bảng immi 12/12/2019 => Dùng đoạn query dưới -->
+	<!--<sql-query name="borderGateNC">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       SELECT * FROM (
+       			SELECT  EPP_CENTRAL.IMMIHISTORY.BORDERGATE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMITYPE = 1
+			  		AND (EPP_CENTRAL.IMMIHISTORY.SYSTEMRESULT = 1 OR  EPP_CENTRAL.IMMIHISTORY.SUPERVISORRESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.ADRESULT = 1)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDERGATE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDERGATE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>-->
+	
+	<sql-query name="borderGateNC">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       SELECT * FROM (
+       			SELECT  EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE = '1'
+			  		AND (EPP_CENTRAL.IMMIHISTORY.SYSTEM_CHECK_RESULT = 1 OR  EPP_CENTRAL.IMMIHISTORY.SUPERVISOR_RESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.ADMIN_RESULT = 1)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>
+	<!-- Phúc đóng do thay đổi lại bảng immi 12/12/2019 => Dùng đoạn query dưới -->
+	<!--<sql-query name="borderGateNCVP">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       	SELECT * FROM (
+       			SELECT  EPP_CENTRAL.IMMIHISTORY.BORDERGATE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMITYPE = 1
+			  		AND (EPP_CENTRAL.IMMIHISTORY.ADRESULT = 0)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDERGATE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDERGATE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>-->
+	<sql-query name="borderGateNCVP">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       	SELECT * FROM (
+       			SELECT  EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE = '1'
+			  		AND (EPP_CENTRAL.IMMIHISTORY.ADMIN_RESULT = 0)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>
+	<!-- Phúc đóng do thay đổi lại bảng immi 12/12/2019 => Dùng đoạn query dưới -->
+	<!--<sql-query name="borderGateXC">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       	SELECT * FROM (
+       			SELECT  EPP_CENTRAL.IMMIHISTORY.BORDERGATE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMITYPE = 0
+			  		AND (EPP_CENTRAL.IMMIHISTORY.SYSTEMRESULT = 1 OR  EPP_CENTRAL.IMMIHISTORY.SUPERVISORRESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.ADRESULT = 1)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDERGATE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDERGATE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>-->
+	<sql-query name="borderGateXC">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       SELECT * FROM (
+       			SELECT  EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE = '0'
+			  		AND (EPP_CENTRAL.IMMIHISTORY.SYSTEM_CHECK_RESULT = 1 OR  EPP_CENTRAL.IMMIHISTORY.SUPERVISOR_RESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.ADMIN_RESULT = 1)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>
+	<!-- Phúc đóng do thay đổi lại bảng immi 12/12/2019 => Dùng đoạn query dưới -->
+	<!--<sql-query name="borderGateXCVP">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       	SELECT * FROM (
+			  SELECT  EPP_CENTRAL.IMMIHISTORY.BORDERGATE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMITYPE = 0
+			  		AND (EPP_CENTRAL.IMMIHISTORY.ADRESULT = 0)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDERGATE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDERGATE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>-->
+	<sql-query name="borderGateXCVP">
+		<return-scalar column="bordeGate" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+       	SELECT * FROM (
+			  SELECT  EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE as bordeGate, count (*) AS total FROM EPP_CENTRAL.IMMIHISTORY
+			  		WHERE EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE = '0'
+			  		AND (EPP_CENTRAL.IMMIHISTORY.ADMIN_RESULT = 0)
+        			AND (EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE IN ('SNB','STS','SDN','SPQ','SCR'))
+					GROUP BY EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE
+			)
+		WHERE ROWNUM <= 10
+        ]]>
+	</sql-query>
+	<!-- Phúc đóng do thay đổi lại bảng immi 12/12/2019 => Dùng đoạn query dưới -->
+	<!--<sql-query name="newImmihistory">
+		<return-scalar column="fullName" type="string" />
+		<return-scalar column="borderGate" type="string" />
+		<return-scalar column="immiType" type="integer" />
+        <![CDATA[
+       	SELECT * FROM (
+		  SELECT EPP_CENTRAL.IMMIHISTORY.FULLNAME AS fullName, EPP_CENTRAL.IMMIHISTORY.BORDERGATE AS borderGate, EPP_CENTRAL.IMMIHISTORY.IMMITYPE AS immiType FROM EPP_CENTRAL.IMMIHISTORY 
+		  WHERE (EPP_CENTRAL.IMMIHISTORY.ADRESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.SYSTEMRESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.SUPERVISORRESULT = 1)
+		  Order by EPP_CENTRAL.IMMIHISTORY.CREATEDTIME desc
+		)
+		WHERE ROWNUM <= 5
+        ]]>
+	</sql-query>-->
+	<sql-query name="newImmihistory">
+		<return-scalar column="fullName" type="string" />
+		<return-scalar column="borderGate" type="string" />
+		<return-scalar column="immiType" type="string" />
+        <![CDATA[
+        SELECT * FROM (
+		  SELECT EPP_CENTRAL.IMMIHISTORY.FULL_NAME AS fullName, EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE AS borderGate, EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE AS immiType FROM EPP_CENTRAL.IMMIHISTORY 
+		  WHERE (EPP_CENTRAL.IMMIHISTORY.ADMIN_RESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.SYSTEM_CHECK_RESULT = 1 OR EPP_CENTRAL.IMMIHISTORY.SUPERVISOR_RESULT = 1)
+		  Order by EPP_CENTRAL.IMMIHISTORY.CREATED_TIME desc
+		)
+		WHERE ROWNUM <= 5
+        ]]>
+	</sql-query>
+	<!--<sql-query name="listImmihistoryAll">
+		<return-scalar column="fullName" type="string" />
+		<return-scalar column="dob" type="date" />
+		<return-scalar column="gender" type="string" />
+		<return-scalar column="countryName" type="string" />
+		<return-scalar column="immiType" type="integer" />
+		<return-scalar column="createTime" type="date" />
+		<return-scalar column="passportNo" type="string" />
+		<return-scalar column="visaNo" type="string" />
+		<return-scalar column="borderGate" type="string" />
+        <![CDATA[
+       		SELECT  EPP_CENTRAL.IMMIHISTORY.FULLNAME as fullname, 
+			  	EPP_CENTRAL.IMMIHISTORY.DOB as dob, 
+		        EPP_CENTRAL.IMMIHISTORY.GENDER as gender,
+		        EPP_CENTRAL.IMMIHISTORY.COUNTRYNAME as countryName,
+	            EPP_CENTRAL.IMMIHISTORY.IMMITYPE as immiType,
+	            EPP_CENTRAL.IMMIHISTORY.CREATEDTIME as createTime,
+	            EPP_CENTRAL.IMMIHISTORY.PASSPORTNO as passportNo,
+	            EPP_CENTRAL.IMMIHISTORY.VISANO as visaNo,
+	            EPP_CENTRAL.IMMIHISTORY.BORDERGATE as borderGate
+		        FROM EPP_CENTRAL.IMMIHISTORY
+            	WHERE (EPP_CENTRAL.IMMIHISTORY.FULLNAME = (:fullNameI) OR (:fullNameI) IS NULL)
+		        AND (EPP_CENTRAL.IMMIHISTORY.GENDER = (:genderI) OR (:genderI) IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.DOB = (:dobI) OR (:dobI) IS NULL)
+		        AND ((TO_DATE(EPP_CENTRAL.IMMIHISTORY.CREATEDTIME, 'DD/MM/YYYY') = TO_DATE((:fromDateI), 'DD/MM/YYYY')) OR TO_DATE((:fromDateI), 'DD/MM/YYYY') IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.BORDERGATE = (:borderGateI) OR (:borderGateI) IS NULL) 
+            	AND (EPP_CENTRAL.IMMIHISTORY.PASSPORTNO = (:passportNoI) OR (:passportNoI) IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.IMMITYPE = (:immiTypeI) OR (:immiTypeI) = -1) 
+            	AND (EPP_CENTRAL.IMMIHISTORY.COUNTRYCODE = (:countryCodeI) OR (:countryCodeI) IS NULL)
+			Order by createTime desc
+        ]]>
+	</sql-query>-->
+	<sql-query name="listImmihistoryAll">
+		<return-scalar column="fullName" type="string" />
+		<return-scalar column="dob" type="date" />
+		<return-scalar column="gender" type="string" />
+		<return-scalar column="countryName" type="string" />
+		<return-scalar column="immiType" type="string" />
+		<return-scalar column="createTime" type="date" />
+		<return-scalar column="passportNo" type="string" />
+		<return-scalar column="visaNo" type="string" />
+		<return-scalar column="borderGate" type="string" />
+        <![CDATA[
+       		SELECT  EPP_CENTRAL.IMMIHISTORY.FULL_NAME as fullname, 
+			  	EPP_CENTRAL.IMMIHISTORY.DATE_OF_BIRTH as dob, 
+		        EPP_CENTRAL.IMMIHISTORY.GENDER as gender,
+		        EPP_CENTRAL.IMMIHISTORY.COUNTRY_CODE as countryName,
+	            EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE as immiType,
+	            EPP_CENTRAL.IMMIHISTORY.CREATED_TIME as createTime,
+	            EPP_CENTRAL.IMMIHISTORY.PASSPORT_NO as passportNo,
+	            EPP_CENTRAL.IMMIHISTORY.VISA_NO as visaNo,
+	            EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE as borderGate
+		        FROM EPP_CENTRAL.IMMIHISTORY
+            	WHERE (EPP_CENTRAL.IMMIHISTORY.FULL_NAME = (:fullNameI) OR (:fullNameI) IS NULL)
+		        AND (EPP_CENTRAL.IMMIHISTORY.GENDER = (:genderI) OR (:genderI) IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.DATE_OF_BIRTH = (:dobI) OR (:dobI) IS NULL)
+		        AND ((TO_DATE(EPP_CENTRAL.IMMIHISTORY.CREATED_TIME, 'DD/MM/YYYY') = TO_DATE((:fromDateI), 'DD/MM/YYYY')) OR TO_DATE((:fromDateI), 'DD/MM/YYYY') IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE = (:borderGateI) OR (:borderGateI) IS NULL) 
+            	AND (EPP_CENTRAL.IMMIHISTORY.PASSPORT_NO = (:passportNoI) OR (:passportNoI) IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE = (:immiTypeI) OR (:immiTypeI) IS NULL) 
+            	AND (EPP_CENTRAL.IMMIHISTORY.COUNTRY_CODE = (:countryCodeI) OR (:countryCodeI) IS NULL)
+			Order by createTime desc
+        ]]>
+	</sql-query>
+	<sql-query name="totalImmihistoryAll">
+		<return-scalar column="total" type="int" />
+        <![CDATA[
+       		SELECT COUNT(*) as total
+		        FROM EPP_CENTRAL.IMMIHISTORY
+            	WHERE (EPP_CENTRAL.IMMIHISTORY.FULL_NAME = (:fullNameI) OR (:fullNameI) IS NULL)
+		        AND (EPP_CENTRAL.IMMIHISTORY.GENDER = (:genderI) OR (:genderI) IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.DATE_OF_BIRTH = (:dobI) OR (:dobI) IS NULL)
+		        AND ((TO_DATE(EPP_CENTRAL.IMMIHISTORY.CREATED_TIME, 'DD/MM/YYYY') = TO_DATE((:fromDateI), 'DD/MM/YYYY')) OR TO_DATE((:fromDateI), 'DD/MM/YYYY') IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.BORDER_GATE_CODE = (:borderGateI) OR (:borderGateI) IS NULL) 
+            	AND (EPP_CENTRAL.IMMIHISTORY.PASSPORT_NO = (:passportNoI) OR (:passportNoI) IS NULL)
+            	AND (EPP_CENTRAL.IMMIHISTORY.IMMI_TYPE = (:immiTypeI) OR (:immiTypeI) IS NULL) 
+            	AND (EPP_CENTRAL.IMMIHISTORY.COUNTRY_CODE = (:countryCodeI) OR (:countryCodeI) IS NULL)
+        ]]>
+	</sql-query>
+	<sql-query name="searchImmiQuery">
+		<return-scalar column="FULL_NAME" type="string" />
+		<return-scalar column="GENDER" type="string" />
+		<return-scalar column="DOB_C" type="string" />
+		<return-scalar column="COUNTRY_CODE" type="string" />
+		<return-scalar column="PASSPORT_NO" type="string" />
+		<return-scalar column="VISA_NO" type="string" />
+		<return-scalar column="IDENTITY_CARD_NO" type="string" />
+		<return-scalar column="PLACE_OF_BIRTH_CODE" type="string" />
+		<return-scalar column="R_" type="int" />
+		<return-scalar column="RESULT_COUNT" type="int" />
+        <![CDATA[
+			SELECT * FROM
+          		(
+			  SELECT immi.FULL_NAME, immi.GENDER, TO_CHAR(immi.DATE_OF_BIRTH, 'DD/MM/YYYY') as DOB_C, immi.COUNTRY_CODE, immi.PASSPORT_NO, immi.VISA_NO, immi.IDENTITY_CARD_NO, immi.PLACE_OF_BIRTH_CODE, rownum r_, COUNT(*) OVER () RESULT_COUNT
+			  FROM EPP_CENTRAL.IMMIHISTORY immi
+			  WHERE (:fname IS NULL OR immi.FULL_NAME = :fname) 
+			  AND (:gender IS NULL OR immi.GENDER = :gender) 
+			  AND (:ppNo IS NULL OR immi.PASSPORT_NO = :ppNo) 
+			  AND (:vsNo IS NULL OR immi.VISA_NO = :vsNo)
+			  AND (:nin IS NULL OR immi.IDENTITY_CARD_NO = :nin)
+			  AND (:nationality IS NULL OR immi.COUNTRY_CODE = :nationality)
+			  AND (:dob IS NULL OR (immi.DATE_OF_BIRTH >= to_date(:dob,'DD/MM/YYYY') AND immi.DATE_OF_BIRTH <= to_date(:dob,'DD/MM/YYYY')))
+			  )
+			WHERE r_ >= (((:pageNo-1) * :pageSize) + 1) and r_ < ((:pageNo * :pageSize) + 1)
+        ]]>
+	</sql-query>
+	<sql-query name="searchImmiQueryA">
+		<return-scalar column="FULL_NAME" type="string" />
+		<return-scalar column="GENDER" type="string" />
+		<return-scalar column="DOB_C" type="string" />
+		<return-scalar column="COUNTRY_CODE" type="string" />
+		<return-scalar column="PASSPORT_NO" type="string" />
+		<return-scalar column="VISA_NO" type="string" />
+		<return-scalar column="IDENTITY_CARD_NO" type="string" />
+		<return-scalar column="PLACE_OF_BIRTH_CODE" type="string" />
+		<return-scalar column="R_" type="int" />
+		<return-scalar column="RESULT_COUNT" type="int" />
+        <![CDATA[
+			SELECT * FROM
+          		(
+			  SELECT immi.FULL_NAME, immi.GENDER, TO_CHAR(immi.DATE_OF_BIRTH, 'DD/MM/YYYY') as DOB_C , immi.COUNTRY_CODE, immi.PASSPORT_NO, immi.VISA_NO, immi.IDENTITY_CARD_NO, immi.PLACE_OF_BIRTH_CODE, rownum r_, COUNT(*) OVER () RESULT_COUNT
+			  FROM EPP_CENTRAL.IMMIHISTORY immi
+			  WHERE (:fname IS NULL OR immi.FULL_NAME = :fname) 
+			  AND (:gender IS NULL OR immi.GENDER = :gender) 
+			  AND (:ppNo IS NULL OR immi.PASSPORT_NO = :ppNo) 
+			  AND (:vsNo IS NULL OR immi.VISA_NO = :vsNo)
+			  AND (:nin IS NULL OR immi.IDENTITY_CARD_NO = :nin)
+			  AND (:nationality IS NULL OR immi.COUNTRY_CODE = :nationality)
+			  AND (:startY IS NULL OR EXTRACT(YEAR FROM(immi.DATE_OF_BIRTH)) >= :startY)
+        	  AND (:endY IS NULL OR EXTRACT(YEAR FROM(immi.DATE_OF_BIRTH)) <= :endY)
+			  )
+			WHERE r_ >= (((:pageNo-1) * :pageSize) + 1) and r_ < ((:pageNo * :pageSize) + 1)
+        ]]>
+	</sql-query>
+	<sql-query name="totalImmiA">
+		<return-scalar column="total" type="int" />
+        <![CDATA[
+			SELECT COUNT(*) as total
+			  FROM EPP_CENTRAL.IMMIHISTORY immi
+			  WHERE (:fname IS NULL OR immi.FULL_NAME = :fname) 
+			  AND (:gender IS NULL OR immi.GENDER = :gender) 
+			  AND (:ppNo IS NULL OR immi.PASSPORT_NO = :ppNo) 
+			  AND (:vsNo IS NULL OR immi.VISA_NO = :vsNo)
+			  AND (:nin IS NULL OR immi.IDENTITY_CARD_NO = :nin)
+			  AND (:nationality IS NULL OR immi.COUNTRY_CODE = :nationality)
+			  AND (:startY IS NULL OR EXTRACT(YEAR FROM(immi.DATE_OF_BIRTH)) >= :startY)
+        	  AND (:endY IS NULL OR EXTRACT(YEAR FROM(immi.DATE_OF_BIRTH)) <= :endY)
+        ]]>
+	</sql-query>
+	<sql-query name="totalImmi">
+		<return-scalar column="total" type="int" />
+        <![CDATA[
+			SELECT COUNT(*) as total
+			  FROM EPP_CENTRAL.IMMIHISTORY immi
+			  WHERE (:fname IS NULL OR immi.FULL_NAME = :fname) 
+			  AND (:gender IS NULL OR immi.GENDER = :gender) 
+			  AND (:ppNo IS NULL OR immi.PASSPORT_NO = :ppNo) 
+			  AND (:vsNo IS NULL OR immi.VISA_NO = :vsNo)
+			  AND (:nin IS NULL OR immi.IDENTITY_CARD_NO = :nin)
+			  AND (:nationality IS NULL OR immi.COUNTRY_CODE = :nationality)
+			  AND (:dob IS NULL OR (immi.DATE_OF_BIRTH >= to_date(:dob,'DD/MM/YYYY') AND immi.DATE_OF_BIRTH <= to_date(:dob,'DD/MM/YYYY')))
+        ]]>
+	</sql-query>
+		<sql-query name="totalImmiBorder">
+		<return-scalar column="total" type="int" />
+        <![CDATA[
+			SELECT COUNT(*) as total
+			FROM EPP_CENTRAL.IMMIHISTORY immi
+			WHERE (:immiType IS NULL OR immi.IMMI_TYPE = :immiType) AND (:boderGate IS NULL OR immi.BORDER_GATE_CODE = :boderGate)
+			GROUP BY immi.BORDER_GATE_CODE
+        ]]>
+	</sql-query>
+</hibernate-mapping>

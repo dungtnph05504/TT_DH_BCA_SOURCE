@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 14, 2016 10:26:40 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.site.domain.Department" table="EPP_CENTRAL_SYS.DEPARTMENT">
+        <id name="codeDepartment" type="string">
+            <column name="CODE_DEPARTMENT" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="nameDepartment" type="string">
+            <column name="NAME_DEPARTMENT" length="250">
+                <comment>Tên phòng ban</comment>
+            </column>
+        </property>
+        <many-to-one name="siteRepository" class="com.nec.asia.nic.framework.admin.site.domain.SiteRepository" fetch="select">
+            <column name="SITE_ID" not-null="true" />
+        </many-to-one>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="64">
+                <comment>Địa chỉ</comment>
+            </column>
+        </property>
+        <property name="country" type="string">
+            <column name="COUNTRY" length="20">
+                <comment>Quốc gia</comment>
+            </column>
+        </property>
+        <property name="active" type="string">
+            <column name="ACTIVE" length="1">
+                <comment>Trạng thái</comment>
+            </column>
+        </property>
+        <property name="createTs" type="timestamp">
+            <column name="CREATE_TS" length="6">
+                <comment>Ngày tạo</comment>
+            </column>
+        </property>
+        <property name="createBy" type="string">
+            <column name="CREATE_BY" length="64">
+                <comment>Người tạo</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

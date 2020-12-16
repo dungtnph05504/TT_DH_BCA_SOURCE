@@ -1,0 +1,108 @@
+package com.nec.asia.nic.comp.trans.dao;
+
+import java.util.Date;
+import java.util.List;
+
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.NicDocumentData;
+import com.nec.asia.nic.comp.trans.domain.NicDocumentDataId;
+import com.nec.asia.nic.comp.trans.dto.RetrieveDocumentDataResponse;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.dao.DaoException;
+import com.nec.asia.nic.framework.dao.GenericDao;
+
+/**
+ * @author chris
+ *
+ */
+public interface DocumentDataDao extends
+		GenericDao<NicDocumentData, NicDocumentDataId> {
+
+	public BaseModelList<NicDocumentData> findAllByTransactionId(
+			String transactionId);
+
+	public BaseModelSingle<NicDocumentData> findByDocNumber(String passportNo);
+
+	public List<NicDocumentData> findAllByTransactionId(String transactionId,
+			List<String> statusesToInclude);
+
+	public List<NicDocumentData> findAllByTransactionId_notInStatuses(
+			String transactionId, List<String> statusesToInclude);
+
+	public List<NicDocumentData> findAllDispatchedDocuments(Integer maxResult)
+			throws DaoException;
+
+	public List<NicDocumentData> findAllSyncErrorDocuments(Integer maxResult)
+			throws DaoException;
+
+	public int updatePackageDispatchInfoByPassportNoList(
+			List<String> passportNoList, String packageId,
+			Date packageDateTime, String dispatchId, Date dispatchDateTime,
+			String status, Date statusUpdateTime, String officerId,
+			String workstationId) throws DaoException;
+
+	public int countExistingPassportByPassportNoList(List<String> passportNoList)
+			throws DaoException;
+
+	public List<NicDocumentData> findAllByDocNumber(String passportNo);
+
+	public PaginatedResult<NicDocumentData> findAllForPagination(
+			NicDocumentData nicDocumentData, int pageNo, int pageSize);
+
+	public void cancelPassport(String transactionId, String passportNo)
+			throws DaoException;
+
+	public List<NicDocumentData> findAllDocumentsForSync(String siteCode)
+			throws DaoException;
+
+	public void updateSyncStatus(List<String> passportNoList, String officerId,
+			String wkstnId) throws DaoException;
+
+	// for demo only
+	public String getNextPassportNo();
+
+	/* [09-Mar] Trung lấy bản ghi documentdata */
+	public BaseModelSingle<NicDocumentData> getNicDocumentDataById(
+			String transactionId);
+
+	/* [09-Mar] Trung thêm thay đổi số năm hết hạn hộ chiếu */
+	public void updatePassportNo(String transactionId, String userId,
+			String wkstnId, String passportNo);
+
+	public List<NicDocumentData> findAllBySiteCodeAndStage(String site,
+			String status, int year, int check);
+
+	public List<NicDocumentData> findSyncByDay(Date date);
+
+	public List<RetrieveDocumentDataResponse> getlistDocumentData(
+			String siteCode, String passportNo, Date issueDatePassport,
+			String typePassport, Date expireDatePassport, String handoverB);
+
+	public RetrieveDocumentDataResponse detailDocumentData(String passportNo);
+
+	public BaseModelSingle<Void> saveOrUpdateDocumentData(NicDocumentData data);
+
+	public BaseModelList<NicDocumentData> findAllPassportByCondition(
+			String passportNo, String archiveCode);
+
+	public BaseModelSingle<NicDocumentData> findPassportByConditions(
+			String passportNo, String name, String gender, String dateOfBirth,
+			String dateOfDocIssue, String dateOfDocExpiry);
+
+	public List<NicDocumentData> findPassportToRestore(String passportNo,
+			String reason, String name, String gender, String dateOfBirth);
+
+	public List<NicDocumentData> findValidPassportById(String passportNo);
+
+	public List<NicDocumentData> findValidDocByListTranId(String[] listTranId);
+
+	public List<NicDocumentData> findDocDataToDel(
+			NicDocumentDataId nicDocumentDataId, String phoiSerialNo);
+
+	public void deletePassport(NicDocumentData nicDocData);
+
+	public List<NicDocumentData> findDocByListPassportNo(String[] listPassportNo);
+	public List<NicDocumentData> findAllDocByListTranId(String[] listTranId);
+
+}

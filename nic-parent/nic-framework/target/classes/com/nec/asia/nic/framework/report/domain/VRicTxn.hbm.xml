@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 29, 2013 3:31:39 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.report.domain.VRicTxn" table="V_RIC_TXN" schema="NICAPP">
+       
+       
+            <id  name="nin" type="string">
+                <column name="NIN" length="14" />
+                 <generator class="assigned" />
+            </id>           
+            <property name="transactionId" type="string">
+                <column name="TRANSACTION_ID" length="36" />
+            </property>
+            <property name="firstname" type="string">
+                <column name="FIRSTNAME" />
+            </property>
+            <property name="surname" type="string">
+                <column name="SURNAME" />
+            </property>
+            <property name="surnameBirth" type="string">
+                <column name="SURNAME_BIRTH" />
+            </property>
+            <property name="transactionType" type="string">
+                <column name="TRANSACTION_TYPE" length="1020" />
+            </property>
+            <property name="transactionSubtype" type="string">
+                <column name="TRANSACTION_SUBTYPE" length="1020" />
+            </property>
+            <property name="transactionStatus" type="string">
+                <column name="TRANSACTION_STATUS" length="1020" />
+            </property>
+            <property name="gender" type="string">
+                <column name="GENDER" length="1020" />
+            </property>
+            <property name="applicationDate" type="timestamp">
+                <column name="APPLICATION_DATE" length="7" />
+            </property>
+            <property name="servedBy" type="string">
+                <column name="SERVED_BY" length="64" />
+            </property>
+           
+       
+    </class>
+</hibernate-mapping>

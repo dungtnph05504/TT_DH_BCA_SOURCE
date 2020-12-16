@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+	<!-- APPENDERS LIST -->
+	<!-- show log entries on console 	-->
+	<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %30c - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="NIC-WS-DEBUG-LOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${jboss.server.log.dir}/nic-ws-debug.log" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<param name="append" value="false" />
+		<!-- <param name="Threshold" value="DEBUG"/> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The default pattern: Date Priority [Category] (Thread) Message\n -->
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} %-5p [%-40.40c{2}] (%-20.20t) %m%n" />
+		</layout>
+	</appender>
+	<!-- A time/date based rolling appender -->
+	<appender name="WSLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${jboss.server.log.dir}/nic-ws.log" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<param name="append" value="false" />
+		<!-- <param name="Threshold" value="INFO"/> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The default pattern: Date Priority [Category] (Thread) Message\n -->
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} %-5p [%-40.40c{2}] (%-20.20t) %m%n" />
+		</layout>
+	</appender>
+	<!-- ================ -->
+	<!-- Limit categories -->
+	<!-- ================ -->
+
+	<!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
+	<!-- replaced all category to logger, priority to level on 2017 -->
+	<!-- https://hanuska.blogspot.sg/2007/02/log4j-logger-vs-category.html -->
+	<logger name="com.apache">
+		<level value="INFO" />
+	</logger>
+	<logger name="com.mchange">
+		<level value="INFO" />
+	</logger>
+	<logger name="com.sshtools">
+		<level value="WARN" />
+	</logger>
+	<!-- CXF -->
+	<logger name="org.apache.cxf.configuration.spring">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.apache.cxf.jaxb.JAXBDataBinding">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.apache.cxf.jaxws.handler">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.apache.cxf.phase">
+		<level value="INFO" />
+	</logger>
+
+
+	<logger name="org.apache.commons.beanutils">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.displaytag">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.hibernate.cfg">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.engine">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.event">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.hibernate.id">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.impl">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.jdbc">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.loader">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.persister">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.SQL">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.transaction">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.hibernate.type.BasicTypeRegistry">
+		<level value="WARN" />
+	</logger>
+	<logger name="org.hibernate.util">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework.aop">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.springframework.core">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.springframework.orm">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.springframework.beans">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="com.nec">
+		<level value="DEBUG" />
+		<appender-ref ref="NIC-WS-DEBUG-LOG" />
+	</logger>
+	
+	<logger name="com.nec.asia.nic" additivity="false">
+		<level value="TRACE" />
+		<appender-ref ref="NIC-WS-DEBUG-LOG" />
+	</logger>
+
+	<logger name="com.nec.asia.nic.dx" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="NIC-WS-DEBUG-LOG" />
+	</logger>
+	
+	<logger name="com.nec.asia.nic.utils.mappers.ObjectMapper">
+		<level value="WARN" />
+	</logger>
+	
+	<logger name="org.apache.cxf.services" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="WSLOG" />
+	</logger>
+	
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="consoleAppender" />
+	</root>
+
+<!--
+
+   Log4J Configuration Quick Reference:
+   ====================================
+   Priority order is DEBUG < INFO < WARN < ERROR < FATAL
+
+   PatternLayout conversion characters:
+
+    %c   Category of the logging event
+    %C   Fully qualified class name of the caller
+    %d   Date of the logging event  (example: %d{HH:mm:ss,SSS} )
+    %F   File name where the logging request was issued (caution: extremely slow)
+    %l   Location information of the caller (caution: extremely slow)
+    %L   Line number from where the logging request was issued (caution: extremely slow)
+    %m   Application-supplied message
+    %M   Method name from where the logging request was issued (caution: extremely slow)
+    %n   Line separator
+    %p   Priority of the logging event
+    %r   Number of milliseconds since the start of the application
+    %t   Name of the thread that generated the logging event
+    %x   Nested diagnotic context associated with the thread
+    %%   A single percent sign
+
+   Format modifiers examples:
+
+    %20c     Left pad with spaces if category is less than 20 characters long
+    %-20c    Right pad with spaces if category is less than 20 characters long
+    %.30c    Truncate from the beginning if category is more than 30 chars long
+    %20.30c  Left pad 20 chars + truncate from beginning if more than 30 chars
+    %-20.30c Right pad 20 chars + truncate from beginning if more than 30 chars
+
+   Examples:  "%r [%t] %-5p %c %x - %m\n"
+              "%-6r [%15.15t] %-5p %30.30c %x - %m\n"
+
+-->
+</log4j:configuration>

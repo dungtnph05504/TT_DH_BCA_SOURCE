@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+  	<!-- APPENDERS LIST -->
+  	<!-- show log entries on console -->
+	<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{3}:%L - %m%n" />
+		</layout>
+	</appender> 
+	<!-- A time/date based rolling appender -->
+	<appender name="LOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="nic.log" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<param name="append" value="true" />
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] (%t) %m%n" />
+		</layout>
+	</appender>
+
+	<category name="com.apache">
+		<priority value="INFO"/>
+	</category>
+	<category name="com.mchange">
+		<priority value="INFO"/>
+	</category>
+	<category name="com.sshtools">
+		<priority value="WARN"/>
+	</category>
+	<!-- CXF -->
+	<category name="org.apache.cxf.configuration.spring">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.apache.cxf.jaxb.JAXBDataBinding">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.apache.cxf.jaxws.handler">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.apache.cxf.phase">
+		<priority value="INFO"/>
+	</category>
+	
+	<category name="org.apache.commons.beanutils">
+		<priority value="INFO"/>
+	</category>
+	
+	<category name="org.hibernate.cfg">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.engine">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.event">
+		<priority value="INFO"/>
+	</category>
+	
+	<category name="org.hibernate.id">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.impl">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.jdbc">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.loader">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.persister">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.SQL" >
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.transaction">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.hibernate.type.BasicTypeRegistry">
+		<priority value="WARN"/>
+	</category>
+	<category name="org.hibernate.util">
+		<priority value="INFO"/>
+	</category>
+	
+	<category name="org.springframework.aop">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.springframework.core">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.springframework.orm">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.springframework.beans">
+		<priority value="INFO"/>
+	</category>
+	<category name="org.springframework.scheduling.quartz.LocalDataSourceJobStore">
+		<priority value="WARN"/>
+	</category>
+
+	
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="LOG" />
+		<appender-ref ref="consoleAppender" />
+	</root>
+<!--
+
+   Log4J Configuration Quick Reference:
+   ====================================
+   Priority order is DEBUG < INFO < WARN < ERROR < FATAL
+
+   PatternLayout conversion characters:
+
+    %c   Category of the logging event
+    %C   Fully qualified class name of the caller
+    %d   Date of the logging event  (example: %d{HH:mm:ss,SSS} )
+    %F   File name where the logging request was issued (caution: extremely slow)
+    %l   Location information of the caller (caution: extremely slow)
+    %L   Line number from where the logging request was issued (caution: extremely slow)
+    %m   Application-supplied message
+    %M   Method name from where the logging request was issued (caution: extremely slow)
+    %n   Line separator
+    %p   Priority of the logging event
+    %r   Number of milliseconds since the start of the application
+    %t   Name of the thread that generated the logging event
+    %x   Nested diagnotic context associated with the thread
+    %%   A single percent sign
+
+   Format modifiers examples:
+
+    %20c     Left pad with spaces if category is less than 20 characters long
+    %-20c    Right pad with spaces if category is less than 20 characters long
+    %.30c    Truncate from the beginning if category is more than 30 chars long
+    %20.30c  Left pad 20 chars + truncate from beginning if more than 30 chars
+    %-20.30c Right pad 20 chars + truncate from beginning if more than 30 chars
+
+   Examples:  "%r [%t] %-5p %c %x - %m\n"
+              "%-6r [%15.15t] %-5p %30.30c %x - %m\n"
+
+-->
+</log4j:configuration>

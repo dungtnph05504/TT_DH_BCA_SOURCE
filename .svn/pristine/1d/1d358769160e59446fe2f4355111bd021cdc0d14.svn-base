@@ -1,0 +1,234 @@
+package com.nec.asia.nic.framework.admin.code.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.stereotype.Repository;
+
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.dao.CodeValuesDao;
+import com.nec.asia.nic.framework.admin.code.domain.CodeValues;
+import com.nec.asia.nic.framework.admin.code.domain.CodeValuesId;
+import com.nec.asia.nic.framework.admin.code.domain.Codes;
+import com.nec.asia.nic.framework.dao.impl.GenericHibernateDao;
+/* 
+ * Modification History:
+ *  
+ * 17 Feb 2016 (chris): Update method findAllByCodeId
+ * 27 Jun 2017 (chris): add delete method for physical delete
+ */
+@Repository("codeValuesDao")
+public class CodeValuesDaoImpl extends
+		GenericHibernateDao<CodeValues, CodeValuesId> implements
+		CodeValuesDao {
+
+	@SuppressWarnings("unchecked")
+	
+	@Override
+	public CodeValues findByStringCodeId(String codeId,String codevalue){
+		DetachedCriteria criteria = DetachedCriteria.forClass(CodeValues.class);
+	//	CodeValuesId codevalueId= new CodeValuesId();
+		//codevalueId.setCodeId(codeId);
+	//	codevalueId.setCodeValue(codeValue);
+		criteria.add(Restrictions.eq("id.codeId", codeId));
+		criteria.add(Restrictions.eq("id.codeValue", codevalue));
+		if(this.findAll(criteria).size()>0){
+			return this.findAll(criteria).get(0);
+		}
+		return null;
+		//return (CodeValues) getHibernateTemplate().findByCriteria(criteria);
+	}
+	@Override
+	public List<CodeValues> findAllByCodeId(String codeId) {
+		try {
+			DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
+			criteria.add(Restrictions.eq("id.codeId", codeId));
+			//[chris][17 Feb 2016] - to filter by deleteFlag
+			Criterion deleteFlagNull = Restrictions.isNull("deleteFlag");
+			Criterion deleteFlagN = Restrictions.eq("deleteFlag", false);
+			criteria.add(Restrictions.or(deleteFlagNull,deleteFlagN));
+			
+			criteria.addOrder(Order.asc("codePriority"));
+			criteria.addOrder(Order.asc("codeValueDesc"));
+			List<CodeValues> list = this.findAll(criteria);
+			return  list;
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
+	public  PaginatedResult<CodeValues> getCodevalues(String codeId,int pageNo, int pageSize, Order... orders){
+		DetachedCriteria criteria = DetachedCriteria.forClass(CodeValues.class);
+		criteria.add(Restrictions.eq("id.codeId", codeId));
+		Criterion deleteFlagNull = Restrictions.isNull("deleteFlag");
+		Criterion deleteFlagN = Restrictions.eq("deleteFlag", false);
+		criteria.add(Restrictions.or(deleteFlagNull,deleteFlagN ));
+		criteria.addOrder(Order.asc("codePriority"));
+		
+		PaginatedResult<CodeValues> results =findAllForPagination(criteria, pageNo, pageSize,orders);
+		return results;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public PaginatedResult<CodeValues> findAllForPagination(final DetachedCriteria detachedCriteria, final int pageNo, final int pageSize) {
+		return (PaginatedResult<CodeValues>) getHibernateTemplate().execute(
+				new HibernateCallback<PaginatedResult<CodeValues>>() {
+					public PaginatedResult<CodeValues> doInHibernate(Session session)
+							throws HibernateException {
+						Criteria c = detachedCriteria.getExecutableCriteria(session);  
+						int total = ((Long) c.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+						int maxNoPage = 1;
+						if (total>pageSize) {
+							maxNoPage = (int) Math.ceil(((double)total / pageSize));
+						}
+						int firstResults = (pageNo - 1) * pageSize;
+						int maxResults = pageSize;
+						if (pageNo == maxNoPage) {
+							maxResults = total % pageSize;
+						}
+						c.setProjection(null);     
+						c.setResultTransformer(Criteria.ROOT_ENTITY);    
+						c.setFirstResult(firstResults);    
+						c.setMaxResults(maxResults); 
+						List<CodeValues> res = c.list();
+
+						logger.debug("total: {}, pageNo: {}, lastPage: {}, firstResults: {}, maxResults: {}, result size: {}", new Object[]{total, pageNo, maxNoPage, firstResults, maxResults, res.size()});
+						return new PaginatedResult<CodeValues>(total, pageNo, res);
+					}  
+		        });  
+	}
+
+		 
+	@Override
+	public List<CodeValues> getCodeValuesByParent(String parentId, String code) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(CodeValues.class);
+		criteria.add(Restrictions.eq("id.codeId", code));
+		criteria.add(Restrictions.like("parentCodeValue", "%"+parentId+"%"));
+		criteria.addOrder(Order.asc("codePriority"));
+		criteria.addOrder(Order.asc("codeValueDesc"));
+		return (List<CodeValues>) getHibernateTemplate().findByCriteria(criteria);
+	}
+
+	@Override
+	public boolean updateCodeValue(CodeValues orm) {
+		logger.debug("orm.getId() >> " + orm.getId().getCodeValue());		
+		try {
+			CodeValues obj = getHibernateTemplate().load(CodeValues.class, orm.getId());
+			logger.debug("obj >> " + obj.getId().getCodeId());
+			obj.getId().setCodeValue(orm.getId().getCodeValue());
+			obj.setCodeValueDesc(orm.getCodeValueDesc());
+			obj.setCodePriority(orm.getCodePriority());
+			obj.setAdminAccessibleFlag(orm.getAdminAccessibleFlag().booleanValue());
+			obj.setSystemId(orm.getSystemId());
+			obj.setCreateDate(orm.getCreateDate());
+			obj.setCreateWkstnId(orm.getCreateWkstnId());
+			obj.setCreateBy(orm.getCreateBy());
+			//[tuenv][13 Jan 2016] - Add
+			obj.setParentCodeValue(orm.getParentCodeValue());
+			logger.debug(" >>> GOING TO UPDATE <<<<<");
+			getHibernateTemplate().update(obj);
+			logger.debug(" >>> UPDATED CODEVALUE <<<<<");
+			return true;
+		} catch (Throwable e1) {
+			logger.error("EXCEPTION OCCURRED IN RETRIEVAL / UPDATE >> " + e1.getMessage());
+			return false;
+
+		}
+	}
+
+	@Override
+	public boolean savePendingCodeValue(CodeValues codeValue) {
+		try {
+			Codes obj = getHibernateTemplate().load(Codes.class,
+					codeValue.getId().getCodeId());
+			getHibernateTemplate().save(codeValue);
+			return true;
+		} catch (Exception e1) {
+			logger.error("EXCEPTION OCCURRED IN RETRIEVAL OF CODE TABLE>> " + e1.getMessage());
+			return false;
+
+		}		
+	}
+
+	@Override
+	public Map<String, String> getAllCodeValues() {
+		List<CodeValues> codeValuesList = this.findAll();
+		Map<String, String> entityMap = new HashMap<String, String>();
+		for (CodeValues codeValue : codeValuesList) {
+			entityMap.put(codeValue.getId().getCodeValue(),	codeValue.getCodeValueDesc());
+		}
+		return entityMap;
+	}
+		
+	@Override
+	public List<CodeValues> getAllCodeValues(String codeId, 	String[] codeNames) throws Exception {
+		DetachedCriteria criteria = DetachedCriteria.forClass(CodeValues.class);
+		criteria.add(Restrictions.eq("id.codeId", codeId));
+		if(codeNames != null){
+			criteria.add(Restrictions.in("id.codeValue", codeNames));			
+		}
+		return (List<CodeValues>) getHibernateTemplate().findByCriteria(criteria);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CodeValues> getParentCodeValues(String parentId) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(CodeValues.class);
+		criteria.add(Restrictions.eq("parentCodeValue", parentId));
+		criteria.addOrder(Order.asc("codePriority"));
+		criteria.addOrder(Order.asc("codeValueDesc"));
+		return (List<CodeValues>) getHibernateTemplate().findByCriteria(criteria);
+	}
+	
+	
+	@Override
+	public void delete(CodeValues entity) {
+		try {
+			logger.trace("delete codeValue >> " + entity.getId().getCodeValue());
+			if (isSupportSoftDelete) {
+				CodeValues obj = this.findById(entity.getId());
+				if (obj!=null) {
+					obj.setDeleteBy(entity.getDeleteBy());
+					obj.setDeleteDate(entity.getDeleteDate());
+					obj.setDeleteFlag(entity.getDeleteFlag());
+					obj.setDeleteWkstnId(entity.getDeleteWkstnId());
+					
+					this.saveOrUpdate(obj);
+					logger.debug("[delete][CodeValues] softDelete({}) : {} ", obj.getId().getCodeValue());
+				}
+			} else {
+				super.delete(entity);
+				logger.debug("[delete][CodeValues] physical deleted.");
+			}
+		} catch (Throwable t) {
+			logger.error("EXCEPTION OCCURRED IN Delete CodeValues >> " + t.getMessage());
+		}
+	}
+	@Override
+	public CodeValues findByCodeIdAndA08Id (String codeId,String a08Id) throws Exception {
+		CodeValues codeValues = null;
+		try {
+			DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
+			criteria.add(Restrictions.eq("id.codeId", codeId));
+			criteria.add(Restrictions.eq("a08Id", a08Id));
+			List<CodeValues> list = this.findAll(criteria);
+			if (list != null && list.size() > 0) {
+				codeValues = list.get(0);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return codeValues;
+	}
+
+}

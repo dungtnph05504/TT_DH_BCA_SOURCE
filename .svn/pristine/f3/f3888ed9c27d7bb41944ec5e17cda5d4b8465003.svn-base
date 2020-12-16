@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions> 
+	<definition name="show.transactionEnquiry" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />  
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/reprint/index.jsp" />
+	</definition> 
+	<definition name="show.transactionEnquiryDetail" extends="viewpopup.layout.standard">
+		<put-attribute name="queue" value="" /> 
+		<put-attribute name="transaction" value="/WEB-INF/views/reprint/transactionInfo_reprint.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/reprint/reprint-transaction-details.jsp" />
+	</definition> 
+    <definition name="show.transactionEnquiryPhotos" template="/WEB-INF/views/enquiry/transactionEnquiry/transactionEnquiryPhotos.jsp" />
+</tiles-definitions>

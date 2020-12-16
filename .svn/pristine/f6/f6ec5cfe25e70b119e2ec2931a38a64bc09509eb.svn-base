@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:ns1 = "http://ws.dx.nic.asia.nec.com/"
+    xmlns:txn = "http://trans.dx.nic.asia.nec.com/"
+    xmlns:cmn="http://common.dx.nic.asia.nec.com/"
+    name = "transactionWS"
+    targetNamespace = "http://ws.dx.nic.asia.nec.com/">
+    <wsdl:types>
+        <xs:schema
+            xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+            xmlns:tns = "http://ws.dx.nic.asia.nec.com/"
+            xmlns:txn = "http://trans.dx.nic.asia.nec.com/"
+            elementFormDefault = "unqualified"
+            targetNamespace = "http://ws.dx.nic.asia.nec.com/"
+            version = "1.0">
+            <xs:import namespace="http://trans.dx.nic.asia.nec.com/" schemaLocation="transaction.xsd" />
+            <xs:import namespace="http://common.dx.nic.asia.nec.com/" schemaLocation="common.xsd" />
+            
+            <xs:element name = "TransactionUpload" type = "txn:MainTransaction"/>
+            <xs:element name = "TransactionUploadResponse" type = "xsd:string"/>
+            <xs:element name = "TransactionRetrieval" type = "txn:TransactionRetrievalFilter"/>
+            <xs:element name = "TransactionRetrievalResponse" type = "txn:TransactionRetrievalResult"/>
+            <xs:element name = "TransactionID" type = "xsd:string" />
+            <xs:element name = "TransactionStatus" type = "xsd:string" />
+            
+            <xs:element name = "PassportNo" type = "xsd:string" />
+            <xs:element name = "PassportStatus" type = "xsd:string" />
+            
+            <xs:element name = "TransactionLogUpload" type = "txn:TransactionLogUpload"/>
+            <xs:element name = "TransactionLogUploadResponse" type = "txn:TransactionLogUploadResponse"/>
+            
+            <xs:element name = "DownloadNicPersoInfo" type="txn:NicPersoInfoDownloadFilter" />
+			<xs:element name = "DownloadNicPersoInfoResponse" type="txn:NicPersoInfoDownloadResult" />
+			
+			<xs:element name = "UpdateReceivedNicPersoInfo" type="txn:UpdateReceivedNicPersoInfo" />
+ 			<xs:element name = "UpdateReceivedNicPersoInfoResponse" type="xsd:string" />
+ 			
+ 			<xs:element name = "DownloadBufEppPerson" type = "txn:BufEppRequest"/>
+            <xs:element name = "DownloadBufEppPersonResponse" type = "txn:BufEppDataPerson"/>
+ 			
+ 			<xs:element name = "DownloadListBufIdPerson" type = "xsd:string"/>
+            <xs:element name = "DownloadListBufIdPersonResponse" type = "txn:BufEppListRequest"/>
+            
+            <xs:element name = "EditDataRegistration" type = "txn:EditDataRegistration"/>
+            <xs:element name = "EditDataRegistrationResponse" type = "xsd:string"/>
+ 			
+            <xs:element name="FaultException" type="cmn:FaultDetail" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="faultException">
+		<wsdl:part element="ns1:FaultException" name="faultException"></wsdl:part>
+	</wsdl:message>
+    <wsdl:message name = "transactionUploadRequest">
+        <wsdl:part element = "ns1:TransactionUpload" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionUploadResponse">
+        <wsdl:part element = "ns1:TransactionUploadResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "downloadBufEppPersonRequest">
+        <wsdl:part element = "ns1:DownloadBufEppPerson" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "downloadBufEppPersonResponse">
+        <wsdl:part element = "ns1:DownloadBufEppPersonResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionRetrievalRequest">
+        <wsdl:part element = "ns1:TransactionRetrieval" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionRetrievalResponse">
+        <wsdl:part element = "ns1:TransactionRetrievalResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionStatusRetrievalRequest">
+        <wsdl:part element = "ns1:TransactionID" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionStatusRetrievalResponse">
+        <wsdl:part element = "ns1:TransactionStatus" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "passportStatusRetrievalRequest">
+        <wsdl:part element = "ns1:PassportNo" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "passportStatusRetrievalResponse">
+        <wsdl:part element = "ns1:PassportStatus" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionLogUploadRequest">
+        <wsdl:part element = "ns1:TransactionLogUpload" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "transactionLogUploadResponse">
+        <wsdl:part element = "ns1:TransactionLogUploadResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+	<wsdl:message name="downloadNicPersoInfoRequest">
+		<wsdl:part element="ns1:DownloadNicPersoInfo" name="input"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="downloadNicPersoInfoResponse">
+		<wsdl:part element="ns1:DownloadNicPersoInfoResponse" name="output"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateReceivedNicPersoInfoRequest">
+		<wsdl:part element="ns1:UpdateReceivedNicPersoInfo" name="input"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateReceivedNicPersoInfoResponse">
+		<wsdl:part element="ns1:UpdateReceivedNicPersoInfoResponse" name="output"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name = "downloadListBufIdPersonRequest">
+        <wsdl:part element = "ns1:DownloadListBufIdPerson" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "downloadListBufIdPersonResponse">
+        <wsdl:part element = "ns1:DownloadListBufIdPersonResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="editDataRegistrationRequest">
+		<wsdl:part element="ns1:EditDataRegistration" name="input"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="editDataRegistrationResponse">
+		<wsdl:part element="ns1:EditDataRegistrationResponse" name="output"></wsdl:part>
+	</wsdl:message>
+	
+    <wsdl:portType name = "transactionWS">
+        <wsdl:operation name = "uploadTransaction">
+            <wsdl:input message = "ns1:transactionUploadRequest"></wsdl:input>
+            <wsdl:output message = "ns1:transactionUploadResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "downloadBufEppPerson">
+            <wsdl:input message = "ns1:downloadBufEppPersonRequest"></wsdl:input>
+            <wsdl:output message = "ns1:downloadBufEppPersonResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "downloadListBufIdPerson">
+            <wsdl:input message = "ns1:downloadListBufIdPersonRequest"></wsdl:input>
+            <wsdl:output message = "ns1:downloadListBufIdPersonResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "retrieveTransaction">
+            <wsdl:input message = "ns1:transactionRetrievalRequest"></wsdl:input>
+            <wsdl:output message = "ns1:transactionRetrievalResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "retrieveTransactionStatus">
+            <wsdl:input message = "ns1:transactionStatusRetrievalRequest"></wsdl:input>
+            <wsdl:output message = "ns1:transactionStatusRetrievalResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "retrievePassportStatus">
+            <wsdl:input message = "ns1:passportStatusRetrievalRequest"></wsdl:input>
+            <wsdl:output message = "ns1:passportStatusRetrievalResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "uploadTransactionLog">
+            <wsdl:input message = "ns1:transactionLogUploadRequest"></wsdl:input>
+            <wsdl:output message = "ns1:transactionLogUploadResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="downloadNicPersoInfo">
+			<wsdl:input message = "ns1:downloadNicPersoInfoRequest" name="downloadNicPersoInfoRequest"></wsdl:input>
+			<wsdl:output message = "ns1:downloadNicPersoInfoResponse"	name="downloadNicPersoInfoResponse"></wsdl:output>
+			<wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updateReceivedNicPersoInfo">
+			<wsdl:input message="ns1:updateReceivedNicPersoInfoRequest" name="updateReceivedNicPersoInfoRequest"></wsdl:input>
+			<wsdl:output message="ns1:updateReceivedNicPersoInfoResponse" name="updateReceivedNicPersoInfoResponse"></wsdl:output>
+			<wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="editDataRegistration">
+			<wsdl:input message="ns1:editDataRegistrationRequest" name="editDataRegistrationRequest"></wsdl:input>
+			<wsdl:output message="ns1:editDataRegistrationResponse" name="editDataRegistrationResponse"></wsdl:output>
+			<wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+		</wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

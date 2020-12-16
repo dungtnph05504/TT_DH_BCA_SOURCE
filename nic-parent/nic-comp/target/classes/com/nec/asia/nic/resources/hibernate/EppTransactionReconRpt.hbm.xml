@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicTransactionReconRpt" table="EPP_TRANSACTION_RECON_RPT" optimistic-lock="version">
+		<composite-id name="id" class="com.nec.asia.nic.comp.trans.domain.NicTransactionReconRptId">
+			<key-property name="regSiteCode" type="string">
+				<column name="REG_SITE_CODE" length="5" />
+			</key-property>
+			<key-property name="issSiteCode" type="string">
+				<column name="ISS_SITE_CODE" length="5" />
+			</key-property>
+			<key-property name="applicationDate" type="string">
+				<column name="APPLICATION_DATE" length="8" />
+			</key-property>
+			<key-property name="collectionDate" type="string">
+				<column name="COLLECTION_DATE" length="8" />
+			</key-property>
+		</composite-id>
+		<property name="reconStatus" type="string">
+			<column name="RECON_STATUS" length="30">
+				<comment>Reconciliation Status</comment>
+			</column>
+		</property>
+		<property name="reconRemarks" type="string">
+			<column name="RECON_REMARKS" length="1000">
+				<comment>Reconciliation Report</comment>
+			</column>
+		</property>
+		<property name="dcmRegistered" type="long">
+			<column name="DCM_REGISTERED" precision="20" scale="0">
+				<comment>DCM Registered Count</comment>
+			</column>
+		</property>
+		<property name="dcmUploaded" type="long">
+			<column name="DCM_UPLOADED" precision="20" scale="0">
+				<comment>DCM Transmission Completed Count</comment>
+			</column>
+		</property>
+		<property name="dcmCancelled" type="long">
+			<column name="DCM_CANCELLED" precision="20" scale="0">
+				<comment>DCM Cancelled Count</comment>
+			</column>
+		</property>
+		<property name="dcmWip" type="long">
+			<column name="DCM_WIP" precision="20" scale="0">
+				<comment>DCM WIP (Work in Progress) Count</comment>
+			</column>
+		</property>
+		<property name="eppReceived" type="long">
+			<column name="EPP_RECEIVED" precision="20" scale="0">
+				<comment>EPP Central Received Count</comment>
+			</column>
+		</property>
+		<property name="eppRejected" type="long">
+			<column name="EPP_REJECTED" precision="20" scale="0">
+				<comment>EPP Central Rejected Count</comment>
+			</column>
+		</property>
+		<property name="eppWip" type="long">
+			<column name="EPP_WIP" precision="20" scale="0">
+				<comment>EPP Central WIP Count</comment>
+			</column>
+		</property>
+		<property name="eppPersoSubmitted" type="long">
+			<column name="EPP_PERSO_SUBMITTED" precision="20" scale="0">
+				<comment>EPP Central Perso Submitted Count</comment>
+			</column>
+		</property>
+		<property name="eppPersoRejected" type="long">
+			<column name="EPP_PERSO_REJECTED" precision="20" scale="0">
+				<comment>EPP Central Perso Rejected Count</comment>
+			</column>
+		</property>
+		<property name="eppDocPrinted" type="long">
+			<column name="EPP_DOC_PRINTED" precision="20" scale="0">
+				<comment>EPP Central Document Printed Count</comment>
+			</column>
+		</property>
+		<property name="eppDocQcCompleted" type="long">
+			<column name="EPP_DOC_QC_COMPLETED" precision="20" scale="0">
+				<comment>EPP Central Document QC Completed Count</comment>
+			</column>
+		</property>
+		<property name="eppPersoWip" type="long">
+			<column name="EPP_PERSO_WIP" precision="20" scale="0">
+				<comment>EPP Central Perso WIP Count</comment>
+			</column>
+		</property>
+		<property name="eppDocPackaged" type="long">
+			<column name="EPP_DOC_PACKAGED" precision="20" scale="0">
+				<comment>EPP Central Packaged Count</comment>
+			</column>
+		</property>
+		<property name="eppDocDispatched" type="long">
+			<column name="EPP_DOC_DISPATCHED" precision="20" scale="0">
+				<comment>EPP Central Dispatched Count</comment>
+			</column>
+		</property>
+		<property name="eppIssuanceDocReceived" type="long">
+			<column name="EPP_ISSUANCE_DOC_RECEIVED" precision="20" scale="0">
+				<comment>EPP Central Document Received Count</comment>
+			</column>
+		</property>
+		<property name="eppIssuanceDocRejected" type="long">
+			<column name="EPP_ISSUANCE_DOC_REJECTED" precision="20" scale="0">
+				<comment>EPP Central Document Rejected Count</comment>
+			</column>
+		</property>
+		<property name="eppIssuanceDocIssued" type="long">
+			<column name="EPP_ISSUANCE_DOC_ISSUED" precision="20" scale="0">
+				<comment>EPP Central Document Issued Count</comment>
+			</column>
+		</property>
+		<property name="eppIssuanceWip" type="long">
+			<column name="EPP_ISSUANCE_WIP" precision="20" scale="0">
+				<comment>EPP Central Issuance WIP</comment>
+			</column>
+		</property>
+		<property name="persoReceived" type="long">
+			<column name="PERSO_RECEIVED" precision="20" scale="0">
+				<comment>PERSO Received Count</comment>
+			</column>
+		</property>
+		<property name="persoRejected" type="long">
+			<column name="PERSO_REJECTED" precision="20" scale="0">
+				<comment>PERSO Rejected Count</comment>
+			</column>
+		</property>
+		<property name="persoDocPrinted" type="long">
+			<column name="PERSO_DOC_PRINTED" precision="20" scale="0">
+				<comment>PERSO Document Printed Count</comment>
+			</column>
+		</property>
+		<property name="persoDocQcCompleted" type="long">
+			<column name="PERSO_DOC_QC_COMPLETED" precision="20" scale="0">
+				<comment>PERSO Document QC Completed Count</comment>
+			</column>
+		</property>
+		<property name="persoWip" type="long">
+			<column name="PERSO_WIP" precision="20" scale="0">
+				<comment>PERSO WIP Count</comment>
+			</column>
+		</property>
+		<property name="dmDocPackaged" type="long">
+			<column name="DM_DOC_PACKAGED" precision="20" scale="0">
+				<comment>Dispatch Module Packaged Count</comment>
+			</column>
+		</property>
+		<property name="dmDocDispatched" type="long">
+			<column name="DM_DOC_DISPATCHED" precision="20" scale="0">
+				<comment>Dispatch Module Dispatched Count</comment>
+			</column>
+		</property>
+		<property name="dmWip" type="long">
+			<column name="DM_WIP" precision="20" scale="0">
+				<comment>Dispatch Module WIP Count</comment>
+			</column>
+		</property>
+		<property name="ioStockedIn" type="long">
+			<column name="IO_STOCKED_IN" precision="20" scale="0">
+				<comment>Issuance Office Stocked In Count</comment>
+			</column>
+		</property>
+		<property name="ioRejected" type="long">
+			<column name="IO_REJECTED" precision="20" scale="0">
+				<comment>Issuance Office Rejected Count</comment>
+			</column>
+		</property>
+		<property name="ioIssued" type="long">
+			<column name="IO_ISSUED" precision="20" scale="0">
+				<comment>Issuance Office Issued Count</comment>
+			</column>
+		</property>
+		<property name="ioWip" type="long">
+			<column name="IO_WIP" precision="20" scale="0">
+				<comment>Issuance Office WIP Count</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Update By</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

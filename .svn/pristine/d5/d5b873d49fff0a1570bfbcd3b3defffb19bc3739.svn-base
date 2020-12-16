@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.BorderGate" table="EPP_CENTRAL.BORDERGATE">
+  <id name="id" type="long">
+	<column name="ID" precision="10" scale="0" />
+	<generator class="sequence">
+		<param name="sequence">EPP_CENTRAL.SEQ_BORDERGATE</param>
+		<param name="allocationSize">100</param>
+	</generator>
+  </id>
+  <property generated="never" lazy="false" name="createBy" type="long">
+   <column name="CREATEDBY" />
+  </property>
+  <property generated="never" lazy="false" name="lastModifiedBy" type="long">
+   <column name="LASTMODIFIEDBY" />
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
+   <column name="CREATEDTIME" >
+   
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="lastModifiedDate" type="java.util.Date">
+   <column name="LASTMODIFIEDTIME"/>
+  </property>
+  <property generated="never" lazy="false" name="code" type="java.lang.String">
+   <column name="CODE"/>
+  </property>
+  <property generated="never" lazy="false" name="name" type="java.lang.String">
+   <column name="NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="borderGateKind" type="long">
+   <column name="BORDERGATEKIND"/>
+  </property>
+  <property generated="never" lazy="false" name="description" type="java.lang.String">
+   <column name="DESCRIPTION"/>
+  </property>
+  <property generated="never" lazy="false" name="syncDataFlag" type="java.lang.String">
+   <column name="SYNC_DATA_FLAG"/>
+  </property>
+ </class>
+</hibernate-mapping>

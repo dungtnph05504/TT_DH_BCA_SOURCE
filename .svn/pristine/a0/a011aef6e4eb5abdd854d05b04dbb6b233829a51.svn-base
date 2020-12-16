@@ -1,0 +1,191 @@
+package com.nec.asia.nic.comp.trans.dao.impl;
+
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+
+import com.nec.asia.nic.comp.trans.dao.EppListHandoverDetailDao;
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.EppListHandoverDetail;
+import com.nec.asia.nic.comp.ws.log.domain.CreateMessageException;
+import com.nec.asia.nic.framework.dao.impl.GenericHibernateDao;
+
+@Repository
+public class EppListHandoverDetailDaoImpl extends
+		GenericHibernateDao<EppListHandoverDetail, Long> implements
+		EppListHandoverDetailDao {
+
+	@Override
+	public BaseModelList<EppListHandoverDetail> getListPackageByTransactionId(
+			String tranId) {
+		try {
+			List<EppListHandoverDetail> list = null;
+			DetachedCriteria dCriteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			Order orders = Order.asc("id");
+			if (StringUtils.isNotBlank(tranId)) {
+				dCriteria.add(Restrictions.eq("transactionId", tranId));
+				dCriteria.addOrder(orders);
+				list = this.findAll(dCriteria);
+			}
+			return new BaseModelList<EppListHandoverDetail>(list, true, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseModelList<EppListHandoverDetail>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - getListPackageByTransactionId - " + tranId
+							+ " - thất bại.");
+		}
+	}
+
+	@Override
+	public BaseModelSingle<Boolean> insertDataTable(EppListHandoverDetail tran) {
+		boolean check = false;
+		try {
+			// tran.setId(Long.valueOf(1));
+			super.saveOrUpdate(tran);
+			check = true;
+			return new BaseModelSingle<Boolean>(check, true, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseModelSingle<Boolean>(check, false,
+					CreateMessageException.createMessageException(e)
+							+ " - insertDataTable - " + tran.getPackageId()
+							+ " - thất bại.");
+		}
+	}
+
+	@Override
+	public BaseModelList<EppListHandoverDetail> getListPackageByPackageId(
+			String packageId, String type) {
+		try {
+			List<EppListHandoverDetail> list = null;
+			DetachedCriteria dCriteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			if (!(StringUtils.isBlank(type) && StringUtils.isBlank(packageId))) {
+				Criterion test1 = Restrictions.eq("packageId", packageId);
+				Criterion test2 = Restrictions.eq("typeList", type);
+				dCriteria.add(Restrictions.and(test1, test2));
+				list = this.findAll(dCriteria);
+			}
+			
+			return new BaseModelList<EppListHandoverDetail>(
+					list , true, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseModelList<EppListHandoverDetail>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - getListPackageByPackageId:" + packageId + " "
+							+ type + " - thất bại.");
+		}
+
+	}
+
+	@Override
+	public BaseModelSingle<EppListHandoverDetail> getListPackageByPackageIdAndTranID(
+			String packageId, String tranID, String type) {
+		try {
+			DetachedCriteria dCriteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			if (!(StringUtils.isBlank(packageId) && StringUtils.isBlank(tranID) && StringUtils.isBlank(type))) {
+				dCriteria.add(Restrictions.eq("packageId", packageId));
+				dCriteria.add(Restrictions.eq("transactionId", tranID));
+				dCriteria.add(Restrictions.eq("typeList", type));
+				List<EppListHandoverDetail> list = this.findAll(dCriteria);
+				if (list != null && list.size() > 0)
+					return new BaseModelSingle<EppListHandoverDetail>(list.get(0),
+							true, null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseModelSingle<EppListHandoverDetail>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - getListPackageByPackageIdAndTranID - "
+							+ packageId + " - " + tranID + " " + type
+							+ " - thất bại.");
+		}
+		return new BaseModelSingle<EppListHandoverDetail>(null, true, null);
+	}
+
+	@Override
+	public EppListHandoverDetail getListPackageByPackageIdAndStage(
+			String[] stage, String tranID) {
+		try {
+			DetachedCriteria dCriteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			Criterion test1 = Restrictions.in("stage", stage);
+			Criterion test2 = Restrictions.eq("transactionId", tranID);
+			dCriteria.add(Restrictions.and(test1, test2));
+			List<EppListHandoverDetail> list = this.findAll(dCriteria);
+			if (list != null && list.size() > 0)
+				return list.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+	@Override
+	public BaseModelSingle<EppListHandoverDetail> findTransactionByIdOrType(
+			String transId, String type) {
+		try {
+			DetachedCriteria dCriteria = DetachedCriteria
+					.forClass(getPersistentClass());
+			Criterion test1 = Restrictions.eq("typeList", type);
+			Criterion test2 = Restrictions.eq("transactionId", transId);
+			dCriteria.add(Restrictions.and(test2));
+			List<EppListHandoverDetail> list = this.findAll(dCriteria);
+			if (list != null && list.size() > 0)
+				return new BaseModelSingle<EppListHandoverDetail>(list.get(0),
+						true, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseModelSingle<EppListHandoverDetail>(null, false,
+					CreateMessageException
+							.createMessageException(new Exception(e))
+							+ " - findTransactionByIdOrType - "
+							+ transId
+							+ " - thất bại.");
+		}
+		return new BaseModelSingle<EppListHandoverDetail>(null, true, null);
+	}
+
+	@Override
+	public BaseModelSingle<Boolean> saveHandoverDetail(
+			EppListHandoverDetail tran) {
+		try {
+			this.saveOrUpdate(tran);
+			return new BaseModelSingle<Boolean>(true, true, null);
+		} catch (Throwable e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return new BaseModelSingle<Boolean>(false, false,
+					CreateMessageException
+							.createMessageException(new Exception(e))
+							+ " - saveHandoverDetail - thất bại.");
+		}
+	}
+
+	@Override
+	public void deleteHandoverDetail(String packageOldId, String transactionId,
+			String typeList) throws Exception {
+		try {
+			EppListHandoverDetail hanDetail = this
+					.getListPackageByPackageIdAndTranID(packageOldId,
+							transactionId, typeList).getModel();
+			if (hanDetail != null) {
+				this.delete(hanDetail);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+}

@@ -1,0 +1,243 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.nec.asia</groupId>
+		<artifactId>nic-parent</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.nec.asia</groupId>
+	<artifactId>nic-ws</artifactId>
+	<packaging>war</packaging>
+	<name>NIC Web Service Application</name>
+	<url>http://www.nec.com.sg</url>
+
+	<properties>
+		<log.dir>log</log.dir>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.cxf</groupId> <artifactId>apache-cxf</artifactId> 
+			<version>${cxf.version}</version> <type>pom</type> </dependency> -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>3.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+		</dependency>
+		<dependency><!-- to use sample jaxb version with cxf-rt-frontend-jaxws 
+				: 3.1.4 -->
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+		<!-- Jetty is needed if you're using the CXFServlet -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-extension-providers</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ws-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<exclusions>
+            <exclusion>
+                <artifactId>axis-wsdl4j</artifactId>
+                <groupId>axis</groupId>
+            </exclusion>
+        </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.nec.asia</groupId>
+			<artifactId>nic-dx-type</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.nec.asia</groupId>
+			<artifactId>nic-framework</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.nec.asia</groupId>
+			<artifactId>nic-comp</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_2.4_spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+	
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+
+		
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<!-- <groupId>org.mortbay.jetty</groupId> <artifactId>maven-jetty-plugin</artifactId> 
+					<version>6.1.26</version> -->
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.6.14.v20131031</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.oracle</groupId>
+						<artifactId>ojdbc6</artifactId>
+						<version>${oracle.version}</version>
+						<type>jar</type>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<systemProperties>
+						<systemProperty>
+							<name>jboss.server.log.dir</name>
+							<value>${project.basedir}/${log.dir}</value>
+						</systemProperty>
+					</systemProperties>
+					<scanIntervalSeconds>60</scanIntervalSeconds>
+					<webAppConfig>
+						<contextPath>/nic</contextPath>
+					</webAppConfig>
+					<jvmArgs>-DMAVEN_OPTS="-Xms256m -Xmx512m -XX:PermSize=128m
+						-XX:MaxPermSize=512m -XX:+CMSPermGenSweepingEnabled
+						-Dclient.encoding.override=UTF-8"</jvmArgs>
+					<reload>manual</reload>
+					<!-- <connectors> <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector"> 
+						<port>8280</port> <maxIdleTime>60000</maxIdleTime> </connector> <connector 
+						implementation="org.mortbay.jetty.security.SslSocketConnector"> <port>8643</port> 
+						<maxIdleTime>60000</maxIdleTime> <keystore>${basedir}/src/main/resources/keystore/192.168.112.3.jks</keystore> 
+						<password>password</password> <keyPassword>password</keyPassword> <truststore>${basedir}/src/main/resources/keystore/192.168.112.3.jks</truststore> 
+						<trustPassword>password</trustPassword> <needClientAuth>false</needClientAuth> 
+						</connector> </connectors> <jettyEnvXml>${basedir}/src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<Dependencies>com.oracle.jdbc</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-to-dist</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>war</type>
+									<overWrite>true</overWrite>
+									<!-- <destFileName>nic.war</destFileName> -->
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.basedir}/../../dist</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<!-- <excludes> <exclude>log4j.xml</exclude> </excludes> -->
+			</resource>
+		</resources>
+	</build>
+</project>

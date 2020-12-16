@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+	attributeFormDefault="unqualified" targetNamespace="http://epass.asia.nec.com/pps/persoData"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pd="http://epass.asia.nec.com/pps/persoData">
+	<xs:element name="persoData" type="pd:persoDataType">
+
+	</xs:element>
+
+	<xs:complexType name="applicationDataType">
+		<xs:sequence>
+			<xs:element name="printName" type="pd:nameType" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Name to be printed on the date page. If the name
+						is too long, it should be trimmed in order to
+						fit the data page for
+						printing.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+
+			<xs:element name="docType" maxOccurs="1" minOccurs="1"
+				type="pd:docTypeType">
+				<xs:annotation>
+					<xs:documentation>
+						Type of the document. The value must be one of
+						the following: Regular, Official, Diplomatic,
+						MRP, Hajj or MRCTD.
+					</xs:documentation>
+				</xs:annotation>
+
+			</xs:element>
+			<xs:element name="nat" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The nationality of the applicant as defined by
+						ISO 3166-1 alpha-3. e.g. PHL for Philippines
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="natFull" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Full name of the nationality. e.g. Philippines.
+						This text will be printed on the data page under
+						the Nationality
+						fields.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gender" maxOccurs="1" minOccurs="1" type="pd:genderType">
+				<xs:annotation>
+					<xs:documentation>
+						Gender of the application. The value can be one
+						of the followings: F, M or X
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dob" maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The format should be YYYYMMDD. If the element is
+						unknown, use X to replace the element. e.g. if
+						the date is Nov 30,
+						but year is unknown, the
+						value should be XXXX1130
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9|X]{8}"></xs:pattern>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="pob" type="xs:string" maxOccurs="1"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Place of birth</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="duration" maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Date of issue</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+
+						<xs:minInclusive value="1"></xs:minInclusive>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+			<xs:element name="authority" type="xs:string" maxOccurs="1"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Name of the issuing authority
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="fullName" type="pd:nameType" maxOccurs="1"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Full name of the applicant
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherNames" type="pd:otherNamesType"
+				maxOccurs="1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Other names of the applicant
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+
+
+
+
+
+
+			<xs:element name="remarks" type="pd:remarkType" maxOccurs="1"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Remarks that need to be printed on the 4th page
+						of the passport (above the date page)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="photo" type="xs:base64Binary" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						File name of the photo
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="xs:base64Binary"
+				maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="nameType">
+		<xs:sequence>
+			<xs:element name="surname" type="xs:string"></xs:element>
+			<xs:element name="middleName" type="xs:string"></xs:element>
+			<xs:element name="givenName" type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="otherNamesType">
+		<xs:sequence>
+			<xs:element name="otherName" type="pd:nameType" maxOccurs="unbounded"
+				minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="persoDataType">
+		<xs:sequence>
+			<xs:element name="jobInfo" type="pd:jobInfoType"
+				maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Section containing the print job metadata
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="applicationData" type="pd:applicationDataType"
+				maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Section containing the personal data
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="jobInfoType">
+		<xs:sequence>
+			<xs:element name="arn" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Unique application reference number (ARN) of the
+						application
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="priority" type="xs:int" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Priority of the job. The larger the number, the
+						higher the priority.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="collectLocation" type="xs:string"
+				maxOccurs="1" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Branch code of the collection site of this
+						document.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="collectionDate" type="xs:date"
+				maxOccurs="1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date to collect the document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="captureDate" type="xs:date" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Date of capture of this application.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="remarkType">
+		<xs:sequence>
+			<xs:element name="limitation" type="xs:string" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+			<xs:element name="fullname" type="xs:string" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+			<xs:element name="position" type="xs:string" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+			<xs:element name="aka" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="docTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Regular"></xs:enumeration>
+			<xs:enumeration value="Official"></xs:enumeration>
+			<xs:enumeration value="Diplomatic"></xs:enumeration>
+			<xs:enumeration value="MRP"></xs:enumeration>
+			<xs:enumeration value="Hajj"></xs:enumeration>
+			<xs:enumeration value="MRCTDR"></xs:enumeration>
+			<xs:enumeration value="MRCTDS"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="genderType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="F"></xs:enumeration>
+			<xs:enumeration value="M"></xs:enumeration>
+			<xs:enumeration value="X"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

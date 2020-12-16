@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicDocumentData" table="EPP_DOCUMENT_DATA" optimistic-lock="version">
+		<composite-id name="id" class="com.nec.asia.nic.comp.trans.domain.NicDocumentDataId">
+			<key-property name="transactionId" type="string">
+				<column name="TRANSACTION_ID" length="36" />
+			</key-property>
+			<key-property name="passportNo" type="string">
+				<column name="PASSPORT_NO" length="16" />
+			</key-property>
+			<!-- <key-property name="serialNo" type="string">
+				<column name="SERIAL_NO" length="50"/>
+			</key-property> -->
+		</composite-id>
+		<many-to-one name="nicTransaction" class="com.nec.asia.nic.comp.trans.domain.NicTransaction" lazy="false" fetch="select" insert="false" update="false">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Application Id</comment>
+			</column>
+		</many-to-one>
+		<property name="serialNo" type="string">
+		    <column name="SERIAL_NO" length="50">
+                <comment>serial ho chieu</comment>
+  		    </column>
+		</property>
+		<property name="printDate" type="timestamp">
+		    <column name="PRINT_DATE" length="7">
+		         <comment>ngay in</comment>
+		    </column>
+		</property>
+		<property name="printName" type="string">
+		   <column name="PRINT_NAME" length="120">
+		     <comment>nguoi in</comment>
+		   </column>
+		</property>
+		<property name="chipSerialNo" type="string">
+			<column name="CHIP_SERIAL_NO" length="36">
+				<comment>Chip Serial No</comment>
+			</column>
+		</property>
+		<property name="printingSite" type="string">
+			<column name="PRINTING_SITE" length="30">
+				<comment>Printing Site (LIMA / ASEANA)</comment>
+			</column>
+		</property>
+		<property name="dateOfIssue" type="timestamp">
+			<column name="DATE_OF_ISSUE" length="7">
+				<comment>Date of Issue</comment>
+			</column>
+		</property>
+		<property name="dateOfExpiry" type="timestamp">
+			<column name="DATE_OF_EXPIRY" length="7">
+				<comment>Date of Expiry</comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="30">
+				<comment>Document Status</comment>
+			</column>
+		</property>
+		<property name="statusUpdateTime" type="timestamp">
+			<column name="STATUS_UPDATE_TIME" length="7">
+				<comment>Document Status update Datetime</comment>
+			</column>
+		</property>
+		<property name="packageId" type="string">
+			<column name="PACKAGE_ID" length="36">
+				<comment>Package Id</comment>
+			</column>
+		</property>
+		<property name="packageDatetime" type="timestamp">
+			<column name="PACKAGE_DATETIME" length="7">
+				<comment>Packed Datetime</comment>
+			</column>
+		</property>
+		<property name="dispatchId" type="string">
+			<column name="DISPATCH_ID" length="36">
+				<comment>Dispatch Id</comment>
+			</column>
+		</property>
+		<property name="dispatchDatetime" type="timestamp">
+			<column name="DISPATCH_DATETIME" length="7">
+				<comment>Dispatch Datetime</comment>
+			</column>
+		</property>
+		<property name="issuedFlag" type="yes_no">
+			<column name="ISSUED_FLAG" length="1">
+				<comment>Passport Issued Flag (Y/N)</comment>
+			</column>
+		</property>
+		<property name="activeFlag" type="yes_no">
+			<column name="ACTIVE_FLAG" length="1">
+				<comment>Passport Active Flag (Y/N)</comment>
+			</column>
+		</property>
+		<property name="receiveBy" type="string">
+			<column name="RECEIVE_BY" length="64">
+				<comment>Delivery Received By</comment>
+			</column>
+		</property>
+		<property name="receiveDatetime" type="timestamp">
+			<column name="RECEIVE_DATETIME" length="7">
+				<comment>Delivery Received Datetime</comment>
+			</column>
+		</property>
+		<property name="issueBy" type="string">
+			<column name="ISSUE_BY" length="64">
+				<comment>Passport Issue By</comment>
+			</column>
+		</property>
+		<property name="issueDatetime" type="timestamp">
+			<column name="ISSUE_DATETIME" length="7">
+				<comment>Passport Issue Datetime</comment>
+			</column>
+		</property>
+		<property name="rejectBy" type="string">
+			<column name="REJECT_BY" length="64">
+				<comment>Passport Reject By</comment>
+			</column>
+		</property>
+		<property name="rejectDatetime" type="timestamp">
+			<column name="REJECT_DATETIME" length="7">
+				<comment>Passport Reject Datetime</comment>
+			</column>
+		</property>
+		<property name="cancelBy" type="string">
+			<column name="CANCEL_BY" length="64">
+				<comment>Passport Cancel By</comment>
+			</column>
+		</property>
+		<property name="cancelDatetime" type="timestamp">
+			<column name="CANCEL_DATETIME" length="7">
+				<comment>Passport Cancel Datetime</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Create Workstation Id</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Update By</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="string">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Update Workstation Id</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+		<property name="syncStatus" type="string">
+			<column name="SYNC_STATUS" length="1">
+				<comment>Sync Status (TBC)</comment>
+			</column>
+		</property>
+		<property name="lastSyncDatetime" type="timestamp">
+			<column name="LAST_SYNC_DATETIME" length="7">
+				<comment>Last Sync Datetime</comment>
+			</column>
+		</property>
+		<property name="icaoLine1" type="string">
+			<column name="ICAO_LINE1" length="100">
+				<comment>Icao Line 1</comment>
+			</column>
+		</property>
+		<property name="icaoLine2" type="string">
+			<column name="ICAO_LINE2" length="100">
+				<comment>Icao Line 2</comment>
+			</column>
+		</property>
+		<property name="signer" type="string">
+			<column name="SIGNER" length="120">
+				<comment>Người ký</comment>
+			</column>
+		</property>
+		<property name="positionSigner" type="string">
+			<column name="POSITION_SIGNER" length="200">
+				<comment>Vị trí người ký</comment>
+			</column>
+		</property>
+		<property name="cancelReason" type="string">
+			<column name="CANCEL_REASON" length="2000">
+				<comment>Ly do huy</comment>
+			</column>
+		</property>
+		<property name="cancelType" type="string">
+			<column name="CANCEL_TYPE" length="20">
+				<comment>Kieu huy</comment>
+			</column>
+		</property>
+		<property name="printerSerial" type="string">
+			<column name="PRINTER_SERIAL" length="50">
+				<comment>Số hiệu máy in</comment>
+			</column>
+		</property>
+		<property name="passportType" type="string">
+			<column name="PASSPORT_TYPE" length="2">
+				<comment>Loại hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="placeOfIssueCode" type="string">
+			<column name="PLACE_OF_ISSUE_CODE" length="10">
+				<comment>Mã nơi cấp hộ chiếu</comment>
+			</column>
+		</property>
+	</class>
+
+	<sql-query name="updatePackageDispatchInfo">
+        <![CDATA[
+        UPDATE EPP_DOCUMENT_DATA 
+        SET PACKAGE_ID=:packageId, PACKAGE_DATETIME=:packageDateTime, DISPATCH_ID=:dispatchId, DISPATCH_DATETIME=:dispatchDateTime, 
+            STATUS=:status, STATUS_UPDATE_TIME=:statusUpdateTime,
+            UPDATE_BY=:officerId, UPDATE_WKSTN_ID=:workstationId, UPDATE_DATETIME=sysdate 
+        WHERE PASSPORT_NO in (:passportNoList) and STATUS in ('PO','QC')
+        ]]>
+	</sql-query>
+
+	<sql-query name="countExistingPassportByPassportNoList">
+        <![CDATA[
+        SELECT COUNT(1) FROM EPP_DOCUMENT_DATA WHERE PASSPORT_NO in (:passportNoList)
+        ]]>
+	</sql-query>
+	
+	<sql-query name="callCancelPassport">
+		<![CDATA[CALL EPP_DPS.PROC_CANCEL_PASSPORT(:passportNo,:transactionId)]]>
+    </sql-query>
+    
+    <sql-query name="updateSyncStatusByPassportNoList">
+        <![CDATA[
+        UPDATE EPP_DOCUMENT_DATA 
+        SET SYNC_STATUS='Y', LAST_SYNC_DATETIME=sysdate,  
+            UPDATE_BY=:officerId, UPDATE_WKSTN_ID=:workstationId, UPDATE_DATETIME=sysdate 
+        WHERE PASSPORT_NO in (:passportNoList)
+        ]]>
+	</sql-query>
+	
+	<sql-query name="generateTrialPassportNo">
+		<return-scalar column="passportNo" type="string" />
+            <![CDATA[
+            SELECT GENERATE_PASSPORT_NO() as passportNo from DUAL (:trans)
+            ]]>
+	</sql-query>
+	
+	<sql-query name="listDocumentData">
+		<return-scalar column="passportNo" type="string" />
+		<return-scalar column="fullname" type="string" />
+		<return-scalar column="gender" type="string" />
+		<return-scalar column="dob" type="date" />
+		<return-scalar column="pob" type="string" />
+		<return-scalar column="passportType" type="string" />
+		<return-scalar column="nin" type="string" />
+		<return-scalar column="typeDob" type="string" />
+		<return-scalar column="tranId" type="string" />
+		<return-scalar column="dateOfIssue" type="date" />
+		<return-scalar column="dateExpire" type="date" />
+		<return-scalar column="printingSite" type="string" />
+		<return-scalar column="status" type="string" />
+		<return-scalar column="activeFlag" type="string" />
+		<return-scalar column="infoPerson" type="string" />
+		<return-scalar column="icaoFirst" type="string" />
+		<return-scalar column="icaoEnd" type="string" />
+            <![CDATA[
+            SELECT DISTINCT EPP_CENTRAL.EPP_DOCUMENT_DATA.PASSPORT_NO as passportNo,
+				      EPP_CENTRAL.EPP_REGISTRATION_DATA.SURNAME_LINE1 as fullname,
+				      EPP_CENTRAL.EPP_REGISTRATION_DATA.GENDER as gender,
+				      EPP_CENTRAL.EPP_REGISTRATION_DATA.DATE_OF_BIRTH as dob,
+				      EPP_CENTRAL.EPP_REGISTRATION_DATA.PLACE_OF_BIRTH as pob,
+				      EPP_CENTRAL.EPP_TRANSACTION.PASSPORT_TYPE as passportType,
+				      EPP_CENTRAL.EPP_TRANSACTION.NIN as nin,
+      				  EPP_CENTRAL.EPP_REGISTRATION_DATA.STYLE_DOB as typeDob,
+      				  EPP_CENTRAL.EPP_DOCUMENT_DATA.TRANSACTION_ID as tranId,
+      				  EPP_CENTRAL.EPP_DOCUMENT_DATA.DATE_OF_ISSUE as dateOfIssue,
+      				  EPP_CENTRAL.EPP_DOCUMENT_DATA.DATE_OF_EXPIRY as dateExpire,
+				      EPP_CENTRAL.EPP_DOCUMENT_DATA.PRINTING_SITE as printingSite,
+				      EPP_CENTRAL.EPP_DOCUMENT_DATA.STATUS as status,
+				      EPP_CENTRAL.EPP_DOCUMENT_DATA.ACTIVE_FLAG as activeFlag,
+				      EPP_CENTRAL.EPP_TRANSACTION.INFO_PERSON as infoPerson,
+				      EPP_CENTRAL.EPP_DOCUMENT_DATA.ICAO_LINE1 as icaoFirst,
+				      EPP_CENTRAL.EPP_DOCUMENT_DATA.ICAO_LINE2 as icaoEnd
+			FROM EPP_CENTRAL.EPP_DOCUMENT_DATA
+					  JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_DOCUMENT_DATA.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID				  
+					  JOIN EPP_CENTRAL.EPP_REGISTRATION_DATA ON EPP_CENTRAL.EPP_REGISTRATION_DATA.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+					  JOIN EPP_CENTRAL.EPP_TRANSACTION_PACKAGE ON EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID  
+			WHERE ((EPP_CENTRAL.EPP_DOCUMENT_DATA.PASSPORT_NO = (:passportNo)) 
+					  	OR (TO_DATE(EPP_CENTRAL.EPP_DOCUMENT_DATA.DATE_OF_ISSUE,'DD/MM/YY') = TO_DATE((:dateIssue),'DD/MM/YY'))
+	           			OR (TO_DATE(EPP_CENTRAL.EPP_DOCUMENT_DATA.DATE_OF_EXPIRY,'DD/MM/YY') = TO_DATE((:dateExpire),'DD/MM/YY'))
+					  	OR (EPP_CENTRAL.EPP_TRANSACTION.ISS_SITE_CODE = (:siteCode))
+	            		OR (EPP_CENTRAL.EPP_TRANSACTION.PASSPORT_STYLE = (:style))
+					  	OR (EPP_CENTRAL.EPP_TRANSACTION_PACKAGE.PACKAGE_ID = (:packId)))
+              AND (EPP_CENTRAL.EPP_DOCUMENT_DATA.STATUS = 'ISSUANCE' AND EPP_CENTRAL.EPP_DOCUMENT_DATA.ACTIVE_FLAG = 'Y')
+            ]]>
+	</sql-query>
+	<sql-query name="detailDocumentData">
+		<return-scalar column="dateExpire" type="date" />
+		<return-scalar column="printingSite" type="string" />
+		<return-scalar column="status" type="string" />
+		<return-scalar column="activeFlag" type="string" />
+		<return-scalar column="infoPerson" type="string" />
+		<return-scalar column="icaoFirst" type="string" />
+		<return-scalar column="icaoEnd" type="string" />
+		<return-scalar column="docData" type="materialized_blob" />
+            <![CDATA[
+            SELECT EPP_CENTRAL.EPP_DOCUMENT_DATA.DATE_OF_EXPIRY as dateExpire,
+			      EPP_CENTRAL.EPP_DOCUMENT_DATA.PRINTING_SITE as printingSite,
+			      EPP_CENTRAL.EPP_DOCUMENT_DATA.STATUS as status,
+			      EPP_CENTRAL.EPP_DOCUMENT_DATA.ACTIVE_FLAG as activeFlag,
+			      EPP_CENTRAL.EPP_TRANSACTION.INFO_PERSON as infoPerson,
+			      EPP_CENTRAL.EPP_DOCUMENT_DATA.ICAO_LINE1 as icaoFirst,
+			      EPP_CENTRAL.EPP_DOCUMENT_DATA.ICAO_LINE2 as icaoEnd,
+            EPP_CENTRAL.EPP_TRANSACTION_ATTACHMENT.DOC_DATA as docData
+			FROM EPP_CENTRAL.EPP_DOCUMENT_DATA
+					  JOIN EPP_CENTRAL.EPP_TRANSACTION ON EPP_CENTRAL.EPP_DOCUMENT_DATA.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID				  
+					  JOIN EPP_CENTRAL.EPP_REGISTRATION_DATA ON EPP_CENTRAL.EPP_REGISTRATION_DATA.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+            JOIN EPP_CENTRAL.EPP_TRANSACTION_ATTACHMENT ON EPP_CENTRAL.EPP_TRANSACTION_ATTACHMENT.TRANSACTION_ID = EPP_CENTRAL.EPP_TRANSACTION.TRANSACTION_ID
+			WHERE EPP_CENTRAL.EPP_DOCUMENT_DATA.PASSPORT_NO = (:passportNo) AND EPP_CENTRAL.EPP_TRANSACTION_ATTACHMENT.DOC_TYPE = 'PH_CAP' AND ROWNUM = 1
+            ]]>
+	</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,248 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- taglib uri="displaytag.tld" prefix="display" -->
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+$('#addAllBtnId').click(function(){
+    $('#rptcols option').prop('selected', 'selected');
+    $('#rptcols option:selected').each( function() {
+   	 $('#selRptcols').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+       $(this).remove();
+   }); 
+});
+
+$('#addBtnId').click(function(){
+$('#rptcols option:selected').each( function() {
+	 $('#selRptcols').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+    $(this).remove();
+}); 
+});
+
+$('#removBtnId').click(function(){
+	$('#selRptcols :selected').each( function() {
+		 $('#rptcols').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+		$(this).remove(); 
+	});
+});
+
+$('#removAllBtnId').click(function(){
+    $('#selRptcols option').prop('selected', 'selected');
+    $('#selRptcols :selected').each( function() {
+		 $('#rptcols').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+		$(this).remove(); 
+	});
+});
+
+});
+</script>
+
+<div id="main">
+<div id="content_main">
+
+<table class="heading_report">
+	<tr>
+		<B><td class='subHeading' colspan='4' style='padding:5px'>ADD USERS</td></b>
+	</tr>
+	
+	
+  <tr> 
+  <td colspan="4"> &nbsp; 
+  </td>
+  </tr>
+	 
+	 <tr>
+		<td style="padding:15px" colspan="4">			&nbsp;
+<table style="width:100%" cellspacing="0" class="displayTable" id="row" cellpadding="0">
+	<thead>
+	<tr>
+	<tbody> 
+	
+				<tr>
+				<td style="border: none; font-weight: bold">Job ID</td>
+				<td style="border: none;">
+				<input id="id" name="id" class="defaultText" type="text" value="" size="30" maxlength="30" /></td>
+				<td rowspan="9">
+				<table width="50%">
+								<tr><td class="subjectsmall">Assigned Roles&nbsp;&nbsp;</td><td></td><td class="subjectsmall">Selected Roles&nbsp;&nbsp;</td></tr>
+								<tr><td></td><td></td><td></td></tr>
+								<tr> 
+										<td>
+									<select id="rptcols"   multiple="multiple" name="rptCols"  style="width:200px;;height:200px">
+										<option value="1">System Administrator</option>
+										<option value="2">NIC Operation Manager</option>
+										<option value="3">Investigation Officer</option>
+									</select>
+									</td> 
+									<td>
+										<table> 
+											<tr>
+												<td><input id="addAllBtnId" type="button" class="button_grey" value=">>" align="center" /></td>
+											</tr>
+											<tr>
+												<td><input id="addBtnId" type="button" class="button_grey" value=">" align="center" /></td>
+											</tr>
+											<tr>
+												<td><input id="removBtnId" type="button" class="button_grey" value="<" align="center" /></td>
+											</tr>
+											<tr>
+												<td><input id="removAllBtnId" type="button" class="button_grey" value="<<" align="center" /></td>
+											</tr>
+										</table>
+									</td>
+									<td>
+									<select id="selRptcols"  multiple="multiple" name="selRptcols" style="width:200px;height:200px" > 
+									</select>
+									</td> 
+								</tr>
+							</table>
+				<tr>
+				</td>
+				</tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">First Name</td>
+				<td style="border: none;">
+				<input id="firstName" name="firstName" class="defaultText" type="text" value="" size="30" maxlength="30" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Middle Name</td>
+				<td style="border: none;">
+				<input id="middleInitial" name="middleInitial" class="defaultText" type="text" value="" size="30" maxlength="30" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Last Name</td>
+				<td style="border: none;">
+				<input id="lastName" name="lastName" class="defaultText" type="text" value="" size="30" maxlength="30" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Street Address</td>
+				<td style="border: none;">
+				<input id="streetAddress" name="streetAddress" class="defaultText" type="text" value="" size="60" maxlength="60" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">City</td>
+				<td style="border: none;">
+				<input id="city" name="city" class="defaultText" type="text" value="" size="30" maxlength="30" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Province/State</td>
+				<td style="border: none;">
+				<input id="provinceOrState" name="provinceOrState" class="defaultText" type="text" value="" size="30" maxlength="30" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Country</td>
+				<td style="border: none;">
+				<input id="country" name="country" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Postal Code</td>
+				<td style="border: none;">
+				<input id="postalCode" name="postalCode" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Main Phone Number</td>
+				<td style="border: none;">
+				<input id="mainPhone" name="mainPhone" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Mobile Number</td>
+				<td style="border: none;">
+				<input id="mobile" name="mobile" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Home Number</td>
+				<td style="border: none;">
+				<input id="homePhone" name="homePhone" class="defaultText"  type="text" value="" size="20" maxlength="20"/>
+				</td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Ip Phone Number</td>
+				<td style="border: none;">
+				<input id="ipPhone" name="ipPhone" class="defaultText"  type="text" value="" size="20" maxlength="20"/>
+				</td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Description</td>
+				<td style="border: none;">
+				<input id="description" name="description" class="defaultText" type="text" value="" size="60" maxlength="60" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Job title</td>
+				<td style="border: none;">
+				<input id="jobTitle" name="jobTitle" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Company</td>
+				<td style="border: none;">
+				<input id="company" name="company" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Domain</td>
+				<td style="border: none;">
+				<input id="domain" name="domain" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Office Address</td>
+				<td style="border: none;">
+				<input id="officeAddress" name="officeAddress" class="defaultText"  type="text" value="" size="40" maxlength="40"/></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Email</td>
+				<td style="border: none;">
+				<input id="email" name="email" class="defaultText"  type="text" value="" size="20" maxlength="20"/></td></tr><br>
+				<tr>
+				<td style="border: none; font-weight: bold">Department</td>
+				<td style="border: none;">
+				<input id="department" name="department" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">User Name</td>
+				<td style="border: none;">
+				<input id="userName" name="userName" class="defaultText" type="text" value="" size="20" maxlength="20" /></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Password</td>
+				<td style="border: none;">
+				<input id="password" name="password" class="defaultText"  type="text" value="" size="20" maxlength="20"/></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold">Organizational Unit String</td>
+				<td style="border: none;">
+				<input id="organizationalUnitString" name="organizationalUnitString" class="defaultText"  type="text" value="" size="20" maxlength="20"/></td></tr>
+				<br>
+				<tr>
+				<td style="border: none; font-weight: bold"><br/>
+				<input type="button" class="button_grey" value="Search" onclick="doSubmitSave(this.form);"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" id="reset_btn" class="button_grey" onclick="" value="Reset"/></td></tr>
+				</table>
+				</td></table>
+
+				<br /><br />
+
+</div>
+</div>
+<script type="text/javascript">
+		function doSubmitSave(form) {
+
+		}
+	</script>
+	

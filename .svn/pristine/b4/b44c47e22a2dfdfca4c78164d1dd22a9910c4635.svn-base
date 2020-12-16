@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicWorkflowProcess" table="EPP_CENTRAL.WORKFLOW_PROCESS" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_WORKFLOW_PROCESS_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="workflowStart" type="string">
+			<column name="WORKFLOW_START" length="50" not-null="true">
+				<comment>WORKFLOW_START</comment>
+			</column>
+		</property>
+		<property name="workflowEnd" type="string">
+			<column name="WORKFLOW_END" length="50" not-null="true">
+				<comment>WORKFLOW_END</comment>
+			</column>
+		</property>
+		<property name="workflowStartResult" type="string">
+			<column name="WORKFLOW_START_RESULT" length="200" >
+				<comment>WORKFLOW_START_RESULT</comment>
+			</column>
+		</property>
+		<property name="transactionType" type="string">
+			<column name="TRANSACTION_TYPE" length="50" not-null="true">
+				<comment>TRANSACTION_TYPE</comment>
+			</column>
+		</property>
+		<property name="parameter" type="string">
+			<column name="PARAMETER" length="20" >
+				<comment>PARAMETER</comment>
+			</column>
+		</property>
+		<property name="status" type="int">
+			<column name="STATUS" precision="5" scale="0">
+				<comment>STATUS 1:ON - 0: OFF </comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="20" >
+				<comment>CREATE_BY</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATETIME" length="6">
+				<comment>CREATE_DATETIME</comment>
+			</column>
+		</property>
+		<property name="updateDate" type="timestamp">
+			<column name="UPDATE_DATETIME" length="6">
+				<comment>UPDATE_DATETIME</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="20">
+				<comment>UPDATE_BY</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="150" >
+				<comment>DESCRIPTION</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppBlacklistAttachment" table="EPP_CENTRAL.EPP_BLACKLIST_ATTACHMENT" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_BLACKLIST_ATTACHMENT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="blacklistId" type="long">
+			<column name="BLACKLIST_ID" precision="19" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="type_" type="string">
+			<column name="TYPE_" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fileName" type="string">
+			<column name="FILE_NAME" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="base64" type="org.hibernate.type.MaterializedClobType">
+			<column name="BASE64">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

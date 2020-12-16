@@ -1,0 +1,11 @@
+##
+# Modification History:
+# 14 Jan 2015 (chris): update systemid to EPP, DS_EPP.
+##
+
+# Credential information of IDSERVER for EPP System
+idserver.systemid = EPP
+idserver.password = WyTiFYGUdD9x
+idserver.endpoint = http://172.16.12.61:8280/idserver-webservices/itf/secured/securedTransactionCommandService
+idserver.datasource = DS_EPP
+idserver.match.datatypes = TPL

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicTransactionReprint" table="EPP_TRANSACTION_REPRINT" optimistic-lock="version">
+		<composite-id name="id" class="com.nec.asia.nic.comp.trans.domain.NicTransactionReprintId">
+			<key-property name="transactionId" type="string">
+				<column name="TRANSACTION_ID" length="36" />
+			</key-property>
+			<key-property name="refArn" type="string">
+				<column name="REF_ARN" length="36" />
+			</key-property>
+		</composite-id>
+		<property name="reprintCount" type="int">
+			<column name="REPRINT_COUNT" precision="10" scale="0">
+				<comment>Reprint Count for current Application Id</comment>
+			</column>
+		</property>
+		<property name="cancelPptFlag" type="yes_no">
+			<column name="CANCEL_PPT_FLAG" length="1">
+				<comment>Cancel Passport Flag</comment>
+			</column>
+		</property>
+		
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Create Workstation Id</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

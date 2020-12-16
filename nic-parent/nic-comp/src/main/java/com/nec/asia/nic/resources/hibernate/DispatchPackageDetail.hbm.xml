@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.dispatch.domain.DispatchPackageDetail" table="PACKAGE_DETAIL" optimistic-lock="version">
+		<id name="detailId" type="long">
+			<column name="DETAIL_ID" precision="20" scale="0" />
+		</id>
+		<property name="packageId" type="string">
+			<column name="PACKAGE_ID" length="20" not-null="true" />
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="16" not-null="true" />
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" not-null="true" />
+		</property>
+		<property name="collectionSite" type="string">
+			<column name="COLLECTION_SITE" length="50" not-null="true" />
+		</property>
+		<property name="priority" type="int">
+			<column name="PRIORITY" precision="10" scale="0" not-null="true" />
+		</property>
+		<property name="firstName" type="string">
+			<column name="FIRST_NAME" />
+		</property>
+		<property name="middleName" type="string">
+			<column name="MIDDLE_NAME" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="LAST_NAME" />
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="20" not-null="true" />
+		</property>
+		<property name="collectionDate" type="timestamp">
+			<column name="COLLECTION_DATE" length="7" />
+		</property>
+	</class>
+</hibernate-mapping>

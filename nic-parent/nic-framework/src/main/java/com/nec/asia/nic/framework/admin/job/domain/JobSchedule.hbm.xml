@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 3:28:48 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.job.domain.JobSchedule" table="JOB_SCHEDULE" optimistic-lock="version">
+        <composite-id name="id" class="com.nec.asia.nic.framework.admin.job.domain.JobScheduleId">
+            <key-property name="jobId" type="string">
+                <column name="JOB_ID" length="10" />
+            </key-property>
+            <key-property name="scheduleName" type="string">
+                <column name="SCHEDULE_NAME" length="80" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="job" class="com.nec.asia.nic.framework.admin.job.domain.Job" update="false" insert="false" fetch="select">
+            <column name="JOB_ID" length="10" not-null="true" />
+        </many-to-one>
+        <property name="frequency" type="com.nec.asia.nic.framework.job.scheduler.dataAccess.type.FrequencyType">
+            <column name="FREQUENCY" precision="2" scale="0" />
+        </property>
+        <property name="repeatCount" type="int">
+            <column name="REPEAT_COUNT" precision="4" scale="0" />
+        </property>
+        <property name="startHour" type="int">
+            <column name="START_HOUR" precision="2" scale="0" />
+        </property>
+        <property name="startMin" type="int">
+            <column name="START_MIN" precision="2" scale="0" />
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="START_DATE" length="7" />
+        </property>
+        <property name="endHour" type="int">
+            <column name="END_HOUR" precision="2" scale="0" />
+        </property>
+        <property name="endMin" type="int">
+            <column name="END_MIN" precision="2" scale="0" />
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="END_DATE" length="7" />
+        </property>
+        <property name="actionOnFailure" type="com.nec.asia.nic.framework.job.scheduler.dataAccess.type.ActionOnEventType">
+            <column name="ACTIONONFAILURE" precision="2" scale="0" />
+        </property>
+        <property name="actionOnSuccess" type="com.nec.asia.nic.framework.job.scheduler.dataAccess.type.ActionOnEventType">
+            <column name="ACTIONONSUCCESS" precision="2" scale="0" />
+        </property>
+        <property name="active" type="yes_no">
+            <column name="ISACTIVE" length="1" not-null="true" />
+        </property>
+        <property name="reOccurrence" type="int">
+            <column name="REOCCURRENCE" precision="2" scale="0" not-null="true" />
+        </property>
+        <property name="daysOfWeek" type="int">
+            <column name="DAYSOFWEEK" precision="1" scale="0" not-null="true" />
+        </property>
+        <property name="weekDay" type="string">
+            <column name="WEEKDAY" length="30" />
+        </property>
+        <property name="repeatIntervalSecond" type="long">
+            <column name="INTERVAL_SECOND" precision="4" scale="0" />
+        </property>
+        <property name="dayOfMonth" type="string">
+            <column name="DAYOFMONTH" length="4" />
+        </property>
+        <property name="scheduleDescription" type="string">
+            <column name="DESCRIPTION" length="150" />
+        </property>
+        <property name="yearlyMonth" type="string">
+            <column name="YEARLY_MONTH" length="2" />
+        </property>
+        <property name="yearlyDayOfMonth" type="string">
+            <column name="YEARLY_DAYOFMONTH" length="2" />
+        </property>
+        <property name="emailAddress" type="string">
+            <column name="EMAILADDRESS" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

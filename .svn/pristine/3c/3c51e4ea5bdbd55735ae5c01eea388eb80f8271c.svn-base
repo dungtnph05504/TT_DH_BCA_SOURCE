@@ -1,0 +1,198 @@
+package com.nec.asia.nic.comp.trans.dao;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.NicTransaction; 
+import com.nec.asia.nic.comp.trans.dto.CountPassport;
+import com.nec.asia.nic.comp.trans.dto.Datadto;
+import com.nec.asia.nic.comp.trans.dto.NicUploadJobDto;
+import com.nec.asia.nic.comp.trans.dto.RICTxnRptDto;
+import com.nec.asia.nic.comp.trans.utils.MSReportDefinition;
+import com.nec.asia.nic.comp.trans.utils.MultiSeriesReport;
+import com.nec.asia.nic.framework.PageRequest;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.dao.DaoException;
+import com.nec.asia.nic.framework.dao.GenericDao;
+
+/* 
+ * Modification History:
+ *  
+ * 20 Dec 2013 (chris): add method getTransactionStatusByIdForUpdate().  
+ * 16 jan 2014 (priya):getRicRejTxnRptRecordList added exception
+ * 09 May 2016 (khang): add method updateStatusByTxnIdList
+ * 11 May 2016 (tue): add methods:  getCollectedTransByEstDate, getPendingTransByEstDate, getAllTransByEstDate, getAllByStatusAndEstDate
+ * 
+ */
+public interface NicTransactionDao extends GenericDao<NicTransaction, String> {
+
+	//default methods from super class
+	//public NicTransaction findById(String transactionId);
+	//public String save (NicTransaction e);
+	//public void saveOrUpdate(NicTransaction e);
+    //public NicTransaction merge(NicTransaction e);
+	//public void delete(NicTransaction e);
+	//public void delete(String transactionId);
+	//public List<NicTransaction> findAll ();
+	
+	//public List<NicTransaction> findAllByCcn(String ccn);
+	public List<NicTransaction> findAllByTransIdList(List<String> transIds);
+	
+	public List<NicTransaction> findAllByTransTypeList(String txnType);
+	
+	public List<NicTransaction> findAllByNin(String nin);
+	
+	public List<NicTransaction> findAllByFields(String surname,	String firstName, String middleName, String sex, String dob);
+	
+	public String getTransactionStatusById(String transactionId);
+	
+	public String getTransactionStatusByIdForUpdate(String transactionId);
+	
+	public void updateStatusByTransactionId(String transactionId, String status, String officerId, String workstationId);
+	//public NicTransaction getTransactionIssuanceDatas(NicTransaction transObj);
+	//public NicTransaction getTransactiondocuments(NicTransaction transObj);
+	//public NicTransaction getTransactionRegistrationData(NicTransaction transObj);
+	//public NicTransaction getTransactionPayment(NicTransaction transObj);
+
+	public PaginatedResult<Object[]> findAllBySearchParam(PageRequest pageRequest,
+			String siteCode, String tranasctionId, String surname, String maidenName,
+			String otherName, String gender, String dateOfBirth, String status);
+
+	public PaginatedResult<NicTransaction> findAllForPaginationByFilter(
+			NicTransaction nicTransaction, int pageNo, int pageSize,
+			boolean ignoreCase, boolean enableLike, Order order);
+	
+	/* Update the transaction status upon approve */
+	public void updateOnApprove(String transactionId, String userId, String wkstnId);
+	
+	/* Update the transaction status upon reject */
+	public void updateOnReject(String transactionId, String userId, String wkstnId);
+	public List<RICTxnRptDto> getRicRejTxnRptRecordList(RICTxnRptDto ricRejTxnRptCriteria )throws Exception;
+	
+	 public List<Object[]> getNicTransactionStatsBySite(String regSiteCode);
+
+	public List<Object[]> getNicTransactionStatsBySiteAndDate(String regSiteCode, Date dateFrom, Date dateTo );
+	
+	public List<Object[]> getNicMainStatsByStatus(String cardStatus);
+
+
+	public List<Object[]> getNicTransactionStatusStats(String regSiteCode, Date dateFrom, Date dateTo);
+
+	public List<Object[]> getNicTransactionStatusStatsByDate(String regSiteCode, Date dateFrom, Date dateTo);
+
+	public List<Object[]> getTxnAgeTypeGenderSiteStats(Date dateFrom, Date dateTo);
+
+	public List<Object[]> getTxnDaySiteTotal(String transctionStatus, String transactionType, String transactionSubtype, Date dateFrom, Date dateTo);
+
+	public List getCardConvChartData(Date fromDate, Date toDate, String[] sites) throws Exception;
+
+	public List<Object[]> getTotTransVolBySiteReportInfo(Date fromDate, Date toDate, String[] sites) throws Exception;
+
+	public void loadMSLineReportData(MultiSeriesReport report, MSReportDefinition msReportDef, HashMap<String, Object> parameters) throws Exception;
+
+	public List<Object[]> getCardBypassApprovedBySiteInfo(Date fromDate, Date toDate, String[] sites) throws Exception;
+
+	public PaginatedResult<String> getCardBypassApprovedTransIds(Date fromDate, Date toDate, String[] siteCodes, int fromRow, int toRow) throws Exception;
+
+	public List<String> getAllCardBypassApprovedTransIds(Date fromDate, Date toDate, String[] sites) throws Exception;
+
+	public BaseModelSingle<NicTransaction> getNicTransactionById(String transactionId);
+	
+	public NicTransaction getNicTransactionByPrevPPno(String prevPassportNo, String typePassport, String nin);
+	
+	public void updateOnSuspend(String transactionId, String userId, String wkstnId);
+
+	public PaginatedResult<NicTransaction> findAllForPagination(NicTransaction nicTransaction, int pageNo, int pageSize, boolean ignoreCase, boolean enableLike, Order order);
+
+	public int updateStatusByTxnIdList(List<String> txnIdList, String status, String officerId, String workstationId) throws Exception;
+
+	List<NicTransaction> findByApplnRefId(String applnRefNo) throws DaoException;
+	
+	public List<Object[]> getCollectedTransByEstDate(String fromDate, int noDay);
+	public List<Object[]> getPendingTransByEstDate( String fromDate, int noDay);
+	public List<Object[]> getAllTransByEstDate( String fromDate, int noDay);
+	public PaginatedResult<NicTransaction> getAllByStatusAndEstDate(String[] status, String estDate, String transType, PageRequest pageRequest);
+	public List<NicTransaction> getAllByStatusAndEstDate(String[] status, String estDate, String transType);
+
+	
+	/*[09-Mar] Trung thêm thay đổi số năm hết hạn hộ chiếu */
+	public void updateValidateTime(String transactionId, String userId, String wkstnId, Integer year);
+	
+	//Phúc thêm 5/5/2019 lấy danh sách theo mã phiêu
+	public List<NicTransaction> getListTransactionByPackage(String packageId);
+	
+	public List<NicTransaction> getListTransactionBySiteCode(String siteCode, Date date);
+	
+	public List<CountPassport> issuePassportList() throws Exception;
+	
+	public List<CountPassport> noneIssuePassportList() throws Exception;
+	
+	public List<CountPassport> printedPassport() throws Exception;
+	
+	public List<CountPassport> nonePrintPassport() throws Exception;
+	
+	public List<NicUploadJobDto> allPassportList(String handoverId, String regSite, String fromDate, String toDate, int pageNumber, int pageSize) throws Exception;
+	
+	public List<NicUploadJobDto> newTransactionProcess() throws Exception;
+	public List<NicUploadJobDto> newTransactionProcessDDXL() throws Exception;
+	
+	public List<CountPassport> totalHosoTrongNgay() throws Exception;
+	public List<CountPassport> slhosoDuyetCap() throws Exception;
+	public List<CountPassport> slhosoTuChoi() throws Exception;
+	public List<CountPassport> slhosoSapHetHan() throws Exception;
+	public List<CountPassport> slhosoQuaHan() throws Exception;
+	
+	public long getRowCountallPassportList(String handoverId, String regSite, String fromDate, String toDate) throws Exception;
+
+	public long getRowCountallPersoList(String handoverId, Integer persoId, String fromDate, String toDate) throws Exception;
+	public List<NicUploadJobDto> allPersoList(String handoverId, Integer persoId, String fromDate, String toDate, int pageNumber, int pageSize) throws Exception;
+	public PaginatedResult<NicUploadJobDto> allListBProcessPerso(String packageId, String dateApprove, String siteCode, int pageNo, int pageSize);
+	public PaginatedResult<Datadto> allListBProcessPerso(String name,String dateOfBirth, String idNumber,String gender,String listCode ,String passportNo ,String passportType,String receipNo , int page, int pageSize);
+	public List<CountPassport> sohschuaxl() throws Exception;
+	public List<CountPassport> sohsdaxl() throws Exception;
+	
+	public PaginatedResult<NicUploadJobDto> allPassportStorage(String passportType, String passportNo, String status, String startDate, String endDate, String fullName,int pageNo, int pageSize) throws Exception;
+	
+	public PaginatedResult<NicUploadJobDto> allTransactionStorage(String transactionId, String recieptNo, String passportNo, String nin, String fullName, String passportStyle, String ppStage, String typeInves, int pageNo, int pageSize) throws Exception;
+
+	public long getTracuuhosohcCount(NicUploadJobDto model) throws Exception;
+	public List<NicUploadJobDto> allTracuuhosohc(NicUploadJobDto model, int pageNumber, int pageSize) throws Exception;
+
+	public PaginatedResult<NicUploadJobDto> allPassportDestroy(String passportNo, String[] status, String toDay, int pageNo, int pageSize) throws Exception;
+
+	
+	public List<NicUploadJobDto> searchUpdateB(String packageId, String createDate, String endDate) throws Exception;
+
+	
+	public List<NicUploadJobDto> listPackageIDPerso(String code, String packId) throws Exception;
+	public List<NicUploadJobDto> listPackageIDPerso(String code) throws Exception;
+	public BaseModelList<NicUploadJobDto> listPackageIDConfig(String packageId, String todayTime) throws Exception;
+	public List<NicUploadJobDto> listPackageIDDefault(String packageId, String type) throws Exception;
+	public String getSitePerso(String transactionId) throws Exception; 
+	
+	public BaseModelSingle<NicTransaction> findNicTransactionById(String transactionId) throws Exception;
+	public BaseModelSingle<Void> saveOrUpdateTransaction(NicTransaction tran);
+	public BaseModelSingle<String> saveTransaction(NicTransaction tran);
+
+	public List<NicTransaction> findTranByPersonCode(String personCode) throws Exception;
+
+	public List<NicTransaction> findTranByPersonCode(String[] listPersonCode) throws Exception;
+
+	public List<NicTransaction> findTranByArchiveCode(String archiveCode)throws Exception;
+
+	public List<NicTransaction> findTranByNinAndTypePassport(String nin,
+			String passportType)throws Exception;
+
+	public List<NicTransaction> findAllByListTranId(String[] listTranId);
+
+	public PaginatedResult<NicUploadJobDto> getResultPassportInStore(String passportType, String passportNo, String status, String startDate, String endDate, String fullName,int pageNo, int pageSize)throws Exception;
+
+	public PaginatedResult<NicUploadJobDto> getResultTransactionInStore(String transactionId, String recieptNo, String passportNo, String nin, String fullName, String passportStyle, String ppStage, String typeInves, int pageNo, int pageSize) throws Exception;
+
+}

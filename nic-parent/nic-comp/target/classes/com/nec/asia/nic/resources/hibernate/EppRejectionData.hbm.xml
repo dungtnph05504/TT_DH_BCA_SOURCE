@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicRejectionData" table="EPP_REJECTION_DATA" optimistic-lock="version">
+		<id name="workflowJobId" type="long">
+			<column name="WORKFLOW_JOB_ID" precision="20" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Application Id</comment>
+			</column>
+		</property>
+		<property name="rejectBy" type="string">
+			<column name="REJECT_BY" length="64">
+				<comment>Reject By</comment>
+			</column>
+		</property>
+		<property name="rejectDatetime" type="timestamp">
+			<column name="REJECT_DATETIME" length="7">
+				<comment>Reject Datetime</comment>
+			</column>
+		</property>
+		<property name="rejectReason" type="string">
+			<column name="REJECT_REASON" length="100">
+				<comment>Reject Reason</comment>
+			</column>
+		</property>
+		<property name="rejectRemarks" type="string">
+			<column name="REJECT_REMARKS" length="1000">
+				<comment>Reject Remarks</comment>
+			</column>
+		</property>
+		<property name="syncStatus" type="string">
+			<column name="SYNC_STATUS" length="1">
+				<comment>Sync Status (N, Y)</comment>
+			</column>
+		</property>
+		<property name="lastSyncDatetime" type="timestamp">
+			<column name="LAST_SYNC_DATETIME" length="7">
+				<comment>Last Sync Datetime</comment>
+			</column>
+		</property>
+	</class>
+	
+	<query name="findUnSyncRejectionDataBySiteCode">
+        <![CDATA[from NicRejectionData a where (syncStatus is null or syncStatus = 'N') and exists (select 1 from NicTransaction b where b.transactionId=a.transactionId and b.issSiteCode = ?)]]>
+    </query>
+	
+	<sql-query name="updateRejectionSyncStatusByTransactionIdList">
+        <![CDATA[
+        UPDATE EPP_REJECTION_DATA 
+        SET SYNC_STATUS='Y', LAST_SYNC_DATETIME=sysdate
+        WHERE TRANSACTION_ID in (:transactionIdList)
+        ]]>
+	</sql-query>
+</hibernate-mapping>

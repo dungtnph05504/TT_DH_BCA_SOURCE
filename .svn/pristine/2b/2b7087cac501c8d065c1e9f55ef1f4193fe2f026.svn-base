@@ -1,0 +1,695 @@
+package com.nec.asia.nic.investigation.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.collections.map.LinkedMap;
+import org.apache.commons.lang.StringUtils;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.nec.asia.nic.comp.trans.domain.EppAirline;
+import com.nec.asia.nic.comp.trans.domain.EppAirport;
+import com.nec.asia.nic.comp.trans.domain.EppFlight;
+import com.nec.asia.nic.comp.trans.domain.EppFlightRouter;
+import com.nec.asia.nic.comp.trans.domain.EppInventoryItems;
+import com.nec.asia.nic.comp.trans.dto.AirlineDto;
+import com.nec.asia.nic.comp.trans.dto.FlightDto;
+import com.nec.asia.nic.comp.trans.dto.PurposeDto;
+import com.nec.asia.nic.comp.trans.dto.VisaDto;
+import com.nec.asia.nic.comp.trans.service.AirlineService;
+import com.nec.asia.nic.comp.trans.service.AirportService;
+import com.nec.asia.nic.comp.trans.service.FlightRouterService;
+import com.nec.asia.nic.comp.trans.service.FlightService;
+import com.nec.asia.nic.comp.trans.service.FreeVisaService;
+import com.nec.asia.nic.comp.trans.service.PurposeService;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.domain.CodeValues;
+import com.nec.asia.nic.framework.admin.code.service.CodesService;
+import com.nec.asia.nic.framework.dao.DaoException;
+import com.nec.asia.nic.util.Constants;
+import com.nec.asia.nic.util.pagingUtil;
+import com.nec.asia.nic.utils.HelperClass;
+import com.nec.asia.nic.web.session.UserSession;
+
+@Controller
+@RequestMapping("/adminImmi")
+public class ImmiController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ImmiController.class);
+	
+	public static final String CODE_NATIONALITY = "NATIONALITY";
+	public static final String CODE_SYSTEM = "SYSTEM";
+	
+	@Autowired
+	private CodesService codesService;
+	
+	@Autowired
+	private AirlineService airlineService;
+	
+	@Autowired
+	private AirportService airportService;
+	
+	@Autowired
+	private FlightRouterService flightRouterService;
+	
+	
+	@Autowired
+	private FlightService flightService;
+	
+	@Autowired
+	private FreeVisaService visaService;
+	
+	@Autowired
+	private PurposeService purposeService;
+	
+	
+	@ModelAttribute("nationalityList")
+	public Map<String, String> nationalityList() throws DaoException {
+		Map<String, String> list = new HashMap<String, String>();
+		List<CodeValues> listcode = codesService.findAllByCodeId(CODE_NATIONALITY);
+		for(CodeValues sr : listcode){
+			list.put(sr.getId().getCodeValue(), sr.getCodeValueDesc());
+		}	
+		Map<String, String> treeMap = new TreeMap<>(list);
+		return treeMap;
+	}
+	
+	@RequestMapping(value="/showAirline")
+	public ModelAndView showAirline(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		int mesg = !StringUtils.isEmpty(request.getParameter("result")) ? Integer.parseInt(request.getParameter("result")) : -2;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		model.addAttribute("mesg", mesg);
+		return this.getMavAirline(inv, httpRequest, model, pageNo);
+	}
+	
+	@RequestMapping(value="/showAirport")
+	public ModelAndView showAirport(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		int mesg = !StringUtils.isEmpty(request.getParameter("result")) ? Integer.parseInt(request.getParameter("result")) : -2;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		model.addAttribute("mesg", mesg);
+		return this.getMavAirport(inv, httpRequest, model, pageNo);
+	}
+	
+	@RequestMapping(value="/showFlightRouter")
+	public ModelAndView showFlightRouter(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		int mesg = !StringUtils.isEmpty(request.getParameter("result")) ? Integer.parseInt(request.getParameter("result")) : -2;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		model.addAttribute("mesg", mesg);
+		return this.getMavFlightRouter(inv, httpRequest, model, pageNo);
+	}
+	
+	@RequestMapping(value="/showFlight")
+	public ModelAndView showFlight(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		int mesg = !StringUtils.isEmpty(request.getParameter("result")) ? Integer.parseInt(request.getParameter("result")) : -2;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		model.addAttribute("mesg", mesg);
+		return this.getMavFlight(inv, httpRequest, model, pageNo);
+	}
+	
+	@RequestMapping(value="/showVisaNo")
+	public ModelAndView showVisaNo(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		int mesg = !StringUtils.isEmpty(request.getParameter("result")) ? Integer.parseInt(request.getParameter("result")) : -1;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		model.addAttribute("mesg", mesg);
+		return this.getMavVisaNo(inv, httpRequest, model, pageNo);
+	}
+	
+	@RequestMapping(value="/showPurpose")
+	public ModelAndView showPurpose(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		int mesg = !StringUtils.isEmpty(request.getParameter("result")) ? Integer.parseInt(request.getParameter("result")) : -1;
+		int pageNo = !StringUtils.isEmpty(request.getParameter("pageNo")) ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+		model.addAttribute("mesg", mesg);
+		return this.getMavPurpose(inv, httpRequest, model, pageNo);
+	}
+	
+	public ModelAndView getMavPurpose(InvestigationAssignmentData inv, HttpServletRequest request, ModelMap model, int pageNo){
+		ModelAndView mav = new ModelAndView("show.purpose.immi");
+		int pageSize = Constants.DEFAULT_PAGE_MAX_SIZE;
+		PaginatedResult<PurposeDto> pr = purposeService.findPaginateByPurpose(inv.getPackageCode(), (StringUtils.isNotEmpty(inv.getTransactionType()) ? Integer.parseInt(inv.getTransactionType()) : -1), pageNo, pageSize);
+		List<PurposeDto> list = new ArrayList<PurposeDto>();
+		if(pr == null){
+			pr = new PaginatedResult<PurposeDto>(0, pageNo, new ArrayList<PurposeDto>());
+		}else{
+			list = pr.getRows();
+		}
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(pr.getTotal(), pageSize));
+		model.addAttribute("startIndex", pr.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", pr.getTotal());
+		model.addAttribute("endIndex", firstResults + pr.getRowSize());
+		model.addAttribute("purposeList", list);
+		return mav;
+	}
+	
+	public ModelAndView getMavVisaNo(InvestigationAssignmentData inv, HttpServletRequest request, ModelMap model, int pageNo){
+		ModelAndView mav = new ModelAndView("show.visa.immi");
+		int pageSize = Constants.DEFAULT_PAGE_MAX_SIZE;
+		PaginatedResult<VisaDto> pr = visaService.findPaginatedByVisa((StringUtils.isNotEmpty(inv.getTransactionType()) ? Integer.parseInt(inv.getTransactionType()) : -1), inv.getPackageCode(), pageNo, pageSize);
+		List<VisaDto> list = new ArrayList<VisaDto>();
+		if(pr == null){
+			pr = new PaginatedResult<VisaDto>(0, pageNo, new ArrayList<VisaDto>());
+		}else{
+			list = pr.getRows();
+		}
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(pr.getTotal(), pageSize));
+		model.addAttribute("startIndex", pr.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", pr.getTotal());
+		model.addAttribute("endIndex", firstResults + pr.getRowSize());
+		model.addAttribute("visaList", list);
+		return mav;
+	}
+	
+	public ModelAndView getMavFlight(InvestigationAssignmentData inv, HttpServletRequest request, ModelMap model, int pageNo){
+		ModelAndView mav = new ModelAndView("show.flight.immi");
+		int pageSize = Constants.DEFAULT_PAGE_MAX_SIZE;
+		PaginatedResult<FlightDto> pr = flightService.findPaginateBySearch(inv.getSearchTransactionId(), inv.getStartYear(), inv.getEndYear(), pageNo, pageSize);
+		List<FlightDto> list = new ArrayList<FlightDto>();
+		if(pr == null){
+			pr = new PaginatedResult<FlightDto>(0, pageNo, new ArrayList<FlightDto>());
+		}else{
+			list = pr.getRows();
+		}
+		List<EppAirline> airlineList = airlineService.findAllAirline();
+		Map<String, String> airList = new HashMap<String, String>();
+		if(airlineList != null){
+			for(EppAirline epp : airlineList){
+				airList.put(epp.getCode(), epp.getName());
+			}
+		}
+		List<EppFlightRouter> flightList = flightRouterService.findALlFlightRouter();
+		Map<String, String> flightMap = new HashMap<String, String>();
+		if(flightList != null){
+			for(EppFlightRouter epp : flightList){
+				flightMap.put(epp.getFlightRouterCode(), epp.getName());
+			}
+		}
+		model.addAttribute("airList", airList);
+		model.addAttribute("flightMap", flightMap);
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(pr.getTotal(), pageSize));
+		model.addAttribute("startIndex", pr.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", pr.getTotal());
+		model.addAttribute("endIndex", firstResults + pr.getRowSize());
+		model.addAttribute("flightList", list);
+		return mav;
+	}
+	
+	public ModelAndView getMavFlightRouter(InvestigationAssignmentData inv, HttpServletRequest request, ModelMap model, int pageNo){
+		ModelAndView mav = new ModelAndView("show.flight.router.immi");
+		int pageSize = Constants.DEFAULT_PAGE_MAX_SIZE;
+		PaginatedResult<FlightDto> pr = flightRouterService.findPaginateBySearch(inv.getSearchTransactionId(), inv.getStartYear(), inv.getEndYear(), pageNo, pageSize);
+		List<FlightDto> list = new ArrayList<FlightDto>();
+		if(pr == null){
+			pr = new PaginatedResult<FlightDto>(0, pageNo, new ArrayList<FlightDto>());
+		}else{
+			list = pr.getRows();
+		}
+		List<EppAirport> airportList = airportService.findAllAirport();
+		Map<String, String> airList = new HashMap<String, String>();
+		if(airportList != null){
+			for(EppAirport epp : airportList){
+				airList.put(epp.getCode(), epp.getName());
+			}
+		}
+		model.addAttribute("airList", airList);
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(pr.getTotal(), pageSize));
+		model.addAttribute("startIndex", pr.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", pr.getTotal());
+		model.addAttribute("endIndex", firstResults + pr.getRowSize());
+		model.addAttribute("flightList", list);
+		return mav;
+	}
+	
+	public ModelAndView getMavAirline(InvestigationAssignmentData inv, HttpServletRequest request, ModelMap model, int pageNo){
+		ModelAndView mav = new ModelAndView("show.airline.immi");
+		int pageSize = Constants.DEFAULT_PAGE_MAX_SIZE;
+		PaginatedResult<AirlineDto> pr = airlineService.findPaginateBySearch(inv.getSearchTransactionId(), inv.getRegSiteCode(), pageNo, pageSize);
+		List<AirlineDto> list = new ArrayList<AirlineDto>();
+		if(pr == null){
+			pr = new PaginatedResult<>(0, pageNo, new ArrayList<AirlineDto>());
+		}else{
+			list = pr.getRows();
+		}
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(pr.getTotal(), pageSize));
+		model.addAttribute("startIndex", pr.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", pr.getTotal());
+		model.addAttribute("endIndex", firstResults + pr.getRowSize());
+		model.addAttribute("alineList", list);
+		return mav;
+	}
+	
+	public ModelAndView getMavAirport(InvestigationAssignmentData inv, HttpServletRequest request, ModelMap model, int pageNo){
+		ModelAndView mav = new ModelAndView("show.airport.immi");
+		int pageSize = Constants.DEFAULT_PAGE_MAX_SIZE;
+		PaginatedResult<AirlineDto> pr = airportService.findPaginateBySearch(inv.getSearchTransactionId(), inv.getRegSiteCode(), pageNo, pageSize);
+		List<AirlineDto> list = new ArrayList<AirlineDto>();
+		if(pr == null){
+			pr = new PaginatedResult<>(0, pageNo, new ArrayList<AirlineDto>());
+		}else{
+			list = pr.getRows();
+		}
+		int firstResults = (pageNo - 1) < 0 ? 0 : (pageNo - 1) * pageSize;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("totalPage", pagingUtil.totalPage(pr.getTotal(), pageSize));
+		model.addAttribute("startIndex", pr.getTotal() != 0 ? firstResults + 1 : 0);
+		model.addAttribute("totalRecord", pr.getTotal());
+		model.addAttribute("endIndex", firstResults + pr.getRowSize());
+		model.addAttribute("aportList", list);
+		return mav;
+	}
+	
+	@RequestMapping(value="/deleteAirline/{idAL}")
+	public ModelAndView deleteAirline(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, @PathVariable Long idAL, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		try {
+			Boolean result = airlineService.deleteEppAirline(idAL);
+			model.addAttribute("result", 0);
+			if(result){
+				model.addAttribute("result", 1);
+			}
+		} catch (Exception e) {
+			logger.error("error delete airline, err === " + e.getMessage());
+		}
+		return this.getMavAirline(inv, httpRequest, model, 1);
+	}
+	
+	@RequestMapping(value="/deleteAirport/{idAL}")
+	public ModelAndView deleteAirport(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, @PathVariable Long idAL, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		try {
+			Boolean result = airportService.deleteEppAirport(idAL);
+			model.addAttribute("result", 0);
+			if(result){
+				model.addAttribute("result", 1);
+			}
+		} catch (Exception e) {
+			logger.error("error delete airport, err === " + e.getMessage());
+		}
+		return this.getMavAirport(inv, httpRequest, model, 1);
+	}
+	
+	@RequestMapping(value="/deleteFlightRouter/{idAL}")
+	public ModelAndView deleteFlightRouter(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, @PathVariable Long idAL, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		try {
+			Boolean result = flightRouterService.deleteEppFlightRouter(idAL);
+			model.addAttribute("result", 0);
+			if(result){
+				model.addAttribute("result", 1);
+			}
+		} catch (Exception e) {
+			logger.error("error delete flight router, err === " + e.getMessage());
+		}
+		return this.getMavAirport(inv, httpRequest, model, 1);
+	}
+	
+	@RequestMapping(value="/deleteFlight/{idAL}")
+	public ModelAndView deleteFlight(@ModelAttribute(value = "formData") InvestigationAssignmentData inv, @PathVariable Long idAL, WebRequest request, HttpServletRequest httpRequest, ModelMap model){
+		try {
+			Boolean result = flightService.deleteEppFlight(idAL);
+			model.addAttribute("result", 0);
+			if(result){
+				model.addAttribute("result", 1);
+			}
+		} catch (Exception e) {
+			logger.error("error delete flight, err === " + e.getMessage());
+		}
+		return this.getMavAirport(inv, httpRequest, model, 1);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/editAirline")
+	public ModelAndView editAirline(@RequestParam String value, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.airline");
+		try {
+			Map<String, String> list = new HashMap<String, String>();
+			List<CodeValues> listcode = codesService.findAllByCodeId(CODE_NATIONALITY);
+			for(CodeValues sr : listcode){
+				list.put(sr.getId().getCodeValue(), sr.getCodeValueDesc());
+			}	
+			model.addAttribute("nationList", list);
+			EppAirline epp = airlineService.findAllByCode(value);
+			if(epp == null){
+				epp = new EppAirline();
+			}
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/editFlightRouter")
+	public ModelAndView editFlightRouter(@RequestParam String value, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.flight.router");
+		try {
+			List<EppAirport> airportList = airportService.findAllAirport();
+			Map<String, String> airList = new HashMap<String, String>();
+			if(airportList != null){
+				for(EppAirport epp : airportList){
+					airList.put(epp.getCode(), epp.getName());
+				}
+			}
+			model.addAttribute("airList", airList);
+			EppFlightRouter epp = flightRouterService.findByCode(value);
+			if(epp == null){
+				epp = new EppFlightRouter();
+			}
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/editFlight")
+	public ModelAndView editFlight(@RequestParam String value, @RequestParam String typ,ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.flight");
+		try {
+			List<EppAirline> airlineList = airlineService.findAllAirline();
+			Map<String, String> airList = new HashMap<String, String>();
+			if(airlineList != null){
+				for(EppAirline epp : airlineList){
+					airList.put(epp.getCode(), epp.getName());
+				}
+			}
+			List<EppFlightRouter> flightList = flightRouterService.findALlFlightRouter();
+			Map<String, String> flightMap = new HashMap<String, String>();
+			if(flightList != null){
+				for(EppFlightRouter epp : flightList){
+					flightMap.put(epp.getFlightRouterCode(), epp.getName());
+				}
+			}
+			model.addAttribute("flightMap", flightMap);
+			model.addAttribute("airList", airList);
+			EppFlight epp = flightService.findByFlightno_Type(value, typ);
+			if(epp == null){
+				epp = new EppFlight();
+			}else{
+				List<EppFlight> flgList = flightService.findByFlightRouter(epp.getFlightRouterCode());
+				model.addAttribute("flgList", flgList);
+			}
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/editAirport")
+	public ModelAndView editAirport(@RequestParam String value, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.airport");
+		try {
+			Map<String, String> list = new HashMap<String, String>();
+			List<CodeValues> listcode = codesService.findAllByCodeId(CODE_NATIONALITY);
+			for(CodeValues sr : listcode){
+				list.put(sr.getId().getCodeValue(), sr.getCodeValueDesc());
+			}	
+			model.addAttribute("nationList", list);
+			EppAirport epp = airportService.findAllByCode(value);
+			if(epp == null){
+				epp = new EppAirport();
+			}
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveAirline")
+	public ModelAndView saveAirline(HttpServletRequest request, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.airline");
+		try {
+			Map<String, String> list = new HashMap<String, String>();
+			List<CodeValues> listcode = codesService.findAllByCodeId(CODE_NATIONALITY);
+			for(CodeValues sr : listcode){
+				list.put(sr.getId().getCodeValue(), sr.getCodeValueDesc());
+			}	
+			model.addAttribute("nationList", list);
+			EppAirline epp = new EppAirline();
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveAirport")
+	public ModelAndView saveAirport(HttpServletRequest request, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.airport");
+		try {
+			Map<String, String> list = new HashMap<String, String>();
+			List<CodeValues> listcode = codesService.findAllByCodeId(CODE_NATIONALITY);
+			for(CodeValues sr : listcode){
+				list.put(sr.getId().getCodeValue(), sr.getCodeValueDesc());
+			}	
+			model.addAttribute("nationList", list);
+			EppAirport epp = new EppAirport();
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveFlightRouter")
+	public ModelAndView saveFlightRouter(HttpServletRequest request, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.flight.router");
+		try {
+			List<EppAirport> airportList = airportService.findAllAirport();
+			Map<String, String> airList = new HashMap<String, String>();
+			if(airportList != null){
+				for(EppAirport epp : airportList){
+					airList.put(epp.getCode(), epp.getName());
+				}
+			}
+			model.addAttribute("airList", airList);
+			EppFlightRouter epp = new EppFlightRouter();
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveFlight")
+	public ModelAndView saveFlight(HttpServletRequest request, ModelMap model){
+		ModelAndView mav = new ModelAndView("add.edit.flight");
+		try {
+			List<EppAirline> airlineList = airlineService.findAllAirline();
+			Map<String, String> airList = new HashMap<String, String>();
+			if(airlineList != null){
+				for(EppAirline epp : airlineList){
+					airList.put(epp.getCode(), epp.getName());
+				}
+			}
+			List<EppFlightRouter> flightList = flightRouterService.findALlFlightRouter();
+			Map<String, String> flightMap = new HashMap<String, String>();
+			if(flightList != null){
+				for(EppFlightRouter epp : flightList){
+					flightMap.put(epp.getFlightRouterCode(), epp.getName());
+				}
+			}
+			model.addAttribute("flightMap", flightMap);
+			model.addAttribute("airList", airList);
+//			if(flightList != null && flightList.size() > 0){
+//				List<EppFlight> flgList = flightService.findByFlightRouter(flightList.get(0).getFlightRouterCode());
+//				model.addAttribute("flgList", flgList);						
+//			}
+			EppFlight epp = new EppFlight();			
+			model.addAttribute("dto", epp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/loadFlight")
+	public List<String> loadFlight(HttpServletRequest request, @RequestParam String codeFlight, ModelMap model){		
+		List<String> list = new ArrayList<String>();
+		try {
+			List<EppFlight> flgList = flightService.findByFlightRouter(codeFlight);
+			if(flgList != null){
+				for(EppFlight epp : flgList){
+					list.add(epp.getName());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/saveChangeAir")
+	public Integer saveChangeAir(@RequestBody String yourArray, ModelMap model, HttpServletRequest httpRequest){
+		JSONObject onb = new JSONObject(yourArray);
+		HttpSession session = httpRequest.getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		Boolean check = true;
+		try {
+			String codeAir = (onb.has("codeAir") && !onb.isNull("codeAir")) ? onb.getString("codeAir") : "";
+			String nationalityAir = (onb.has("nationalityAir") && !onb.isNull("nationalityAir")) ? onb.getString("nationalityAir") : "";
+			String nameAir = (onb.has("nameAir") && !onb.isNull("nameAir")) ? onb.getString("nameAir") : "";
+			String descAir = (onb.has("descAir") && !onb.isNull("descAir")) ? onb.getString("descAir") : "";
+			String idItem = (onb.has("idItem") && !onb.isNull("idItem")) ? onb.getString("idItem") : "";
+			Long id = null;
+			if(StringUtils.isNotEmpty(idItem)){
+				id = Long.parseLong(idItem);
+			}
+			EppAirline epp = airlineService.findAllByCode(codeAir);
+			if((id == null && epp != null) || (id != null && epp != null && id != epp.getId())){
+				check = false;
+			}
+			if(!check)
+				return -1;
+			EppAirline eppAirline = new EppAirline(id, userSession.getUserId(), null, new Date(), null, codeAir, nameAir, nationalityAir, descAir, null);
+			airlineService.saveOrUpdateAir(eppAirline);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveChangeAirport")
+	public Integer saveChangeAirport(@RequestBody String yourArray, ModelMap model, HttpServletRequest httpRequest){
+		JSONObject onb = new JSONObject(yourArray);
+		HttpSession session = httpRequest.getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		Boolean check = true;
+		try {
+			String codeAir = (onb.has("codeAir") && !onb.isNull("codeAir")) ? onb.getString("codeAir") : "";
+			String nationalityAir = (onb.has("nationalityAir") && !onb.isNull("nationalityAir")) ? onb.getString("nationalityAir") : "";
+			String nameAir = (onb.has("nameAir") && !onb.isNull("nameAir")) ? onb.getString("nameAir") : "";
+			String descAir = (onb.has("descAir") && !onb.isNull("descAir")) ? onb.getString("descAir") : "";
+			String idItem = (onb.has("idItem") && !onb.isNull("idItem")) ? onb.getString("idItem") : "";
+			Long id = null;
+			if(StringUtils.isNotEmpty(idItem)){
+				id = Long.parseLong(idItem);
+			}
+			EppAirport epp = airportService.findAllByCode(codeAir);
+			if((id == null && epp != null) || (id != null && epp != null && id != epp.getId())){
+				check = false;
+			}
+			if(!check)
+				return -1;
+			EppAirport eppAirline = new EppAirport(id, userSession.getUserId(), null, new Date(), null, codeAir, nameAir, nationalityAir, descAir, null);
+			airportService.saveOrUpdateAir(eppAirline);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveChangeFlightRouter")
+	public Integer saveChangeFlightRouter(@RequestBody String yourArray, ModelMap model, HttpServletRequest httpRequest){
+		JSONObject onb = new JSONObject(yourArray);
+		HttpSession session = httpRequest.getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		Boolean check = true;
+		try {
+			String codeAir = (onb.has("codeAir") && !onb.isNull("codeAir")) ? onb.getString("codeAir") : "";
+			String startAir = (onb.has("startAir") && !onb.isNull("startAir")) ? onb.getString("startAir") : "";
+			String endAir = (onb.has("endAir") && !onb.isNull("endAir")) ? onb.getString("endAir") : "";
+			String nameAir = (onb.has("nameAir") && !onb.isNull("nameAir")) ? onb.getString("nameAir") : "";
+			String descAir = (onb.has("descAir") && !onb.isNull("descAir")) ? onb.getString("descAir") : "";
+			String idItem = (onb.has("idItem") && !onb.isNull("idItem")) ? onb.getString("idItem") : "";
+			Long id = null;
+			if(StringUtils.isNotEmpty(idItem)){
+				id = Long.parseLong(idItem);
+			}
+			EppFlightRouter epp = flightRouterService.findByCode(codeAir);
+			if((id == null && epp != null) || (id != null && epp != null && id != epp.getId())){
+				check = false;
+			}
+			if(!check)
+				return -1;
+			EppFlightRouter eppFlight = new EppFlightRouter(id, userSession.getUserId(), null, new Date(), null, codeAir, startAir, endAir, nameAir, descAir, null);
+			flightRouterService.saveOrUpdateAir(eppFlight);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveChangeFlight")
+	public Integer saveChangeFlight(@RequestBody String yourArray, ModelMap model, HttpServletRequest httpRequest){
+		JSONObject onb = new JSONObject(yourArray);
+		HttpSession session = httpRequest.getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		Boolean check = true;
+		try {
+			String codeAir = (onb.has("codeAir") && !onb.isNull("codeAir")) ? onb.getString("codeAir") : "";
+			String typeFlight = (onb.has("typeFlight") && !onb.isNull("typeFlight")) ? onb.getString("typeFlight") : "";
+			String flightRt = (onb.has("flightRt") && !onb.isNull("flightRt")) ? onb.getString("flightRt") : "";
+			String nameAir = (onb.has("nameAir") && !onb.isNull("nameAir")) ? onb.getString("nameAir") : "";
+			String airlineCode = (onb.has("airlineCode") && !onb.isNull("airlineCode")) ? onb.getString("airlineCode") : "";
+			String descAir = (onb.has("descAir") && !onb.isNull("descAir")) ? onb.getString("descAir") : "";
+			String idItem = (onb.has("idItem") && !onb.isNull("idItem")) ? onb.getString("idItem") : "";
+			Long id = null;
+			if(StringUtils.isNotEmpty(idItem)){
+				id = Long.parseLong(idItem);
+			}
+			EppFlight epp = flightService.findByFlightno_Type(codeAir, typeFlight);
+			if((id == null && epp != null) || (id != null && epp != null && id != epp.getId())){
+				check = false;
+			}
+			if(!check)
+				return -1;
+			EppFlight eppFlight = new EppFlight(id, userSession.getUserId(), null, new Date(), null, codeAir, flightRt, airlineCode, typeFlight, nameAir, descAir, null);
+			flightService.saveOrUpdateFlight(eppFlight);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+}

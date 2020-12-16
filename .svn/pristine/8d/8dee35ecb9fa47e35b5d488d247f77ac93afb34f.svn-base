@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<bean id="jbossTxManager"
+	 class="org.springframework.transaction.jta.JtaTransactionManager" lazy-init="true"/>
+	
+		
+	<bean id="hbSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource"> 
+		    <ref bean="datasource"/> 
+		</property>
+
+	 	<property name="mappingLocations">
+    	    <list>
+				<value>classpath:com/nec/asia/nic/framework/admin/code/domain/Codes.hbm.xml</value>
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/code/domain/CodeValues.hbm.xml</value>
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/code/domain/Parameters.hbm.xml</value>
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/code/domain/PaymentDef.hbm.xml</value>
+    	    	<!-- <value>classpath:com/nec/asia/nic/framework/admin/code/domain/ProofDocumentDef.hbm.xml</value> -->
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Functions.hbm.xml</value>
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Roles.hbm.xml</value>
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Users.hbm.xml</value>
+    	    	<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Workstations.hbm.xml</value>
+
+				<value>classpath:com/nec/asia/nic/framework/admin/audit/domain/AuditAccessLogs.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/audit/domain/AuditSessionLogs.hbm.xml</value>
+				
+				<value>classpath:com/nec/asia/nic/framework/admin/site/domain/SiteGroups.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/site/domain/SiteRepository.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/site/domain/Department.hbm.xml</value>
+        	</list>
+	    </property>
+  		<property name="hibernateProperties">
+  			<props>
+  				<prop key="hibernate.show_sql">false</prop>  			
+<!--   				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop> -->
+  				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+  				<prop key="hibernate.jdbc.batch_size">50</prop>
+  				<prop key="hibernate.cache.use_second_level_cache">false</prop> 				  				
+  				<!-- Add to use C3PO Connection Pooling
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.OSCacheProvider</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>			
+				<prop key="hibernate.c3p0.max_size">100</prop>
+				<prop key="hibernate.c3p0.min_size">10</prop>
+				<prop key="hibernate.c3p0.initial_pool_size">10</prop>
+				<prop key="hibernate.c3p0.min_pool_size">10</prop>
+				<prop key="hibernate.c3p0.max_pool_size">100</prop>
+				<prop key="hibernate.c3p0.timeout">1800</prop>
+				<prop key="hibernate.c3p0.max_statements">50</prop>  	-->			
+  			</props>
+  		</property>
+	</bean>
+ 		
+	<bean id="hbTxManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"  lazy-init="true">
+		<property name="sessionFactory" ref="hbSessionFactory"/>
+	</bean>
+	
+	<bean id="txManager" parent="hbTxManager"/>
+
+<!-- 	<import resource="spring-dao.xml"/> -->
+	
+</beans>

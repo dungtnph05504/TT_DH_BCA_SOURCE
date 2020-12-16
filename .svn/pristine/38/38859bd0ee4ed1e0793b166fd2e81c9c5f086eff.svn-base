@@ -1,0 +1,11 @@
+##
+# Modification History:
+# 24 Jul 2017 (chris): set default as hanoi dev environment
+##
+
+# Credential information of IDSERVER for NIC System
+idserver.systemid = EPP
+idserver.password = WyTiFYGUdD9x
+idserver.endpoint = http://20.1.8.71:8280/idserver-webservices/itf/secured/securedTransactionCommandService
+idserver.datasource = BMS
+idserver.match.datatypes = TPL

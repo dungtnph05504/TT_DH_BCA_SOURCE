@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions> 
+	<definition name="nic-enquiry-transaction" extends="global.layout.standard">
+		<put-attribute name="queue"
+			value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/enquiry/transactionEnquiry/transactionEnquiry.jsp" />
+	</definition> 
+	
+	<definition name="nic-transaction-enquiry-details-init" template="/WEB-INF/views/enquiry/transactionEnquiry/transactionEnquiryDetail.jsp" />
+	<definition name="enquiry-details-init" template="/WEB-INF/views/enquiry/transactionEnquiry/transactionEnquiry-vs1.jsp" />
+</tiles-definitions>

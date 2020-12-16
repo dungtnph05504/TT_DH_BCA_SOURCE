@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppPersonFamily" table="EPP_CENTRAL.EPP_PERSON_FAMILY" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_PERSON_FAMILY_SEQ_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="deleteTs" type="timestamp">
+			<column name="DELETE_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deletedBy" type="string">
+			<column name="DELETED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateTs" type="timestamp">
+			<column name="UPDATE_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedBy" type="string">
+			<column name="UPDATE_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createTs" type="timestamp">
+			<column name="CREATE_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="string">
+			<column name="DATE_OF_BIRTH" length="8" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfBirthId" type="int">
+			<column name="PLACE_OF_BIRTH_ID" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="relationship" type="string">
+			<column name="RELATIONSHIP" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="subjectPerson" type="long">
+			<column name="SUBJECT_PERSON" precision="19" scale="0" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="personSelfId" type="long">
+			<column name="PERSON_SELF_ID" precision="19" scale="0" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="lost" type="string">
+			<column name="LOST" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfBirthCode" type="string">
+			<column name="PLACE_OF_BIRTH_CODE" length="200">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

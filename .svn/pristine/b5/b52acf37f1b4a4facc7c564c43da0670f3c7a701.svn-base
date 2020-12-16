@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.listHandover.domain.NicPersoLocations" table="EPP_CENTRAL.EPP_PERSO_LOCATIONS" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_PERSO_LOCATIONS_SEQ</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="code" type="string">
+			<column name="CODE" length="50" not-null="true">
+				<comment>CODE</comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="100">
+				<comment>NAME</comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="ADDRESS" length="200" >
+				<comment>ADDRESS</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="4000" >
+				<comment>DESCRIPTION</comment>
+			</column>
+		</property>
+		<property name="status" type="int">
+			<column name="STATUS" precision="10" scale="0" >
+				<comment>STATUS</comment>
+			</column>
+		</property>
+		<property name="issuePlace" type="string">
+			<column name="ISSUEPLACE" length="4000" >
+				<comment>ISSUEPLACE</comment>
+			</column>
+		</property>
+		<property name="createBy" type="long">
+			<column name="CREATEBY" precision="10" scale="0" >
+				<comment>CREATEBY</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATEDATE" length="7">
+				<comment>CREATEDATE</comment>
+			</column>
+		</property>
+		<property name="lastModifiedDate" type="timestamp">
+			<column name="LASTMODIFIEDDATE" length="7">
+				<comment>LASTMODIFIEDDATE</comment>
+			</column>
+		</property>
+		<property name="lastModifiedBy" type="long">
+			<column name="LASTMODIFIEDBY" precision="10" scale="0">
+				<comment>LASTMODIFIEDBY</comment>
+			</column>
+		</property>
+		<property name="idPerso" type="long">
+			<column name="ID_PERSO" precision="10" scale="0">
+				<comment>ID_PERSO</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+SPID Java Version
+Wang Junge
+
+10. V6.00B28  2009/03/26
+   Migrate project to Eclipse
+   
+9. V6.00B28   2007/08/02
+  Add new function SPIDTools.SPID_WSQCompressLimitSize
+
+8. V6.00B27   2007/06/07
+  Merge two java version into this version.
+
+7. V5.00B26  2006/11/22
+  Add function JavaFPDPIChange
+
+6. V5.00B25  2006/11/15
+  Add function ImagingResize
+
+5. V5.00B24  2006/08/3
+   Add Tenprint function
+
+4.V5.00B23    2006/07/25
+    Add support more than one image cropped for image scan api.
+
+3.V5.00B22    2006/06/05
+    Add thumbnail for fingerprint, Imagescan and portrait class
+
+2.V4.11B21    2006/05/02
+     Add function ImageTagging to class Imaging
+
+1.V4.11B20    2006/04/25
+     Add class IMAGE_FORMAT, inside the class defined all the image format constants
+     Add class Imaging, and method ImageFormatConvert

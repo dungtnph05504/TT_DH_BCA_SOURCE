@@ -1,0 +1,40 @@
+/* Scroll Bar Master Styling Starts Here */
+/* All comments can be freely removed from the css */
+
+.scrollgeneric {
+line-height: 1px;
+font-size: 1px;
+position: absolute;
+top: 0; left: 0;
+}
+
+.vscrollerbase {
+width: 6px;
+background-color: white;
+}
+.vscrollerbar {
+width: 6px;
+background: #c5deea; /* Old browsers */
+background: -moz-linear-gradient(top,  #c5deea 0%, #8abbd7 32%, #066dab 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c5deea), color-stop(32%,#8abbd7), color-stop(100%,#066dab)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #c5deea 0%,#8abbd7 32%,#066dab 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #c5deea 0%,#8abbd7 32%,#066dab 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #c5deea 0%,#8abbd7 32%,#066dab 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #c5deea 0%,#8abbd7 32%,#066dab 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c5deea', endColorstr='#066dab',GradientType=0 ); /* IE6-9 */
+}
+.hscrollerbase {
+height: 10px;
+background-color: white;
+}
+.hscrollerbar {
+height: 10px;
+background-color: black;
+}
+.scrollerjogbox {
+width: 6px;
+height: 6px;
+top: auto; left: auto;
+bottom: 0px; right: 0px;
+background-color: gray;
+}

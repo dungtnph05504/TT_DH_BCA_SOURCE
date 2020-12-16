@@ -1,0 +1,378 @@
+.header {
+	margin: 0px; padding: 0px; background-color: rgb(255, 255, 255);
+}
+.headerFrame {
+	border: thin solid rgb(0, 153, 255); border-image: none;
+}
+.headerText {
+	font: italic 12px/normal Arial, Verdana, Helvetica, sans-serif; font-size-adjust: none; font-stretch: normal;
+}
+.headerTitleText {
+	font: italic bold 16px/normal Arial, Verdana, Helvetica, sans-serif; color: rgb(0, 0, 255); font-size-adjust: none; font-stretch: normal;
+}
+.showMenu {
+	display: none;
+}
+.displayOff {
+	visibility: hidden;
+}
+.displayOn {
+	visibility: visible;
+}
+#shadow-container {
+	left: 3px; top: -10px; margin-right: 3px; margin-bottom: 3px; position: relative; min-height: 550px;
+}
+#shadow-container .shadow2 {
+	left: -1px; top: -1px; position: relative; min-height: 550px;
+}
+#shadow-container .shadow3 {
+	left: -1px; top: -1px; position: relative; min-height: 550px;
+}
+#shadow-container .container {
+	left: -1px; top: -1px; position: relative; min-height: 550px;
+}
+#shadow-container .shadow1 {
+	background: rgb(241, 240, 241);
+}
+#shadow-container .shadow2 {
+	background: rgb(219, 218, 219);
+}
+#shadow-container .shadow3 {
+	background: rgb(184, 182, 184);
+}
+#shadow-container .container background {
+	
+}
+#shadow-container .container {
+	background-position: right bottom; border-right-color: rgb(132, 130, 132); border-bottom-color: rgb(132, 130, 132); border-left-color: rgb(132, 130, 132); border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid;
+}
+form {
+	border: 0px solid rgb(0, 102, 153); border-image: none; width: 99%; background-color: white; align: center;
+}
+.content {
+	margin: 0px 10px; width: 98%;
+}
+.content .defaultTbl {
+	border: 1px solid rgb(0, 102, 153); border-image: none; width: 100%; vertical-align: top; border-collapse: collapse;
+}
+.content .regMenuTbl {
+	border: 1px solid rgb(0, 102, 153); border-image: none; width: 80%; vertical-align: top; border-collapse: collapse;
+}
+.content .regMenuTbl td {
+	padding: 0px 1px; border: 1px solid rgb(0, 102, 153); border-image: none;
+}
+.content .innerTable {
+	margin: 0px; border: 0px solid rgb(0, 102, 153); border-image: none; width: 100%; border-collapse: collapse;
+}
+.content .innerTable td {
+	border: 0px solid rgb(0, 102, 153); border-image: none; border-collapse: collapse;
+}
+.content .innerTable2 {
+	margin: 0px; border: 1px solid rgb(0, 102, 153); border-image: none; width: 100%; border-collapse: collapse;
+}
+.content .innerTable2 td {
+	border: 1px solid rgb(0, 102, 153); border-image: none; border-collapse: collapse;
+}
+.content .displayTableSmall {
+	margin: 0px; border: 1px solid rgb(0, 102, 153); border-image: none; text-align: left; font-size: 11px; border-collapse: collapse;
+}
+.content .displayTableSmall td {
+	padding: 2px; border: 1px solid rgb(0, 102, 153); border-image: none;
+}
+.content .displayTableSmall th {
+	padding: 5px; border: 1px solid rgb(0, 102, 153); border-image: none; height: 15px; text-align: left; color: black; text-transform: uppercase; font-weight: bold; background-color: rgb(173, 214, 255);
+}
+.content .displayTableSmall .total {
+	padding: 5px; border: 1px solid rgb(0, 102, 153); border-image: none; text-align: right; color: black; text-transform: uppercase; font-weight: bold; vertical-align: top; background-color: rgb(173, 214, 255);
+}
+.stepActive {
+	background: url("images/bg-red.png"); color: white; font-size: 13px; vertical-align: top;
+}
+.stepNonActive {
+	background: url("images/bg-gray.png"); font-size: 13px; vertical-align: top;
+}
+.content .displayTable {
+	margin: 0px; border: 1px solid rgb(0, 102, 153); border-image: none; text-align: left; font-size: 12px; border-collapse: collapse;
+}
+.content .displayTable td {
+	border: 1px solid rgb(0, 102, 153); border-image: none;
+}
+.content .displayTable th {
+	padding: 5px; border: 1px solid rgb(0, 102, 153); border-image: none; height: 30px; text-align: left; color: black; text-transform: uppercase; font-weight: bold; background-color: rgb(173, 214, 255);
+}
+.content .displayTable .total {
+	padding: 5px; border: 1px solid rgb(0, 102, 153); border-image: none; text-align: right; color: black; text-transform: uppercase; font-weight: bold; vertical-align: top; background-color: rgb(173, 214, 255);
+}
+.content .displayTable th.sorted {
+	color: white; padding-right: 7px; font-weight: bold; display: inline; z-index: 1; background-color: rgb(138, 171, 204);
+}
+.content .displayTable th.sorted a:visited {
+	color: white; padding-right: 7px; font-weight: bold; display: inline; z-index: 1; background-color: rgb(138, 171, 204);
+}
+th.sorted a:hover {
+	color: white; padding-right: 7px; font-weight: bold; display: inline; z-index: 1; background-color: rgb(138, 171, 204);
+}
+.content .displayTable th.sorted a:link {
+	color: white; padding-right: 7px; font-weight: bold; display: inline; z-index: 1; background-color: rgb(138, 171, 204);
+}
+.content .displayTable th.sortable a {
+	color: black; font-weight: bold;
+}
+.content .displayTable th.sortable a:hover {
+	color: rgb(0, 102, 153);
+}
+.order1 {
+	background-position: 100% 50%; background-image: url("images/sort_arrow_down.png"); background-repeat: no-repeat;
+}
+.order2 {
+	background-position: 100% 50%; background-image: url("images/sort_arrow_up.png"); background-repeat: no-repeat;
+}
+.content .displayTable .odd {
+	background-color: rgb(230, 230, 230);
+}
+.content .displayTable .even {
+	background-color: white;
+}
+.content .displayTable .odd a {
+	text-decoration: none;
+}
+.content .displayTable .even a {
+	text-decoration: none;
+}
+.content .displayTable .odd a:hover {
+	text-decoration: underline;
+}
+.content .displayTable .even a:hover {
+	text-decoration: underline;
+}
+.content .displayTable .odd:hover {
+	background: rgb(255, 255, 163);
+}
+.content .displayTable .even:hover {
+	background: rgb(255, 255, 163);
+}
+.content .displayTable .even td {
+	padding: 3px 4px;
+}
+.content .displayTable .odd td {
+	padding: 3px 4px;
+}
+img {
+	border: currentColor; border-image: none;
+}
+th {
+	text-align: left;
+}
+#tooltip {
+	padding: 5px; border: 1px solid rgb(17, 17, 17); border-image: none; position: absolute; z-index: 1; opacity: 0.85; background-color: rgb(238, 238, 238);
+}
+#tooltip h3 {
+	margin: 0px;
+}
+#tooltip div {
+	margin: 0px;
+}
+.tips {
+	padding: 1px 2px; color: rgb(255, 255, 255); font-size: 1.3em; font-weight: bold; text-decoration: none; margin-left: 5px; cursor: help; background-color: gray;
+}
+.displayDate {
+	padding: 1px 2px; color: blue; font-size: 11px; font-weight: bold; text-decoration: none; margin-left: 5px;
+}
+#dividerBlue {
+	background: url("images/ui-bg_glass.png") repeat-x; height: 2px;
+}
+.pageFunction {
+	padding: 5px 5px 5px 20px; width: auto; text-transform: uppercase; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; _background: url(images/ui-bg_glass.png) 100% 100%;
+}
+.errors {
+	padding: 5px;
+}
+.notice {
+	padding: 5px;
+}
+.success {
+	padding: 5px;
+}
+.info {
+	padding: 5px;
+}
+.errors {
+	background: rgb(251, 227, 228); border-color: rgb(251, 194, 196); color: rgb(138, 31, 17);
+}
+.notice {
+	background: rgb(255, 246, 191); border-color: rgb(255, 211, 36); color: rgb(81, 71, 33);
+}
+.success {
+	background: rgb(230, 239, 194); border-color: rgb(198, 216, 128); color: rgb(38, 68, 9);
+}
+.info {
+	background: rgb(213, 237, 248); border-color: rgb(146, 202, 228); color: rgb(32, 87, 145);
+}
+.systemMsg {
+	padding: 20px 10px; width: 100%; font-size: 18px;
+}
+p {
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;
+}
+h1 {
+	margin: 0.5em 0px; font-size: 20px;
+}
+h2 {
+	margin: 3em 0px 0.5em; font-size: 16px;
+}
+h3 {
+	margin: 2em 0px 0.5em; font-size: 12px;
+}
+h4 {
+	font-size: 12px;
+}
+h5 {
+	font-size: 11px;
+}
+h6 {
+	font-size: 10px;
+}
+hr {
+	height: 1px; color: rgb(153, 153, 153);
+}
+.description {
+	height: 25px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;
+}
+.description_slim {
+	height: 20px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none; background-color: rgb(244, 243, 248);
+}
+.description_slimplain {
+	height: 20px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; text-decoration: none;
+}
+.description_highlighted {
+	height: 30px; color: red; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; text-decoration: none;
+}
+.defaultText {
+	background-color: rgb(224, 234, 251);
+}
+.defaultTextListBox {
+	font: 12px/normal Verdana, Arial, Helvetica, sans-serif; width: 200px; font-size-adjust: none; font-stretch: normal; background-color: rgb(224, 234, 251);
+}
+.defaultText_highlighted {
+	font: 12px/normal Verdana, Arial, Helvetica, sans-serif; color: red; font-size-adjust: none; font-stretch: normal; background-color: rgb(224, 234, 251);
+}
+.defaultText_error {
+	color: red; background-color: rgb(224, 234, 251);
+}
+.subject {
+	height: 25px; text-align: left; color: rgb(0, 0, 0); text-transform: uppercase; line-height: normal; text-indent: 5px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; text-decoration: none;
+}
+.subjectsmall {
+	height: 25px; text-align: left; color: rgb(0, 0, 0); line-height: normal; text-indent: 5px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; text-decoration: none;
+}
+.textLink {
+	background: none; font: 12px/normal Verdana, Arial, Helvetica, sans-serif; padding: 2px; color: rgb(0, 102, 153); float: none; display: inline; font-size-adjust: none; font-stretch: normal; readonly: true;
+}
+.textLink:hover {
+	background: rgb(212, 234, 255); color: black;
+}
+.datepicker {
+	background-color: rgb(224, 234, 251);
+}
+#dialog_link {
+	padding: 0.4em 1em 0.4em 20px; text-decoration: none; position: relative;
+}
+#dialog_link span.ui-icon {
+	margin: -8px 5px 0px 0px; left: 0.2em; top: 50%; position: absolute;
+}
+.tblHeader1 {
+	text-align: center; color: black; text-transform: uppercase; font-weight: bold;
+}
+.tblHeaderAlignLeft {
+	background: rgb(99, 201, 196); text-align: left; color: black; text-transform: uppercase; text-indent: 5px; font-weight: bold; _background: 100% 100% repeat-x;
+}
+.tblHeaderAlignCenter {
+	background: rgb(99, 201, 196); text-align: center; color: black; text-transform: uppercase; text-indent: 5px; font-weight: bold; _background: 100% 100% repeat-x;
+}
+.subSection {
+	text-align: left; color: rgb(255, 255, 255); text-transform: uppercase; text-indent: 5px; font-weight: bold; background-color: rgb(0, 102, 153);
+}
+.buttonMenu {
+	width: 100%; white-space: normal; max-width: 280px;
+}
+.btnAlignRight {
+	text-align: right;
+}
+.btn {
+	font: 15px/normal Verdana, Arial, Helvetica, sans-serif; padding: 5px; text-decoration: none; float: inherit; display: inline; cursor: pointer; font-size-adjust: none; font-stretch: normal;
+}
+.btn_disable {
+	font: 15px/normal Verdana, Arial, Helvetica, sans-serif; padding: 5px; text-decoration: none; float: inherit; display: inline; cursor: pointer; font-size-adjust: none; font-stretch: normal;
+}
+.btn * {
+	font-style: normal; display: block; background-repeat: repeat-x;
+}
+.btn_disable * {
+	font-style: normal; display: block; background-repeat: repeat-x;
+}
+.btn i {
+	background-position: left top; left: 0px; top: 0px; width: 5px; height: 5px; margin-bottom: -5px;
+}
+.btn_disable i {
+	background-position: left top; left: 0px; top: 0px; width: 5px; height: 5px; margin-bottom: -5px;
+}
+.btn span {
+	background-position: left bottom; padding: 0px 0px 5px 10px; left: -5px; margin-bottom: -5px;
+}
+.btn_disable span {
+	background-position: left bottom; padding: 0px 0px 5px 10px; left: -5px; margin-bottom: -5px;
+}
+.btn span i {
+	background-position: right bottom; left: 100%; top: 0px; width: 10px; height: 100%; margin-bottom: 0px;
+}
+.btn_disable span i {
+	background-position: right bottom; left: 100%; top: 0px; width: 10px; height: 100%; margin-bottom: 0px;
+}
+.btn span span {
+	background-position: right top; top: -5px; height: 0px; right: -10px; margin-left: 10px;
+}
+.btn_disable span span {
+	background-position: right top; top: -5px; height: 0px; right: -10px; margin-left: 10px;
+}
+#loading {
+	left: 0px; top: 0px; width: 100%; height: 100%; position: fixed; z-index: 5; background-image: url("images/transparentbg.png");
+}
+#load {
+	background: rgb(255, 255, 255); width: 50%; display: block; position: absolute; z-index: 5; cursor: default;
+}
+.px1 {
+	border: 1px solid black; border-image: none;
+}
+div#regNav {
+	background: rgb(178, 178, 178); font: bold 12px/normal Verdana, Arial, Helvetica, sans-serif; width: 100%; height: 40px; bottom: 0px; color: rgb(0, 0, 0); text-transform: uppercase; margin-left: 0px; position: absolute; font-size-adjust: none; font-stretch: normal;
+}
+div#regNav a {
+	padding: 10px; color: rgb(0, 0, 0);
+}
+div#regNav a:hover {
+	color: rgb(255, 255, 255);
+}
+#regNavFooter {
+	width: 100%; height: 40px; bottom: 0px; position: fixed;
+}
+.summaryTableHdr {
+	padding: 5px; border: 1px solid rgb(0, 102, 153); border-image: none; height: 30px; text-align: center; color: black; text-transform: uppercase; font-weight: bold; background-color: rgb(173, 214, 255);
+}
+.topbreadcrumbs {
+	font-weight: bold;
+}
+.topbreadcrumbs a {
+	color: rgb(0, 0, 255); text-decoration: none;
+}
+.topbreadcrumbs a:hover {
+	color: rgb(255, 0, 255); text-decoration: underline overline;
+}
+.topbreadcrumbs a:visited {
+	color: rgb(0, 0, 255); text-decoration: none;
+}
+.topbreadcrumbs a:hover:visited {
+	color: rgb(255, 0, 255); text-decoration: underline overline;
+}
+.topbreadcrumbs-active {
+	font-weight: bold;
+}

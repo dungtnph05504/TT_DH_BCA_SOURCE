@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicApprovalData" table="EPP_APPROVAL_DATA" optimistic-lock="version">
+		<id name="workflowJobId" type="long">
+			<column name="WORKFLOW_JOB_ID" precision="20" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Application Id</comment>
+			</column>
+		</property>
+		<property name="approveBy" type="string">
+			<column name="APPROVE_BY" length="64">
+				<comment>Approve By</comment>
+			</column>
+		</property>
+		<property name="approveDatetime" type="timestamp">
+			<column name="APPROVE_DATETIME" length="7">
+				<comment>Approve Datetime</comment>
+			</column>
+		</property>
+		<property name="approveReason" type="string">
+			<column name="APPROVE_REASON" length="100">
+				<comment>Approve Reason</comment>
+			</column>
+		</property>
+		<property name="approveRemarks" type="string">
+			<column name="APPROVE_REMARKS" length="1000">
+				<comment>Approve Remarks</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

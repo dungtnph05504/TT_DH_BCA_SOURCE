@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.NicDecisionManager" table="EPP_CENTRAL.EPP_DECISION_MANAGER" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_DECISION_MANAGER_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="decisionNumber" type="string">
+			<column name="DECISIONNUMBER" length="200">
+				<comment>Số quyết định</comment>
+			</column>
+		</property>
+		<property name="signer" type="string">
+			<column name="SIGNER" length="100">
+				<comment>Người ký</comment>
+			</column>
+		</property>
+		<property name="signDate" type="timestamp">
+			<column name="SIGNDATE" length="7">
+				<comment>Ngày ký </comment>
+			</column>
+		</property>
+		<property name="competentAuthorities" type="string">
+			<column name="COMPETENTAUTHORITIES" length="2000">
+				<comment>Tên cơ quan có thẩm quyền</comment>
+			</column>
+		</property>
+		<property name="competentAuthoritiesEng" type="string">
+			<column name="COMPETENTAUTHORITIESENG" length="2000">
+				<comment>Tên cơ quan có thẩm quyền (Tiếng Anh)</comment>
+			</column>
+		</property>
+		<property name="purpose" type="string">
+			<column name="PURPOSE" length="2000">
+				<comment>Mục đích chuyến đi</comment>
+			</column>
+		</property>
+		<property name="timeplan" type="string">
+			<column name="TIMEPLAN" length="200">
+				<comment>Thời gian dự tính xuất cảnh</comment>
+			</column>
+		</property>
+		<property name="tripCost" type="string">
+			<column name="TRIPCOST" length="200">
+				<comment>Chi phí chuyến đi</comment>
+			</column>
+		</property>
+		<property name="invitingAgency" type="string">
+			<column name="INVITINGAGENCY" length="200">
+				<comment>Cơ quan mời (hoặc thu xếp chuyến đi)</comment>
+			</column>
+		</property>
+		<property name="transitNation" type="string">
+			<column name="TRANSITNATION" length="4000">
+				<comment>Quốc gia quá cảnh</comment>
+			</column>
+		</property>
+		<property name="timeLasts" type="string">
+			<column name="TIMELASTS" length="100">
+				<comment>Thời gian kéo dài</comment>
+			</column>
+		</property>
+		<property name="countryPlan" type="string">
+			<column name="COUNTRYPLAN" length="4000">
+				<comment>Quốc gia đến</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATEBY" length="200">
+				<comment>Người tạo</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATEDATE" length="7">
+				<comment>Ngày tạo</comment>
+			</column>
+		</property>
+		<property name="modifyBy" type="string">
+			<column name="MODIFYBY" length="200">
+				<comment>Người thay đổi</comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFYDATE" length="7">
+				<comment>Ngày thay đổi</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="30">
+				<comment>Mô tả thêm</comment>
+			</column>
+		</property>
+		<property name="data" type="org.hibernate.type.MaterializedBlobType">
+			<column name="DATA">
+				<comment>Dữ liệu quét tờ quyết định</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

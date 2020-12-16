@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	    http://www.springframework.org/schema/aop 
+	    http://www.springframework.org/schema/aop/spring-aop-4.2.xsd"
+>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<mvc:interceptors>
+		<!--  
+    	<mvc:interceptor>
+	    	<mvc:mapping path="/**" />
+			<bean class="com.nec.asia.nic.framework.admin.login.LoginInterceptor" >
+			   	<property name="userSessionKey" value="userSession" />
+				<property name="loginURL" value="/servlet/user/login" />
+		    </bean>
+    	</mvc:interceptor>
+    	-->
+    	<!-- Temporary Disabled interceptor for development purposes -->
+    	<!--  
+    	<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+	    	<bean class="com.nec.asia.nic.admin.acl.interceptor.FunctionInterceptor" >
+				<property name="userSessionKey" value="userSession" />
+				<property name="securityService" ref="securityService"></property>
+	    		<property name="ignoreControllers">
+					<list>
+						<value>LoginController</value>
+					</list>
+				</property>
+	    	</bean>	
+	    				
+		</mvc:interceptor>
+		-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.nec.asia.nic.framework.admin.acl.impl.AclInterceptor">
+				<property name="service" ref="aclService"></property>
+				<property name="ignoreControllers">
+					<list>
+						<value>LoginController</value>
+						<value>/intro</value>
+					</list>
+				</property>
+				<property name="errorPath" value="/servlet/user/accessDenied"></property>
+			</bean>
+		</mvc:interceptor>
+
+
+	</mvc:interceptors>
+
+	
+	<!-- scan for controllers only -->
+	<context:component-scan base-package="com.nec.asia.nic" use-default-filters="false">
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+		<context:include-filter expression="com.nec.asia.nic.investigation.controller.FraudCaseManagementController_PrintProcessor" type="regex" />
+	</context:component-scan>
+	<mvc:annotation-driven />
+	<!-- the global acl interceptor which supports ignore list (of controller simple class name) -->
+
+
+	<!-- 
+		Map paths directly to view names without controller processing. 
+		Use the view-name attribute if necessary: by convention the view name 
+		equals the path without the leading slash
+		
+		That is, the path of '/intro' will use a view name 'intro', 
+		same as adding view-name='intro' 
+	-->
+	<mvc:view-controller path="/login" />
+	<mvc:view-controller path="/logout" />
+
+	<mvc:view-controller path="/error" view-name="error" />
+	
+	<!-- 
+		Map some framework resources (javascript etc.) from the framework's jar file
+	-->
+	<!-- 
+	<mvc:resources mapping="/resources/framework/**" location="classpath:/META-INF/framework/"/>
+	-->
+	<mvc:resources mapping="/resources/**" location="/, classpath:/META-INF/web-resources/" />
+	<!--
+	<mvc:default-servlet-handler />
+	-->
+
+	<!-- 
+		Resolves logical view names returned by Controllers to Tiles; 
+		a view name to resolve is treated as the name of a tiles definition 
+	-->
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
+	
+	<!-- Configures the Tiles layout system -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layout/tiles-defs.xml</value>
+				<!-- no in used
+				<value>/WEB-INF/views/exception/exception-tiles-defs.xml</value>
+				<value>/WEB-INF/views/supervisor/supervisor-tiles-defs.xml</value>
+				<value>/WEB-INF/views/registration/registration-tiles-defs.xml</value>
+				<value>/WEB-INF/views/payment/payment-tiles-defs.xml</value>
+				<value>/WEB-INF/views/cardreception/cardreception-tiles-defs.xml</value>
+				<value>/WEB-INF/views/cardreturn/cardreturn-tiles-defs.xml</value>
+
+				<value>/WEB-INF/views/cardissue/cardissue-tiles-defs.xml</value>
+				<value>/WEB-INF/views/cpdv2query/cpdv2query-tiles-defs.xml</value>
+				<value>/WEB-INF/views/verification/verification-tiles-defs.xml</value>
+				<value>/WEB-INF/views/transCardStatusQuery/transCardStatusQuery-tiles-defs.xml</value>
+				<value>/WEB-INF/views/enquiry/cardEnquiry/cardEnquiry-tiles-defs.xml</value>
+				<value>/WEB-INF/views/ricreport/report-defs.xml</value>
+				
+				<value>/WEB-INF/views/reprint/reprint-tiles-defs.xml</value>
+				<value>/WEB-INF/views/statistic/statistic-tiles-defs.xml</value>
+				 -->
+				<value>/WEB-INF/views/reprint/reprint-tiles-defs.xml</value>
+				<value>/WEB-INF/views/statistic/statistic-tiles-defs.xml</value>
+				<value>/WEB-INF/views/ricreport/report-defs.xml</value>
+				<value>/WEB-INF/views/tiles-defs.xml</value>
+				<value>/WEB-INF/views/changePassword/changePassword-tiles-def.xml</value>
+				
+				<value>/WEB-INF/views/investigation/investigation-tiles-defs.xml</value>
+				<value>/WEB-INF/views/documentAttachment/documentAttachment-tiles-defs.xml</value>
+								
+				<value>/WEB-INF/views/adminconsole/adminconsole-tiles-defs.xml</value>
+				<value>/WEB-INF/views/security/security-tiles-def.xml</value>
+				
+				<value>/WEB-INF/views/nicEnquiry/nic-enquiry-tiles-defs.xml</value>
+				<value>/WEB-INF/views/enquiry/nicEnquiry/nicEnquiry-tiles-defs.xml</value>
+				<value>/WEB-INF/views/enquiry/transactionEnquiry/transactionEnquiry-tiles-defs.xml</value>
+
+				<value>/WEB-INF/views/dataSyncMonitoring/dataSyncMonitoring-tiles-defs.xml</value>
+				
+			    <value>/WEB-INF/views/adminconsole/syns/syns-tiles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/manager/utils-tiles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/officalNation/utils-tiles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/officalVisa/utils-tiles-defs.xml</value>
+				
+				<value>/WEB-INF/views/investigationConfirmDSQ/investigationDSQ-tiles-defs.xml</value>
+				<value>/WEB-INF/views/investigationBca/investigation-tiles-defs.xml</value>
+				<value>/WEB-INF/views/investigationBoss/investigation-tiles-defs.xml</value>
+				<value>/WEB-INF/views/investigationLost/investigation-tiles-defs.xml</value>
+				<value>/WEB-INF/views/investigationReject/investigation-tiles-defs.xml</value>
+				<value>/WEB-INF/views/investigationBoss/investigation-tiles-defs.xml</value>
+				
+				<value>/WEB-INF/views/listHandover/listHandover-tiles-defs.xml</value>
+				<value>/WEB-INF/views/pendingPassportNo/pendingPassportNo-tiles-defs.xml</value>
+				<value>/WEB-INF/views/persoLocations/persoLocation-tiles-defs.xml</value>
+				<value>/WEB-INF/views/syncSinger/sync-tiles-defs.xml</value>
+				<value>/WEB-INF/views/reportCqdd/reportCqdd-tiles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/pendingQueuesJobSchedule/pendingQueuesJobSchedule-tiles-defs.xml</value>
+				<value>/WEB-INF/views/workflowProcess/workflowProcess-tiles-defs.xml</value>
+				<value>/WEB-INF/views/central/central-tiles-defs.xml</value>
+				<value>/WEB-INF/views/storage/storage-tiles-defs.xml</value>
+				<value>/WEB-INF/views/destroy/destroy-tiles-defs.xml</value>
+				<value>/WEB-INF/views/immi/immi-tiles-defs.xml</value>
+				<value>/WEB-INF/views/pkd/pkd-tiles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/listLogWs/listLogWs-titles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/listLogCheckConnection/logCheckConnection-titles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/listRptData/listRptData-titles-defs.xml</value>
+				<value>/WEB-INF/views/adminconsole/thongKeHangDoi/thongkehangdoi-titles-defs.xml</value>
+				<value>/WEB-INF/views/bordergate/bordergate-tiles-defs.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean name="aclService" class="com.nec.asia.nic.admin.acl.AclServiceImpl">
+		<property name="functionService" ref="functionService"></property>
+	</bean>
+	
+	<!-- MultipartResolver for parsing file uploads, implementation for Commons FileUpload -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
+	<!--
+		- This bean resolves specific types of exceptions to corresponding logical 
+		- view names for error views. The default behaviour of DispatcherServlet 
+		- is to propagate all exceptions to the servlet container: this will happen 
+		- here with all other types of exceptions.
+		
+		- We can set exceptionMappings by mapping naming exceptions, 
+		- and statusCodes by HTTP error code such as 500 as well
+	-->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.nec.asia.nic.framework.admin.acl.AccessDeniedException">login</prop>
+			</props>
+		</property>
+	</bean>    
+    
+	<!-- ==============================Utils & Misc ============================== -->
+	<bean name="applicationScopeLoader" class="com.nec.asia.nic.utils.ApplicationScopeLoader" lazy-init="false">
+		<property name="constantClass">
+			<map>
+				<entry key="Constants" value="com.nec.asia.nic.utils.Constants" />
+
+			</map>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,507 @@
+/**
+ * 
+ */
+package com.nec.asia.nic.comp.trans.service.impl;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.nec.asia.nic.comp.trans.dao.DocumentDataDao;
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.NicDocumentData;
+import com.nec.asia.nic.comp.trans.domain.NicDocumentDataId;
+import com.nec.asia.nic.comp.trans.domain.NicDocumentHistory;
+import com.nec.asia.nic.comp.trans.domain.NicTransactionLog;
+import com.nec.asia.nic.comp.trans.domain.type.TransactionStatus;
+import com.nec.asia.nic.comp.trans.dto.RetrieveDocumentDataResponse;
+import com.nec.asia.nic.comp.trans.service.DocumentDataService;
+import com.nec.asia.nic.comp.trans.service.DocumentHistoryService;
+import com.nec.asia.nic.comp.trans.service.NicTransactionService;
+import com.nec.asia.nic.comp.trans.service.TransactionLogService;
+import com.nec.asia.nic.comp.trans.service.exception.DocumentDataServiceException;
+import com.nec.asia.nic.comp.trans.utils.HelperClass;
+import com.nec.asia.nic.comp.ws.log.domain.CreateMessageException;
+import com.nec.asia.nic.framework.PageRequest;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.dao.DaoException;
+import com.nec.asia.nic.framework.service.impl.DefaultBusinessServiceImpl;
+
+/**
+ * 
+ * @author chris_wong
+ *
+ */
+/*
+ * Modification History:
+ * 
+ * 04 Jan 2016 (chris): init service implementations 20 May 2016 (khang/chris):
+ * move save Dispatch Info logic from SyncWSImpl to DocumentDataServiceImpl
+ */
+// method reference from IssuanceDataService
+@Service("documentDataService")
+public class DocumentDataServiceImpl
+		extends
+		DefaultBusinessServiceImpl<NicDocumentData, NicDocumentDataId, DocumentDataDao>
+		implements DocumentDataService {
+
+	@Autowired
+	private NicTransactionService nicTransactionService = null;
+
+	@Autowired
+	private TransactionLogService nicTransactionLogService = null;
+
+	@Autowired
+	private DocumentHistoryService documentHistoryService = null;
+
+	/** must define the non-argument constructor because we use CGLib proxy */
+	public DocumentDataServiceImpl() {
+	}
+
+	@Autowired
+	public DocumentDataServiceImpl(DocumentDataDao dao) {
+		this.dao = dao;
+	}
+
+	@Override
+	@Transactional(rollbackFor = java.lang.Throwable.class, propagation = Propagation.REQUIRED)
+	public BaseModelSingle<NicDocumentData> findByDocNumber(String passportNo) {
+		try {
+			return this.dao.findByDocNumber(passportNo);
+		} catch (Exception e) {
+			return new BaseModelSingle<NicDocumentData>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - findByDocNumber - " + passportNo
+							+ " - thất bại.");
+		}
+
+	}
+
+	@Override
+	public List<NicDocumentData> findAllByDocNumber(String passportNo) {
+		return this.dao.findAllByDocNumber(passportNo);
+	}
+
+	@Override
+	public List<NicDocumentData> findAllByTransactionId(String transactionId,
+			List<String> statusesToInclude) {
+		return this.dao
+				.findAllByTransactionId(transactionId, statusesToInclude);
+	}
+
+	@Override
+	public List<NicDocumentData> findAllByTransactionId_notInStatuses(
+			String transactionId, List<String> statusesToInclude) {
+		return this.dao.findAllByTransactionId_notInStatuses(transactionId,
+				statusesToInclude);
+	}
+
+	@Override
+	public BaseModelSingle<Collection<NicDocumentData>> findByTransactionId(
+			String transactionId) throws DocumentDataServiceException {
+		try {
+			Collection<NicDocumentData> col = this.dao.findAllByTransactionId(
+					transactionId).getListModel();
+			return new BaseModelSingle<Collection<NicDocumentData>>(col, true,
+					null);
+		} catch (Exception e) {
+			return new BaseModelSingle<Collection<NicDocumentData>>(null,
+					false, CreateMessageException.createMessageException(e)
+							+ " - findByTransactionId - " + transactionId
+							+ " - thất bại.");
+		}
+	}
+
+	@Override
+	@Transactional(rollbackFor = java.lang.Throwable.class, propagation = Propagation.REQUIRED)
+	public NicDocumentData updateDocByStatus(String transactionId,
+			String passportNo, TransactionStatus transStatus, String userId)
+			throws DocumentDataServiceException {
+		NicDocumentDataId documentDataId = new NicDocumentDataId(transactionId,
+				passportNo);
+		NicDocumentData docData = this.dao.findById(documentDataId);
+		if (docData == null)
+			throw new DocumentDataServiceException(
+					"Cannot find any document for transactionId["
+							+ transactionId + "] and passportNo[" + passportNo
+							+ "]");
+
+		docData.setStatus(transStatus.getKey());
+		docData.setUpdateDatetime(new Date());
+		docData.setUpdateBy(userId);
+
+		this.dao.saveOrUpdate(docData);
+
+		return docData;
+	}
+
+	@Override
+	public List<NicDocumentData> findAllDispatchedDocuments(Integer maxResult)
+			throws DocumentDataServiceException {
+		try {
+			return this.dao.findAllDispatchedDocuments(maxResult);
+		} catch (DaoException e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	@Override
+	public List<NicDocumentData> findAllSyncErrorDocuments(Integer maxResult)
+			throws DocumentDataServiceException {
+		try {
+			return this.dao.findAllSyncErrorDocuments(maxResult);
+		} catch (DaoException e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	@Override
+	public int updatePackageDispatchInfoByPassportNoList(
+			List<String> passportNoList, String packageId,
+			Date packageDateTime, String dispatchId, Date dispatchDateTime,
+			String status, Date statusUpdateTime, String officerId,
+			String workstationId) throws DocumentDataServiceException {
+		try {
+			return this.dao.updatePackageDispatchInfoByPassportNoList(
+					passportNoList, packageId, packageDateTime, dispatchId,
+					dispatchDateTime, status, statusUpdateTime, officerId,
+					workstationId);
+		} catch (DaoException e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	@Override
+	public int countExistingPassportByPassportNoList(List<String> passportNoList)
+			throws DocumentDataServiceException {
+		try {
+			return this.dao
+					.countExistingPassportByPassportNoList(passportNoList);
+		} catch (DaoException e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	@Override
+	@Transactional(rollbackFor = java.lang.Throwable.class, propagation = Propagation.REQUIRED)
+	public void updatePackageDispatchInfo(List<String> passportNoList,
+			List<String> transactionIdList,
+			List<NicDocumentHistory> documentHistoryList,
+			List<NicTransactionLog> transactionLogList, String packageId,
+			Date packageDateTime, String dispatchId, Date dispatchDateTime,
+			String status, Date statusUpdateTime, String officerId,
+			String workstationId) throws DocumentDataServiceException {
+		try {
+			if (CollectionUtils.isNotEmpty(passportNoList)) {
+				this.updatePackageDispatchInfoByPassportNoList(passportNoList,
+						packageId, packageDateTime, dispatchId,
+						dispatchDateTime, status, statusUpdateTime, officerId,
+						workstationId);
+			}
+
+			if (CollectionUtils.isNotEmpty(transactionIdList)) {
+				nicTransactionService.updateStatusByTxnIdList(
+						transactionIdList, status, officerId, workstationId);
+			}
+
+			if (CollectionUtils.isNotEmpty(documentHistoryList)) {
+				documentHistoryService.addDocumentHistory(documentHistoryList);
+			}
+
+			if (CollectionUtils.isNotEmpty(transactionLogList)) {
+				nicTransactionLogService.addTransactionLog(transactionLogList);
+			}
+		} catch (Throwable e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	@Override
+	public PaginatedResult<NicDocumentData> findAllForPagination(
+			PageRequest pageRequest, NicDocumentData nicDocumentData)
+			throws DocumentDataServiceException {
+		PaginatedResult<NicDocumentData> pr = null;
+		try {
+			int pageNo = pageRequest.getPageNo();
+			int pageSize = pageRequest.getMaxRecords();
+
+			pr = dao.findAllForPagination(nicDocumentData, pageNo, pageSize);
+		} catch (Exception e) {
+			throw new DocumentDataServiceException(e);
+		}
+		return pr;
+	}
+
+	public List<NicDocumentData> findAllDocumentsForSync(String siteCode)
+			throws DocumentDataServiceException {
+		try {
+			return this.dao.findAllDocumentsForSync(siteCode);
+		} catch (DaoException e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	public void updateSyncStatus(List<String> passportNoList, String officerId,
+			String wkstnId, String siteCode)
+			throws DocumentDataServiceException {
+		try {
+			this.dao.updateSyncStatus(passportNoList, officerId, wkstnId);
+		} catch (DaoException e) {
+			throw new DocumentDataServiceException(e);
+		}
+	}
+
+	// [09-Mar] Trung thêm số năm hết hạn hộ chiếu
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public boolean updatePassportNo(String transactionId, String userId,
+			String wkstnId, String passportNo) {
+		try {
+			dao.updatePassportNo(transactionId, userId, wkstnId, passportNo);
+			NicDocumentData nic = dao.getNicDocumentDataById(transactionId)
+					.getModel();
+			if (nic.getId().getPassportNo() == passportNo
+					&& nic.getId().getTransactionId() == transactionId)
+				return true;
+		} catch (Exception ex) {
+			logger.error("Error occurred while approving the card. Exception: "
+					+ ex.getMessage(), ex);
+
+		}
+		return false;
+	}
+
+	@Override
+	public List<NicDocumentData> findAllBySiteCodeAndStage(String site,
+			String status, int year, int check) {
+		List<NicDocumentData> list = dao.findAllBySiteCodeAndStage(site,
+				status, year, check);
+		List<NicDocumentData> listDoc = new ArrayList<NicDocumentData>();
+		if (list != null && list.size() > 0) {
+			if (check == 0) {
+				for (NicDocumentData doc : list) {
+					if ((year - 1) == HelperClass.getYearInDate(doc
+							.getCreateDatetime())) {
+						listDoc.add(doc);
+					}
+				}
+			} else {
+				for (NicDocumentData doc : list) {
+					if (year == HelperClass.getYearInDate(doc
+							.getCreateDatetime())) {
+						listDoc.add(doc);
+					}
+				}
+			}
+		}
+		return listDoc;
+	}
+
+	@Override
+	public BaseModelSingle<NicDocumentData> getDocumentDataById(
+			String transactionId) {
+		try {
+			return dao.getNicDocumentDataById(transactionId);
+		} catch (Exception e) {
+			return new BaseModelSingle<NicDocumentData>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - getDocumentDataById - " + transactionId
+							+ " - thất bại.");
+		}
+	}
+
+	@Override
+	public List<RetrieveDocumentDataResponse> getlistDocumentData(
+			String siteCode, String passportNo, Date issueDatePassport,
+			String typePassport, Date expireDatePassport, String handoverB) {
+		try {
+			return dao.getlistDocumentData(siteCode, passportNo,
+					issueDatePassport, typePassport, expireDatePassport,
+					handoverB);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public RetrieveDocumentDataResponse detailDocumentData(String passportNo) {
+		try {
+			return dao.detailDocumentData(passportNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public BaseModelSingle<Void> saveOrUpdateDocData(NicDocumentData nicDoc) {
+		try {
+			return this.dao.saveOrUpdateDocumentData(nicDoc);
+		} catch (Exception e) {
+			return new BaseModelSingle<Void>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - saveOrUpdateDocData - thất bại.");
+		}
+	}
+
+	@Override
+	public BaseModelList<NicDocumentData> findAllPassportByCondition(
+			String passportNo, String archiveCode) {
+		try {
+			return this.dao.findAllPassportByCondition(passportNo, archiveCode);
+		} catch (Exception e) {
+			return new BaseModelList<NicDocumentData>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - findAllPassportByCondition - " + passportNo
+							+ " - thất bại.");
+		}
+	}
+
+	@Override
+	public BaseModelSingle<NicDocumentData> findPassportByConditions(
+			String passportNo, String name, String gender, String dateOfBirth,
+			String dateOfDocIssue, String dateOfDocExpiry) {
+		try {
+			return this.dao.findPassportByConditions(passportNo, name, gender,
+					dateOfBirth, dateOfDocIssue, dateOfDocExpiry);
+		} catch (Exception e) {
+			return new BaseModelSingle<NicDocumentData>(null, false,
+					CreateMessageException.createMessageException(e)
+							+ " - findPassportByConditions - thất bại.");
+		}
+	}
+
+	@Override
+	public NicDocumentData findPassportToRestore(String passportNo,
+			String reason, String name, String gender, String dateOfBirth)
+			throws Exception {
+		NicDocumentData nicDocData = null;
+		try {
+			List<NicDocumentData> list = this.dao.findPassportToRestore(
+					passportNo, reason, name, gender, dateOfBirth);
+			if (list != null && list.size() > 0) {
+				nicDocData = list.get(0);
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					CreateMessageException.createMessageException(e)
+							+ " - findPassportToRestore - thất bại.");
+		}
+		return nicDocData;
+	}
+
+	@Override
+	public NicDocumentData findDocDataById(String transactionId,
+			String passportNo) throws Exception {
+		NicDocumentData nicDoc = null;
+		try {
+			nicDoc = this.dao.findById(new NicDocumentDataId(transactionId,
+					passportNo));
+		} catch (Exception e) {
+			throw new Exception(
+					CreateMessageException.createMessageException(e)
+							+ " - findDocDataById - thất bại.");
+		}
+		return nicDoc;
+	}
+
+	@Override
+	public NicDocumentData findDocDataByTranId(String transactionId)
+			throws Exception {
+		NicDocumentData nicDoc = null;
+		try {
+			List<NicDocumentData> list = this.dao.findAllByTransactionId(transactionId, null);
+			if (list != null && list.size() > 0) {
+				nicDoc = list.get(0);
+			}
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - findDocDataByTranId thất bại.");
+		}
+		return nicDoc;
+	}
+
+	@Override
+	public List<NicDocumentData> findValidPassportById(
+			String passportNo) throws Exception {
+		List<NicDocumentData> list = null;
+		try {
+			list = this.dao.findValidPassportById(passportNo);
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - findValidPassportById thất bại.");
+		}
+		return list;
+	}
+
+	@Override
+	public List<NicDocumentData> findListDocByTranId(String transactionIdHit)
+			throws Exception {
+		List<NicDocumentData> list = null;
+		try {
+			list = this.dao.findAllByTransactionId(transactionIdHit, null);
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - findListDocByTranId thất bại.");
+		}
+		return list;
+	}
+
+	@Override
+	public NicDocumentData findValidDocByListTranId(
+			String[] listTranId) throws Exception {
+		NicDocumentData doc = null;
+		try {
+			
+			List<NicDocumentData> list = this.dao.findValidDocByListTranId(listTranId);
+			if (list != null && list.size() > 0) {
+				doc = list.get(0);
+			}
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - findValidDocByListTranId thất bại.");
+		}
+		return doc;
+	}
+
+	@Override
+	public NicDocumentData findDocDataToDel(String transactionId,
+			String passportNo, String phoiSerialNo) throws Exception {
+		NicDocumentData docData = null;
+		try {
+			List<NicDocumentData> listDoc = this.dao.findDocDataToDel(new NicDocumentDataId(transactionId, passportNo), phoiSerialNo);
+			if (listDoc != null && listDoc.size() > 0) {
+				docData = listDoc.get(0);
+			}
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - findDocDataToDel thất bại.");
+		}
+		return docData;
+	}
+
+	@Override
+	public void deletePassport(NicDocumentData nicDocData) throws Exception {
+		try {
+			this.dao.deletePassport(nicDocData);
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - deletePassport thất bại.");
+		}
+	}
+
+	@Override
+	public List<NicDocumentData> findDocByListPassportNo(String[] listPassportNo)
+			throws Exception {
+		List<NicDocumentData> list = null;
+		try {
+			list = this.dao.findDocByListPassportNo(listPassportNo);
+		} catch (Exception e) {
+			throw new Exception(CreateMessageException.createMessageException(e) + " - findDocByListPassportNo thất bại.");
+		}
+		return list;
+	}
+}

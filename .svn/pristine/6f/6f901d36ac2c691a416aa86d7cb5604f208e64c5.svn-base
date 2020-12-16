@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- Modification History: 01 Oct 2013 (Sailaja): Added New view supervisor-rejectJob-List 
+	for the supervisor rejected job list -->
+
+<tiles-definitions>
+	<!-- ========== XÁC MINH HỒ SƠ TỪ BCA ========== -->
+	<!-- Trung danh sach chờ xác minh từ BCA -->
+	<definition
+		name="central.trungtamdieuhanh.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm điều hành" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/trungtamdieuhanh.jsp" />
+	</definition>
+	<definition
+		name="central.cathehoa.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Cá thể hóa" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/cathehoa.jsp" />
+	</definition>
+	<definition
+		name="central.xulyhoso.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Xử lý hồ sơ" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/xulyhoso.jsp" />
+	</definition>
+	<definition
+		name="central.capphathochieu.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Phát hành hộ chiếu" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/capphathochieu.jsp" />
+	</definition>
+	<definition
+		name="central.kiemsoatxnc.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Kiểm soát xuất nhập cảnh" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/kiemsoatxnc.jsp" />
+	</definition>
+	<definition
+		name="central.thongke.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Thống kê" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/thongke.jsp" />
+	</definition>
+	<definition
+		name="central.thongKeTruyenNhan.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Thống kê truyền nhận" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/thongKeTruyenNhan.jsp" />
+	</definition>
+	<definition
+		name="tracuu.tonghop.xnc"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Tra cứu tổng hợp xuất nhập cảnh" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/tracuu-tonghop-xnc.jsp" />
+	</definition>
+	<definition
+		name="central.ttluutru.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm lưu trữ" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/ttluutru.jsp" />
+	</definition>
+	<definition
+		name="central.ttdieuhanhbng.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm điều hành bng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/ttdieuhanhbng.jsp" />
+	</definition>
+	<definition
+		name="central.ttca.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm điều hành bng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/ttca.jsp" />
+	</definition>
+	<definition
+		name="central.ttchxnc.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm điều hành bng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/ttchxnc.jsp" />
+	</definition>
+	<definition
+		name="central.cmnd.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm điều hành bng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/cmnd.jsp" />
+	</definition>
+	<definition
+		name="central.dancu.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm điều hành bng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/dancu.jsp" />
+	</definition>
+	<definition
+		name="central.detailApi.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết danh sách Api" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/detailApi.jsp" />
+	</definition>
+	<definition
+		name="center.processPackage.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết xử lý hồ sơ" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/danhsachxlcapphat.jsp" />
+	</definition>
+	<definition
+		name="center.packagePrint.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết kiểm soát xnc" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/danhsachdphoiin.jsp" />
+	</definition>
+	<definition
+		name="center.packagePrint1.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết cá thể hóa" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/danhsachdphoiin-1.jsp" />
+	</definition>
+	<definition
+		name="center.lsxnc.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết kiểm soát xnc" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/danhsachlsxnc.jsp" />
+	</definition>
+	<definition
+		name="center.tracuuhshc.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Tra cứu hồ sơ hộ chiếu" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/tracuuhosohochieu.jsp" />
+	</definition>
+	<definition
+		name="central.tradoixm-bs.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trao đổi xác minh hồ sơ" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/trandoixm_bs.jsp" />
+	</definition>
+	
+	<definition
+		name="central.dieuphoiluong.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Điều phối luồng" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/process-job-main.jsp" />
+	</definition>
+	
+	<definition
+		name="central.dieuphoiapi.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Điều phối api" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/api-job-main.jsp" />
+	</definition>
+	
+	<definition
+		name="detail.dieuphoiluong.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết luồng điều phối" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/detail-process-main.jsp" />
+	</definition>
+	
+	<definition
+		name="queue.quanly.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý hàng đợi" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/queue-main.jsp" />
+	</definition>
+	
+	<definition
+		name="center.lsxnc.list"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết kiểm soát xnc" />	
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/danhsachlsxnc.jsp" />
+	</definition>
+	
+	<definition
+		name="save.quanly.api"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Thêm mới Api quản lý" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/form-save-api.jsp" />
+	</definition>
+	
+	<definition name="central-danhsachHS"
+		template="/WEB-INF/views/central/danhsachhso.jsp" />	
+	<definition name="central-tientrinhHS"
+		template="/WEB-INF/views/central/tientrinhxulyhs.jsp" />
+	<definition name="central-inchitiet"
+		template="/WEB-INF/views/central/inchitiethoso.jsp" />
+	<definition name="central-inlichsu"
+		template="/WEB-INF/views/central/inlichsu.jsp" />
+	<definition name="central-intokhai"
+		template="/WEB-INF/views/central/intokhai.jsp" />
+	<definition name="central-thongtinkhac"
+		template="/WEB-INF/views/central/thongtinkhac.jsp" />
+	<definition name="in-traodoixm"
+		template="/WEB-INF/views/central/intraodoi-xacminh.jsp" />	
+	<definition name="in-danhsach-hoso"
+		template="/WEB-INF/views/central/indanhsach-hoso.jsp" />
+	<definition name="in-botuchoso"
+		template="/WEB-INF/views/central/botuchoso.jsp" />			
+	<definition name="check-site"
+		template="/WEB-INF/views/central/checksite.jsp" />	
+	<definition name="check-siteq"
+		template="/WEB-INF/views/central/checkSiteQ.jsp" />
+						
+	<definition name="check-statusq"
+		template="/WEB-INF/views/central/checkStatusQ.jsp" />
+						
+	<definition
+		name="central.sodohethong.show"
+		extends="global.layout.standardTitle">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/sodohethong.jsp" />
+	</definition>
+	
+	<!-- -->
+	<definition name="template.passport" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Template Passport" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/central/Template-Passport.jsp" />
+	</definition>
+	<definition name="addPassportForm" template="/WEB-INF/views/central/addPassport.jsp" />
+	<definition name="chitietTemplatePassport" template="/WEB-INF/views/central/chitietTemplatePassport.jsp" />
+	<definition name="editTemplatePassport" template="/WEB-INF/views/central/editTemplatePassport.jsp" />
+	
+	<!-- -->
+</tiles-definitions>

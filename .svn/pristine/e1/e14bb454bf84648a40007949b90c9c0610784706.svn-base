@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:ns1 = "http://asia.nec.com/nic/dx/ws/"
+    name = "reportWS"
+    targetNamespace = "http://asia.nec.com/nic/dx/ws/">
+    <wsdl:types>                 
+        <xs:schema
+            xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+            xmlns:tns = "http://asia.nec.com/nic/dx/ws/"
+            xmlns:rpt = "http://asia.nec.com/nic/dx/report/"
+            elementFormDefault = "unqualified"
+            targetNamespace = "http://asia.nec.com/nic/dx/ws/"
+            version = "1.0">
+            <xs:import namespace="http://asia.nec.com/nic/dx/report/" schemaLocation="report.xsd" />
+            <xs:element name = "uploadTransactionReconReportDataRequest" type = "rpt:uploadTransactionReconReportDataRequest"/>
+            <xs:element name = "uploadTransactionReconReportDataResponse" type = "rpt:uploadTransactionReconReportDataResponse"/>
+            <xs:element name = "retrieveTransactionReconReportDataRequest" type = "rpt:retrieveTransactionReconReportDataRequest"/>
+            <xs:element name = "retrieveTransactionReconReportDataResponse" type = "rpt:retrieveTransactionReconReportDataResponse"/>
+            <xs:element name = "uploadCardReconReportDataRequest" type = "rpt:uploadCardReconReportDataRequest"/>
+            <xs:element name = "uploadCardReconReportDataResponse" type = "rpt:uploadCardReconReportDataResponse"/>
+            <xs:element name = "retrieveCardReconReportDataRequest" type = "rpt:retrieveCardReconReportDataRequest"/>
+            <xs:element name = "retrieveCardReconReportDataResponse" type = "rpt:retrieveCardReconReportDataResponse"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name = "uploadTransactionReconReportDataRequest">
+        <wsdl:part element = "ns1:uploadTransactionReconReportDataRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "uploadTransactionReconReportDataResponse">
+        <wsdl:part element = "ns1:uploadTransactionReconReportDataResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "retrieveTransactionReconReportDataRequest">
+        <wsdl:part element = "ns1:retrieveTransactionReconReportDataRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "retrieveTransactionReconReportDataResponse">
+        <wsdl:part element = "ns1:retrieveTransactionReconReportDataResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name = "uploadCardReconReportDataRequest">
+        <wsdl:part element = "ns1:uploadCardReconReportDataRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "uploadCardReconReportDataResponse">
+        <wsdl:part element = "ns1:uploadCardReconReportDataResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "retrieveCardReconReportDataRequest">
+        <wsdl:part element = "ns1:retrieveCardReconReportDataRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "retrieveCardReconReportDataResponse">
+        <wsdl:part element = "ns1:retrieveCardReconReportDataResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name = "reportWS">
+        <wsdl:operation name = "uploadTransactionReconReportData">
+            <wsdl:input message = "ns1:uploadTransactionReconReportDataRequest" name = "uploadTransactionReconReportDataRequest"></wsdl:input>
+            <wsdl:output message = "ns1:uploadTransactionReconReportDataResponse" name = "uploadTransactionReconReportDataResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name = "retrieveTransactionReconReportData">
+            <wsdl:input message = "ns1:retrieveTransactionReconReportDataRequest" name = "retrieveTransactionReconReportDataRequest"></wsdl:input>
+            <wsdl:output message = "ns1:retrieveTransactionReconReportDataResponse" name = "retrieveTransactionReconReportDataResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name = "uploadCardReconReportData">
+            <wsdl:input message = "ns1:uploadCardReconReportDataRequest" name = "uploadCardReconReportDataRequest"></wsdl:input>
+            <wsdl:output message = "ns1:uploadCardReconReportDataResponse" name = "uploadCardReconReportDataResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name = "retrieveCardReconReportData">
+            <wsdl:input message = "ns1:retrieveCardReconReportDataRequest" name = "retrieveCardReconReportDataRequest"></wsdl:input>
+            <wsdl:output message = "ns1:retrieveCardReconReportDataResponse" name = "retrieveCardReconReportDataResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

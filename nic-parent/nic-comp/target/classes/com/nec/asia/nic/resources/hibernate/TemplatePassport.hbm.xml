@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.TemplatePassport"
+		table="EPP_CENTRAL.TEMPLATE_PASSPORT" optimistic-lock="version">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.TEMPLATE_PASSPORT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="nation" type="string">
+			<column name="NATION" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nameNationVie" type="string">
+			<column name="NAME_NATION_VIE" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="passPortType" type="string">
+			<column name="PASSPORT_TYPE" length="400">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="yearIssue" type="int">
+			<column name="YEAR_ISSUE">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyDateTime" type="timestamp">
+			<column name="MODIFY_DATETIME">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyBy" type="string">
+			<column name="MODIFY_BY">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="status" type="yes_no">
+			<column name="STATUS">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+	<sql-query name="getLastIdPassport">
+		<return-scalar column="ID" type="string" />
+            <![CDATA[ 
+		            SELECT ID FROM (
+					        SELECT ID AS ID
+					        FROM  TEMPLATE_PASSPORT
+					        ORDER BY id desc
+					     ) 
+					where rownum = 1 
+            ]]>
+	</sql-query>
+	<sql-query name="updateTemplatePassport">
+        <![CDATA[
+            UPDATE template_passport
+        SET DESCRIPTION=:description
+        WHERE id=:id
+     
+        ]]>
+	</sql-query>
+	<sql-query name="updateTemplatePassportStatus">
+        <![CDATA[
+            UPDATE template_passport
+        SET STATUS=:status
+        WHERE id=:id
+     
+        ]]>
+	</sql-query>
+	
+	<sql-query name="getCodeNation">
+		<return-scalar column="CODE_VALUE" type="string" />
+        <![CDATA[
+          SELECT distinct
+  CODE_VALUE
+FROM
+  code_values
+  where CODE_ID = 'COUNTRY_OLD' and CODE_VALUE_DESC=:namenation
+        ]]>
+	</sql-query>
+	
+	<sql-query name="getNationName">
+		<return-scalar column="CODE_VALUE_DESC" type="string" />
+        <![CDATA[
+          SELECT distinct
+  CODE_VALUE_DESC
+FROM
+  code_values
+  where CODE_ID = 'COUNTRY_OLD' 
+        ]]>
+	</sql-query>
+	
+</hibernate-mapping>

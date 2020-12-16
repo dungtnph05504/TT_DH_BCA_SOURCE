@@ -1,0 +1,518 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
+
+<c:url var="jobListUrl" value="/servlet/batchJobMgmt/view"/>
+<c:url var="fwdtoSavePg" value="/servlet/batchJobMgmt/forwardReq"/>
+<c:url var="editPageUrl" value="/servlet/batchJobMgmt/editJob"/>
+
+
+
+
+
+
+<script type="text/javascript" language="javascript">
+
+	function initPage() {
+		document.getElementById("triggerTime").style.display = '';
+		document.getElementById("dayOfWeek").style.display = 'none';
+		document.getElementById("dayOfMonth").style.display = 'none';
+		document.getElementById("yearlyMonth").style.display = 'none';
+		document.getElementById("yearlyDayOfMonth").style.display = 'none';
+		document.getElementById("repeatCount").style.display = 'none';
+		document.getElementById("repeatIntervalSecond").style.display = 'none';
+		document.getElementById("specifyEndDate").style.display = '';
+		document.getElementById("specifyEndDateYesNo").style.display = '';
+		document.getElementById("endDate").style.display = '';
+	}
+	
+	function submitDeleteSch() {
+		document.forms[0].action = '<s:url action="delete" namespace="%{#request.namespace}" />'; 
+		document.forms[0].submit();
+  	}
+  	
+	function submitAdd() {
+		//document.forms[0].action.value = "ADDSCH";
+		document.forms[0].submit();
+  	}
+
+	function submitCancel() {
+		document.forms[0].action = '<s:url action="index" namespace="%{#request.namespace}" />'; 
+		document.forms[0].submit();
+  	}
+
+	function disableDurationEndDate() {
+		document.forms[0].durationEndDate.value="";
+		document.getElementById("endDate").style.display = 'none';
+	}
+
+	function enableDurationEndDate() {
+		document.getElementById("endDate").style.display = '';
+	}
+
+	function actionOnEventChange() {
+		if ((document.forms[0].actionOnSuccessType.value == "Notify By Email")||(document.forms[0].actionOnSuccessType.value == "Rerun and Notify by Email")||(document.forms[0].actionOnFailureType.value == "Notify By Email")||(document.forms[0].actionOnFailureType.value == "Rerun and Notify by Email")) {
+			document.getElementById("actionEmailAddress").style.display = '';
+			document.getElementById("actionOnEmailAddressEmpty").style.display = 'none';
+		}else{
+			document.getElementById("actionEmailAddress").style.display = 'none';
+			document.getElementById("actionOnEmailAddressEmpty").style.display = '';
+			document.forms[0].emailAddress.value="";
+		}
+	}
+	
+	function freqOccurAction() {
+		if (document.forms[0].freqOccurType.value == "Daily") {
+			document.getElementById("actionOnSuccess").style.display = '';
+			document.getElementById("actionOnFailure").style.display = '';
+			document.getElementById("actionEmailAddress").style.display = '';
+			document.getElementById("actionOnSuccessEmpty").style.display = 'none';
+			document.getElementById("actionOnFailureEmpty").style.display = 'none';
+			document.getElementById("triggerTime").style.display = '';
+			document.getElementById("dayOfWeek").style.display = 'none';
+			document.getElementById("dayOfMonth").style.display = 'none';
+			document.getElementById("yearlyMonth").style.display = 'none';
+			document.getElementById("yearlyDayOfMonth").style.display = 'none';
+			document.getElementById("repeatCount").style.display = 'none';
+			document.getElementById("repeatIntervalSecond").style.display = 'none';
+			document.getElementById("specifyEndDateEmpty").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = '';
+			document.getElementById("specifyEndDateYesNo").style.display = '';
+			document.getElementById("endDate").style.display = '';
+			actionOnEventChange();
+		}
+		else if (document.forms[0].freqOccurType.value == "Weekly") {
+			document.getElementById("actionOnSuccess").style.display = '';
+			document.getElementById("actionOnFailure").style.display = '';
+			document.getElementById("actionEmailAddress").style.display = '';
+			document.getElementById("actionOnSuccessEmpty").style.display = 'none';
+			document.getElementById("actionOnFailureEmpty").style.display = 'none';
+			document.getElementById("triggerTime").style.display = '';
+			document.getElementById("dayOfWeek").style.display = '';
+			document.getElementById("dayOfMonth").style.display = 'none';
+			document.getElementById("yearlyMonth").style.display = 'none';
+			document.getElementById("yearlyDayOfMonth").style.display = 'none';
+			document.getElementById("repeatCount").style.display = 'none';
+			document.getElementById("repeatIntervalSecond").style.display = 'none';
+			document.getElementById("specifyEndDateEmpty").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = '';
+			document.getElementById("specifyEndDateYesNo").style.display = '';
+			document.getElementById("endDate").style.display = '';
+			actionOnEventChange();
+		}
+		else if (document.forms[0].freqOccurType.value == "Monthly") {
+			document.getElementById("actionOnSuccess").style.display = '';
+			document.getElementById("actionOnFailure").style.display = '';
+			document.getElementById("actionEmailAddress").style.display = '';
+			document.getElementById("actionOnSuccessEmpty").style.display = 'none';
+			document.getElementById("actionOnFailureEmpty").style.display = 'none';
+			document.getElementById("triggerTime").style.display = '';
+			document.getElementById("dayOfWeek").style.display = 'none';
+			document.getElementById("dayOfMonth").style.display = '';
+			document.getElementById("yearlyMonth").style.display = 'none';
+			document.getElementById("yearlyDayOfMonth").style.display = 'none';
+			document.getElementById("repeatCount").style.display = 'none';
+			document.getElementById("repeatIntervalSecond").style.display = 'none';
+			document.getElementById("specifyEndDateEmpty").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = '';
+			document.getElementById("specifyEndDateYesNo").style.display = '';
+			document.getElementById("endDate").style.display = '';
+			actionOnEventChange();
+		}
+		else if (document.forms[0].freqOccurType.value == "Yearly") {
+			document.getElementById("actionOnSuccess").style.display = '';
+			document.getElementById("actionOnFailure").style.display = '';
+			document.getElementById("actionEmailAddress").style.display = '';
+			document.getElementById("actionOnSuccessEmpty").style.display = 'none';
+			document.getElementById("actionOnFailureEmpty").style.display = 'none';
+			document.getElementById("triggerTime").style.display = '';
+			document.getElementById("dayOfWeek").style.display = 'none';
+			document.getElementById("dayOfMonth").style.display = 'none';
+			document.getElementById("yearlyMonth").style.display = '';
+			document.getElementById("yearlyDayOfMonth").style.display = '';
+			document.getElementById("repeatCount").style.display = 'none';
+			document.getElementById("repeatIntervalSecond").style.display = 'none';
+			document.getElementById("specifyEndDateEmpty").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = '';
+			document.getElementById("specifyEndDateYesNo").style.display = '';
+			document.getElementById("endDate").style.display = '';
+			actionOnEventChange();
+		}
+		else if (document.forms[0].freqOccurType.value == "Repeat At Interval") {
+			document.getElementById("actionOnSuccess").style.display = 'none';
+			document.getElementById("actionOnFailure").style.display = 'none';
+			document.getElementById("actionEmailAddress").style.display = 'none';
+			document.getElementById("actionOnSuccessEmpty").style.display = '';
+			document.getElementById("actionOnFailureEmpty").style.display = '';
+			document.getElementById("triggerTime").style.display = 'none';
+			document.getElementById("dayOfWeek").style.display = 'none';
+			document.getElementById("dayOfMonth").style.display = 'none';
+			document.getElementById("yearlyMonth").style.display = 'none';
+			document.getElementById("yearlyDayOfMonth").style.display = 'none';
+			document.getElementById("repeatCount").style.display = '';
+			document.getElementById("repeatIntervalSecond").style.display = '';
+			document.getElementById("specifyEndDateEmpty").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = '';
+			document.getElementById("specifyEndDateYesNo").style.display = '';
+			document.getElementById("endDate").style.display = '';
+		}
+		else if (document.forms[0].freqOccurType.value == "Repeat Indefinitely") {
+			document.getElementById("actionOnSuccess").style.display = 'none';
+			document.getElementById("actionOnFailure").style.display = 'none';
+			document.getElementById("actionEmailAddress").style.display = 'none';
+			document.getElementById("actionOnSuccessEmpty").style.display = '';
+			document.getElementById("actionOnFailureEmpty").style.display = '';
+			document.getElementById("triggerTime").style.display = 'none';
+			document.getElementById("dayOfWeek").style.display = 'none';
+			document.getElementById("dayOfMonth").style.display = 'none';
+			document.getElementById("yearlyMonth").style.display = 'none';
+			document.getElementById("yearlyDayOfMonth").style.display = 'none';
+			document.getElementById("repeatCount").style.display = 'none';
+			document.getElementById("repeatIntervalSecond").style.display = '';
+			document.getElementById("specifyEndDateEmpty").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = '';
+			document.getElementById("specifyEndDateYesNo").style.display = '';
+			document.getElementById("endDate").style.display = '';
+		}
+		else if (document.forms[0].freqOccurType.value == "Specific") {
+			document.getElementById("actionOnSuccess").style.display = '';
+			document.getElementById("actionOnFailure").style.display = '';
+			document.getElementById("actionEmailAddress").style.display = '';
+			document.getElementById("actionOnSuccessEmpty").style.display = 'none';
+			document.getElementById("actionOnFailureEmpty").style.display = 'none';
+			document.getElementById("triggerTime").style.display = '';
+			document.getElementById("dayOfWeek").style.display = 'none';
+			document.getElementById("dayOfMonth").style.display = 'none';
+			document.getElementById("yearlyMonth").style.display = 'none';
+			document.getElementById("yearlyDayOfMonth").style.display = 'none';
+			document.getElementById("repeatCount").style.display = 'none';
+			document.getElementById("repeatIntervalSecond").style.display = 'none';
+			document.getElementById("specifyEndDate").style.display = 'none';
+			document.getElementById("specifyEndDateYesNo").style.display = 'none';
+			document.getElementById("specifyEndDateEmpty").style.display = '';
+			document.getElementById("endDate").style.display = 'none';
+			actionOnEventChange();
+		}
+	}
+
+	function changeYearlyMonth() {
+
+		var month31Days ="01,03,05,07,08,10,12";
+		var monthValue = document.forms[0].freqYearlyMonth.value;
+		var dayOptionsLength = document.forms[0].freqYearlyDayOfMonth.options.length;
+
+		if(month31Days.indexOf(monthValue) == -1) {
+			if(monthValue=="02") {
+				if(dayOptionsLength == 31) {
+					document.forms[0].freqYearlyDayOfMonth.options.remove(30);
+					document.forms[0].freqYearlyDayOfMonth.options.remove(29);
+				}
+				else if(dayOptionsLength == 30) {
+					document.forms[0].freqYearlyDayOfMonth.options.remove(29);
+				}
+			}
+			else if(dayOptionsLength==31) {
+				document.forms[0].freqYearlyDayOfMonth.options.remove(30);
+			}
+		}
+		else {
+			if(dayOptionsLength == 29) {
+				var optn = document.createElement("OPTION");
+				optn.text = "30";
+				optn.value = "30";
+				document.forms[0].freqYearlyDayOfMonth.options.add(optn);
+			
+				optn = document.createElement("OPTION");
+				optn.text = "31";
+				optn.value = "31";
+				document.forms[0].freqYearlyDayOfMonth.options.add(optn);
+			}
+			else if(dayOptionsLength == 30) {
+				optn = document.createElement("OPTION");
+				optn.text = "31";
+				optn.value = "31";
+				document.forms[0].freqYearlyDayOfMonth.options.add(optn);
+			}
+		}
+	}
+</script>
+
+
+
+<form:form  id="scheduleForm" >
+
+       <div id="heading_report" align="justify"  style='padding:2px'>Save Job Schedule</div>
+          <br />
+          <br />
+		<table  style="width:100%;padding-bottom:  10px;padding-top: 10px;"  class="" id="row" class="displayTag" style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+			
+			<c:if test='${not empty mnicBatchJobForm.mode}'>
+			<tr><td width="10%">Job Id: </td><td>
+			<c:out value="${mnicBatchJobForm.jobId}" />
+			<form:hidden id="jobId" path="jobId" />
+			</td></tr>	
+			<tr><td width="10%">Job Name: </td><td>
+			<c:out value="${mnicBatchJobForm.jobName}" />
+			<form:hidden id="jobName" path="jobName" />
+			</td></tr>			
+			<tr><td>Class Name: </td>
+			<td>
+			 <c:out value="${mnicBatchJobForm.jobClass}" />
+			 <form:hidden id="jobClass" path="jobClass" ></form:hidden>
+			</td></tr> 	
+			</c:if>  		
+  		
+	   </table> 
+
+	
+	<table  style="width:100%;padding-bottom:  10px;padding-top: 10px;"   id="row" class="displayTag" style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+		<tr>
+			<td width="20%">Schedule Name:</td>
+			<td><form:input id="scheduleName" path="scheduleName"  type="text" size='50' /></td>
+		</tr>
+		<tr>
+			<td width="20%">Schedule Enabled:</td>
+			<td><form:checkbox id="scheduleEnabled" path="scheduleEnabled" 	size='20' /></td>
+		</tr>
+
+	</table>
+		
+
+			<table  style="width:100%;padding-bottom:  10px;padding-top: 10px;"   id="row" class="displayTag" style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+			
+			   
+                 <tr>
+                            <td width="20%"></td>
+                            <td width='10%'>Occurrence : </td>
+                            <td width='50%'>
+                               <form:select id="freqOccurType" path="freqOccurType" onchange="freqOccurAction();" >
+								  <form:options items="${mnicReportForm.freqOccurTypeList}" itemLabel="value"  itemValue="label"/>
+							   </form:select>
+                            </td>		
+                            <td colspan='2' width='10%'></td>
+                </tr>
+                 <tr id="actionOnSuccess">
+                            <td width="20%"></td>
+                            <td width='10%'>Action On Success: </td>
+                            <td width='50%'>
+                               <form:select id="actionOnSuccessType" path="actionOnSuccessType" onchange="actionOnEventChange();" >
+								  <form:options items="${mnicReportForm.successTypeList}" itemLabel="value"  itemValue="label"/>
+							   </form:select>
+                            </td>		
+                            <td colspan='2' width='10%'></td>
+                </tr>
+                 <tr id="actionOnFailure">
+                            <td width="20%"></td>
+                            <td width='10%'>Action On Success: </td>
+                            <td width='50%'>
+                               <form:select id="actionOnFailureType" path="actionOnFailureType" onchange="actionOnEventChange();" >
+								  <form:options items="${mnicReportForm.failureTypeList}" itemLabel="value"  itemValue="label"/>
+							   </form:select>
+                            </td>		
+                            <td colspan='2' width='10%'></td>
+                </tr>
+
+				<tr id="actionOnEmailAddressEmpty">
+					<td width="20%">Email Addresses:</td>
+	    			<td><form:input id="emailAddress" path="emailAddress" size='20' /></td>
+	    		</tr>
+		
+				<tr id="actionOnSuccessEmpty">
+					<td width="10%">
+						&nbsp;
+					</td>
+					<td width="2%">
+						&nbsp;
+					</td>
+					<td width="80%">
+						&nbsp;
+					</td>
+				</tr>
+				<tr id="actionOnFailureEmpty">
+					<td width="10%">
+						&nbsp;
+					</td>
+					<td width="2%">
+						&nbsp;
+					</td>
+					<td width="80%">
+						&nbsp;
+					</td>
+				</tr>
+				<tr id="actionOnEmailAddressEmpty">
+					<td width="10%">
+						&nbsp;
+					</td>
+					<td width="2%">
+						&nbsp;
+					</td>
+					<td width="80%">
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+	
+
+
+			<table  style="width:100%;padding-bottom:  10px;padding-top: 10px;"   id="row" class="displayTag" style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+				<tr id="triggerTime">
+				
+				 <td width="20%"></td>
+                            <td width='10%'>Trigger Time: </td>
+                      <td width='50%'>
+                            <form:select id="freqDailyTriggerTimeHr" path="freqDailyTriggerTimeHr"  list="hourList" listKey="value" listValue="label" />
+								hr
+							 <form:select id="freqDailyTriggerTimeMin" path="freqDailyTriggerTimeMin" list="hourList" listKey="value" listValue="label" />
+								min
+						    <form:radiobutton type="radio" name="freqDailyTriggerTimeAmPm"  path="freqDailyTriggerTimePm" value="AM" 	checked />
+						    AM
+						    <form:input type="radio" name="freqDailyTriggerTimeAmPm" path="freqDailyTriggerTimeAm" value="PM"/>
+						     PM
+                       </td>		
+                 	
+				</tr>
+				<tr id="dayOfWeek">
+					<td width="10%">Day of Week:</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<form:checkboxes items="" name="freqWeeklyDayOfWeek" path="freqWeeklyDayOfWeek" list="weeklyDayList"></form:checkboxes>
+						
+					</td>
+				</tr>
+				<tr id="dayOfMonth">
+					<td width="10%">
+						Day of Month:
+					</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<form:select name="freqMonthlyDayOfMonth"   path="freqMonthlyDayOfMonth"
+								list="dayList" listKey="value" listValue="label"/>
+					
+					</td>
+				</tr>
+				<tr id="yearlyMonth">
+					<td width="10%">
+						Month:
+					</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<form:select name="freqYearlyMonth"   path="freqYearlyMonth"
+								list="monthList" listKey="value" listValue="label" onchange="changeYearlyMonth();"/>
+						
+					</td>
+				</tr>
+				<tr id="yearlyDayOfMonth">
+					<td width="10%">
+						Day of Month:
+					</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<form:select name="freqYearlyDayOfMonth"   path="freqYearlyDayOfMonth"
+								list="yearDayList" listKey="value" listValue="label" />						
+					</td>
+				</tr>
+				<tr id="repeatCount">
+					<td width="10%">
+						 No of Repeats:
+					</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<form:input name="freqRepeatIntervalCount"  path="freqRepeatIntervalCount" size="5" maxlength="4"> </form:input>
+					</td>
+				</tr>
+				<tr id="repeatIntervalSecond">
+					<td width="10%">
+						Interval Seconds:
+					</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<form:input name="freqRepeatIntervalSecond" path="freqRepeatIntervalSecond" maxlength="4" size="5"></form:input>
+					</td>
+				</tr>
+			</table>
+	
+
+		
+			<table  style="width:100%;padding-bottom:  10px;padding-top: 10px;"   id="row" class="displayTag" style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+				<tr>
+					<td width="10%">
+						Start Date:
+					</td>
+					<td width="2%"></td>
+					<td width="30%">
+						<form:input path="" type="text" name="durationStartDate" value="${durationStartDate}" size="10"	readonly="readonly" />
+					</td>
+					<td width="50%" id="specifyEndDateEmpty">
+						&nbsp;
+					</td>
+					<td width="10%" id="specifyEndDate">
+						Specify End Date:
+					</td>
+					<td width="2%"></td>
+					<td width="38%" id="specifyEndDateYesNo">
+						<input type="radio" name="durationEndDateEnabled"
+							value="EndDateYes" onclick="enableDurationEndDate();"
+							<c:if test="${durationEndDateEnabled=='EndDateYes'}">
+								checked
+ 							</c:if> />
+						Yes
+						<input type="radio" name="durationEndDateEnabled"
+							value="EndDateNo" onclick="disableDurationEndDate();"
+							<c:if test="${durationEndDateEnabled=='EndDateNo'}">
+								checked
+ 							</c:if>>
+						No
+					</td>
+				</tr>
+				<tr id="endDate">
+					<td width="10%">
+						End Date:
+					</td>
+					<td width="2%"></td>
+					<td width="80%" colspan="4">
+
+						<input type="text" name="durationEndDate" 
+							value="${durationEndDate}" size="10"
+							readonly="readonly" />
+
+					</td>
+				</tr>
+			</table>
+		
+
+		
+			<table  style="width:100%;padding-bottom:  10px;padding-top: 10px;"   id="row" class="displayTag" style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+				<tr>
+					<td width="80%" align="right">
+					<c:if test="%{mode == 'edit'}">
+						<input type="button" id="delAct" class="bttnSize" onclick="javascript:submitAdd();" value="<s:text name='jobMonitoring.amend' />" />
+						<input type="button" class="bttnSize" onclick="javascript:submitDeleteSch();" value="<s:text name='jobMonitoring.deleteJob' />" />
+					</c:if>	
+					
+						<input type="button" class="bttnSize" onclick="submitAdd();" value="<s:text name='jobMonitoring.addSchedule' />">						
+					
+					<input type="button" class="bttnSize" onclick="submitCancel();" value="<s:text name='st.cancel' />">
+					</td>
+				</tr>
+			</table>
+		
+		
+		<form:hidden id="jobId"  path="jobId" />
+		<form:hidden id="jobName" path="jobId" />
+		<form:hidden id="mode" path="jobId"  />
+
+	</form:form>
+
+</body>
+
+<script type="text/javascript">
+	initPage();
+	freqOccurAction();
+	<c:if test="${durationEndDateEnabled=='EndDateNo'}">
+		disableDurationEndDate();
+ 	</c:if>
+</script>

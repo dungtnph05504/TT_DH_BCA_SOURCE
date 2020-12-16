@@ -1,0 +1,71 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+
+<c:url var="jobListUrl" value="/servlet/batchJobMgmt/view"/>
+<c:url var="fwdtoSavePg" value="/servlet/batchJobMgmt/forwardReq"/>
+<c:url var="editPageUrl" value="/servlet/batchJobMgmt/editJob"/>
+
+
+<form:form  commandName="mnicBatchJobForm"  id="mnicBatchJobForm"  name="mnicBatchJobForm"  method="GET" >
+    <!-- <div id="main"> -->
+	<div id="content_main">
+		<div id="heading_report" align="justify" colspan='2'
+			style='padding: 2px'>Batch Job Management</div>
+		<br /> <br /> <br />
+
+		<c:if test="${not empty requestScope.messages}">
+			<div
+				style="color: green; background-color: White; border-style: solid; border-color: green; border-width: thin;">
+				<c:forEach items="${requestScope.messages}" var="takla">
+					<li>${takla}</li>
+				</c:forEach>
+
+			</div>
+		</c:if>
+
+		<div id="batchJobs" class="displayTag"
+			style="background-image:url('<%=request.getContextPath() %>/resource/images/head.png');background-repeat: repeat-x;">
+			<display:table id="jobList" export="false" class="displayTag"
+				name="${jobList.rows}" defaultsort="1" sort='external'
+				pagesize="${pageSize}" size="${jobList.total}" partialList="true"
+				requestURI="/servlet/batchJobMgmt/view">
+				<display:column title="ID" sortable="true" sortName="jobId"
+					maxLength="100">
+					<a href="${editPageUrl}/${jobList.jobId}"> <c:out
+							value="${jobList.jobId}" /></a>
+				</display:column>
+				<display:column property="jobName" sortable="true" title="Name"
+					sortName="jobName" maxLength="70" />
+				<display:column property="jobDescription" sortable="true"
+					title="Description" sortName="jobDescription" maxLength="70" />
+				<display:column property="createby" sortable="true"
+					title="Create By" sortName="createby" maxLength="70" />
+				<display:column property="createdate" sortable="true"
+					title="Create Date" sortName="createdate"
+					format="{0,date,dd-MMM-yyyy}" maxLength="70" />
+			</display:table>
+		</div>
+		<div id="addbutton" align="right" class="displayTag"
+				style="background-image:url('<%=request.getContextPath()%>/resources/images/head.png');background-repeat: repeat-x;">
+			<table >
+				<tr>
+					<td colspan="5" align="center" style="padding: 20px;"><input
+						id="add_btn" type="button" class="button_grey" value="Add" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- </div> -->
+</form:form>
+<script type="text/javascript">
+$("#add_btn").click(function(){	
+	
+    document.forms["mnicBatchJobForm"].action = '${fwdtoSavePg}';
+    document.forms["mnicBatchJobForm"].submit();	
+	
+});
+
+</script>
+

@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.listHandover.domain.NicListHandover" table="EPP_CENTRAL.EPP_LIST_HANDOVER" optimistic-lock="version">
+		
+		<composite-id name="id" class="com.nec.asia.nic.comp.listHandover.domain.NicListHandoverId">
+			<key-property name="packageId" type="string">
+				<column name="PACKAGE_ID" length="40" />
+			</key-property>
+			<key-property name="typeList" type="string">
+				<column name="TYPE_LIST" length="10" />
+			</key-property>
+		</composite-id>
+		
+		<property name="packageName" type="string">
+			<column name="PACKAGE_NAME" length="100" not-null="true">
+				<comment>Tên danh sách</comment>
+			</column>
+		</property>
+
+		<property name="siteCode" type="string">
+			<column name="SITE_CODE" length="5" >
+				<comment>Mã trung tâm tao danh sách</comment>
+			</column>
+		</property>
+		<property name="handoverStatus" type="int">
+			<column name="HANDOVER_STATUS" precision="5" scale="0" >
+				<comment>Trạng thái danh sách</comment>
+			</column>
+		</property>
+		<property name="handoverStage" type="yes_no">
+			<column name="HANDOVER_STAGE" length="1" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="countTransaction" type="int">
+			<column name="COUNT_TRANSACTION">
+				<comment>Số hồ sơ trong ds</comment>
+			</column>
+		</property>
+		<property name="processUsers" type="string">
+			<column name="PROCESS_USERS" length="4000" >
+				<comment>DS cán bộ được phân cng</comment>
+			</column>
+		</property>
+		<property name="proposalUser" type="string">
+			<column name="PROPOSAL_USER" length="4000" >
+				<comment>Cán bộ lập đề xuất</comment>
+			</column>
+		</property>
+		<property name="proposalDate" type="timestamp">
+			<column name="PROPOSAL_DATE" length="7" >
+				<comment>Ngày đề xuất</comment>
+			</column>
+		</property>
+		<property name="approveUser" type="string">
+			<column name="APPROVE_USER" length="150" >
+				<comment>Lãnh đạo phê duyệt</comment>
+			</column>
+		</property>
+		<property name="approveDate" type="timestamp">
+			<column name="APPROVE_DATE" length="7" >
+				<comment>Ngày phê duyệt</comment>
+			</column>
+		</property>
+<!-- 		<property name="archiveCode" type="string">
+			<column name="ARCHIVE_CODE" length="7" >
+				<comment>Số hồ sơ lưu danh sách</comment>
+			</column>
+		</property> -->
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="120" >
+				<comment>CREATE_BY</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment>CREATE_DATE</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="30">
+				<comment>UPDATE_BY</comment>
+			</column>
+		</property>
+		<property name="updateDate" type="timestamp">
+			<column name="UPDATE_DATE" length="7">
+				<comment>UPDATE_DATE</comment>
+			</column>
+		</property>
+		<property name="proposalName" type="string">
+			<column name="PROPOSAL_NAME" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="approveName" type="string">
+			<column name="APPROVE_NAME" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="approvePosition" type="string">
+			<column name="APPROVE_POSITION" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="creatorName" type="string">
+			<column name="CREATOR_NAME" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateByName" type="string">
+			<column name="UPDATE_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfDelivery" type="timestamp">
+			<column name="DATE_OF_DELIVERY" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfDelivery" type="string">
+			<column name="PLACE_OF_DELIVERY" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="cancelReason" type="string">
+			<column name="CANCEL_REASON" length="4000">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="cancelBy" type="string">
+			<column name="CANCEL_BY" length="60">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="cancelByName" type="string">
+			<column name="CANCEL_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="cancelDatetime" type="timestamp">
+			<column name="CANCEL_DATETIME" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<!-- <property name="description" type="string">
+			<column name="DESCRIPTION" length="150" >
+				<comment>DESCRIPTION</comment>
+			</column>
+		</property>
+		<property name="usersProcess" type="string">
+			<column name="USERS_PROCESS" length="4000" >
+				<comment>USERS_PROCESS</comment>
+			</column>
+		</property>
+		<property name="userLeaderProcess" type="string">
+			<column name="USER_LEADER_PROCESS" length="4000" >
+				<comment>USER_LEADER_PROCESS</comment>
+			</column>
+		</property>
+		<property name="countTransaction" type="int">
+			<column name="COUNT_TRANSACTION" precision="10" scale="0" >
+				<comment>COUNT_TRANSACTION</comment>
+			</column>
+		</property>
+		
+		<property name="archiveCode" type="string">
+			<column name="ARCHIVE_CODE" length="20" >
+				<comment>ARCHIVE_CODE</comment>
+			</column>
+		</property>
+		
+		<property name="handoverStage" type="yes_no">
+		   <column length="1" name="HANDOVER_STAGE"/>
+		</property>
+		<property name="isSyncPerso" type="yes_no">
+			<column name="IS_SYNC_PERSO" length="1">
+				<comment>Đồng bộ dữ liệu in. N: Không /Y: Có</comment>
+			</column>
+		</property>
+		<property name="leaderId" type="string">
+		   <column length="150" name="LEADER_ID"/>
+		</property>
+		<property name="statusSyncXl" type="yes_no">
+		   <column length="1" name="STATUS_SYNC_XL"/>
+		</property>
+		<property name="proposalDate" type="timestamp">
+			<column name="PROPOSAL_DATE" length="7">
+				<comment>PROPOSAL_DATE</comment>
+			</column>
+		</property>
+		<property name="approveDate" type="timestamp">
+			<column name="APPROVE_DATE" length="7">
+				<comment>APPROVE_DATE</comment>
+			</column>
+		</property> -->
+		<property name="status" type="int">
+			<column name="STATUS_HANDOVER" precision="10" scale="0" >
+				<comment>STATUS_HANDOVER</comment>
+			</column>
+		</property>
+         <!-- <set name="transactions" table="EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="PACKAGE_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.nec.asia.nic.comp.trans.domain.NicTransaction">
+                <column name="TRANSACTION_ID" not-null="true" />
+            </many-to-many>
+        </set>  -->
+        
+	</class>
+	
+	<sql-query name="countHandoverAProcess">
+		<return-scalar column="packId" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId, count (*) as total FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+			JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID =  EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+			JOIN EPP_CENTRAL.EPP_WORKFLOW_JOB ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.EPP_WORKFLOW_JOB.TRANSACTION_ID
+			WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 7 AND EPP_CENTRAL.EPP_WORKFLOW_JOB.INVESTIGATION_STATUS IS NOT NULL
+			
+			AND (TRUNC(TO_DATE(EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE((:datefrom),'DD/MM/YY')) OR (:datefrom) IS NULL)
+			GROUP BY EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+        ]]>
+	</sql-query>
+	
+	<sql-query name="countHandoverA">
+		<return-scalar column="packId" type="string" />
+		<return-scalar column="total" type="integer" />
+        <![CDATA[
+			SELECT EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID as packId, count (*) as total FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+			JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID =  EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+			WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 7
+			AND (EPP_CENTRAL.EPP_LIST_HANDOVER.STATUS_SYNC_XL IS NULL OR EPP_CENTRAL.EPP_LIST_HANDOVER.STATUS_SYNC_XL = 'N')
+			AND (TRUNC(TO_DATE(EPP_CENTRAL.EPP_LIST_HANDOVER.CREATE_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE((:datefrom),'DD/MM/YY')) OR (:datefrom) IS NULL)
+			GROUP BY EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+        ]]>
+	</sql-query>
+	
+	<sql-query name="listTransactionA">
+		<return-scalar column="tranId" type="string" />
+        <![CDATA[
+			SELECT Epp_central.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID as tranId FROM EPP_CENTRAL.EPP_LIST_HANDOVER
+	        JOIN EPP_CENTRAL.EPP_LIST_HANDOVER_DETAIL ON Epp_central.EPP_LIST_HANDOVER_DETAIL.PACKAGE_ID =  EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID
+			JOIN EPP_CENTRAL.epp_workflow_job ON Epp_central.EPP_LIST_HANDOVER_DETAIL.TRANSACTION_ID = EPP_CENTRAL.epp_workflow_job.TRANSACTION_ID
+			WHERE EPP_CENTRAL.EPP_LIST_HANDOVER.TYPE_LIST = 7 AND Epp_central.epp_workflow_job.INVESTIGATION_STATUS IS NOT NULL
+	        AND EPP_CENTRAL.EPP_LIST_HANDOVER.PACKAGE_ID = (:pack)
+        ]]>
+	</sql-query>
+</hibernate-mapping>

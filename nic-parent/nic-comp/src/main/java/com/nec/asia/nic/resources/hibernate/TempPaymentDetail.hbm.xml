@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.TempPaymentDetail" table="EPP_CENTRAL.TEMP_TRAN_PAYMENT_DETAIL" optimistic-lock="version">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.TEMP_PAYMENT_DETAIL_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>TRANSACTION_ID</comment>
+			</column>
+		</property>
+		<property name="typePayment" type="string">
+			<column name="TYPE_PAYMENT" length="30">
+				<comment>TYPE_PAYMENT</comment>
+			</column>
+		</property>
+		<property name="subtypePayment" type="string">
+			<column name="SUBTYPE_PAYMENT" length="30">
+				<comment>SUBTYPE_PAYMENT</comment>
+			</column>
+		</property>
+		<property name="statusFee" type="string">
+			<column name="STATUS_FEE" length="1">
+				<comment>STATUS_FEE </comment>
+			</column>
+		</property>
+		<property name="paymentAmount" type="java.lang.Double">
+			<column name="PAYMENT_AMOUNT" precision="18" scale="0">
+				<comment>PAYMENT_AMOUNT</comment>
+			</column>
+		</property>
+		<property name="note" type="string">
+			<column name="NOTE" length="1000">
+				<comment>NOTE</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

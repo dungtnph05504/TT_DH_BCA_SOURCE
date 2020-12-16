@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-3.0.xsd
+           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+	<!-- Controller Audit -->
+	<bean id="defaultControllerAuditService" class="com.nec.asia.nic.admin.audit.DemoBusinessActionAuditServiceImpl">
+        <property name="messageTemplate">
+        	<value>{0}-{1}: subject:[{2}], What:[{3}], Who:[{4}], When:[{5}], Where:[{6}], Code:[{7}], Message:[{8}], Time Elapsed:[{9}]</value>
+        </property>
+    </bean>
+    <!-- Service Audit: should be another one instead of same as controller -->
+    <bean id="defaultServiceAuditService" class="com.nec.asia.nic.admin.audit.NicAuditServiceImpl">
+        <property name="messageTemplate">
+        	<value>{0}-{1}: subject:[{2}], What:[{3}], Who:[{4}], When:[{5}], Where:[{6}], Code:[{7}], Message:[{8}], Time Elapsed:[{9}]</value>
+        </property>
+    </bean>	
+	<!-- message configuration-->
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages/messages</value>		<!-- equals to message_en_SG.properties 		| message_en.properties-->
+				<value>/WEB-INF/messages/messages-admin</value>	<!-- equals to message-admin_en_SG.properties 	| message-admin_en.properties-->
+			</list>	
+		</property> 
+		
+		
+		<!-- 
+			Default is "-1", indicating to cache forever.
+			A value of "0" will check the last-modified timestamp of the file on every message access. 
+			Do not set to "0" in a production environment! -->
+		
+		<property name="cacheSeconds" value="0" />
+	</bean>
+
+</beans>

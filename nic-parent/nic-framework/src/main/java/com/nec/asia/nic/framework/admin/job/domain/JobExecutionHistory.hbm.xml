@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 3:28:48 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.job.domain.JobExecutionHistory" table="JOB_EXECUTION_HISTORY" optimistic-lock="version">
+        <id name="logId" type="long">
+            <column name="LOG_ID" precision="22" scale="0" />
+            <!-- <generator class="assigned" /> -->
+           <generator class="sequence">
+                <param name="sequence">JOB_EXECUTION_LOG_ID</param>
+            </generator>
+        </id>
+        <property name="jobId" type="string">
+            <column name="JOB_ID" length="10" not-null="true" />
+        </property>
+        <property name="executionDate" type="timestamp">
+            <column name="EXECUTION_DATE" length="7" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="STATUS" precision="1" scale="0" />
+        </property>
+        <property name="message" type="string">
+            <column name="MESSAGE" length="80" />
+        </property>
+        <property name="detail" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType">
+            <column name="DETAIL" />
+        </property>
+        <property name="completeDate" type="timestamp">
+            <column name="COMPLETE_DATE" length="7" />
+        </property>
+        <!-- <set name="jobExecutionDetails" table="NSYS_JOB_EXECUTION_DETAILS" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="LOG_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.nec.asia.nic.framework.admin.job.domain.JobExecutionDetails" />
+        </set> -->
+    </class>
+	 <sql-query name="latest.job.execution.history">  
+		  <return-scalar column="LOG_ID" type="long"/>
+		  <return-scalar column="JOB_ID" type="string"/>
+		  <return-scalar column="EXECUTION_DATE" type="java.util.Date"/>
+		  <return-scalar column="STATUS" type="integer"/>
+		  <return-scalar column="MESSAGE" type="string"/>
+		  <return-scalar column="JOB_NAME" type="string"/>
+		  <return-scalar column="JOB_STATUS" type="string"/>
+		  <return-scalar column="LAST_EXECUTED_DATE" type="java.util.Date"/>
+		  <return-scalar column="NEXT_PLANNED_DATE" type="java.util.Date"/>
+		   <![CDATA[
+				SELECT HIST.LOG_ID, HIST.JOB_ID, HIST.EXECUTION_DATE, HIST.STATUS, HIST.MESSAGE, JOB.JOB_NAME, JOB.JOB_STATUS, JOB.LAST_EXECUTED_DATE, JOB.NEXT_PLANNED_DATE 
+				FROM JOB_EXECUTION_HISTORY HIST, JOB JOB
+				WHERE HIST.JOB_ID = JOB.JOB_ID
+				AND LOG_ID IN (
+				SELECT MAX(LOG_ID) FROM JOB_EXECUTION_HISTORY GROUP BY JOB_ID) ORDER BY JOB.LAST_EXECUTED_DATE DESC
+		]]>
+	 </sql-query>
+</hibernate-mapping>

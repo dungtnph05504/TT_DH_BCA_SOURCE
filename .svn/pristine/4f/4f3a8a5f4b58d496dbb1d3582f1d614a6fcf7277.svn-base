@@ -1,0 +1,25 @@
+package com.nec.asia.nic.framework.admin.code.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.code.domain.Codes;
+import com.nec.asia.nic.framework.dao.GenericDao;
+
+/* 
+ * Modification History:
+ * 
+ * 20 Dec 2015 (chris): Code Refactoring, 
+ * 						1) remove getCodeValueById()
+ */
+public interface CodesDao extends GenericDao<Codes, String> {
+	
+	public  Map<String,String> getPramCodes(String codeName);	
+	public  Map<String, String> getCodeValuesByCodeID(String codeName) throws Exception;
+	public  PaginatedResult<Codes> getAllCodes(int pageNo, int pageSize);
+	public List<String> getAllCodeDescs() throws Exception;
+	public PaginatedResult<Codes> getCodesByCodeId(String codeId, int pageNo, int pageSize);
+
+
+}

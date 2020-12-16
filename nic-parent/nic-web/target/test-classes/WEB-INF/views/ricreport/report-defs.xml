@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions> 
+	<definition name="show.exceptionHandlingRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/exception_handling_rpt.jsp" />
+	</definition>
+	
+	<definition name="show.ricTxnRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_txn_rpt.jsp" />
+	</definition>	
+	
+	<definition name="show.ricPymtRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_pymt_rpt.jsp" />
+	</definition>	
+	
+	<definition name="show.ricWaiverRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_waiver_rpt.jsp" />
+	</definition>
+	
+	<definition name="show.ricTxnUpldRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_txn_uploaded_rpt.jsp" />
+	</definition>	
+	
+	<definition name="show.ricBatchCardInfoRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_batch_card_info_rpt.jsp" />
+	</definition>
+	
+	<definition name="show.ricUserPermRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_user_perm_rpt.jsp" />
+	</definition>	
+	
+		
+	<definition name="show.cardCollectedRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/card_collected_status_rpt.jsp" />
+	</definition>
+	<definition name="show.cardRejectedRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/card_rejected_status_rpt.jsp" />
+	</definition>
+	<definition name="show.cardExpiredRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/card_expired_status_rpt.jsp" />
+	</definition>
+	<definition name="show.txnRejRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_txn_rej_rpt.jsp" />
+	</definition>
+	<definition name="show.batchJobRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/ric_batch_job_rpt.jsp" />
+	</definition>
+	<definition name="show.cardReActivateRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/card_reactivate_rpt.jsp" />
+	</definition>
+	<definition name="show.cardDeActivateRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/card_deactivate_rpt.jsp" />
+	</definition>
+	<definition name="show.cardDelStRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/ricreport/card_delivery_Status_rpt.jsp" />
+	</definition>
+	<definition name="show.unColCrdStRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/ricreport/un_collected_card_status_rpt.jsp" />
+	</definition>	
+	<definition name="show.exprsPrintRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/ricreport/exprs_print_rpt.jsp" />
+	</definition>
+	<definition name="show.lostNfoundRpt" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/ricreport/lostNfound_rpt.jsp" />
+	</definition> 
+</tiles-definitions>

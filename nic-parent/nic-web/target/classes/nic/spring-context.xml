@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+      http://www.springframework.org/schema/context 
+      http://www.springframework.org/schema/context/spring-context-4.2.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+      http://www.springframework.org/schema/tx 
+      http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/jee
+       http://www.springframework.org/schema/jee/spring-jee-4.2.xsd"
+>
+      
+	<!-- need to initialize web service factory first, it is used by service impl -->
+	<import resource="classpath:/com/nec/asia/nic/resources/spring/services/spring-services-web.xml" />	 
+
+	<!-- autoproxy for all -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- scan for components -->
+	<context:component-scan base-package="com.nec.asia.nic">
+		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
+	<!-- <import resource="spring-jee-datasource.xml" /> -->
+	<import resource="spring-context-web.xml" />
+	<import resource="spring-service.xml" />
+
+	<!-- ==============================Transaction============================== -->
+	<tx:annotation-driven />
+	<!-- Transaction Manager -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hbSessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- Using declarative transaction management on annotated classes -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="merge*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="put*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="count*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="list*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="txPointCut" expression="execution(* com.nec.asia.nic.*.service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut" />
+	</aop:config>
+
+	<!-- ==============================Application Context============================== -->
+	<!-- Utils for Spring ApplicationContext -->
+	<bean id="applicationContextManager" class="com.nec.asia.nic.utils.ApplicationContextManager">
+	</bean>
+
+	<!-- ==============================Audit============================== -->
+	<aop:config>
+		<aop:pointcut id="controllerLayerPointcut" 
+			expression="execution(
+				@com.nec.asia.nic.framework.admin.audit.Auditable
+				* com.nec.asia.nic.*.controller.*Controller.*(..))
+				and @annotation(auditable)"/>
+		<aop:aspect ref="auditServiceAdapter">
+			<aop:around pointcut-ref="controllerLayerPointcut"
+				method="executeControllerLayerAudit" arg-names="auditable"/>
+		</aop:aspect>
+	</aop:config>
+	<aop:config>
+		<aop:pointcut id="serviceLayerPointcut" 
+			expression="execution(
+				@com.nec.asia.nic.framework.admin.audit.Auditable
+				* com.nec.asia.nic.*.service.*ServiceImpl.*(..))
+				and @annotation(auditable)"/>
+		<aop:aspect ref="auditServiceAdapter">
+			<aop:around pointcut-ref="serviceLayerPointcut"
+				method="executeServiceLayerAudit" arg-names="auditable"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="auditServiceAdapter" class="com.nec.asia.nic.framework.admin.audit.impl.AuditServiceAdapter" />
+	
+	<!-- ==============================Transaction============================== -->
+	<bean id="commandUtil" class="com.nec.asia.nic.comp.job.utils.NicCommandUtil" scope="prototype">
+		<property name="parametersService" ref="parametersService" />
+	</bean>
+</beans>

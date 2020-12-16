@@ -1,0 +1,1199 @@
+package com.nec.asia.nic.comp.trans.utils;
+
+import com.nec.asia.nic.comp.job.dto.LogInfoDTO;
+import com.nec.asia.nic.comp.trans.domain.NicIssuanceData;
+import com.nec.asia.nic.comp.trans.domain.NicMain;
+import com.nec.asia.nic.comp.trans.domain.NicRegistrationData;
+import com.nec.asia.nic.comp.trans.domain.NicTransaction;
+import com.nec.asia.nic.comp.trans.domain.NicTransactionDocument;
+import com.nec.asia.nic.comp.trans.domain.NicTransactionLog;
+import com.nec.asia.nic.comp.trans.domain.NicTransactionPayment;
+import com.nec.asia.nic.dx.common.LogInfo;
+import com.nec.asia.nic.dx.trans.Address;
+import com.nec.asia.nic.dx.trans.FacialImage;
+import com.nec.asia.nic.dx.trans.FacialInfo;
+import com.nec.asia.nic.dx.trans.Fingerprint;
+import com.nec.asia.nic.dx.trans.FingerprintInfo;
+import com.nec.asia.nic.dx.trans.IssuanceData;
+import com.nec.asia.nic.dx.trans.MnicTransaction;
+import com.nec.asia.nic.dx.trans.Page;
+import com.nec.asia.nic.dx.trans.PaymentInfo;
+import com.nec.asia.nic.dx.trans.PersonDetail;
+import com.nec.asia.nic.dx.trans.RegistrationData;
+import com.nec.asia.nic.dx.trans.RejectionData;
+import com.nec.asia.nic.dx.trans.Relationship;
+import com.nec.asia.nic.dx.trans.ScannedDocument;
+import com.nec.asia.nic.dx.trans.SignatureInfo;
+import com.nec.asia.nic.dx.trans.TransactionLog;
+import com.nec.asia.nic.util.TransLogInfoXmlConvertor;
+import com.nec.asia.nic.utils.BaseDTOMapper;
+import com.nec.asia.nic.utils.DateUtil;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
+
+@Component
+public class TransDTOMapper extends BaseDTOMapper
+{
+  public static final String DEFAULT_SERIAL_NO = "01";
+  public static final String DOC_TYPE_PREFIX_FINGERPRINT = "FP";
+  public static final String DOC_TYPE_PREFIX_MINUTIAETEMPLATE = "MNU";
+  public static final String DOC_TYPE_PREFIX_PHOTO = "PH";
+  public static final String DOC_TYPE_PREFIX_THUMBNAIL = "TH";
+  public static final String DOC_TYPE_PREFIX_SIGNATURE = "SIGN";
+  public static final String DOC_TYPE_PREFIX_SCANNEDDOC = "SC";
+  public static final String DOC_TYPE_FINGERPRINT = "FP";
+  public static final String DOC_TYPE_MINUTIAETEMPLATE = "MNU";
+  public static final String DOC_TYPE_PHOTO_CAPTURE = "PH_CAP";
+  public static final String DOC_TYPE_PHOTO_GREY = "PH_GREY";
+  public static final String DOC_TYPE_PHOTO_CHIP = "PH_CHIP";
+  public static final String DOC_TYPE_PHOTO_CLI = "PH_CLI";
+  public static final String DOC_TYPE_PERSO = "PERSO";
+  public static final String DOC_TYPE_SIGNATURE = "SI";
+  public static final String DOC_TYPE_USER_DECLARATION = "USER_DECL";
+  public static final String DOC_TYPE_SC_BIRTH_CERT = "SC_BIRTH_CERT";
+  public static final String DOC_TYPE_SC_MAR_CERT = "SC_MAR_CERT";
+  public static final String DOC_TYPE_SC_ADDR_PROOF = "SC_ADDR_PROOF_DOC";
+  public static final String DEFAULT_MINUTIAE_FORMAT = "MINU_CBEFF_SC37_N464";
+  public static final int DEFAULT_GEN_NO = 0;
+  public static final int DEFAULT_UPDATE_NO = 0;
+  private TransLogInfoXmlConvertor logInfoXmlConvertor = new TransLogInfoXmlConvertor();
+
+  public NicTransaction parseNicTransactionDBO(MnicTransaction mnicTransactionDTO)
+  {
+    NicTransaction nicTransactionDBO = new NicTransaction();
+    nicTransactionDBO.setTransactionId(mnicTransactionDTO.getTransactionID());
+    nicTransactionDBO.setQueueNumber(mnicTransactionDTO.getQueueNumber());
+    nicTransactionDBO.setApplnRefNo(mnicTransactionDTO.getApplnRefNo());
+    nicTransactionDBO.setNin(mnicTransactionDTO.getNin());
+    nicTransactionDBO.setDateOfApplication(mnicTransactionDTO.getDateOfApplication());
+    nicTransactionDBO.setRegSiteCode(mnicTransactionDTO.getRegSiteCode());
+    nicTransactionDBO.setIssSiteCode(mnicTransactionDTO.getIssSiteCode());
+    nicTransactionDBO.setTransactionType(mnicTransactionDTO.getTransactionType());
+    nicTransactionDBO.setTransactionSubtype(mnicTransactionDTO.getTransactionSubtype());
+    nicTransactionDBO.setTransactionStatus(mnicTransactionDTO.getTransactionStatus());
+
+    nicTransactionDBO.setCreateBy(mnicTransactionDTO.getCreateBy());
+    nicTransactionDBO.setCreateDate(mnicTransactionDTO.getCreateDate());
+    nicTransactionDBO.setCreateWkstnId(mnicTransactionDTO.getCreateWkstnID());
+    nicTransactionDBO.setUpdateBy(mnicTransactionDTO.getUpdateBy());
+    nicTransactionDBO.setUpdateDate(mnicTransactionDTO.getUpdateDate());
+    nicTransactionDBO.setUpdateWkstnId(mnicTransactionDTO.getUpdateWkstnID());
+
+    NicRegistrationData nicRegDataDBO = parseRegistrationDataDBO(mnicTransactionDTO.getTransactionID(), mnicTransactionDTO.getNin(), mnicTransactionDTO.getRegistrationData());
+    nicTransactionDBO.setNicRegistrationData(nicRegDataDBO);
+
+    List nicFacialDocDBOList = parseNicTransDocDBOForFacial(mnicTransactionDTO.getTransactionID(), mnicTransactionDTO.getRegistrationData().getFacialInfo());
+    nicTransactionDBO.getNicTransactionDocuments().addAll(nicFacialDocDBOList);
+
+    List nicFPDocDBOList = parseNicTransDocDBOForFingerprint(mnicTransactionDTO.getTransactionID(), mnicTransactionDTO.getRegistrationData().getFingerprintInfo());
+    nicTransactionDBO.getNicTransactionDocuments().addAll(nicFPDocDBOList);
+
+    for (ScannedDocument scDTO : mnicTransactionDTO.getRegistrationData().getScannedDocuments()) {
+      List nicSCDocDBOList = parseNicTransDocDBOForScannedDocument(mnicTransactionDTO.getTransactionID(), scDTO);
+      nicTransactionDBO.getNicTransactionDocuments().addAll(nicSCDocDBOList);
+    }
+
+    NicTransactionDocument nicSignDocDBO = parseNicTransDocDBOForSignature(mnicTransactionDTO.getTransactionID(), mnicTransactionDTO.getRegistrationData().getSignatureInfo());
+    if (nicSignDocDBO != null) {
+      nicTransactionDBO.getNicTransactionDocuments().add(nicSignDocDBO);
+    }
+
+    NicTransactionPayment nicTransPaymentDBO = parseNicTransPaymentDBO(mnicTransactionDTO.getTransactionID(), mnicTransactionDTO.getRegistrationData().getPaymentInfo());
+    nicTransactionDBO.setNicTransactionPayment(nicTransPaymentDBO);
+    return nicTransactionDBO;
+  }
+
+  public MnicTransaction parseMnicTransactionDTO(NicTransaction nicTransactionDBO) {
+    MnicTransaction mnicTransactionDTO = new MnicTransaction();
+    mnicTransactionDTO.setTransactionID(nicTransactionDBO.getTransactionId());
+    mnicTransactionDTO.setQueueNumber(nicTransactionDBO.getQueueNumber());
+    mnicTransactionDTO.setApplnRefNo(nicTransactionDBO.getApplnRefNo());
+    mnicTransactionDTO.setNin(nicTransactionDBO.getNin());
+    mnicTransactionDTO.setDateOfApplication(nicTransactionDBO.getDateOfApplication());
+    mnicTransactionDTO.setRegSiteCode(nicTransactionDBO.getRegSiteCode());
+    mnicTransactionDTO.setIssSiteCode(nicTransactionDBO.getIssSiteCode());
+    mnicTransactionDTO.setTransactionType(nicTransactionDBO.getTransactionType());
+    mnicTransactionDTO.setTransactionSubtype(nicTransactionDBO.getTransactionSubtype());
+    mnicTransactionDTO.setTransactionStatus(nicTransactionDBO.getTransactionStatus());
+
+    mnicTransactionDTO.setCreateBy(nicTransactionDBO.getCreateBy());
+    mnicTransactionDTO.setCreateDate(nicTransactionDBO.getCreateDate());
+    mnicTransactionDTO.setCreateWkstnID(nicTransactionDBO.getCreateWkstnId());
+    mnicTransactionDTO.setUpdateBy(nicTransactionDBO.getUpdateBy());
+    mnicTransactionDTO.setUpdateDate(nicTransactionDBO.getUpdateDate());
+    mnicTransactionDTO.setUpdateWkstnID(nicTransactionDBO.getUpdateWkstnId());
+
+    RegistrationData registrationDataDTO = parseRegistrationDataDTO(nicTransactionDBO.getNicRegistrationData(), nicTransactionDBO.getNicTransactionDocuments(), nicTransactionDBO.getNicTransactionPayment());
+    mnicTransactionDTO.setRegistrationData(registrationDataDTO);
+
+    if (nicTransactionDBO.getNicIssuanceDatas() != null) {
+      NicIssuanceData nicIssDataDBO = null;
+
+      for (NicIssuanceData temp : nicTransactionDBO.getNicIssuanceDatas()) {
+        if (nicIssDataDBO == null) {
+          nicIssDataDBO = temp;
+        } else {
+          Date chosenDBODate = nicIssDataDBO.getUpdateDate() != null ? nicIssDataDBO.getUpdateDate() : nicIssDataDBO.getCreateDate();
+          Date tempDate = temp.getUpdateDate() != null ? temp.getUpdateDate() : temp.getCreateDate();
+          if ((tempDate != null) && (chosenDBODate != null) && (DateUtil.isAfterDate(tempDate, chosenDBODate)))
+          {
+            nicIssDataDBO = temp;
+          }
+        }
+      }
+      IssuanceData issuanceDataDTO = parseIssuanceDataDTO(nicIssDataDBO);
+      mnicTransactionDTO.setIssuanceData(issuanceDataDTO);
+    }
+    return mnicTransactionDTO;
+  }
+
+  public NicRegistrationData parseRegistrationDataDBO(String transactionId, String nin, RegistrationData regDataDTO)
+  {
+    NicRegistrationData nicRegDataDBO = null;
+    if (regDataDTO != null) {
+      nicRegDataDBO = new NicRegistrationData();
+
+      nicRegDataDBO.setTransactionId(transactionId);
+      nicRegDataDBO.setNicTransaction(new NicTransaction());
+      nicRegDataDBO.getNicTransaction().setTransactionId(transactionId);
+      nicRegDataDBO.setNin(nin);
+
+      nicRegDataDBO.setRegCompleteFlag(convertFlagToBoolean(regDataDTO.getRegistrationCompleteFlag()));
+      nicRegDataDBO.setRegOfficerId(regDataDTO.getRegistrationOfficerID());
+      nicRegDataDBO.setRegCompleteTime(regDataDTO.getRegistrationCompleteTime());
+      nicRegDataDBO.setVerCompleteFlag(convertFlagToBoolean(regDataDTO.getVerificationCompleteFlag()));
+      nicRegDataDBO.setVerOfficerId(regDataDTO.getVerificationOfficerID());
+      nicRegDataDBO.setVerCompleteTime(regDataDTO.getVerificationCompleteTime());
+      nicRegDataDBO.setPayCompleteFlag(convertFlagToBoolean(regDataDTO.getPaymentCompleteFlag()));
+      nicRegDataDBO.setPayOfficerId(regDataDTO.getPaymentOfficerID());
+      nicRegDataDBO.setPayCompleteTime(regDataDTO.getPaymentCompleteTime());
+      nicRegDataDBO.setRegTransactionCompleteFlag(convertFlagToBoolean(regDataDTO.getTransactionCompletedFlag()));
+      nicRegDataDBO.setFullAmputatedFlag(convertFlagToBoolean(regDataDTO.getFullAmputatedFlag()));
+      nicRegDataDBO.setPartialAmputatedFlag(convertFlagToBoolean(regDataDTO.getPartialAmputatedFlag()));
+      nicRegDataDBO.setSupervisorDecision(regDataDTO.getSupervisorDecision());
+      nicRegDataDBO.setCreateBy(regDataDTO.getCreateBy());
+      nicRegDataDBO.setCreateWkstnId(regDataDTO.getCreateWkstnID());
+      nicRegDataDBO.setCreateDate(regDataDTO.getCreateDate());
+      nicRegDataDBO.setUpdateBy(regDataDTO.getUpdateBy());
+      nicRegDataDBO.setUpdateWkstnId(regDataDTO.getUpdateWkstnID());
+      nicRegDataDBO.setUpdateDate(regDataDTO.getUpdateDate());
+
+      PersonDetail personDetailDTO = regDataDTO.getPersonDetail();
+      nicRegDataDBO.setSurnameFull(personDetailDTO.getSurnameFull());
+      nicRegDataDBO.setSurnameLine1(personDetailDTO.getSurnameLine1());
+      nicRegDataDBO.setSurnameLine2(personDetailDTO.getSurnameLine2());
+      nicRegDataDBO.setSurnameLenExceedFlag(convertFlagToBoolean(personDetailDTO.getSurnameLenExceedFlag()));
+
+      nicRegDataDBO.setFirstnameFull(personDetailDTO.getFirstnameFull());
+      nicRegDataDBO.setFirstnameLine1(personDetailDTO.getFirstnameLine1());
+      nicRegDataDBO.setFirstnameLine2(personDetailDTO.getFirstnameLine2());
+      nicRegDataDBO.setFirstnameLenExceedFlag(convertFlagToBoolean(personDetailDTO.getFirstnameLenExceedFlag()));
+
+      nicRegDataDBO.setSurnameBirthFull(personDetailDTO.getSurnameAtBirthFull());
+      nicRegDataDBO.setSurnameBirthLine1(personDetailDTO.getSurnameAtBirthLine1());
+      nicRegDataDBO.setSurnameBirthLine2(personDetailDTO.getSurnameAtBirthLine2());
+      nicRegDataDBO.setSurnameBirthLenExceedFlag(convertFlagToBoolean(personDetailDTO.getSurnameAtBirthLenExceedFlag()));
+
+      nicRegDataDBO.setOptionSurname(personDetailDTO.getOptionSurname());
+
+      nicRegDataDBO.setDateOfBirth(personDetailDTO.getDateOfBirth());
+      nicRegDataDBO.setApproxDob(personDetailDTO.getApproxDOB());
+      nicRegDataDBO.setPrintDob(personDetailDTO.getPrintDOB());
+
+      if (StringUtils.isBlank(nicRegDataDBO.getPrintDob())) {
+        if (nicRegDataDBO.getDateOfBirth() != null) {
+          nicRegDataDBO.setPrintDob(convertDateToString8(nicRegDataDBO.getDateOfBirth()));
+        } else if (StringUtils.isNotBlank(nicRegDataDBO.getApproxDob()))
+        {
+          String dayPart = StringUtils.substring(nicRegDataDBO.getApproxDob(), 0, 2);
+          String monthPart = StringUtils.substring(nicRegDataDBO.getApproxDob(), 3, 5);
+          String yearPart = StringUtils.substring(nicRegDataDBO.getApproxDob(), 6, 10);
+          String printDob = dayPart + monthPart + yearPart;
+          nicRegDataDBO.setPrintDob(printDob);
+        }
+      }
+
+      nicRegDataDBO.setGender(personDetailDTO.getGender());
+      nicRegDataDBO.setMaritalStatus(personDetailDTO.getMaritalStatus());
+      nicRegDataDBO.setMaritalNapoleanCodeFlag(convertFlagToBoolean(personDetailDTO.getMaritalNapoleanCodeFlag()));
+
+      Address addressDTO = regDataDTO.getAddress();
+      nicRegDataDBO.setAddressLine1(addressDTO.getAddressLine1());
+      nicRegDataDBO.setAddressLine2(addressDTO.getAddressLine2());
+      nicRegDataDBO.setAddressLine3(addressDTO.getAddressLine3());
+      nicRegDataDBO.setAddressLine4(addressDTO.getAddressLine4());
+      nicRegDataDBO.setAddressLine5(addressDTO.getAddressLine5());
+      nicRegDataDBO.setAddressLine6(addressDTO.getAddressLine6());
+
+      nicRegDataDBO.setPreferredMailingAddress(addressDTO.getPreferredMailingAddress());
+      nicRegDataDBO.setOverseasAddress(addressDTO.getOverseasAddress());
+      nicRegDataDBO.setOverseasCountry(addressDTO.getOverseasCountry());
+
+      nicRegDataDBO.setAddressUpdatedFlag(convertFlagToBoolean(addressDTO.getAddressUpdateFlag()));
+      nicRegDataDBO.setAddressUpdatedOfficerId(addressDTO.getUpdateBy());
+      nicRegDataDBO.setAddressUpdatedWkstnId(addressDTO.getUpdateWkstnID());
+      nicRegDataDBO.setAddressUpdatedTime(addressDTO.getUpdateDate());
+
+      for (Relationship relationshipDTO : regDataDTO.getRelationships()) {
+        if (StringUtils.equals("FATHER", relationshipDTO.getRelationshipType())) {
+          nicRegDataDBO.setFatherName(relationshipDTO.getFirstname());
+          nicRegDataDBO.setFatherSurname(relationshipDTO.getSurname());
+          nicRegDataDBO.setFatherNin(relationshipDTO.getNin());
+        } else if (StringUtils.equals("MOTHER", relationshipDTO.getRelationshipType())) {
+          nicRegDataDBO.setMotherName(relationshipDTO.getFirstname());
+          nicRegDataDBO.setMotherSurname(relationshipDTO.getSurname());
+          nicRegDataDBO.setMotherNin(relationshipDTO.getNin());
+        }
+        else if (StringUtils.equals("SPOUSE", relationshipDTO.getRelationshipType())) {
+          nicRegDataDBO.setSpouseName(relationshipDTO.getFirstname());
+          nicRegDataDBO.setSpouseSurname(relationshipDTO.getSurname());
+          nicRegDataDBO.setSpouseNin(relationshipDTO.getNin());
+        }
+
+      }
+
+      nicRegDataDBO.setTotalFp(regDataDTO.getTotalFp());
+      nicRegDataDBO.setFpIndicator(regDataDTO.getFpIndicator());
+      nicRegDataDBO.setFpVerifyScore(regDataDTO.getFpVerifyScore());
+      nicRegDataDBO.setFpQuality(regDataDTO.getFpQuality());
+      nicRegDataDBO.setFpEncode(regDataDTO.getFpEncode());
+      nicRegDataDBO.setSignatureIndicator(regDataDTO.getSignatureIndicator());
+      nicRegDataDBO.setSignatureFp(regDataDTO.getSignatureFp());
+      nicRegDataDBO.setFacialIndicator(regDataDTO.getFacialIndicator());
+      nicRegDataDBO.setSeniorCitizenFlag(convertFlagToBoolean(regDataDTO.getSeniorCitizenFlag()));
+
+      nicRegDataDBO.setFpVerifyFlag(convertFlagToBoolean(regDataDTO.getFpVerifyFlag()));
+      nicRegDataDBO.setCardVerifyFlag(convertFlagToBoolean(regDataDTO.getCardVerifyFlag()));
+      nicRegDataDBO.setExpressFlag(convertFlagToBoolean(regDataDTO.getCardVerifyFlag()));
+      nicRegDataDBO.setConversionFlag(convertFlagToBoolean(regDataDTO.getConversionFlag()));
+      nicRegDataDBO.setEmail(regDataDTO.getEmail());
+      nicRegDataDBO.setContactNo(regDataDTO.getContactNo());
+    }
+    return nicRegDataDBO;
+  }
+
+  public List<NicTransactionDocument> parseTransactionDocDBOList(String transactionId, RegistrationData regDataDTO) {
+    List allTransDocDBOList = new ArrayList();
+    if (regDataDTO != null) {
+      FacialInfo facialInfoDTO = regDataDTO.getFacialInfo();
+      FingerprintInfo fingerprintInfoDTO = regDataDTO.getFingerprintInfo();
+      List scannedDocDTOList = regDataDTO.getScannedDocuments();
+      SignatureInfo signatureInfoDTO = regDataDTO.getSignatureInfo();
+
+      allTransDocDBOList.addAll(parseNicTransDocDBOForFacial(transactionId, facialInfoDTO));
+      allTransDocDBOList.addAll(parseNicTransDocDBOForFingerprint(transactionId, fingerprintInfoDTO));
+      for (ScannedDocument scannedDocDTO : scannedDocDTOList) {
+        allTransDocDBOList.addAll(parseNicTransDocDBOForScannedDocument(transactionId, scannedDocDTO));
+      }
+      if (signatureInfoDTO != null)
+        allTransDocDBOList.add(parseNicTransDocDBOForSignature(transactionId, signatureInfoDTO));
+    }
+    return allTransDocDBOList;
+  }
+
+  public RegistrationData parseRegistrationDataDTO(NicRegistrationData nicRegDataDBO, Collection<NicTransactionDocument> nicTransDocDBOList, NicTransactionPayment nicTransPaymentDBO) {
+    RegistrationData regDataDTO = null;
+    if ((nicRegDataDBO != null) || (nicTransPaymentDBO != null)) {
+      regDataDTO = new RegistrationData();
+      if (nicRegDataDBO != null) {
+        regDataDTO.setTransactionID(nicRegDataDBO.getTransactionId());
+        regDataDTO.setRegistrationCompleteFlag(convertBooleanToFlag(nicRegDataDBO.getRegCompleteFlag()));
+        regDataDTO.setRegistrationOfficerID(nicRegDataDBO.getRegOfficerId());
+        regDataDTO.setRegistrationCompleteTime(nicRegDataDBO.getRegCompleteTime());
+        regDataDTO.setVerificationCompleteFlag(convertBooleanToFlag(nicRegDataDBO.getVerCompleteFlag()));
+        regDataDTO.setVerificationOfficerID(nicRegDataDBO.getVerOfficerId());
+        regDataDTO.setVerificationCompleteTime(nicRegDataDBO.getVerCompleteTime());
+        regDataDTO.setPaymentCompleteFlag(convertBooleanToFlag(nicRegDataDBO.getPayCompleteFlag()));
+        regDataDTO.setPaymentOfficerID(nicRegDataDBO.getPayOfficerId());
+        regDataDTO.setPaymentCompleteTime(nicRegDataDBO.getPayCompleteTime());
+        regDataDTO.setTransactionCompletedFlag(convertBooleanToFlag(nicRegDataDBO.getRegTransactionCompleteFlag()));
+        regDataDTO.setTransactionUploadedCompletedFlag(convertBooleanToFlag(nicRegDataDBO.getUploadFlag()));
+        regDataDTO.setNicJobCompletedFlag(convertBooleanToFlag(nicRegDataDBO.getNicJobCompleteFlag()));
+        regDataDTO.setFullAmputatedFlag(convertBooleanToFlag(nicRegDataDBO.getFullAmputatedFlag()));
+        regDataDTO.setPartialAmputatedFlag(convertBooleanToFlag(nicRegDataDBO.getPartialAmputatedFlag()));
+        regDataDTO.setSupervisorDecision(nicRegDataDBO.getSupervisorDecision());
+        regDataDTO.setCreateBy(nicRegDataDBO.getCreateBy());
+        regDataDTO.setCreateDate(nicRegDataDBO.getCreateDate());
+        regDataDTO.setCreateWkstnID(nicRegDataDBO.getCreateWkstnId());
+        regDataDTO.setUpdateBy(nicRegDataDBO.getUpdateBy());
+        regDataDTO.setUpdateDate(nicRegDataDBO.getUpdateDate());
+        regDataDTO.setUpdateWkstnID(nicRegDataDBO.getUpdateWkstnId());
+        regDataDTO.setTotalFp(nicRegDataDBO.getTotalFp());
+        regDataDTO.setFpIndicator(nicRegDataDBO.getFpIndicator());
+        regDataDTO.setFpQuality(nicRegDataDBO.getFpQuality());
+        regDataDTO.setFpEncode(nicRegDataDBO.getFpEncode());
+        regDataDTO.setFpVerifyScore(nicRegDataDBO.getFpVerifyScore());
+        regDataDTO.setSignatureIndicator(nicRegDataDBO.getSignatureIndicator());
+        regDataDTO.setSignatureFp(nicRegDataDBO.getSignatureFp());
+        regDataDTO.setFacialIndicator(nicRegDataDBO.getFacialIndicator());
+        regDataDTO.setSeniorCitizenFlag(convertBooleanToFlag(nicRegDataDBO.getSeniorCitizenFlag()));
+        regDataDTO.setFpVerifyFlag(convertBooleanToFlag(nicRegDataDBO.getFpVerifyFlag()));
+        regDataDTO.setCardVerifyFlag(convertBooleanToFlag(nicRegDataDBO.getCardVerifyFlag()));
+        regDataDTO.setExpressFlag(convertBooleanToFlag(nicRegDataDBO.getExpressFlag()));
+        regDataDTO.setConversionFlag(convertBooleanToFlag(nicRegDataDBO.getConversionFlag()));
+        regDataDTO.setEmail(nicRegDataDBO.getEmail());
+        regDataDTO.setContactNo(nicRegDataDBO.getContactNo());
+
+        regDataDTO.setPersonDetail(parsePersonDetailDTO(nicRegDataDBO));
+        regDataDTO.setAddress(parseAddressDTO(nicRegDataDBO));
+        regDataDTO.getRelationships().addAll(parseRelationshipDTOList(nicRegDataDBO));
+
+        List facialDocDBOList = getTransactionDocDBOListForFacial(nicTransDocDBOList);
+        List fpDocDBOList = getTransactionDocDBOListForFingerprint(nicTransDocDBOList);
+        List mnuDocDBOList = getTransactionDocDBOListForMinutiaeTemplate(nicTransDocDBOList);
+        List scannedDocDBOList = getTransactionDocDBOListForScannedDocument(nicTransDocDBOList);
+        NicTransactionDocument signatureDocDBO = getTransactionDocDBOForSignature(nicTransDocDBOList);
+
+        String fpIndicators = nicRegDataDBO.getFpIndicator();
+        String fpQualitys = nicRegDataDBO.getFpQuality();
+        String fpEncodes = nicRegDataDBO.getFpEncode();
+        String fpVerifyScore = nicRegDataDBO.getFpVerifyScore();
+        String signatureIndicator = nicRegDataDBO.getSignatureIndicator();
+        String signatureFp = nicRegDataDBO.getSignatureFp();
+
+        regDataDTO.setFacialInfo(parseFacialInfoDTO(facialDocDBOList));
+        regDataDTO.setFingerprintInfo(parseFingerprintInfoDTO(fpDocDBOList, mnuDocDBOList, fpIndicators, fpQualitys, fpEncodes, fpVerifyScore));
+        regDataDTO.getScannedDocuments().addAll(parseScannedDocumentDTO(scannedDocDBOList));
+        regDataDTO.setSignatureInfo(parseSignatureInfoDTO(signatureDocDBO, signatureIndicator, signatureFp));
+      }
+      regDataDTO.setPaymentInfo(parsePaymentInfoDTO(nicTransPaymentDBO));
+    }
+    return regDataDTO;
+  }
+
+  private List<NicTransactionDocument> getTransactionDocDBOListForFacial(Collection<NicTransactionDocument> nicTransDocDBOList) {
+    List facialTransDocDBOList = new ArrayList();
+    for (NicTransactionDocument docDBO : nicTransDocDBOList) {
+      if ((StringUtils.startsWith(docDBO.getDocType(), "PH")) || (StringUtils.startsWith(docDBO.getDocType(), "TH")))
+      {
+        facialTransDocDBOList.add(docDBO);
+      }
+    }
+    return facialTransDocDBOList;
+  }
+  private List<NicTransactionDocument> getTransactionDocDBOListForFingerprint(Collection<NicTransactionDocument> nicTransDocDBOList) {
+    List fingerprintTransDocDBOList = new ArrayList();
+    for (NicTransactionDocument docDBO : nicTransDocDBOList) {
+      if (StringUtils.startsWith(docDBO.getDocType(), "FP")) {
+        fingerprintTransDocDBOList.add(docDBO);
+      }
+    }
+    return fingerprintTransDocDBOList;
+  }
+  private List<NicTransactionDocument> getTransactionDocDBOListForMinutiaeTemplate(Collection<NicTransactionDocument> nicTransDocDBOList) {
+    List mnuTransDocDBOList = new ArrayList();
+    for (NicTransactionDocument docDBO : nicTransDocDBOList) {
+      if (StringUtils.startsWith(docDBO.getDocType(), "MNU")) {
+        mnuTransDocDBOList.add(docDBO);
+      }
+    }
+    return mnuTransDocDBOList;
+  }
+  private List<NicTransactionDocument> getTransactionDocDBOListForScannedDocument(Collection<NicTransactionDocument> nicTransDocDBOList) {
+    List signatureTransDocDBOList = new ArrayList();
+    for (NicTransactionDocument docDBO : nicTransDocDBOList) {
+      if (StringUtils.startsWith(docDBO.getDocType(), "SC")) {
+        signatureTransDocDBOList.add(docDBO);
+      }
+    }
+    return signatureTransDocDBOList;
+  }
+  private NicTransactionDocument getTransactionDocDBOForSignature(Collection<NicTransactionDocument> nicTransDocDBOList) {
+    NicTransactionDocument signatureTransDocDBO = null;
+    for (NicTransactionDocument docDBO : nicTransDocDBOList) {
+      if (StringUtils.startsWith(docDBO.getDocType(), "SIGN")) {
+        signatureTransDocDBO = docDBO;
+        break;
+      }
+    }
+    return signatureTransDocDBO;
+  }
+
+  public PersonDetail parsePersonDetailDTO(NicRegistrationData nicRegDataDBO)
+  {
+    PersonDetail personDetailDTO = null;
+    if (nicRegDataDBO != null) {
+      personDetailDTO = new PersonDetail();
+      personDetailDTO.setSurnameFull(nicRegDataDBO.getSurnameFull());
+      personDetailDTO.setSurnameLine1(nicRegDataDBO.getSurnameLine1());
+      personDetailDTO.setSurnameLine2(nicRegDataDBO.getSurnameLine2());
+      personDetailDTO.setSurnameLenExceedFlag(convertBooleanToFlag(nicRegDataDBO.getSurnameLenExceedFlag()));
+
+      personDetailDTO.setFirstnameFull(nicRegDataDBO.getFirstnameFull());
+      personDetailDTO.setFirstnameLine1(nicRegDataDBO.getFirstnameLine1());
+      personDetailDTO.setFirstnameLine2(nicRegDataDBO.getFirstnameLine2());
+      personDetailDTO.setFirstnameLenExceedFlag(convertBooleanToFlag(nicRegDataDBO.getFirstnameLenExceedFlag()));
+
+      personDetailDTO.setSurnameAtBirthFull(nicRegDataDBO.getSurnameBirthFull());
+      personDetailDTO.setSurnameAtBirthLine1(nicRegDataDBO.getSurnameBirthLine1());
+      personDetailDTO.setSurnameAtBirthLine2(nicRegDataDBO.getSurnameBirthLine2());
+      personDetailDTO.setSurnameAtBirthLenExceedFlag(convertBooleanToFlag(nicRegDataDBO.getSurnameBirthLenExceedFlag()));
+      personDetailDTO.setOptionSurname(nicRegDataDBO.getOptionSurname());
+
+      personDetailDTO.setDateOfBirth(nicRegDataDBO.getDateOfBirth());
+      personDetailDTO.setApproxDOB(nicRegDataDBO.getApproxDob());
+      personDetailDTO.setPrintDOB(nicRegDataDBO.getPrintDob());
+      personDetailDTO.setGender(nicRegDataDBO.getGender());
+      personDetailDTO.setMaritalStatus(nicRegDataDBO.getMaritalStatus());
+      personDetailDTO.setMaritalNapoleanCodeFlag(convertBooleanToFlag(nicRegDataDBO.getMaritalNapoleanCodeFlag()));
+    }
+    return personDetailDTO;
+  }
+
+  public Address parseAddressDTO(NicRegistrationData nicRegDataDBO) {
+    Address addressDTO = null;
+    if (nicRegDataDBO != null) {
+      addressDTO = new Address();
+      addressDTO.setAddressLine1(nicRegDataDBO.getAddressLine1());
+      addressDTO.setAddressLine2(nicRegDataDBO.getAddressLine2());
+      addressDTO.setAddressLine3(nicRegDataDBO.getAddressLine3());
+      addressDTO.setAddressLine4(nicRegDataDBO.getAddressLine4());
+      addressDTO.setAddressLine5(nicRegDataDBO.getAddressLine5());
+      addressDTO.setAddressLine6(nicRegDataDBO.getAddressLine6());
+      addressDTO.setPreferredMailingAddress(nicRegDataDBO.getPreferredMailingAddress());
+      addressDTO.setOverseasAddress(nicRegDataDBO.getOverseasAddress());
+      addressDTO.setOverseasCountry(nicRegDataDBO.getOverseasCountry());
+      addressDTO.setAddressUpdateFlag(convertBooleanToFlag(nicRegDataDBO.getAddressUpdatedFlag()));
+      addressDTO.setUpdateBy(nicRegDataDBO.getAddressUpdatedOfficerId());
+      addressDTO.setUpdateWkstnID(nicRegDataDBO.getAddressUpdatedWkstnId());
+      addressDTO.setUpdateDate(nicRegDataDBO.getAddressUpdatedTime());
+    }
+    return addressDTO;
+  }
+  public List<Relationship> parseRelationshipDTOList(NicRegistrationData nicRegDataDBO) {
+    List relationships = new ArrayList();
+    if (nicRegDataDBO != null)
+    {
+      if ((StringUtils.isNotBlank(nicRegDataDBO.getFatherName())) || (StringUtils.isNotBlank(nicRegDataDBO.getFatherSurname())) || (StringUtils.isNotBlank(nicRegDataDBO.getFatherNin())))
+      {
+        Relationship relationshipDTO = new Relationship();
+        relationshipDTO.setRelationshipType("FATHER");
+        relationshipDTO.setSurname(nicRegDataDBO.getFatherName());
+        relationshipDTO.setFirstname(nicRegDataDBO.getFatherSurname());
+        relationshipDTO.setNin(nicRegDataDBO.getFatherNin());
+        relationships.add(relationshipDTO);
+      }
+
+      if ((StringUtils.isNotBlank(nicRegDataDBO.getMotherName())) || (StringUtils.isNotBlank(nicRegDataDBO.getMotherSurname())) || (StringUtils.isNotBlank(nicRegDataDBO.getMotherNin())))
+      {
+        Relationship relationshipDTO = new Relationship();
+        relationshipDTO.setRelationshipType("MOTHER");
+        relationshipDTO.setSurname(nicRegDataDBO.getMotherName());
+        relationshipDTO.setFirstname(nicRegDataDBO.getMotherSurname());
+        relationshipDTO.setNin(nicRegDataDBO.getMotherNin());
+        relationships.add(relationshipDTO);
+      }
+
+      if ((StringUtils.isNotBlank(nicRegDataDBO.getSpouseName())) || (StringUtils.isNotBlank(nicRegDataDBO.getSpouseSurname())) || (StringUtils.isNotBlank(nicRegDataDBO.getSpouseNin())))
+      {
+        Relationship relationshipDTO = new Relationship();
+        relationshipDTO.setRelationshipType("SPOUSE");
+        relationshipDTO.setSurname(nicRegDataDBO.getSpouseName());
+        relationshipDTO.setFirstname(nicRegDataDBO.getSpouseSurname());
+        relationshipDTO.setNin(nicRegDataDBO.getSpouseNin());
+        relationships.add(relationshipDTO);
+      }
+    }
+    return relationships;
+  }
+
+  public List<NicTransactionDocument> parseNicTransDocDBOForFacial(String transactionId, FacialInfo facialInfoDTO)
+  {
+    List facialDocDBOList = new ArrayList();
+    if ((facialInfoDTO != null) && (CollectionUtils.isNotEmpty(facialInfoDTO.getFacialImages()))) {
+      for (FacialImage facialImage : facialInfoDTO.getFacialImages()) {
+        NicTransactionDocument facialDocDBO = new NicTransactionDocument();
+
+        facialDocDBO.setTransactionId(transactionId);
+        facialDocDBO.setDocType(facialImage.getDocType());
+        facialDocDBO.setSerialNo("01");
+        facialDocDBO.setDocData(facialImage.getFacialData());
+        facialDocDBO.setPurpose(facialImage.getPurpose());
+        facialDocDBO.setCreateBy(facialInfoDTO.getCreateBy());
+        facialDocDBO.setCreateDate(facialInfoDTO.getCreateDate());
+        facialDocDBO.setCreateWkstnId(facialInfoDTO.getCreateWkstnID());
+        facialDocDBO.setUpdateBy(facialInfoDTO.getUpdateBy());
+        facialDocDBO.setUpdateDate(facialInfoDTO.getUpdateDate());
+        facialDocDBO.setUpdateWkstnId(facialInfoDTO.getUpdateWkstnID());
+        facialDocDBOList.add(facialDocDBO);
+      }
+    }
+    return facialDocDBOList;
+  }
+
+  public FacialInfo parseFacialInfoDTO(List<NicTransactionDocument> facialDocDBOList) {
+    FacialInfo facialInfoDTO = null;
+    boolean isEmpty = true;
+    for (NicTransactionDocument facialDocDBO : facialDocDBOList) {
+      if (isEmpty) {
+        facialInfoDTO = new FacialInfo();
+        facialInfoDTO.setCreateBy(facialDocDBO.getCreateBy());
+        facialInfoDTO.setCreateDate(facialDocDBO.getCreateDate());
+        facialInfoDTO.setCreateWkstnID(facialDocDBO.getCreateWkstnId());
+        facialInfoDTO.setUpdateBy(facialDocDBO.getUpdateBy());
+        facialInfoDTO.setUpdateDate(facialDocDBO.getUpdateDate());
+        facialInfoDTO.setUpdateWkstnID(facialDocDBO.getUpdateWkstnId());
+        isEmpty = false;
+      }
+      FacialImage facialImageDTO = new FacialImage();
+      facialImageDTO.setDocType(facialDocDBO.getDocType());
+      facialImageDTO.setPurpose(facialDocDBO.getPurpose());
+      facialImageDTO.setFacialData(facialDocDBO.getDocData());
+      facialInfoDTO.getFacialImages().add(facialImageDTO);
+    }
+
+    return facialInfoDTO;
+  }
+
+  public List<NicTransactionDocument> parseNicTransDocDBOForFingerprint(String transactionId, FingerprintInfo fingerprintInfoDTO)
+  {
+    List fpDocDBOList = new ArrayList();
+    if ((fingerprintInfoDTO != null) && (CollectionUtils.isNotEmpty(fingerprintInfoDTO.getFingerprints()))) {
+      for (Fingerprint fingerprint : fingerprintInfoDTO.getFingerprints()) {
+        NicTransactionDocument fpDocDBO = new NicTransactionDocument();
+
+        fpDocDBO.setTransactionId(transactionId);
+        fpDocDBO.setDocType("FP");
+        String fpSerialNo = StringUtils.leftPad(fingerprint.getFingerprintPosition(), 2, '0');
+        fpDocDBO.setSerialNo(fpSerialNo);
+        fpDocDBO.setDocData(fingerprint.getFingerprintData());
+
+        fpDocDBO.setCreateBy(fingerprintInfoDTO.getCreateBy());
+        fpDocDBO.setCreateDate(fingerprintInfoDTO.getCreateDate());
+        fpDocDBO.setCreateWkstnId(fingerprintInfoDTO.getCreateWkstnID());
+        fpDocDBO.setUpdateBy(fingerprintInfoDTO.getUpdateBy());
+        fpDocDBO.setUpdateDate(fingerprintInfoDTO.getUpdateDate());
+        fpDocDBO.setUpdateWkstnId(fingerprintInfoDTO.getUpdateWkstnID());
+        fpDocDBOList.add(fpDocDBO);
+
+        if ((StringUtils.equals(fingerprint.getFingerprintEncodeFlag(), "Y")) && (fingerprint.getMinutiaData() != null)) {
+          NicTransactionDocument mnuDocDBO = new NicTransactionDocument();
+
+          mnuDocDBO.setTransactionId(transactionId);
+          mnuDocDBO.setDocType("MNU");
+          mnuDocDBO.setSerialNo(fpSerialNo);
+          mnuDocDBO.setDocData(fingerprint.getMinutiaData());
+
+          mnuDocDBO.setCreateBy(fingerprintInfoDTO.getCreateBy());
+          mnuDocDBO.setCreateDate(fingerprintInfoDTO.getCreateDate());
+          mnuDocDBO.setCreateWkstnId(fingerprintInfoDTO.getCreateWkstnID());
+          mnuDocDBO.setUpdateBy(fingerprintInfoDTO.getUpdateBy());
+          mnuDocDBO.setUpdateDate(fingerprintInfoDTO.getUpdateDate());
+          mnuDocDBO.setUpdateWkstnId(fingerprintInfoDTO.getUpdateWkstnID());
+          fpDocDBOList.add(mnuDocDBO);
+        }
+      }
+    }
+    return fpDocDBOList;
+  }
+
+  public FingerprintInfo parseFingerprintInfoDTO(List<NicTransactionDocument> fpDocDBOList, List<NicTransactionDocument> mnuDocDBOList, String fpIndicators, String fpQualitys, String fpEncodes, String fpVerifyScores)
+  {
+    FingerprintInfo fingerprintInfoDTO = new FingerprintInfo();
+    boolean isEmpty = true;
+    boolean isByPass = false;
+    String enrolStatus = "Enrolled";
+    Map fpIndicatorMap = new HashMap();
+    Map fpQualityMap = new HashMap();
+    Map fpEncodeMap = new HashMap();
+    Map fpVerifyScoreMap = new HashMap();
+
+    if (StringUtils.isNotBlank(fpIndicators)) {
+      String[] fpIndicatorArray = fpIndicators.split(",");
+      for (String fpIndicator : fpIndicatorArray) {
+        if ((StringUtils.contains(fpIndicator, "-")) && (fpIndicator.split("-").length == 2)) {
+          fpIndicatorMap.put(fpIndicator.split("-")[0], fpIndicator.split("-")[1]);
+        }
+      }
+    }
+    if (StringUtils.isNotBlank(fpQualitys)) {
+      String[] fpQualityArray = fpQualitys.split(",");
+      for (String fpQuality : fpQualityArray) {
+        if ((StringUtils.contains(fpQuality, "-")) && (fpQuality.split("-").length == 2)) {
+          fpQualityMap.put(fpQuality.split("-")[0], fpQuality.split("-")[1]);
+        }
+      }
+    }
+    if (StringUtils.isNotBlank(fpEncodes)) {
+      String[] fpEncodeArray = fpEncodes.split(",");
+      for (String fpEncode : fpEncodeArray) {
+        if ((StringUtils.contains(fpEncode, "-")) && (fpEncode.split("-").length == 2)) {
+          fpEncodeMap.put(fpEncode.split("-")[0], fpEncode.split("-")[1]);
+        }
+      }
+    }
+    if (StringUtils.isNotBlank(fpVerifyScores)) {
+      String[] fpVerifyScoreArray = fpEncodes.split(",");
+      for (String fpVerifyScore : fpVerifyScoreArray) {
+        if ((StringUtils.contains(fpVerifyScore, "-")) && (fpVerifyScore.split("-").length == 2)) {
+          fpVerifyScoreMap.put(fpVerifyScore.split("-")[0], fpVerifyScore.split("-")[1]);
+        }
+      }
+    }
+
+    for (NicTransactionDocument fpDocDBO : fpDocDBOList) {
+      if (isEmpty) {
+        fingerprintInfoDTO.setCreateBy(fpDocDBO.getCreateBy());
+        fingerprintInfoDTO.setCreateDate(fpDocDBO.getCreateDate());
+        fingerprintInfoDTO.setCreateWkstnID(fpDocDBO.getCreateWkstnId());
+        fingerprintInfoDTO.setUpdateBy(fpDocDBO.getUpdateBy());
+        fingerprintInfoDTO.setUpdateDate(fpDocDBO.getUpdateDate());
+        fingerprintInfoDTO.setUpdateWkstnID(fpDocDBO.getUpdateWkstnId());
+        isEmpty = false;
+      }
+
+      Fingerprint fingerprintDTO = new Fingerprint();
+      int fingerPosition = Integer.parseInt(fpDocDBO.getSerialNo());
+      fingerprintDTO.setFingerprintPosition(Integer.toString(fingerPosition));
+
+      fingerprintDTO.setFingerprintIndicator((String)fpIndicatorMap.get(fpDocDBO.getSerialNo()));
+      fingerprintDTO.setFingerprintQuality((String)fpQualityMap.get(fpDocDBO.getSerialNo()));
+      fingerprintDTO.setFingerprintEncodeFlag((String)fpEncodeMap.get(fpDocDBO.getSerialNo()));
+      fingerprintDTO.setFingerprintData(fpDocDBO.getDocData());
+      if ((StringUtils.equals(fingerprintDTO.getFingerprintIndicator(), "F")) || (StringUtils.equals(fingerprintDTO.getFingerprintIndicator(), "U"))) {
+        isByPass = true;
+      }
+
+      for (NicTransactionDocument mnuDocDBO : mnuDocDBOList) {
+        int mnuFingerPosition = Integer.parseInt(mnuDocDBO.getSerialNo());
+        if (fingerPosition == mnuFingerPosition) {
+          fingerprintDTO.setMinutiaData(mnuDocDBO.getDocData());
+          fingerprintDTO.setVerifiedScore((String)fpVerifyScoreMap.get(fpDocDBO.getSerialNo()));
+          fingerprintDTO.setMinutiaFormat("MINU_CBEFF_SC37_N464");
+        }
+      }
+
+      fingerprintInfoDTO.getFingerprints().add(fingerprintDTO);
+    }
+    if (isByPass) {
+      enrolStatus = "Skipped";
+    }
+    fingerprintInfoDTO.setFingerprintEnrolStatus(enrolStatus);
+    return fingerprintInfoDTO;
+  }
+
+  public List<NicTransactionDocument> parseNicTransDocDBOForScannedDocument(String transactionId, ScannedDocument scannedDocumentDTO)
+  {
+    List nicSCDocDBOList = new ArrayList();
+    if ((scannedDocumentDTO != null) && (CollectionUtils.isNotEmpty(scannedDocumentDTO.getPages()))) {
+      for (Page pageDTO : scannedDocumentDTO.getPages()) {
+        NicTransactionDocument nicSCDocDBO = new NicTransactionDocument();
+
+        nicSCDocDBO.setTransactionId(transactionId);
+        nicSCDocDBO.setDocType(pageDTO.getDocType());
+        nicSCDocDBO.setSerialNo(pageDTO.getPageNo());
+        nicSCDocDBO.setDocData(pageDTO.getDocumentData());
+        nicSCDocDBO.setPurpose(scannedDocumentDTO.getDocumentName());
+        nicSCDocDBO.setCreateBy(scannedDocumentDTO.getCreateBy());
+        nicSCDocDBO.setCreateDate(scannedDocumentDTO.getCreateDate());
+        nicSCDocDBO.setCreateWkstnId(scannedDocumentDTO.getCreateWkstnID());
+        nicSCDocDBO.setUpdateBy(scannedDocumentDTO.getUpdateBy());
+        nicSCDocDBO.setUpdateDate(scannedDocumentDTO.getUpdateDate());
+        nicSCDocDBO.setUpdateWkstnId(scannedDocumentDTO.getUpdateWkstnID());
+        nicSCDocDBOList.add(nicSCDocDBO);
+      }
+    }
+    return nicSCDocDBOList;
+  }
+
+  public List<ScannedDocument> parseScannedDocumentDTO(List<NicTransactionDocument> scannedDocDBOList)
+  {
+    List scannedDocumentDTOList = new ArrayList();
+    if (CollectionUtils.isNotEmpty(scannedDocDBOList))
+    {
+      List scannedDocDBOGroupList = prepareScannedDocumentGroup(scannedDocDBOList);
+
+      for (List scannedDocDBOGroup : scannedDocDBOGroupList) {
+        ScannedDocument scannedDocumentDTO = new ScannedDocument();
+        boolean isEmpty = true;
+        for (NicTransactionDocument scannedDocDBO : scannedDocDBOGroup) {
+          Page pageDTO = new Page();
+          pageDTO.setPageNo(scannedDocDBO.getSerialNo());
+          pageDTO.setDocumentData(scannedDocDBO.getDocData());
+          pageDTO.setDocType(scannedDocDBO.getDocType());
+          scannedDocumentDTO.getPages().add(pageDTO);
+          if (isEmpty) {
+            scannedDocumentDTO.setDocumentName(scannedDocDBO.getPurpose());
+            scannedDocumentDTO.setCreateBy(scannedDocDBO.getCreateBy());
+            scannedDocumentDTO.setCreateDate(scannedDocDBO.getCreateDate());
+            scannedDocumentDTO.setCreateWkstnID(scannedDocDBO.getCreateWkstnId());
+            scannedDocumentDTO.setUpdateBy(scannedDocDBO.getUpdateBy());
+            scannedDocumentDTO.setUpdateDate(scannedDocDBO.getUpdateDate());
+            scannedDocumentDTO.setUpdateWkstnID(scannedDocDBO.getUpdateWkstnId());
+            isEmpty = false;
+          }
+        }
+        scannedDocumentDTOList.add(scannedDocumentDTO);
+      }
+    }
+    return scannedDocumentDTOList;
+  }
+
+  private List<List<NicTransactionDocument>> prepareScannedDocumentGroup(List<NicTransactionDocument> scannedDocDBOList)
+  {
+    List scannedDocDBOGroupList = new ArrayList();
+    if (CollectionUtils.isNotEmpty(scannedDocDBOList)) {
+      Map scannedDocDBOGroupMap = new HashMap();
+      for (NicTransactionDocument scannedDocDBO : scannedDocDBOList) {
+        String docType = scannedDocDBO.getDocType();
+        List scannedDocDBOGroup = (List)scannedDocDBOGroupMap.get(docType);
+        if (scannedDocDBOGroup == null) {
+          scannedDocDBOGroup = new ArrayList();
+        }
+        scannedDocDBOGroup.add(scannedDocDBO);
+        scannedDocDBOGroupMap.put(docType, scannedDocDBOGroup);
+      }
+      scannedDocDBOGroupList.addAll(scannedDocDBOGroupMap.values());
+    }
+    return scannedDocDBOGroupList;
+  }
+
+  public NicTransactionDocument parseNicTransDocDBOForSignature(String transactionId, SignatureInfo signatureInfoDTO) {
+    NicTransactionDocument nicSignDocDBO = null;
+    if (signatureInfoDTO != null) {
+      nicSignDocDBO = new NicTransactionDocument();
+
+      nicSignDocDBO.setTransactionId(transactionId);
+
+      nicSignDocDBO.setSerialNo("01");
+
+      if (StringUtils.equals(signatureInfoDTO.getSignatureIndicator(), "T")) {
+        nicSignDocDBO.setDocType("SIGN_FP");
+        nicSignDocDBO.setDocData(signatureInfoDTO.getFPAsSignatureData());
+      } else {
+        nicSignDocDBO.setDocType("SIGNATURE");
+        nicSignDocDBO.setDocData(signatureInfoDTO.getSignatureData());
+      }
+
+      nicSignDocDBO.setCreateBy(signatureInfoDTO.getCreateBy());
+      nicSignDocDBO.setCreateDate(signatureInfoDTO.getCreateDate());
+      nicSignDocDBO.setCreateWkstnId(signatureInfoDTO.getCreateWkstnID());
+      nicSignDocDBO.setUpdateBy(signatureInfoDTO.getUpdateBy());
+      nicSignDocDBO.setUpdateDate(signatureInfoDTO.getUpdateDate());
+      nicSignDocDBO.setUpdateWkstnId(signatureInfoDTO.getUpdateWkstnID());
+    }
+    return nicSignDocDBO;
+  }
+
+  public SignatureInfo parseSignatureInfoDTO(NicTransactionDocument nicSignDocDBO, String signatureIndicator, String signatureFp) {
+    SignatureInfo signatureInfoDTO = null;
+    if (nicSignDocDBO != null) {
+      signatureInfoDTO = new SignatureInfo();
+      signatureInfoDTO.setSignatureIndicator(signatureIndicator);
+      signatureInfoDTO.setSignatureFP(signatureFp);
+
+      byte[] docData = nicSignDocDBO.getDocData();
+      if (StringUtils.equals(signatureInfoDTO.getSignatureIndicator(), "T"))
+        signatureInfoDTO.setFPAsSignatureData(docData);
+      else {
+        signatureInfoDTO.setSignatureData(docData);
+      }
+
+      signatureInfoDTO.setCreateBy(nicSignDocDBO.getCreateBy());
+      signatureInfoDTO.setCreateDate(nicSignDocDBO.getCreateDate());
+      signatureInfoDTO.setCreateWkstnID(nicSignDocDBO.getCreateWkstnId());
+      signatureInfoDTO.setUpdateBy(nicSignDocDBO.getUpdateBy());
+      signatureInfoDTO.setUpdateDate(nicSignDocDBO.getUpdateDate());
+      signatureInfoDTO.setUpdateWkstnID(nicSignDocDBO.getUpdateWkstnId());
+    }
+    return signatureInfoDTO;
+  }
+
+  public NicTransactionPayment parseNicTransPaymentDBO(String transactionId, PaymentInfo paymentInfoDTO)
+  {
+    NicTransactionPayment nicTransPaymentDBO = null;
+    if (paymentInfoDTO != null) {
+      nicTransPaymentDBO = new NicTransactionPayment();
+      nicTransPaymentDBO.setTransactionId(transactionId);
+      nicTransPaymentDBO.setNicTransaction(new NicTransaction(transactionId));
+      nicTransPaymentDBO.setPaymentId(paymentInfoDTO.getPaymentID());
+      nicTransPaymentDBO.setBalance(Double.valueOf(paymentInfoDTO.getBalance()));
+      nicTransPaymentDBO.setCashReceived(Double.valueOf(paymentInfoDTO.getCashReceived()));
+      nicTransPaymentDBO.setFeeAmount(Double.valueOf(paymentInfoDTO.getFeeAmount()));
+      nicTransPaymentDBO.setNoCardLost(paymentInfoDTO.getNoCardLost());
+      nicTransPaymentDBO.setPaymentAmount(Double.valueOf(paymentInfoDTO.getPaymentAmount()));
+      nicTransPaymentDBO.setPaymentStatus(paymentInfoDTO.getPaymentStatus());
+      nicTransPaymentDBO.setPaymentTime(paymentInfoDTO.getPaymentTime());
+      nicTransPaymentDBO.setReduceRateAmount(Double.valueOf(paymentInfoDTO.getReduceRateAmount()));
+      nicTransPaymentDBO.setReduceRateFlag(convertFlagToBoolean(paymentInfoDTO.getReduceRateFlag()));
+      nicTransPaymentDBO.setWaiverFlag(convertFlagToBoolean(paymentInfoDTO.getWaiverFlag()));
+      nicTransPaymentDBO.setWaiverOfficerId(paymentInfoDTO.getWaiverOfficerID());
+      nicTransPaymentDBO.setWaiverReason(paymentInfoDTO.getWaiverReason());
+
+      nicTransPaymentDBO.setCollectionOfficerId(paymentInfoDTO.getCollectOfficerID());
+      nicTransPaymentDBO.setCreateBy(paymentInfoDTO.getCreateBy());
+      nicTransPaymentDBO.setCreateDate(paymentInfoDTO.getCreateDate());
+      nicTransPaymentDBO.setCreateWkstnId(paymentInfoDTO.getCreateWkstnID());
+      nicTransPaymentDBO.setUpdateBy(paymentInfoDTO.getUpdateBy());
+      nicTransPaymentDBO.setUpdateDate(paymentInfoDTO.getUpdateDate());
+      nicTransPaymentDBO.setUpdateWkstnId(paymentInfoDTO.getUpdateWkstnID());
+    }
+    return nicTransPaymentDBO;
+  }
+
+  public PaymentInfo parsePaymentInfoDTO(NicTransactionPayment nicTransPaymentDBO)
+  {
+    PaymentInfo paymentInfoDTO = null;
+    if (nicTransPaymentDBO != null) {
+      paymentInfoDTO = new PaymentInfo();
+      paymentInfoDTO.setPaymentID(nicTransPaymentDBO.getPaymentId());
+      if (nicTransPaymentDBO.getBalance() != null)
+        paymentInfoDTO.setBalance(nicTransPaymentDBO.getBalance().doubleValue());
+      if (nicTransPaymentDBO.getCashReceived() != null)
+        paymentInfoDTO.setCashReceived(nicTransPaymentDBO.getCashReceived().doubleValue());
+      paymentInfoDTO.setCollectOfficerID(nicTransPaymentDBO.getCollectionOfficerId());
+      if (nicTransPaymentDBO.getFeeAmount() != null)
+        paymentInfoDTO.setFeeAmount(nicTransPaymentDBO.getFeeAmount().doubleValue());
+      if (nicTransPaymentDBO.getNoCardLost() != null)
+        paymentInfoDTO.setNoCardLost(nicTransPaymentDBO.getNoCardLost());
+      if (nicTransPaymentDBO.getPaymentAmount() != null) {
+        paymentInfoDTO.setPaymentAmount(nicTransPaymentDBO.getPaymentAmount().doubleValue());
+      }
+      paymentInfoDTO.setPaymentStatus(nicTransPaymentDBO.getPaymentStatus());
+      paymentInfoDTO.setPaymentTime(nicTransPaymentDBO.getPaymentTime());
+      if (nicTransPaymentDBO.getReduceRateAmount() != null)
+        paymentInfoDTO.setReduceRateAmount(nicTransPaymentDBO.getReduceRateAmount().doubleValue());
+      paymentInfoDTO.setReduceRateFlag(convertBooleanToFlag(nicTransPaymentDBO.getReduceRateFlag()));
+      paymentInfoDTO.setWaiverFlag(convertBooleanToFlag(nicTransPaymentDBO.getWaiverFlag()));
+      paymentInfoDTO.setWaiverOfficerID(nicTransPaymentDBO.getWaiverOfficerId());
+      paymentInfoDTO.setWaiverReason(nicTransPaymentDBO.getWaiverReason());
+
+      paymentInfoDTO.setCreateBy(nicTransPaymentDBO.getCreateBy());
+      paymentInfoDTO.setCreateDate(nicTransPaymentDBO.getCreateDate());
+      paymentInfoDTO.setCreateWkstnID(nicTransPaymentDBO.getCreateWkstnId());
+      paymentInfoDTO.setUpdateBy(nicTransPaymentDBO.getUpdateBy());
+      paymentInfoDTO.setUpdateDate(nicTransPaymentDBO.getUpdateDate());
+      paymentInfoDTO.setUpdateWkstnID(nicTransPaymentDBO.getUpdateWkstnId());
+    }
+    return paymentInfoDTO;
+  }
+
+  public NicIssuanceData parseNicIssuanceDataDBO(String transactionId, IssuanceData issuanceDataDTO)
+  {
+    NicIssuanceData nicIssDataDBO = null;
+    if (issuanceDataDTO != null) {
+      nicIssDataDBO = new NicIssuanceData();
+      nicIssDataDBO.setNicTransaction(new NicTransaction(transactionId));
+      nicIssDataDBO.setPackageId(issuanceDataDTO.getPackageID());
+      nicIssDataDBO.setCcn(issuanceDataDTO.getCcn());
+      nicIssDataDBO.setSamKeyVersion(Short.valueOf(Short.parseShort(issuanceDataDTO.getSamKeyVersion())));
+      nicIssDataDBO.setCardStatus(issuanceDataDTO.getCardStatus());
+      nicIssDataDBO.setNin(issuanceDataDTO.getNin());
+      nicIssDataDBO.setDateOfIssue(issuanceDataDTO.getDateOfIssue());
+
+      nicIssDataDBO.setIssuanceDecision(issuanceDataDTO.getIssuanceDecision());
+      nicIssDataDBO.setIssuanceOfficerId(issuanceDataDTO.getIssuanceOfficerID());
+      nicIssDataDBO.setCollectionDate(issuanceDataDTO.getCollectionDate());
+
+      nicIssDataDBO.setCreateBy(issuanceDataDTO.getCreateBy());
+      nicIssDataDBO.setCreateDate(issuanceDataDTO.getCreateDate());
+      nicIssDataDBO.setCreateWkstnId(issuanceDataDTO.getCreateWkstnID());
+      nicIssDataDBO.setUpdateBy(issuanceDataDTO.getUpdateBy());
+      nicIssDataDBO.setUpdateDate(issuanceDataDTO.getUpdateDate());
+      nicIssDataDBO.setUpdateWkstnId(issuanceDataDTO.getUpdateWkstnID());
+    }
+    return nicIssDataDBO;
+  }
+
+  public IssuanceData parseIssuanceDataDTO(NicIssuanceData nicIssDataDBO)
+  {
+    IssuanceData issuanceDataDTO = null;
+    if (nicIssDataDBO != null) {
+      issuanceDataDTO = new IssuanceData();
+      issuanceDataDTO.setPackageID(nicIssDataDBO.getPackageId());
+      issuanceDataDTO.setCcn(nicIssDataDBO.getCcn());
+      String samKeyVersion = null;
+      if (nicIssDataDBO.getSamKeyVersion() != null)
+        samKeyVersion = Short.toString(nicIssDataDBO.getSamKeyVersion().shortValue());
+      issuanceDataDTO.setSamKeyVersion(samKeyVersion);
+      issuanceDataDTO.setCardStatus(nicIssDataDBO.getCardStatus());
+      issuanceDataDTO.setNin(nicIssDataDBO.getNin());
+      issuanceDataDTO.setDateOfIssue(nicIssDataDBO.getDateOfIssue());
+
+      issuanceDataDTO.setIssuanceDecision(nicIssDataDBO.getIssuanceDecision());
+      issuanceDataDTO.setIssuanceOfficerID(nicIssDataDBO.getIssuanceOfficerId());
+      issuanceDataDTO.setCollectionDate(nicIssDataDBO.getCollectionDate());
+
+      issuanceDataDTO.setCreateBy(nicIssDataDBO.getCreateBy());
+      issuanceDataDTO.setCreateDate(nicIssDataDBO.getCreateDate());
+      issuanceDataDTO.setCreateWkstnID(nicIssDataDBO.getCreateWkstnId());
+      issuanceDataDTO.setUpdateBy(nicIssDataDBO.getUpdateBy());
+      issuanceDataDTO.setUpdateDate(nicIssDataDBO.getUpdateDate());
+      issuanceDataDTO.setUpdateWkstnID(nicIssDataDBO.getUpdateWkstnId());
+    }
+    return issuanceDataDTO;
+  }
+
+  public RejectionData parseRejectionDataDTO(NicTransactionLog nicTransactionLogDBO)
+  {
+    RejectionData rejectionDataDTO = null;
+    if (nicTransactionLogDBO != null) {
+      rejectionDataDTO = new RejectionData();
+      rejectionDataDTO.setTransactionID(nicTransactionLogDBO.getRefId());
+      rejectionDataDTO.setTransactionStatus(nicTransactionLogDBO.getTransactionStatus());
+
+      nicTransactionLogDBO.getLogInfo();
+      LogInfo logInfo = null;
+      rejectionDataDTO.setRejectionInfo(logInfo);
+    }
+    return rejectionDataDTO;
+  }
+
+  public TransactionLog parseTransactionLogDTO(NicTransactionLog nicTransactionLogDBO) {
+    TransactionLog transactionLogDTO = null;
+    if (nicTransactionLogDBO != null) {
+      transactionLogDTO = new TransactionLog();
+
+      transactionLogDTO.setTransactionID(nicTransactionLogDBO.getRefId());
+      transactionLogDTO.setLogCreateTime(nicTransactionLogDBO.getLogCreateTime());
+      transactionLogDTO.setTransactionStage(nicTransactionLogDBO.getTransactionStage());
+      transactionLogDTO.setTransactionStatus(nicTransactionLogDBO.getTransactionStatus());
+      transactionLogDTO.setSiteCode(nicTransactionLogDBO.getSiteCode());
+      transactionLogDTO.setStartTime(nicTransactionLogDBO.getStartTime());
+      transactionLogDTO.setEndTime(nicTransactionLogDBO.getEndTime());
+      transactionLogDTO.setLogData(nicTransactionLogDBO.getLogData());
+
+      transactionLogDTO.setWkstnID(nicTransactionLogDBO.getWkstnId());
+      transactionLogDTO.setOfficerID(nicTransactionLogDBO.getOfficerId());
+
+      String logInfoXml = nicTransactionLogDBO.getLogInfo();
+      try {
+        LogInfoDTO logInfoDBO = (LogInfoDTO)this.logInfoXmlConvertor.unmarshal(logInfoXml);
+        LogInfo logInfo = new LogInfo();
+        logInfo.setReason(logInfoDBO.getReason());
+        logInfo.setRemark(logInfoDBO.getRemark());
+        transactionLogDTO.setLogInfo(logInfo);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return transactionLogDTO;
+  }
+
+  public List<TransactionLog> parseTransactionLogDTOList(List<NicTransactionLog> nicTransactionLogDBOList) {
+    List transactionLogDTOList = null;
+
+    if (CollectionUtils.isNotEmpty(nicTransactionLogDBOList)) {
+      transactionLogDTOList = new ArrayList();
+      for (NicTransactionLog nicTransactionLog : nicTransactionLogDBOList) {
+        transactionLogDTOList.add(parseTransactionLogDTO(nicTransactionLog));
+      }
+    }
+    return transactionLogDTOList;
+  }
+
+  public NicTransactionLog parseNicTransactionLogDBO(TransactionLog transactionLogDTO)
+  {
+    NicTransactionLog nicTransactionLogDBO = null;
+    if (transactionLogDTO != null) {
+      nicTransactionLogDBO = new NicTransactionLog();
+
+      copyProperties(nicTransactionLogDBO, transactionLogDTO);
+      nicTransactionLogDBO.setRefId(transactionLogDTO.getTransactionID());
+      nicTransactionLogDBO.setWkstnId(transactionLogDTO.getWkstnID());
+      nicTransactionLogDBO.setOfficerId(transactionLogDTO.getOfficerID());
+      if (transactionLogDTO.getLogInfo() != null) {
+        LogInfoDTO logInfo = new LogInfoDTO();
+        logInfo.setReason(transactionLogDTO.getLogInfo().getReason());
+        logInfo.setRemark(transactionLogDTO.getLogInfo().getRemark());
+
+        String logInfoXml = null;
+        try {
+          logInfoXml = this.logInfoXmlConvertor.marshal(logInfo);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        nicTransactionLogDBO.setLogInfo(logInfoXml);
+      }
+    }
+    return nicTransactionLogDBO;
+  }
+
+  public List<NicTransactionLog> parseNicTransactionLogDBOList(List<TransactionLog> transactionLogDTOList) {
+    List nicTransactionLogDBOList = null;
+
+    if (CollectionUtils.isNotEmpty(transactionLogDTOList)) {
+      nicTransactionLogDBOList = new ArrayList();
+      for (TransactionLog transactionLog : transactionLogDTOList) {
+        NicTransactionLog logDBO = parseNicTransactionLogDBO(transactionLog);
+        if (logDBO != null)
+          nicTransactionLogDBOList.add(logDBO);
+      }
+    }
+    return nicTransactionLogDBOList;
+  }
+
+  public NicMain parseNicMain(NicTransaction nicTransactionDBO)
+  {
+    System.out.println("[parseNicMain] trans:" + nicTransactionDBO);
+    NicMain nicMain = null;
+    if (nicTransactionDBO != null) {
+      nicMain = new NicMain();
+
+      copyProperties(nicMain, nicTransactionDBO);
+      nicMain.setGenNo(0);
+      nicMain.setUpdateNo(0);
+      if (nicTransactionDBO.getNicRegistrationData() != null) {
+        NicRegistrationData r = nicTransactionDBO.getNicRegistrationData();
+
+        nicMain.setSurname(r.getSurnameFull());
+        nicMain.setFirstname(r.getFirstnameFull());
+        nicMain.setSurnameBirth(r.getSurnameBirthFull());
+        nicMain.setNicAddr1(r.getAddressLine1());
+        nicMain.setNicAddr2(r.getAddressLine2());
+        nicMain.setNicAddr3(r.getAddressLine3());
+        nicMain.setNicAddr4(r.getAddressLine4());
+        nicMain.setNicAddr5(r.getAddressLine5());
+        nicMain.setNicAddr6(r.getAddressLine6());
+
+        nicMain.setTotalFp(r.getTotalFp());
+        nicMain.setFpIndicator(r.getFpIndicator());
+        nicMain.setFpEncode(r.getFpEncode());
+
+        copyProperties(nicMain, r);
+      }
+
+      System.out.println("trans:" + nicTransactionDBO + "\tdocs:" + nicTransactionDBO.getNicTransactionDocuments());
+
+      if (CollectionUtils.isNotEmpty(nicTransactionDBO.getNicTransactionDocuments()))
+      {
+        List encodeFpList = new ArrayList();
+        if (nicTransactionDBO.getNicRegistrationData() != null) {
+          String fpEncode = nicTransactionDBO.getNicRegistrationData().getFpEncode();
+          if (StringUtils.isNotBlank(fpEncode)) {
+            encodeFpList = Arrays.asList(fpEncode.split("\\s*,\\s*"));
+          }
+        }
+        Long fp01DocId = null; Long fp02DocId = null; Long fp03DocId = null; Long fp04DocId = null; Long fp05DocId = null;
+        Long fp06DocId = null; Long fp07DocId = null; Long fp08DocId = null; Long fp09DocId = null; Long fp10DocId = null;
+        Long mnu1DocId = null; Long mnu2DocId = null; Long mnu3DocId = null; Long mnu4DocId = null;
+        Long facialCapDocId = null; Long facialGreyDocId = null; Long facialChipDocId = null;
+        Long signatureDocId = null;
+        Long persoDocId = null;
+        Long userDeclarationDocId = null;
+        Long scBirthExtDocId = null; Long scMarCertDocId = null; Long scAddrProofDocId = null;
+        for (NicTransactionDocument docDBO : nicTransactionDBO.getNicTransactionDocuments()) {
+          System.out.println("docId:" + docDBO.getTransactionDocId() + "\t" + docDBO.getDocType());
+          if (StringUtils.startsWith(docDBO.getDocType(), "FP")) {
+            int fingerPosition = Integer.parseInt(docDBO.getSerialNo());
+            switch (fingerPosition) { case 1:
+              fp01DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 2:
+              fp02DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 3:
+              fp03DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 4:
+              fp04DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 5:
+              fp05DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 6:
+              fp06DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 7:
+              fp07DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 8:
+              fp08DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 9:
+              fp09DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+            case 10:
+              fp10DocId = Long.valueOf(docDBO.getTransactionDocId()); }
+          }
+          else if (StringUtils.startsWith(docDBO.getDocType(), "MNU")) {
+            int fingerPosition = Integer.parseInt(docDBO.getSerialNo());
+            for (int i = 0; i < encodeFpList.size(); i++) {
+              int encodedFingerPosition = Integer.parseInt((String)encodeFpList.get(i));
+              if (encodedFingerPosition == fingerPosition)
+                switch (i) { case 0:
+                  mnu1DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+                case 1:
+                  mnu2DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+                case 2:
+                  mnu3DocId = Long.valueOf(docDBO.getTransactionDocId()); break;
+                case 3:
+                  mnu4DocId = Long.valueOf(docDBO.getTransactionDocId());
+                }
+            }
+          }
+          else if ((StringUtils.startsWith(docDBO.getDocType(), "PH")) || (StringUtils.startsWith(docDBO.getDocType(), "TH")))
+          {
+            if (StringUtils.equals(docDBO.getDocType(), "PH_CAP"))
+              facialCapDocId = Long.valueOf(docDBO.getTransactionDocId());
+            else if (StringUtils.equals(docDBO.getDocType(), "PH_GREY"))
+              facialGreyDocId = Long.valueOf(docDBO.getTransactionDocId());
+            else if (StringUtils.equals(docDBO.getDocType(), "PH_CHIP"))
+              facialChipDocId = Long.valueOf(docDBO.getTransactionDocId());
+            else if (!StringUtils.equals(docDBO.getDocType(), "PH_CLI"));
+          }
+          else if (StringUtils.equals(docDBO.getDocType(), "SI")) {
+            signatureDocId = Long.valueOf(docDBO.getTransactionDocId());
+          } else if (StringUtils.equals(docDBO.getDocType(), "PERSO")) {
+            persoDocId = Long.valueOf(docDBO.getTransactionDocId());
+          } else if (StringUtils.equals(docDBO.getDocType(), "USER_DECL")) {
+            userDeclarationDocId = Long.valueOf(docDBO.getTransactionDocId());
+          } else if (StringUtils.startsWith(docDBO.getDocType(), "SC")) {
+            if (StringUtils.equals(docDBO.getDocType(), "SC_BIRTH_CERT"))
+              scBirthExtDocId = Long.valueOf(docDBO.getTransactionDocId());
+            else if (StringUtils.equals(docDBO.getDocType(), "SC_MAR_CERT"))
+              scMarCertDocId = Long.valueOf(docDBO.getTransactionDocId());
+            else if (StringUtils.equals(docDBO.getDocType(), "SC_ADDR_PROOF_DOC")) {
+              scAddrProofDocId = Long.valueOf(docDBO.getTransactionDocId());
+            }
+          }
+        }
+        nicMain.setFp01DocId(fp01DocId);
+        nicMain.setFp02DocId(fp02DocId);
+        nicMain.setFp03DocId(fp03DocId);
+        nicMain.setFp04DocId(fp04DocId);
+        nicMain.setFp05DocId(fp05DocId);
+        nicMain.setFp06DocId(fp06DocId);
+        nicMain.setFp07DocId(fp07DocId);
+        nicMain.setFp08DocId(fp08DocId);
+        nicMain.setFp09DocId(fp09DocId);
+        nicMain.setFp10DocId(fp10DocId);
+
+        nicMain.setMnu1DocId(mnu1DocId);
+        nicMain.setMnu2DocId(mnu2DocId);
+        nicMain.setMnu3DocId(mnu3DocId);
+        nicMain.setMnu4DocId(mnu4DocId);
+
+        nicMain.setFacialCapDocId(facialCapDocId);
+        nicMain.setFacialChipDocId(facialChipDocId);
+        nicMain.setFacialGreyDocId(facialGreyDocId);
+
+        nicMain.setSignatureDocId(signatureDocId);
+        nicMain.setPersoDocId(persoDocId);
+        nicMain.setScFormDocId(userDeclarationDocId);
+
+        nicMain.setScBirthExtDocId(scBirthExtDocId);
+        nicMain.setScMarCertDocId(scMarCertDocId);
+        nicMain.setScAddrProofDocId(scAddrProofDocId);
+      }
+    }
+    return nicMain;
+  }
+
+  public byte[] getDocBinaryByType(NicTransaction nicTransaction, String docType)
+  {
+    byte[] docBinary = null;
+    if ((nicTransaction != null) && 
+      (CollectionUtils.isNotEmpty(nicTransaction.getNicTransactionDocuments()))) {
+      for (NicTransactionDocument doc : nicTransaction.getNicTransactionDocuments()) {
+        if (StringUtils.equals(docType, doc.getDocType())) {
+          docBinary = doc.getDocData();
+          break;
+        }
+      }
+    }
+
+    return docBinary;
+  }
+}

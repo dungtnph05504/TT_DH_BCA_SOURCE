@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">	
+
+	<bean id="totTransVolCountByAge"
+		class="com.nec.asia.nic.comp.trans.utils.MSReportDefinition">
+		<property name="reportColumns">
+			<value>MONTH_NAME,CODE_VALUE_DESC,TOTAL_COUNT</value>
+		</property>
+		<property name="reportQuery">
+		<value>
+		    <![CDATA[
+with data as (
+  select to_date(:fromDate, 'MON-YYYY') st_dt, to_date(:toDate, 'MON-YYYY') end_dt from dual
+),
+month_range as (
+  SELECT add_months(st_dt, level -1 ) as START_DATE, add_months(st_dt-1, level ) as END_DATE
+  FROM data
+  CONNECT BY LEVEL <= months_between(end_dt, st_dt) + 1
+),
+SITE_INPUT AS (SELECT  :sites VAL FROM DUAL),
+CHOSEN_SITES AS (
+  SELECT SUBSTR(VAL, (DECODE(LEVEL, 1, 0 , INSTR(VAL,',',1, LEVEL-1) ) + 1) ,
+         (DECODE( INSTR(VAL,',',1, LEVEL) -1 , -1, LENGTH(VAL), INSTR(VAL,',',1, LEVEL) -1 )) - (DECODE(LEVEL, 1, 0 , INSTR(VAL,',',1, LEVEL-1) ) + 1) + 1) AS SITES
+  FROM SITE_INPUT 
+  CONNECT BY LEVEL <= (SELECT (LENGTH(VAL) - LENGTH(REPLACE(VAL , ',', NULL)) ) FROM SITE_INPUT ) + 1
+),
+SITE_LIST AS (
+  SELECT SITE_ID as ISS_SITE_CODE, SITE_NAME as CODE_VALUE_DESC FROM SITE_REPOSITORY CV
+), 
+not_collected_list as (
+  select mr.START_DATE, T.ISS_SITE_CODE, count(*) as TOTAL_COUNT 
+  from EPP_DOCUMENT_DATA D, EPP_TRANSACTION T, month_range mr 
+  where D.TRANSACTION_ID = T.TRANSACTION_ID and D.ISSUED_FLAG is null and T.DATE_OF_APPLICATION between mr.START_DATE and mr.END_DATE
+  group by T.ISS_SITE_CODE , mr.START_DATE
+)
+
+select b.CODE_VALUE_DESC as CODE_VALUE_DESC ,TO_CHAR(B.START_DATE, 'MON YYYY') as MONTH_NAME, NVL(TOTAL_COUNT,0) as TOTAL_COUNT 
+from not_collected_list a,(
+    SELECT ISS_SITE_CODE AS ISS_SITE_CODE, CODE_VALUE_DESC, START_DATE
+    FROM SITE_LIST, month_range WHERE ISS_SITE_CODE IN (select SITES from CHOSEN_SITES)
+) b 
+WHERE a.START_DATE(+)=b.START_DATE    
+AND a.ISS_SITE_CODE(+)=b.ISS_SITE_CODE     
+ORDER BY B.CODE_VALUE_DESC, B.START_DATE
+		    ]]>
+		</value>			
+		</property>
+
+		<property name="reportParameterList">
+			<list>
+				<bean class="com.nec.asia.nic.comp.trans.utils.ReportParameter">
+					<property name="name" value="fromDate"/>
+					<property name="paramType" value="java.lang.String"/>
+				</bean>
+				<bean class=" com.nec.asia.nic.comp.trans.utils.ReportParameter">
+					<property name="name" value="toDate"/>
+					<property name="paramType" value="java.lang.String"/>
+				</bean>
+				<bean class=" com.nec.asia.nic.comp.trans.utils.ReportParameter">
+					<property name="name" value="sites"/>
+					<property name="paramType" value="java.lang.String"/>
+				</bean>
+	    	</list>
+		</property>
+	</bean>
+</beans>

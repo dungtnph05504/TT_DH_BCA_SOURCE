@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.NicOfficalNation" table="EPP_CENTRAL.EPP_OFFICAL_NATION" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_OFFICAL_NATION_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="decisionNumber" type="string">
+			<column name="DECISIONNUMBER" length="200">
+				<comment>Số quyết định</comment>
+			</column>
+		</property>
+		<property name="officalNationNo" type="string">
+			<column name="OFFICALNATIONNO" length="200">
+				<comment>Số công hàm</comment>
+			</column>
+		</property>
+		<property name="businessID" type="long">
+			<column name="BUSINESSID" precision="20" scale="0">
+				<comment>Số ID người cử đi công tác</comment>
+			</column>
+		</property>
+		<property name="status" type="string" >
+			<column name="STATUS" length="50">
+				<comment>Trạng thái hiện tại của công hàm - REGISTRATION: Khởi tạo/ lưu tạm - VERIFY: Xác nhận - RECIVED: Đã nhận - PROCESSING: Chờ xử lý (Giai đoạn lấy thị thực)- REFUSE: Từ chối </comment>
+			</column>
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORTNO" length="50">
+				<comment>Số hộ chiếu xin công hàm</comment>
+			</column>
+		</property>
+		<property name="passportIss" type="timestamp">
+			<column name="PASSPORTISSUEDATE" length="7">
+				<comment>Số hộ chiếu xin công hàm</comment>
+			</column>
+		</property>
+		<property name="passportIssuePlace" type="string">
+			<column name="PASSPORTISSUEPLACE" length="50">
+				<comment>Số hộ chiếu xin công hàm</comment>
+			</column>
+		</property>
+		<property name="passportExp" type="timestamp">
+			<column name="PASSPORTEXPIRE" length="7">
+				<comment>Số hộ chiếu xin công hàm</comment>
+			</column>
+		</property>
+		<property name="passportType" type="string">
+			<column name="PASSPORTTYPE" length="50">
+				<comment>Loại hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="visaNo" type="string">
+			<column name="VISANO" length="50">
+				<comment>Số thị thực</comment>
+			</column>
+		</property>
+		<property name="nationCode" type="string">
+			<column name="NATIONCODE" length="50">
+				<comment>Mã quốc gia</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATEBY" length="200">
+				<comment>Người tạo</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATEDATE" length="7">
+				<comment>Ngày tạo</comment>
+			</column>
+		</property>
+		<property name="ModifyBy" type="string">
+			<column name="MODIFYBY" length="200">
+				<comment>Người thay đổi</comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFYDATE" length="7">
+				<comment>Ngày thay đổi</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="30">
+				<comment>Mô tả thêm</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

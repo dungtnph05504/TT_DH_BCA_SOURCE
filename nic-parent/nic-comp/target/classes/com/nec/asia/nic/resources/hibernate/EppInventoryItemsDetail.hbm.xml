@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	 <class name="com.nec.asia.nic.comp.trans.domain.EppInventoryItemsDetail" table="EPP_CENTRAL.EPP_INVENTORY_ITEMS_DETAIL" optimistic-lock="version">
+		  	<id name="id" type="long">
+				<column name="ID" precision="10" scale="0" />
+				<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_INVESTORY_DETAIL_SEQ_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+			</id>
+		    <property name="inventoryItemsId" type="long">
+				<column name="INVENTORY_ITEMS_ID" precision="19" scale="0">
+					<comment>INVENTORY_ITEMS_ID</comment>
+				</column>
+			</property>
+			<property name="updateTs" type="timestamp">
+				<column name="UPDATE_TS" length="6">
+					<comment>UPDATE_TS</comment>
+				</column>
+			</property>
+			<property name="updatedBy" type="string">
+				<column name="UPDATED_BY" length="50">
+					<comment>UPDATED_BY</comment>
+				</column>
+			</property>
+			<property name="status" type="string">
+				<column name="STATUS" length="20">
+					<comment>STATUS</comment>
+				</column>
+			</property>
+			<property name="batchNo" type="string">
+				<column name="BATCH_NO" length="30">
+					<comment>BATCH_NO</comment>
+				</column>
+			</property>
+			<property name="chipSeriesNo" type="string">
+				<column name="CHIP_SERIES_NO" length="30">
+					<comment>CHIP_SERIES_NO</comment>
+				</column>
+			</property>
+			<property name="docChars" type="string">
+				<column name="DOC_CHARS" length="30">
+					<comment>DOC_CHARS</comment>
+				</column>
+			</property>
+			<property name="docNum" type="string">
+				<column name="DOC_NUM" length="30">
+					<comment>DOC_NUM</comment>
+				</column>
+			</property>
+			<property name="issuedDate" type="string">
+				<column name="ISSUED_DATE" length="8">
+					<comment>ISSUED_DATE</comment>
+				</column>
+			</property>
+			<property name="syncStatus" type="string">
+				<column name="SYNC_STATUS" length="1">
+					<comment>SYNC_STATUS</comment>
+				</column>
+			</property>
+	 </class>
+</hibernate-mapping>

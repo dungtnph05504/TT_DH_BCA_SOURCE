@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.nec.asia</groupId>
+		<artifactId>nic-parent</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>nic-dependency</artifactId>
+	<packaging>pom</packaging>
+
+	<name>NIC Library Preparation</name>
+	<url>http://www.nec.com.sg</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install-oracle-jdbc</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<groupId>com.oracle</groupId>
+							<artifactId>ojdbc6</artifactId>
+							<version>11.2.0.3</version>
+							<packaging>jar</packaging>
+							<generatePom>true</generatePom>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/ojdbc6-11.2.0.3.jar</file>
+						</configuration>
+					</execution>
+				
+					
+					<execution>
+						<id>install-baf-axis-client</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<packaging>jar</packaging>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/baf-axis-client-3.2-SNAPSHOT.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install-baf-client-agent</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<packaging>jar</packaging>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/baf-client-agent-3.2-SNAPSHOT.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install-idserver-agent</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<packaging>jar</packaging>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/idserver-agent-3.3-SNAPSHOT.jar</file>
+						</configuration>
+					</execution>
+					
+					<!-- for demo only -->
+					<execution>
+						<id>install-nic-lds</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<packaging>jar</packaging>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/nic-lds-1.0-SNAPSHOT.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install-vfs2-sandbox</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<packaging>jar</packaging>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/commons-vfs2-sandbox-2.0.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install-spid</id>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>clean</phase>
+						<configuration>
+							<groupId>com.nec.spid</groupId>
+							<artifactId>spid</artifactId>
+							<version>6.0</version>
+							<packaging>jar</packaging>
+							<createChecksum>true</createChecksum>
+							<file>${project.basedir}/lib/spid-6.0.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

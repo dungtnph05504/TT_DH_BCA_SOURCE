@@ -1,0 +1,14 @@
+# LDAP information of NIC System AD for authentication
+# chris [2017 Jun 01]
+ldap.primary_hostname = 20.1.9.22
+ldap.secondary_hostname = 172.16.2.41
+ldap.port = 389
+ldap.ssl.port = 636
+ldap.user = epp_ldap@VEPP
+ldap.password = n3cVN@dm1n
+ldap.base = cn=USERS, dc=VEPP,dc=COM
+ldap.ssl = true
+ldap.truststore.file = C\:\\cert\\nicad-keystore.jks
+ldap.truststore.password = password
+
+

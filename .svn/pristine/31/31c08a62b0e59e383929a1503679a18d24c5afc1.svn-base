@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+      http://www.springframework.org/schema/context 
+      http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+>
+<!-- <bean id="jbossTxManager" class="org.springframework.transaction.jta.JtaTransactionManager" lazy-init="false" />  -->
+
+	<bean id="hbSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="datasource" />
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<!-- Components -->
+				
+				<value>classpath:com/nec/asia/nic/comp/admin/code/domain/VRicCode.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/comp/admin/code/domain/VRicCodeValue.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/comp/admin/code/domain/VRicParameter.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/comp/report/domain/AfisDataSync.hbm.xml</value>
+
+				<!-- Framework -->
+			
+				<value>classpath:com/nec/asia/nic/framework/admin/code/domain/Codes.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/code/domain/CodeValues.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/code/domain/Parameters.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/code/domain/PaymentDef.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/audit/domain/AuditAccessLogs.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/audit/domain/AuditSessionLogs.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Functions.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Users.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Roles.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/rbac/domain/Workstations.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/report/domain/Report.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/report/domain/ReportParameter.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/report/domain/ReportTemplate.hbm.xml</value>
+				<!--<value>classpath:com/nec/asia/nic/framework/report/domain/VNicTransaction.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/report/domain/VRicTxn.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/report/domain/VNicRejectTransaction.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/report/domain/NicTransactionsStatistics.hbm.xml</value>-->
+				<value>classpath:com/nec/asia/nic/framework/admin/job/domain/Job.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/job/domain/JobExecutionDetails.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/job/domain/JobExecutionHistory.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/job/domain/JobSchedule.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/site/domain/SiteGroups.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/site/domain/SiteRepository.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/framework/admin/site/domain/Department.hbm.xml</value>
+				
+				<!-- EPP -->
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppAfisData.hbm.xml</value>
+				<!-- <value>classpath:com/nec/asia/nic/resources/hibernate/EppApprovalData.hbm.xml</value> -->
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppDocumentData.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppDocumentHistory.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppFpData.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppRegistrationData.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppRejectionData.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppSearchHitResult.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppSearchResult.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppTransaction.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppTransactionAttachment.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppTransactionLog.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppTransactionPayment.hbm.xml</value>
+				<!-- <value>classpath:com/nec/asia/nic/resources/hibernate/EppTransactionReconRpt.hbm.xml</value> -->
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppTransactionReprint.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppWorkflowJob.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/PersoStatus.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/PersoDispatchInfo.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/DispatchQueueData.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppListHandover.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppPersoLocations.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppTransactionPackage.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppPaymentDetail.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/BufEppPersonInvestigation.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/ImmiHistory.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/ImmiHistoryChilden.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/ImmiHistoryImages.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/BorderGate.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/NicTransactionLost.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/RptStatisticsTransmitData.hbm.xml</value> 
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppInventory.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppInventoryItems.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppInventoryItemsDetail.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/PersoSites.hbm.xml</value>				
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppIdentification.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppIdentificationAttachmnt.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppBlacklist.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppBlacklistAttachment.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppPerson.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppPersonAttchmnt.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppPersonFamily.hbm.xml</value>
+				
+				<value>classpath:com/nec/asia/nic/resources/hibernate/DetailRecieptFee.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppRecieptManager.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppDetailReciept.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/FeeRecieptPayment.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/SyncQueueJob.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/SynQueueJobXnc.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/TempPaymentDetail.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/TempTransactionPackage.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/ConfigurationWorkflow.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/ConfigurationApi.hbm.xml</value>
+				
+				<value>classpath:com/nec/asia/nic/resources/hibernate/Airline.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/Airport.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/Flight.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/FlightRouter.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/FreeVisa.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/Purpose.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppListHandoverDetail.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppWsLog.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/LogCheckConnection.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppDocumentReturned.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppArchive.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppIssuance.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/EppDocumentPrintedResidence.hbm.xml</value>
+				
+				<value>classpath:com/nec/asia/nic/resources/hibernate/TemplatePassport.hbm.xml</value>
+				<value>classpath:com/nec/asia/nic/resources/hibernate/TemplatePassportImage.hbm.xml</value>
+				
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+<!-- 				Add to use C3PO Connection Pooling -->
+ 			
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hbTxManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager" lazy-init="true">
+		<property name="sessionFactory" ref="hbSessionFactory" />
+	</bean>
+
+	<bean id="txManager" parent="hbTxManager" lazy-init="true" />
+
+	<import resource="classpath:/com/nec/asia/nic/resources/spring/services/spring-dao.xml" />
+</beans>

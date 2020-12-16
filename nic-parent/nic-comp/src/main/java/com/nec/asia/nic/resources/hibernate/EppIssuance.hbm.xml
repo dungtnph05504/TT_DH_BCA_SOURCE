@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.EppIssuance"
+		table="EPP_CENTRAL.EPP_ISSUANCE" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_ISSUANCE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="receiptNo" type="string">
+			<column name="RECEIPT_NO" length="50">
+				<comment>So bien nhan</comment>
+			</column>
+		</property>
+		<property name="documentCode" type="string">
+			<column name="DOCUMENT_CODE" length="50">
+				<comment>Ma ho so</comment>
+			</column>
+		</property>
+		<property name="ioDocCode" type="string">
+			<column name="IO_DOC_CODE" length="20">
+				<comment>So giay to XNC</comment>
+			</column>
+		</property>
+		<property name="ioDocType" type="string">
+			<column name="IO_DOC_TYPE" length="30">
+				<comment>Loai giay to. 'PP'=Hochieu;</comment>
+			</column>
+		</property>
+		<property name="dateOfDelivery" type="timestamp">
+			<column name="DATE_OF_DELIVERY" length="6">
+				<comment>thoi diem tra</comment>
+			</column>
+		</property>
+		<property name="deliveryName" type="string">
+			<column name="DELIVERY_NAME" length="100">
+				<comment>Ten can bo tra HS</comment>
+			</column>
+		</property>
+		<property name="deliveryUser" type="string">
+			<column name="DELIVERY_USER" length="50">
+				<comment>Can bo tra HS (login name)</comment>
+			</column>
+		</property>
+		<property name="deliveryNote" type="string">
+			<column name="DELIVERY_NOTE" length="500">
+				<comment>Ghi chu tra HS</comment>
+			</column>
+		</property>
+		<property name="deliveryOffice" type="string">
+			<column name="DELIVERY_OFFICE" length="10">
+				<comment>Ma Don vi tra KQ. (ma PA hoac ma Buu dien)</comment>
+			</column>
+		</property>
+		<property name="recipient" type="string">
+			<column name="RECIPIENT" length="120">
+				<comment>Nguoi nhan. Ten ca nhan, don vi</comment>
+			</column>
+		</property>
+		<property name="recipientIdNumber" type="string">
+			<column name="RECIPIENT_ID_NUMBER" length="20">
+				<comment>CMND/CCCD Nguoi nhan</comment>
+			</column>
+		</property>
+		<property name="recipientOffice" type="string">
+			<column name="RECIPIENT_OFFICE" length="10">
+				<comment>Ma don vi nhan (neu co)</comment>
+			</column>
+		</property>
+		<property name="issResult" type="string">
+			<column name="ISS_RESULT" length="30">
+				<comment>Ket qua tra ho so</comment>
+			</column>
+		</property>
+		<property name="traKQId" type="string">
+			<column name="TRA_KQ_ID" length="50">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

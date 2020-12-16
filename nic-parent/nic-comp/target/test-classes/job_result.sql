@@ -1,0 +1,1 @@
+select * from epp_central.epp_transaction_log order by 1 desc

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 3:28:48 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.framework.admin.code.domain.CodeValues" table="CODE_VALUES">
+		<composite-id name="id" class="com.nec.asia.nic.framework.admin.code.domain.CodeValuesId">
+			<key-property name="codeId" type="string">
+				<column name="CODE_ID" length="30" />
+			</key-property>
+			<key-property name="codeValue" type="java.lang.String">
+				<column name="CODE_VALUE" length="30" />
+			</key-property>
+		</composite-id>
+		<many-to-one name="codes" class="com.nec.asia.nic.framework.admin.code.domain.Codes" update="false" insert="false" fetch="select">
+			<column name="CODE_ID" length="30" not-null="true">
+				<comment>Code Table Id</comment>
+			</column>
+		</many-to-one>
+		<property name="parentCodeValue" type="java.lang.String">
+			<column name="PARENT_CODE_VALUE" length="30">
+				<comment>Parent code value used to retrieve towns</comment>
+			</column>
+		</property>
+		<property name="codeValueDesc" type="java.lang.String">
+			<column name="CODE_VALUE_DESC" length="255">
+				<comment>Description of Code Value</comment>
+			</column>
+		</property>
+		<property name="codePriority" type="java.lang.Integer">
+			<column name="CODE_PRIORITY" precision="2" scale="0">
+				<comment>The order/sequence of the Code Value result in Code List(0 to 99)</comment>
+			</column>
+		</property>
+		<property name="adminAccessibleFlag" type="yes_no">
+			<column name="ADMIN_ACCESSIBLE_FLAG" length="1">
+				<comment>System Administrator Accessible Flag(Y/N)</comment>
+			</column>
+		</property>
+		<property name="systemId" type="java.lang.String">
+			<column name="SYSTEM_ID" length="16">
+				<comment>System Id</comment>
+			</column>
+		</property>
+		<property name="createBy" type="java.lang.String">
+			<column name="CREATE_BY" length="64">
+				<comment>User Id of Officer who create the record</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="java.lang.String">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Workstation Id of Officer who create the record</comment>
+			</column>
+		</property>
+		<property name="createDate" type="java.util.Date">
+			<column name="CREATE_DATETIME">
+				<comment>Date Time of creation for the record</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="java.lang.String">
+			<column name="UPDATE_BY" length="64">
+				<comment>User Id of Officer who update the record</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="java.lang.String">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Workstation Id of Officer who update the record</comment>
+			</column>
+		</property>
+		<property name="updateDate" type="java.util.Date">
+			<column name="UPDATE_DATETIME">
+				<comment>Date Time of latest update for the record</comment>
+			</column>
+		</property>
+		<property name="deleteBy" type="java.lang.String">
+			<column name="DELETE_BY" length="64">
+				<comment>User Id of Officer who delete the record</comment>
+			</column>
+		</property>
+		<property name="deleteWkstnId" type="java.lang.String">
+			<column name="DELETE_WKSTN_ID" length="64">
+				<comment>Workstation Id of Officer who delete the record</comment>
+			</column>
+		</property>
+		<property name="deleteDate" type="java.util.Date">
+			<column name="DELETE_DATETIME">
+				<comment>Date Time of deletion for the record</comment>
+			</column>
+		</property>
+		<property name="deleteFlag" type="yes_no">
+			<column name="DELETE_FLAG" length="1">
+				<comment>Delete Flag to indicate this record is deleted</comment>
+			</column>
+		</property>
+		<property name="a08Id" type="java.lang.String">
+			<column name="A08_ID" length="20">
+				<comment>Code master by A08</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

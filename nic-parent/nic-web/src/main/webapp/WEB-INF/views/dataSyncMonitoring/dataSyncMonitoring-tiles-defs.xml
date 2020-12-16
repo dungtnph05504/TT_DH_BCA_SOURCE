@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions> 
+	<definition name="dataSyncMonitor-init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />  
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/dataSyncMonitoring/index.jsp" />
+	</definition> 
+	
+	<definition name="dataSyncMonitor-sr" template="/WEB-INF/views/dataSyncMonitoring/search_result.jsp" />
+	
+	<definition name="dataSyncMonitor-details-init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />  
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/dataSyncMonitoring/view_details_init.jsp" />
+	</definition> 
+	
+	<definition name="dataSyncMonitor-monthDetails-init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />  
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/dataSyncMonitoring/view_month_details_init.jsp" />
+	</definition> 
+	
+	<definition name="dataSyncMonitor-month-details-sr" template="/WEB-INF/views/dataSyncMonitoring/view_month_details.jsp" />
+	
+	<definition name="dataSyncMonitor-details-sr" template="/WEB-INF/views/dataSyncMonitoring/view_details.jsp" />
+	
+	
+	<definition name="dataSyncMonitor-reqAndStatus-det" template="/WEB-INF/views/dataSyncMonitoring/request_status_details.jsp" />
+	
+	
+	
+	
+	
+	
+</tiles-definitions>

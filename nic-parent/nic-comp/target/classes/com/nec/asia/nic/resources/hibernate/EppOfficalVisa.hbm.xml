@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.NicOfficalVisa" table="EPP_CENTRAL.EPP_OFFICAL_VISA" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_OFFICAL_VISA_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="countryCode" type="string">
+			<column name="COUNTRYCODE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="passportType" type="string">
+			<column name="PASSPORTTYPE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="freeday" type="int">
+			<column name="FREEDAY" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="validFrom" type="timestamp">
+			<column name="VALIDFROM" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="validTo" type="timestamp">
+			<column name="VALIDTO" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="status" type="int">
+			<column name="STATUS" precision="1" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="type" type="int">
+			<column name="TYPE" precision="1" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="passportExpiredday" type="int">
+			<column name="PASSPORTEXPIREDDAY" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="stayday" type="int">
+			<column name="STAYDAY" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="maxLastemmiday" type="int">
+			<column name="MAXLASTEMMIDAY" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATEDBY" length="200">
+				<comment>Người tạo</comment>
+			</column>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATEDTIME" length="6">
+				<comment>Ngày tạo</comment>
+			</column>
+		</property>
+		<property name="lastModifiedBy" type="string">
+			<column name="LASTMODIFIEDBY" length="200">
+				<comment>Người thay đổi</comment>
+			</column>
+		</property>
+		<property name="lastModifiedTime" type="timestamp">
+			<column name="LASTMODIFIEDTIME" length="6">
+				<comment>Ngày thay đổi</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.LogCheckConnection" table="EPP_CENTRAL.LOG_CHECK_CONNECTION" optimistic-lock="version">		
+		<id name="siteCode" type="string">
+			<column name="SITE_CODE" length="10" />
+		</id>
+
+		<property name="siteName" type="string">
+			<column name="SITE_NAME" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="lastConnectedDatetime" type="timestamp">
+			<column name="LAST_CONNECTED_DATETIME" length="6">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

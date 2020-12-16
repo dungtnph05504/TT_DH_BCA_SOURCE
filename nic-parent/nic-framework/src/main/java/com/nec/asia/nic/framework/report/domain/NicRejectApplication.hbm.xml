@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping schema="SYSTEM"
+	package="com.nec.asia.nic.framework.report.domain">
+	
+	<class name="NicRejectedApplicationDto" table="NIC_REJECT_APP">
+	
+	<id name="itemNumbe" type="java.lang.Integer" column="ITEM_NUMBER">
+            <generator class="assigned"/>
+	</id>	
+	<property name="ninNumber" type="java.lang.String"  column="NIN_NUMBER"/>	
+	<property name="appReferenceNumber" type="java.lang.String" column="APP_REF_NUMBER" ></property>	
+	<property name="firstName" type="java.lang.String" column="FIRST_NAME"></property>		
+	<property name="surName" type="java.lang.String" column="SURNAME"></property>
+	<property name="birthSurName" type="java.lang.String" column="BIRTH_SURNAME" ></property>
+	<property name="gender" type="java.lang.String" column="GENDER" ></property>
+	<property name="birthDate" type="java.util.Date" column="BIRTH_DATE" ></property>
+	<property name="txnType" type="java.lang.String" column="TXN_TYPE" ></property>
+	<property name="txnStatus" type="java.lang.String" column="TXN_STATUS" ></property>
+	<property name="txnDate" type="java.util.Date" column="TXN_DATE" ></property>
+	<property name="officeName" type="java.lang.String" column="OFFICE_NAME" ></property>
+	<property name="servedBy" type="java.lang.String" column="SERVED_BY" ></property>
+	<property name="rejectedBy" type="java.lang.String" column="REJECTED_BY" ></property>
+	<property name="rejectComments" type="java.lang.String" column="REJECT_COMMENTS" ></property>
+	</class>	
+</hibernate-mapping>

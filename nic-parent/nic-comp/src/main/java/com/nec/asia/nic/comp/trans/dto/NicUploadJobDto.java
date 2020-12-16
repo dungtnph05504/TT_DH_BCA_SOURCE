@@ -1,0 +1,1281 @@
+package com.nec.asia.nic.comp.trans.dto;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
+
+import com.nec.asia.nic.comp.job.dto.InfoFamillyDto;
+import com.nec.asia.nic.comp.trans.domain.NicUploadJob;
+/*
+ * Modification History:
+ * 
+ * 16 Oct 2013 (Sailaja) : Added Date of Application to display in the Investigation job list.
+ */
+import com.nec.asia.nic.utils.DateUtil;
+
+/**
+ * @author sailaja_chinapothula
+ *
+ */
+public class NicUploadJobDto implements Serializable {  
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long uploadJobId;
+	private String transactionId;
+	private String jobType;
+	private String investigationType;
+	private String jobCurrentState;
+	private String investigationStatus;
+	private String investigationOfficerId;
+	private int stt;
+	
+	
+	private Date jobStartTime;
+	private Date dateOfApplication; //Added by Sailaja
+	private Date jobEndTime;
+	private Date createDate;
+	private String createBy;
+	private Date updateDate;
+	private String updateBy;
+	private String cpdCheckStatus;
+	private String afisCheckStatus;
+	private String persoCheckStatus;
+	
+	private String transactionType;
+	private String nin;
+	private String queueNumber;	
+	private String regSiteCode;	
+	private String transactionStatus;
+	private Date jobUploadTime;
+
+	private Date estDateOfCollection;
+	private Integer priority;
+	
+	private String priorityString;
+	private String jobApproveStatus;
+	private String fullName;
+	private String passportType;
+	private String noteInvestigation;
+	private Integer periodValidate;
+	private String validateInfoBca_des;
+	private String recieptNo;
+	private String passportNo;
+	private Boolean syncNic;
+	private String packageId;
+	private String nicSiteCode;
+	private String statusValidateInfoCLS_des;
+	
+	//phúc thêm thông tin phiếu bàn giao
+	//private String packageId;
+	private Date datePackage;
+	private String numberTran;
+	private String ricName;
+	private String listCode;
+	private String listName;
+	private String dob;
+	private String gender;
+	private String placeOfBirth;
+	private String stageList;
+	private String packageDate;
+	private String photoStr;
+	private String photoTreEm;
+	private String esColectionDate;
+	private String flagOfficerId;//0: Chưa có ai xử lý //1: Đang có người xử lý đóng bản ghi
+	private String originalyId; //Id hồ sơ đối tượng khớp
+	private String dateApprovePerson; //Ngày khớp cá nhân
+	private String dateApproveInvestigation; // Ngày tra đối tượng
+	private String dateApproveNin; //Ngày tra cmnd
+	private String noteApprovePerson; //Ghi chú khớp
+	private String noteApproveNin; //Ghi chú khớp
+	private String noteApproveObj; //Ghi chú khớp
+	private String leaderId;
+	private String leaderNote;
+	
+	private String archiveCode;
+	private int archiveCodeStt;
+	private int count;
+	private String position;
+	private List<InfoPersonDto> listInfo;
+	private String dateIssuce;
+	private String dateEprity;
+	private String passportStyle;
+	private String subName;
+	private String midName;
+	private String firstName;
+	private String status;
+	private String dateNin;
+	private String addressNin;
+	private String nation;
+	private String religion;
+	private List<InfoFamillyDto> infoFamily;
+	private List<String> imgList;
+	private String phone;
+	private String address1;
+	private String address2;
+	private String dateIssBefore;
+	private String passportBefore;
+	private String job;
+	private String addressCompany;
+	private String priorityDesc;
+	private List<InfoStorageDto> infoStorage;
+	private List<ListStorageDto> infoList;
+	private List<AttachStorageDto> infoAttach;
+	private String placePassport;
+	private String imgPhoto;
+	private String typeApprove;
+	private int stylePP;
+	//private String leaderId;
+	//private String position;
+	private String handoverStatus;
+	private String kindDob;
+	private List<InfoPersonDto> listPersonDto;
+	private String ngay;
+	private String thang;
+	private String nam;
+	private String nationality;
+	private String noA;
+	private List<FacialImgDto> listImg;
+	private List<FacialImgDto> listFinger;
+	private Integer page;
+	private String tempPassportNo;
+	private String personRegStatus;
+	private String docPackage;
+	private String siteFrom;
+	private String siteTo;
+	private String dateFrom;
+	private String dateTo;
+	private String immiType;
+	private Long personId;
+	
+	
+	//dũng thêm data phân trang ajax
+	private int pageSize;
+	private int pageNo;
+	private int totalPage;
+	private int totalRecord;
+	private int endIndex;
+	private int startIndex;
+	private String dataHtml;
+	
+	private String tranStatus;
+	private Date dateIssuance;
+	
+	
+	public Date getDateIssuance() {
+		return dateIssuance;
+	}
+	public void setDateIssuance(Date dateIssuance) {
+		this.dateIssuance = dateIssuance;
+	}
+	public String getTranStatus() {
+		return tranStatus;
+	}
+	public void setTranStatus(String tranStatus) {
+		this.tranStatus = tranStatus;
+	}
+	public String getDataHtml() {
+		return dataHtml;
+	}
+	public void setDataHtml(String dataHtml) {
+		this.dataHtml = dataHtml;
+	}
+	public int getStartIndex() {
+		return startIndex;
+	}
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getTotalRecord() {
+		return totalRecord;
+	}
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
+	}
+	public int getEndIndex() {
+		return endIndex;
+	}
+	public void setEndIndex(int endIndex) {
+		this.endIndex = endIndex;
+	}
+	public Long getPersonId() {
+		return personId;
+	}
+	public void setPersonId(Long personId) {
+		this.personId = personId;
+	}
+	public String getImmiType() {
+		return immiType;
+	}
+	public void setImmiType(String immiType) {
+		this.immiType = immiType;
+	}
+	public String getDateFrom() {
+		return dateFrom;
+	}
+	public void setDateFrom(String dateFrom) {
+		this.dateFrom = dateFrom;
+	}
+	public String getDateTo() {
+		return dateTo;
+	}
+	public void setDateTo(String dateTo) {
+		this.dateTo = dateTo;
+	}
+	public String getSiteFrom() {
+		return siteFrom;
+	}
+	public void setSiteFrom(String siteFrom) {
+		this.siteFrom = siteFrom;
+	}
+	public String getSiteTo() {
+		return siteTo;
+	}
+	public void setSiteTo(String siteTo) {
+		this.siteTo = siteTo;
+	}
+	public String getTempPassportNo() {
+		return tempPassportNo;
+	}
+	public void setTempPassportNo(String tempPassportNo) {
+		this.tempPassportNo = tempPassportNo;
+	}
+	public String getPersonRegStatus() {
+		return personRegStatus;
+	}
+	public void setPersonRegStatus(String personRegStatus) {
+		this.personRegStatus = personRegStatus;
+	}
+	public String getDocPackage() {
+		return docPackage;
+	}
+	public void setDocPackage(String docPackage) {
+		this.docPackage = docPackage;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+	public List<FacialImgDto> getListFinger() {
+		return listFinger;
+	}
+	public void setListFinger(List<FacialImgDto> listFinger) {
+		this.listFinger = listFinger;
+	}
+	public List<FacialImgDto> getListImg() {
+		return listImg;
+	}
+	public void setListImg(List<FacialImgDto> listImg) {
+		this.listImg = listImg;
+	}
+	public String getNoA() {
+		return noA;
+	}
+	public void setNoA(String noA) {
+		this.noA = noA;
+	}
+	public String getNationality() {
+		return nationality;
+	}
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+	public String getNgay() {
+		return ngay;
+	}
+	public void setNgay(String ngay) {
+		this.ngay = ngay;
+	}
+	public String getThang() {
+		return thang;
+	}
+	public void setThang(String thang) {
+		this.thang = thang;
+	}
+	public String getNam() {
+		return nam;
+	}
+	public void setNam(String nam) {
+		this.nam = nam;
+	}
+	public List<InfoPersonDto> getListPersonDto() {
+		return listPersonDto;
+	}
+	public void setListPersonDto(List<InfoPersonDto> listPersonDto) {
+		this.listPersonDto = listPersonDto;
+	}
+	public String getKindDob() {
+		return kindDob;
+	}
+	public void setKindDob(String kindDob) {
+		this.kindDob = kindDob;
+	}
+	public String getHandoverStatus() {
+		return handoverStatus;
+	}
+	public void setHandoverStatus(String handoverStatus) {
+		this.handoverStatus = handoverStatus;
+	}
+	public String getImgPhoto() {
+		return imgPhoto;
+	}
+	public int getStylePP() {
+		return stylePP;
+	}
+	public void setStylePP(int stylePP) {
+		this.stylePP = stylePP;
+	}
+	public String getTypeApprove() {
+		return typeApprove;
+	}
+
+	public void setTypeApprove(String typeApprove) {
+		this.typeApprove = typeApprove;
+	}
+
+	public void setImgPhoto(String imgPhoto) {
+		this.imgPhoto = imgPhoto;
+	}
+
+	public String getPlacePassport() {
+		return placePassport;
+	}
+
+	public void setPlacePassport(String placePassport) {
+		this.placePassport = placePassport;
+	}
+
+	public List<ListStorageDto> getInfoList() {
+		return infoList;
+	}
+
+	public void setInfoList(List<ListStorageDto> infoList) {
+		this.infoList = infoList;
+	}
+
+	public List<AttachStorageDto> getInfoAttach() {
+		return infoAttach;
+	}
+
+	public void setInfoAttach(List<AttachStorageDto> infoAttach) {
+		this.infoAttach = infoAttach;
+	}
+
+	public List<InfoStorageDto> getInfoStorage() {
+		return infoStorage;
+	}
+
+	public void setInfoStorage(List<InfoStorageDto> infoStorage) {
+		this.infoStorage = infoStorage;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public String getAddressCompany() {
+		return addressCompany;
+	}
+
+	public void setAddressCompany(String addressCompany) {
+		this.addressCompany = addressCompany;
+	}
+
+	public String getPriorityDesc() {
+		return priorityDesc;
+	}
+
+	public void setPriorityDesc(String priorityDesc) {
+		this.priorityDesc = priorityDesc;
+	}
+
+	public String getDateIssBefore() {
+		return dateIssBefore;
+	}
+
+	public void setDateIssBefore(String dateIssBefore) {
+		this.dateIssBefore = dateIssBefore;
+	}
+
+	public String getPassportBefore() {
+		return passportBefore;
+	}
+
+	public void setPassportBefore(String passportBefore) {
+		this.passportBefore = passportBefore;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public List<InfoFamillyDto> getInfoFamily() {
+		return infoFamily;
+	}
+
+	public void setInfoFamily(List<InfoFamillyDto> infoFamily) {
+		this.infoFamily = infoFamily;
+	}
+
+	public List<String> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
+
+	public String getNation() {
+		return nation;
+	}
+
+	public void setNation(String nation) {
+		this.nation = nation;
+	}
+
+	public String getReligion() {
+		return religion;
+	}
+
+	public void setReligion(String religion) {
+		this.religion = religion;
+	}
+
+	public String getAddressNin() {
+		return addressNin;
+	}
+
+	public void setAddressNin(String addressNin) {
+		this.addressNin = addressNin;
+	}
+
+	public String getDateNin() {
+		return dateNin;
+	}
+
+	public void setDateNin(String dateNin) {
+		this.dateNin = dateNin;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSubName() {
+		return subName;
+	}
+
+	public void setSubName(String subName) {
+		this.subName = subName;
+	}
+
+	public String getMidName() {
+		return midName;
+	}
+
+	public void setMidName(String midName) {
+		this.midName = midName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getPassportStyle() {
+		return passportStyle;
+	}
+
+	public void setPassportStyle(String passportStyle) {
+		this.passportStyle = passportStyle;
+	}
+
+	public String getDateIssuce() {
+		return dateIssuce;
+	}
+
+	public void setDateIssuce(String dateIssuce) {
+		this.dateIssuce = dateIssuce;
+	}
+
+	public String getDateEprity() {
+		return dateEprity;
+	}
+
+	public void setDateEprity(String dateEprity) {
+		this.dateEprity = dateEprity;
+	}
+
+	public List<InfoPersonDto> getListInfo() {
+		return listInfo;
+	}
+
+	public void setListInfo(List<InfoPersonDto> listInfo) {
+		this.listInfo = listInfo;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getStt() {
+		return stt;
+	}
+
+	public void setStt(int stt) {
+		this.stt = stt;
+	}
+
+	public String getArchiveCode() {
+		return archiveCode;
+	}
+
+	public void setArchiveCode(String archiveCode) {
+		this.archiveCode = archiveCode;
+	}
+
+	public int getArchiveCodeStt() {
+		return archiveCodeStt;
+	}
+
+	public void setArchiveCodeStt(int archiveCodeStt) {
+		this.archiveCodeStt = archiveCodeStt;
+	}
+
+	public String getLeaderId() {
+		return leaderId;
+	}
+
+	public void setLeaderId(String leaderId) {
+		this.leaderId = leaderId;
+	}
+
+	public String getLeaderNote() {
+		return leaderNote;
+	}
+
+	public void setLeaderNote(String leaderNote) {
+		this.leaderNote = leaderNote;
+	}
+
+	
+
+	public String getNoteApprovePerson() {
+		return noteApprovePerson;
+	}
+
+	public void setNoteApprovePerson(String noteApprovePerson) {
+		this.noteApprovePerson = noteApprovePerson;
+	}
+
+	public String getNoteApproveNin() {
+		return noteApproveNin;
+	}
+
+	public void setNoteApproveNin(String noteApproveNin) {
+		this.noteApproveNin = noteApproveNin;
+	}
+
+	public String getNoteApproveObj() {
+		return noteApproveObj;
+	}
+
+	public void setNoteApproveObj(String noteApproveObj) {
+		this.noteApproveObj = noteApproveObj;
+	}
+
+	public String getOriginalyId() {
+		return originalyId;
+	}
+
+	public void setOriginalyId(String originalyId) {
+		this.originalyId = originalyId;
+	}
+
+	public String getDateApprovePerson() {
+		return dateApprovePerson;
+	}
+
+	public void setDateApprovePerson(String dateApprovePerson) {
+		this.dateApprovePerson = dateApprovePerson;
+	}
+
+	public String getDateApproveInvestigation() {
+		return dateApproveInvestigation;
+	}
+
+	public void setDateApproveInvestigation(String dateApproveInvestigation) {
+		this.dateApproveInvestigation = dateApproveInvestigation;
+	}
+
+	public String getDateApproveNin() {
+		return dateApproveNin;
+	}
+
+	public void setDateApproveNin(String dateApproveNin) {
+		this.dateApproveNin = dateApproveNin;
+	}
+
+	public String getPhotoTreEm() {
+		return photoTreEm;
+	}
+
+	public void setPhotoTreEm(String photoTreEm) {
+		this.photoTreEm = photoTreEm;
+	}
+
+	public String getFlagOfficerId() {
+		return flagOfficerId;
+	}
+
+	public void setFlagOfficerId(String flagOfficerId) {
+		this.flagOfficerId = flagOfficerId;
+	}
+
+	public String getEsColectionDate() {
+		return esColectionDate;
+	}
+
+	public void setEsColectionDate(String esColectionDate) {
+		this.esColectionDate = esColectionDate;
+	}
+
+	public String getPhotoStr() {
+		return photoStr;
+	}
+
+	public void setPhotoStr(String photoStr) {
+		this.photoStr = photoStr;
+	}
+
+	public String getPackageDate() {
+		return packageDate;
+	}
+
+	public void setPackageDate(String packageDate) {
+		this.packageDate = packageDate;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getPlaceOfBirth() {
+		return placeOfBirth;
+	}
+
+	public void setPlaceOfBirth(String placeOfBirth) {
+		this.placeOfBirth = placeOfBirth;
+	}
+
+	public String getStageList() {
+		return stageList;
+	}
+
+	public void setStageList(String stageList) {
+		this.stageList = stageList;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String getListCode() {
+		return listCode;
+	}
+
+	public void setListCode(String listCode) {
+		this.listCode = listCode;
+	}
+
+	public String getListName() {
+		return listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public Date getDatePackage() {
+			return datePackage;
+		}
+
+		public void setDatePackage(Date datePackage) {
+			this.datePackage = datePackage;
+		}
+
+		public String getNumberTran() {
+			return numberTran;
+		}
+
+		public void setNumberTran(String numberTran) {
+			this.numberTran = numberTran;
+		}
+
+		public String getRicName() {
+			return ricName;
+		}
+
+		public void setRicName(String ricName) {
+			this.ricName = ricName;
+		}
+
+	public String getStatusValidateInfoCLS_des() {
+		return statusValidateInfoCLS_des;
+	}
+
+	public void setStatusValidateInfoCLS_des(String statusValidateInfoCLS_des) {
+		this.statusValidateInfoCLS_des = statusValidateInfoCLS_des;
+	}
+	
+	public String getNicSiteCode() {
+		return nicSiteCode;
+	}
+
+	public void setNicSiteCode(String nicSiteCode) {
+		this.nicSiteCode = nicSiteCode;
+	}
+	
+	public String getPackageId() {
+		return packageId;
+	}
+
+	public void setPackageId(String packageId) {
+		this.packageId = packageId;
+	}
+	
+	public Boolean getSyncNic() {
+		return syncNic;
+	}
+
+	public void setSyncNic(Boolean syncNic) {
+		this.syncNic = syncNic;
+	}
+	
+	public String getPassportNo() {
+		return passportNo;
+	}
+
+	public void setPassportNo(String passportNo) {
+		this.passportNo = passportNo;
+	}
+
+	public String getRecieptNo() {
+		return recieptNo;
+	}
+
+	public void setRecieptNo(String recieptNo) {
+		this.recieptNo = recieptNo;
+	}
+	
+	public String getValidateInfoBca_des() {
+		return validateInfoBca_des;
+	}
+
+	public void setValidateInfoBca_des(String validateInfoBca_des) {
+		this.validateInfoBca_des = validateInfoBca_des;
+	}
+
+	public Integer getPeriodValidate() {
+		return periodValidate;
+	}
+
+	public void setPeriodValidate(Integer periodValidate) {
+		this.periodValidate = periodValidate;
+	}
+
+	public String getNoteInvestigation() {
+		return noteInvestigation;
+	}
+
+	public void setNoteInvestigation(String noteInvestigation) {
+		this.noteInvestigation = noteInvestigation;
+	}
+
+	public String getPassportType() {
+		return passportType;
+	}
+
+	public void setPassportType(String passportType) {
+		this.passportType = passportType;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public Date getJobUploadTime() {
+		return jobUploadTime;
+	}
+
+	public void setJobUploadTime(Date jobUploadTime) {
+		this.jobUploadTime = jobUploadTime;
+	}
+
+	public NicUploadJobDto(){}
+	
+	public NicUploadJobDto(NicUploadJob orm){
+		//this.dt=orm.getdt();
+		this.uploadJobId=orm.getWorkflowJobId();		
+		this.transactionId=orm.getTransactionId();
+		
+		this.jobType=orm.getJobType();
+		this.investigationType=orm.getInvestigationType();
+		this.jobCurrentState=orm.getJobCurrentStage();
+		this.investigationStatus=orm.getInvestigationStatus();
+		this.investigationOfficerId=orm.getInvestigationOfficerId();
+		this .createBy=orm.getCreateBy();
+		this.jobStartTime=orm.getJobStartTime();
+		this.jobEndTime=orm.getJobEndTime();
+		this.createDate=orm.getCreateDatetime();
+		this.updateBy=orm.getUpdateBy();
+		this.updateDate=orm.getUpdateDatetime();
+		this.cpdCheckStatus=orm.getCpdCheckStatus();
+		this.afisCheckStatus=orm.getAfisCheckStatus();
+		this.persoCheckStatus=orm.getPersoRegisterStatus();
+		this.jobUploadTime = orm.getJobCreatedTime();
+		this.jobApproveStatus = orm.getJobApproveStatus();
+		
+	}
+	 
+	public String getJobApproveStatus() {
+		return jobApproveStatus;
+	}
+
+	public void setJobApproveStatus(String jobApproveStatus) {
+		this.jobApproveStatus = jobApproveStatus;
+	}
+
+	public String getCurrentlyAssignedToAnInvestigationOfficer() {
+
+		if (StringUtils.isBlank(this.getInvestigationOfficerId())) {
+			return "currentlyNotAssignedToAnInvestigationOfficer";
+		} else {
+			return "currentlyAssignedToAnInvestigationOfficer";
+		}
+	}
+	 
+	public EstDateOfCollectionAndPriority getEstDateOfCollectionAndPriority() { 
+
+		return new EstDateOfCollectionAndPriority(this.getEstDateOfCollection(), this.getPriority());
+	}
+	 
+	public String getEstDateOfCollectionString() {
+
+		if (this.getEstDateOfCollection() == null) {
+			return "";
+		}
+
+		return DateUtil.parseDate(this.getEstDateOfCollection(), "dd-MMM-yyyy");
+	}
+
+ 
+	 
+	public String getPriorityString() {
+		return priorityString;
+	}
+
+	public void setPriorityString(String priorityString) {
+		this.priorityString = priorityString;
+	}
+
+	/**
+	 * @return the dateOfApplication
+	 */
+	public Date getDateOfApplication() {
+		return dateOfApplication;
+	}
+
+	/**
+	 * @param dateOfApplication the dateOfApplication to set
+	 */
+	public void setDateOfApplication(Date dateOfApplication) {
+		this.dateOfApplication = dateOfApplication;
+	}
+
+	
+	/**
+	 * @return the upload_job_id
+	 */
+	public long getUploadJobId() {
+		return uploadJobId;
+	}
+	/**
+	 * @param upload_job_id the upload_job_id to set
+	 */
+	public void setUploadJobId(long uploadJobId) {
+		this.uploadJobId = uploadJobId;
+	}
+	/**
+	 * @return the transaction_id
+	 */
+	public String getTransactionId() {
+		return transactionId;
+	}
+	/**
+	 * @param transaction_id the transaction_id to set
+	 */
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+	/**
+	 * @return the job_type
+	 */
+	public String getJobType() {
+		return jobType;
+	}
+	/**
+	 * @param job_type the job_type to set
+	 */
+	public void setJobType(String jobType) {
+		this.jobType = jobType;
+	}
+	/**
+	 * @return the investigation_type
+	 */
+	public String getInvestigationType() {
+		return investigationType;
+	}
+	/**
+	 * @param investigation_type the investigation_type to set
+	 */
+	public void setInvestigationType(String investigationType) {
+		this.investigationType = investigationType;
+	}
+	/**
+	 * @return the job_current_state
+	 */
+	public String getJobCurrentState() {
+		return jobCurrentState;
+	}
+	/**
+	 * @param job_current_state the job_current_state to set
+	 */
+	public void setJobCurrentState(String jobCurrentState) {
+		this.jobCurrentState = jobCurrentState;
+	}
+	/**
+	 * @return the investigation_status
+	 */
+	public String getInvestigationStatus() {
+		return investigationStatus;
+	}
+	/**
+	 * @param investigation_status the investigation_status to set
+	 */
+	public void setInvestigationStatus(String investigationStatus) {
+		this.investigationStatus = investigationStatus;
+	}
+	/**
+	 * @return the investigation_officer_id
+	 */
+	public String getInvestigationOfficerId() {
+		return investigationOfficerId;
+	}
+	/**
+	 * @param investigation_officer_id the investigation_officer_id to set
+	 */
+	public void setInvestigationOfficerId(String investigationOfficerId) {
+		this.investigationOfficerId = investigationOfficerId;
+	}
+
+	/**
+	 * @return the transactionType
+	 */
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	/**
+	 * @param transactionType the transactionType to set
+	 */
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
+	/**
+	 * @return the nin
+	 */
+	public String getNin() {
+		return nin;
+	}
+
+	/**
+	 * @param nin the nin to set
+	 */
+	public void setNin(String nin) {
+		this.nin = nin;
+	}
+
+	/**
+	 * @return the queueNumber
+	 */
+	public String getQueueNumber() {
+		return queueNumber;
+	}
+
+	/**
+	 * @param queueNumber the queueNumber to set
+	 */
+	public void setQueueNumber(String queueNumber) {
+		this.queueNumber = queueNumber;
+	}
+
+	/**
+	 * @return the cpdCheckStatus
+	 */
+	public String getCpdCheckStatus() {
+		return cpdCheckStatus;
+	}
+
+	/**
+	 * @param cpdCheckStatus the cpdCheckStatus to set
+	 */
+	public void setCpdCheckStatus(String cpdCheckStatus) {
+		this.cpdCheckStatus = cpdCheckStatus;
+	}
+
+	/**
+	 * @return the afisCheckStatus
+	 */
+	public String getAfisCheckStatus() {
+		return afisCheckStatus;
+	}
+
+	/**
+	 * @param afisCheckStatus the afisCheckStatus to set
+	 */
+	public void setAfisCheckStatus(String afisCheckStatus) {
+		this.afisCheckStatus = afisCheckStatus;
+	}
+
+	/**
+	 * @return the persoCheckStatus
+	 */
+	public String getPersoCheckStatus() {
+		return persoCheckStatus;
+	}
+
+	/**
+	 * @param persoCheckStatus the persoCheckStatus to set
+	 */
+	public void setPersoCheckStatus(String persoCheckStatus) {
+		this.persoCheckStatus = persoCheckStatus;
+	}
+
+	/**
+	 * @return the regSiteCode
+	 */
+	public String getRegSiteCode() {
+		return regSiteCode;
+	}
+
+	/**
+	 * @param regSiteCode the regSiteCode to set
+	 */
+	public void setRegSiteCode(String regSiteCode) {
+		this.regSiteCode = regSiteCode;
+	}
+
+	/**
+	 * @return the jobStartTime
+	 */
+	public Date getJobStartTime() {
+		return jobStartTime;
+	}
+
+	/**
+	 * @param jobStartTime the jobStartTime to set
+	 */
+	public void setJobStartTime(Date jobStartTime) {
+		this.jobStartTime = jobStartTime;
+	}
+
+	/**
+	 * @return the jobEndTime
+	 */
+	public Date getJobEndTime() {
+		return jobEndTime;
+	}
+
+	/**
+	 * @param jobEndTime the jobEndTime to set
+	 */
+	public void setJobEndTime(Date jobEndTime) {
+		this.jobEndTime = jobEndTime;
+	}
+
+	/**
+	 * @return the createDate
+	 */
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	/**
+	 * @param createDate the createDate to set
+	 */
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	/**
+	 * @return the createBy
+	 */
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	/**
+	 * @param createBy the createBy to set
+	 */
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	/**
+	 * @return the updateDate
+	 */
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	/**
+	 * @param updateDate the updateDate to set
+	 */
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	/**
+	 * @return the updateBy
+	 */
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	/**
+	 * @param updateBy the updateBy to set
+	 */
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	/**
+	 * @return the transactionStatus
+	 */
+	public String getTransactionStatus() {
+		return transactionStatus;
+	}
+
+	/**
+	 * @param transactionStatus the transactionStatus to set
+	 */
+	public void setTransactionStatus(String transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
+	public Date getEstDateOfCollection() {
+		return estDateOfCollection;
+	}
+
+	public void setEstDateOfCollection(Date estDateOfCollection) {
+		this.estDateOfCollection = estDateOfCollection;
+	}
+
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- Modification History: 01 Oct 2013 (Sailaja): Added New view supervisor-rejectJob-List 
+	for the supervisor rejected job list -->
+
+<tiles-definitions>
+	<!-- ========== DANH SÁCH LOG WS ========== -->
+	<!-- ================================================= -->	
+	<!-- <definition name="pendingQueuesJobSchedule.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/pendingQueuesJobSchedule/pendingQueuesJobSchedule-list.jsp" />
+	</definition>
+	
+	<definition name="logSchedule.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/pendingQueuesJobSchedule/logSchedule-compare.jsp" />
+	</definition> -->	
+	<definition name="eppWsLog.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/listLogWs/eppWsLog-list.jsp" />
+	</definition>
+	<!-- ========== DANH SÁCH HÀNG LOG WS ========== - END -->
+	<!-- ============================================================================================== -->
+</tiles-definitions>

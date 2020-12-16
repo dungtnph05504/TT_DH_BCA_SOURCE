@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 28, 2013 8:48:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+     <class name="com.nec.asia.nic.framework.report.domain.VNicTransaction" table="V_NIC_TRANSACTION" schema="NICDB"> 
+       
+            <id name="transactionId" type="string">
+                <column name="TRANSACTION_ID" length="36" />
+            </id>
+            <property name="nin" type="string">
+                <column name="NIN" length="14" />
+            </property>
+            <property name="applnRefNo" type="string">
+                <column name="APPLN_REF_NO" length="36" />
+            </property>
+            <property name="dateOfApplication" type="java.util.Date">
+                <column name="DATE_OF_APPLICATION" length="7" />
+            </property>
+            <property name="firstnameFull" type="string">
+                <column name="FIRSTNAME_FULL" />
+            </property>
+            <property name="surnameFull" type="string">
+                <column name="SURNAME_FULL" />
+            </property>
+            <property name="surnameBirthFull" type="string">
+                <column name="SURNAME_BIRTH_FULL" />
+            </property>
+            <property name="dateOfBirth" type="java.util.Date">
+                <column name="DATE_OF_BIRTH" length="7" />
+            </property>
+            <property name="transactionType" type="string">
+                <column name="TRANSACTION_TYPE" length="1020" />
+            </property>
+            <property name="transactionStatus" type="string">
+                <column name="TRANSACTION_STATUS" length="1020" />
+            </property>
+            <property name="gender" type="string">
+                <column name="GENDER" length="1020" />
+            </property>
+            <property name="regOffId" type="string">
+                <column name="REG_OFF_ID" length="1020" />
+            </property>
+            <property name="transactionDate" type="java.util.Date">
+                <column name="TRANSACTION_DATE" length="7" />
+            </property>
+            <property name="servedBy" type="string">
+                <column name="SERVED_BY" length="64" />
+            </property>
+            <property name="approvedBy" type="string">
+                <column name="APPROVED_BY" length="64" />
+            </property>
+            <property name="approveDate" type="java.util.Date">
+                <column name="APPROVE_DATE" length="7" />
+            </property>
+       
+    </class>
+</hibernate-mapping>
+

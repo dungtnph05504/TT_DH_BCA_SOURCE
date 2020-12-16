@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name = "com.nec.asia.nic.comp.ws.log.domain.EppWsLog" table="EPP_CENTRAL.EPP_WS_LOG" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID"/>
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_WS_LOG_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="keyId" type="string">
+			<column name="KEY_ID" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="urlRequest" type="string">
+			<column name="URL_REQUEST" length="4000">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dataRequest" type="string">
+			<column name="DATA_REQUEST">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dataResponse" type="string">
+			<column name="DATA_RESPONSE">
+				<comment></comment>
+			</column>
+		</property>
+				<property name="createdDate" type="timestamp">
+			<column name="CREATED_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+				<property name="messageErrorLog" type="string">
+			<column name="MESSAGE_ERROR_LOG">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

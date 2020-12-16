@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="stringEncryptionProvider" class="com.nec.asia.nic.utils.encryption.EmptyStringEncyptionProvider"></bean>
+	
+	<!-- deprecated, to use com.nec.asia.nic.framework.security.ad.impl.ActiveDirectoryServiceImpl -->
+	<bean id="administrativeContextFactory" class="com.nec.asia.nic.framework.security.ldap.active.directory.utils.LdapContextFactory">	
+		<constructor-arg name="domain" type="java.lang.String">
+			<value>
+				NIC.LOCAL
+			</value>
+		</constructor-arg>
+		<constructor-arg name="ldapServerAddress" type="java.lang.String">
+			<value>
+				172.16.2.41
+			</value>
+		</constructor-arg>
+		<constructor-arg name="ldapPort" type="java.lang.String">
+			<value>
+				636
+			</value>
+		</constructor-arg>
+		<constructor-arg name="keyStore" type="java.lang.String">
+			<value>
+				C:\cert\keystore.ks
+			</value>
+		</constructor-arg>
+		<constructor-arg name="trustStorePassword" type="java.lang.String">
+			<value>
+				changeit
+			</value>
+		</constructor-arg>
+		<constructor-arg name="userName" type="java.lang.String">
+			<value>
+				ric_admin@NIC.LOCAL
+			</value>
+		</constructor-arg>
+		<constructor-arg name="password" type="java.lang.String">
+			<value>
+				TestLDAP
+			</value>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="stringEncryptionProvider"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="passwordContextFactory" class="com.nec.asia.nic.framework.security.ldap.active.directory.utils.LdapContextFactory">	
+		<constructor-arg name="domain" type="java.lang.String">
+			<value>
+				NIC.LOCAL
+			</value>
+		</constructor-arg>
+		<constructor-arg name="ldapServerAddress" type="java.lang.String">
+			<value>
+				172.16.2.41
+			</value>
+		</constructor-arg>
+		<constructor-arg name="ldapPort" type="java.lang.String">
+			<value>
+				636
+			</value>
+		</constructor-arg>
+		<constructor-arg name="userName" type="java.lang.String">
+			<value>
+				ric_admin@NIC.LOCAL
+			</value>
+		</constructor-arg>
+		<constructor-arg name="password" type="java.lang.String">
+			<value>
+				TestLDAP
+			</value>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="stringEncryptionProvider"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="userADDao" class="com.nec.asia.nic.framework.security.ldap.dao.adImpl.UserDaoADImpl">
+		<property name="contextFactory">
+			<ref bean="administrativeContextFactory"/>
+		</property>
+		<property name="passwordContextFactory">
+			<ref bean="passwordContextFactory"/>
+		</property>
+	</bean>
+</beans>

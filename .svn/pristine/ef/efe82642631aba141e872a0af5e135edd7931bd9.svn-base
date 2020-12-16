@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2013 6:44:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class
+  name="com.nec.asia.nic.framework.admin.rbac.domain.Functions" table="FUNCTIONS" lazy="false" >
+  <id name="functionId" type="string">
+   <column length="30" name="FUNCTION_ID"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="functionDesc" type="string" >
+   <column length="1020" name="FUNCTION_DESC">
+    <comment>Description of Function</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="functionCategory" type="string">
+   <column length="30" name="FUNCTION_CATEGORY">
+    <comment>Category of Function</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="functionUrl" type="string">
+   <column length="100" name="FUNCTION_URL">
+    <comment>URL of Function</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="systemId" type="string">
+   <column length="16" name="SYSTEM_ID">
+    <comment>System Id</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="createBy" type="string">
+   <column length="64" name="CREATE_BY">
+    <comment>User Id of Officer who create the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="createWkstnId" type="string">
+   <column length="64" name="CREATE_WKSTN_ID">
+    <comment>Workstation Id of Officer who create the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="timestamp">
+   <column length="7" name="CREATE_DATETIME">
+    <comment>Date Time of creation for the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="updateBy" type="string">
+   <column length="64" name="UPDATE_BY">
+    <comment>User Id of Officer who update the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="updateWkstnId" type="string">
+   <column length="64" name="UPDATE_WKSTN_ID">
+    <comment>Workstation Id of Officer who update the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="updateDate" type="timestamp">
+   <column length="7" name="UPDATE_DATETIME">
+    <comment>Date Time of latest update for the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteBy" type="string">
+   <column length="64" name="DELETE_BY">
+    <comment>User Id of Officer who delete the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteWkstnId" type="string">
+   <column length="64" name="DELETE_WKSTN_ID">
+    <comment>Workstation Id of Officer who delete the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteDate" type="timestamp">
+   <column length="7" name="DELETE_DATETIME">
+    <comment>Date Time of deletion for the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteFlag" type="yes_no">
+   <column length="1" name="DELETE_FLAG">
+    <comment>Delete Flag to indicate this record is deleted</comment>
+   </column>
+  </property>
+ </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- Modification History: 01 Oct 2013 (Sailaja): Added New view supervisor-rejectJob-List 
+	for the supervisor rejected job list -->
+
+<tiles-definitions>
+	<!-- ========== XÁC MINH HỒ SƠ TỪ BCA ========== -->
+	<!-- Trung danh sach chờ xác minh từ BCA -->
+	<definition
+		name="luutru.tracuuhochieu"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Tra cứu hộ chiếu" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/storage/searchPassport.jsp" />
+	</definition>
+	
+	<definition
+		name="luutru.danhsachcongdan"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Danh sách công dân" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/storage/searchPerson.jsp" />
+	</definition>
+	
+	<definition
+		name="luutru.danhsachhoso"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Danh sách hồ sơ" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/storage/searchTran.jsp" />
+	</definition>
+	
+	<definition name="storage-detail"
+		template="/WEB-INF/views/storage/detailStorage.jsp" />
+		
+	<definition name="person-detail"
+		template="/WEB-INF/views/storage/detailPerson.jsp" />	
+	<definition name="tran-detail"
+		template="/WEB-INF/views/storage/detailTransaction.jsp" />	
+</tiles-definitions>

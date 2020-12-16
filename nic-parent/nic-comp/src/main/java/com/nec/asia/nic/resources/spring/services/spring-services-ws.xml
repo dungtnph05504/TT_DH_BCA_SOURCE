@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="spring-properties.xml" />
+	<import resource="spring-persistent.xml" />
+	<import resource="spring-dao.xml" />
+	<!-- <import resource="spring-services-ad.xml" /> -->
+	<import resource="spring-service-reportData.xml" />
+	<import resource="spring-services-idserver.xml" />
+	<!-- <import resource="spring-ws-client.xml" /> -->
+	<bean id="springServiceManager" class="com.nec.asia.nic.framework.springSupport.SpringServiceManager">
+	</bean>
+
+</beans>

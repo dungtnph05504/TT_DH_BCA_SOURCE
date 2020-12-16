@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns = "http://impl.ws.dx.nic.asia.nec.com/"
+    xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:ns2 = "http://schemas.xmlsoap.org/soap/http"
+    xmlns:ns1 = "http://ws.dx.nic.asia.nec.com/"
+    name = "syncWSImplService"
+    targetNamespace = "http://impl.ws.dx.nic.asia.nec.com/">
+    <wsdl:import location = "syncWS.wsdl" namespace = "http://ws.dx.nic.asia.nec.com/"/>
+    <wsdl:binding name="syncWSImplServiceSoapBinding" type="ns1:syncWS">
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+    	<wsdl:operation name="updateStatus">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input name="updateRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="updateResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    		<wsdl:fault name="faultException">
+				<soap:fault name="faultException" use="literal" />
+			</wsdl:fault>
+    	</wsdl:operation>
+    	
+    	<wsdl:operation name="echo">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input name="echoRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="echoResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    		<wsdl:fault name="faultException">
+				<soap:fault name="faultException" use="literal" />
+			</wsdl:fault>
+    	</wsdl:operation>
+    	
+    </wsdl:binding>
+    <wsdl:service name = "syncWSImplService">
+        <wsdl:port binding = "tns:syncWSImplServiceSoapBinding" name = "syncWSImplPort">
+            <soap:address location = "https://pepp.passport.gov.ph:8843/eppws/services/sync"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

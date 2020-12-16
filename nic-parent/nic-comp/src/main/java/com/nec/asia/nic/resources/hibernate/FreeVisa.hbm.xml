@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.EppFreeVisa"
+		table="EPP_CENTRAL.FREE_VISA">
+		<id name="id" type="long">
+			<column name="ID"/>
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.FREE_VISA_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="createBy" type="string">
+			<column name="CREATED_BY" length="120" not-null="true"/>
+		</property>
+		<property name="lastModifiedBy" type="string">
+			<column name="LAST_MODIFIED_BY" length="120"/>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATED_TIME" length="6"/>
+		</property>
+		<property name="lastModifiedDate" type="timestamp">
+			<column name="LAST_MODIFIED_TIME" length="6"/>
+		</property>
+		<property name="countryCode" type="string">
+			<column name="COUNTRY_CODE" length="10"/>
+		</property>
+		<property name="passportType" type="string">
+			<column name="PASSPORT_TYPE" length="10"/>
+		</property>
+		<property name="freeDay" type="int">
+			<column name="FREE_DAY" precision="10" scale="0"/>
+		</property>
+		<property name="validFromDate" type="java.util.Date">
+			<column name="VALID_FROM_DATE"/>
+		</property>
+		<property name="validToDate" type="java.util.Date">
+			<column name="VALID_TO_DATE"/>
+		</property>
+		<property name="status" type="int">
+			<column name="STATUS" precision="1" scale="0"/>
+		</property>
+		<property name="type" type="string">
+			<column name="TYPE" length="2"/>
+		</property>
+		<property name="passportExpiredDay" type="int">
+			<column name="PASSPORT_EXPIRED_DAY" precision="10" scale="0"/>
+		</property>
+		<property name="stayDay" type="int">
+			<column name="STAY_DAY" precision="10" scale="0"/>
+		</property>
+		<property name="maxLastEmmiDay" type="int">
+			<column name="MAX_LAST_EMMI_DAY" precision="3" scale="0"/>
+		</property>
+		<property name="descriptions" type="string">
+			<column name="DESCRIPTIONS" length="500"/>
+		</property>
+	</class>
+</hibernate-mapping>

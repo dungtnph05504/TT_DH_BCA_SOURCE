@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns = "http://impl.ws.dx.nic.asia.nec.com/"
+    xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:ns2 = "http://schemas.xmlsoap.org/soap/http"
+    xmlns:ns1 = "http://ws.dx.nic.asia.nec.com/"
+    name = "transactionWSImplService"
+    targetNamespace = "http://impl.ws.dx.nic.asia.nec.com/">
+    <wsdl:import location = "transactionWS.wsdl" namespace = "http://ws.dx.nic.asia.nec.com/"/>
+    <wsdl:binding name="transactionWSImplServiceSoapBinding" type="ns1:transactionWS">
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<wsdl:operation name="uploadTransaction">
+    		<soap:operation	soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name="retrieveTransaction">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name = "retrieveTransactionStatus">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name = "retrievePassportStatus">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+        </wsdl:operation>
+    	<wsdl:operation name="uploadTransactionLog">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    	<wsdl:operation name = "downloadBufEppPerson">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name = "downloadListBufIdPerson">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+        </wsdl:operation>
+    	<wsdl:operation name="downloadNicPersoInfo">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input name="downloadNicPersoInfoRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="downloadNicPersoInfoResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    		<wsdl:fault name="faultException">
+				<soap:fault name="faultException" use="literal" />
+			</wsdl:fault>
+    	</wsdl:operation>
+    	<wsdl:operation name="updateReceivedNicPersoInfo">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input name="updateReceivedNicPersoInfoRequest">
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output name="updateReceivedNicPersoInfoResponse">
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    		<wsdl:fault name="faultException">
+				<soap:fault name="faultException" use="literal" />
+			</wsdl:fault>
+    	</wsdl:operation>
+    	<wsdl:operation name="editDataRegistration">
+    		<soap:operation soapAction="" style="document" />
+    		<wsdl:input>
+    			<soap:body use="literal" />
+    		</wsdl:input>
+    		<wsdl:output>
+    			<soap:body use="literal" />
+    		</wsdl:output>
+    	</wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name = "transactionWSImplService">
+        <wsdl:port binding = "tns:transactionWSImplServiceSoapBinding" name = "transactionWSImplPort">
+            <soap:address location = "http://localhost:8080/epp-ws/services/transaction"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

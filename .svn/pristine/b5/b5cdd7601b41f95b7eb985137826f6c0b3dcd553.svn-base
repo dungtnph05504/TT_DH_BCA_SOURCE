@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- Modification History: 01 Oct 2013 (Sailaja): Added New view supervisor-rejectJob-List 
+	for the supervisor rejected job list -->
+
+<tiles-definitions>
+	<!-- ========== XÁC MINH HỒ SƠ TỪ BCA ========== -->
+	<!-- Trung danh sach chờ xác minh từ BCA -->
+	<definition
+		name="show.airline.immi"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý hãng bay" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/immi/airline.jsp" />
+	</definition>
+	
+	<definition
+		name="show.airport.immi"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý sân bay" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/immi/airport.jsp" />
+	</definition>
+	
+	<definition
+		name="show.flight.router.immi"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý đường bay" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/immi/flight-router.jsp" />
+	</definition>
+	
+	<definition
+		name="show.flight.immi"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý đường bay" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/immi/flight.jsp" />
+	</definition>
+	
+	<definition
+		name="show.visa.immi"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý đường bay" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/immi/visa-no.jsp" />
+	</definition>
+	
+	<definition
+		name="show.purpose.immi"
+		extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý đường bay" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/immi/purpose.jsp" />
+	</definition>
+	
+	<definition name="add.edit.airline"
+		template="/WEB-INF/views/immi/add-edit-airline.jsp" />	
+		
+	<definition name="add.edit.airport"
+		template="/WEB-INF/views/immi/add-edit-airport.jsp" />
+		
+	<definition name="add.edit.flight.router"
+		template="/WEB-INF/views/immi/add-edit-flight-router.jsp" />
+	<definition name="add.edit.flight"
+		template="/WEB-INF/views/immi/add-edit-flight.jsp" />
+	<definition name="add.edit.visa"
+		template="/WEB-INF/views/immi/add-edit-visa.jsp" />				
+</tiles-definitions>

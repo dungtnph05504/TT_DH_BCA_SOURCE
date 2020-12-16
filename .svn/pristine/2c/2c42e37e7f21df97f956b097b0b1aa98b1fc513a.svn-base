@@ -1,0 +1,37 @@
+/**
+ * 
+ */
+package com.nec.asia.nic.framework.report.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.hibernate.criterion.Order;
+
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.admin.audit.domain.AuditAccessLogs;
+import com.nec.asia.nic.framework.service.BusinessService;
+
+/**
+ * @author chris
+ */
+/* 
+ * Modification History:
+ * 
+ * 11 Dec 2013 (Sailaja): getAuditAccessLogList method
+ * 19 Jun 2014 (chris): add method saveAuditAccessLogForWS()
+ * 19 Aug 2014 (chris): add method saveAuditAccessLogForWS() with success boolean
+ */
+public interface AuditAccessLogService extends
+		BusinessService<AuditAccessLogs, Long> {
+
+	public void saveAuditAccessLogForWeb(HttpServletRequest httpRequest, String functionName, Object args[], Throwable throwable, long timeMs);
+
+	public PaginatedResult<AuditAccessLogs> getAuditAccessLogList(
+			String userId, String wkstnId, String functionName, 
+			String dateFrom, String dateTo, String status, 
+			int pageSize, Order order, int currentPage) throws Exception;
+	
+	public void saveAuditAccessLogForWS(String serviceName, String functionName, String userId, String wkstnId, Object[] args, Object[] response, Throwable throwable, long timeMs);
+	
+	public void saveAuditAccessLogForWS(String serviceName, String functionName, String userId, String wkstnId, Object[] args, Object[] response, Throwable throwable, long timeMs, boolean success);
+}

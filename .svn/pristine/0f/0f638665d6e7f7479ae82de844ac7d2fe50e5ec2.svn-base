@@ -1,0 +1,16 @@
+##
+# Modification History:
+# 12 Jul 2017 (chris): hanoi dev environment
+##
+
+# Basic Quartz configuration to provide an adequate pool of threads for execution
+#EppQuartzScheduler
+quartz.scheduler.instanceName = EppQuartzSchedulerDev
+quartz.scheduler.instanceName.web = EppWebQuartzSchedulerDev
+quartz.scheduler.instanceId = AUTO
+quartz.threadPool.threadCount = 20
+quartz.threadPool.threadPriority = 5
+quartz.jobStore.misfireThreshold = 60000
+quartz.jobStore.isClustered = true
+quartz.autoStartup = true
+quartz.startupDelay = 30

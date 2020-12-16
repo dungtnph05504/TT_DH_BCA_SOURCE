@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!--  
+	<import resource="spring-service-job.xml" />
+	-->
+	<!--  
+	<import resource="spring-service-sysparam.xml" />
+	-->
+	<bean id="springServiceManager"
+		class="com.nec.asia.nic.framework.springSupport.SpringServiceManager">
+	</bean>
+
+	<bean id="performanceMonitor"
+		class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor">
+	</bean>
+
+	<bean id="serviceTarget"
+		class="com.nec.asia.nic.framework.springSupport.SpringCoreServiceStub">
+	</bean>
+
+	<bean id="loggingInterceptor"
+		class="org.springframework.aop.interceptor.CustomizableTraceInterceptor">
+		<property name="enterMessage">
+			<value>
+				$[targetClassShortName].$[methodName]($[arguments])
+				Types($[argumentTypes])
+			</value>
+		</property>
+		<property name="exitMessage">
+			<value>
+				$[targetClassShortName].$[methodName]($[arguments])
+				Return ($[returnValue])
+			</value>
+		</property>
+		<property name="exceptionMessage">
+			<value>
+				$[targetClassShortName].$[methodName] throw out
+				exception $[exception]
+			</value>
+		</property>
+	</bean>
+
+	<bean id="abstractService"
+		class="com.nec.asia.nic.framework.springSupport.SpringServiceFactory"
+		abstract="true">
+		<property name="transactionManager">
+			<ref bean="txManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

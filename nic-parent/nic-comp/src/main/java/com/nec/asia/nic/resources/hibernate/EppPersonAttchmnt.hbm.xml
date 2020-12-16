@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppPersonAttchmnt" table="EPP_CENTRAL.EPP_PERSON_ATTCHMNT" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_PERSON_ATTCHMNT_SEQ_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="personId" type="long">
+			<column name="PERSON_ID" precision="19" scale="0" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="type_" type="string">
+			<column name="TYPE_" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="serialNo" type="int">
+			<column name="SERIAL_NO" precision="10" scale="0" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fileName" type="string">
+			<column name="FILE_NAME" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="base64"  type="string">
+			<column name="BASE64">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

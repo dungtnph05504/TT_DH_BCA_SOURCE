@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.signerGovs.domain.SignerGovs" table="PARA_SIGNER_COMPARE" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_SIGN_LEADER_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="codeSigner" type="string">
+			<column name="CODE_SIGNER" length="200"/>
+		</property>
+		<property name="docData" type="org.hibernate.type.MaterializedBlobType">
+			<column name="DOC_DATA"/>
+		</property>
+		<property name="active" type="string">
+			<column name="ACTIVE" length="1"/>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="50" />
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7"/>
+		</property>
+		<property name="updateDate" type="timestamp">
+			<column name="UPDATE_DATE" length="7"/>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" />
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" />
+		</property>
+		<property name="nameSigner" type="string">
+			<column name="NAME_SIGNER" length="200"/>
+		</property>
+		<property name="codeGovernment" type="string">
+			<column name="CODE_GOVERNMENT" length="200"/>
+		</property>
+	</class>
+</hibernate-mapping>

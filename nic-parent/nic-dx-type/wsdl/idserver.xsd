@@ -1,0 +1,87 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns = "http://idserver.dx.nic.asia.nec.com/" 
+targetNamespace = "http://idserver.dx.nic.asia.nec.com/">
+  <!-- Object Definition owned by NIC (AFIS Matching) -->
+  <xs:element name="ImageFingerprintDto" type="tns:ImageFingerprintDto"/>
+  <xs:element name="MatchResultDto" type="tns:MatchResultDto"/>
+  <xs:element name="SubjectDto" type="tns:SubjectDto"/>
+  <xs:element name="Identification" type="tns:Identification"/>
+  <xs:element name="IdentificationResponse" type="tns:IdentificationResponse"/>
+  <xs:element name="Verification" type="tns:Verification"/>
+  <xs:element name="VerificationResponse" type="tns:VerificationResponse"/>
+  
+  <xs:complexType name="ImageFingerprintDto">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="imageData" type="xs:base64Binary" />
+      <xs:element minOccurs="1" name="imageType" type="tns:ImageType" />
+      <xs:element minOccurs="1" name="fingerPosition" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ImageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WSQ" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- 
+  <xs:simpleType name="FingerPosition">
+    <xs:restriction base="xs:short">
+      <xs:enumeration value="1" id="RIGHT_THUMB" />
+      <xs:enumeration value="2" id="RIGHT_INDEX" />
+      <xs:enumeration value="3" id="RIGHT_MIDDLE" />
+      <xs:enumeration value="4" id="RIGHT_RING" />
+      <xs:enumeration value="5" id="RIGHT_LITTLE" />
+      <xs:enumeration value="6" id="LEFT_THUMB" />
+      <xs:enumeration value="7" id="LEFT_INDEX" />
+      <xs:enumeration value="8" id="LEFT_MIDDLE" />
+      <xs:enumeration value="9" id="LEFT_RING" />
+      <xs:enumeration value="10" id="LEFT_LITTLE" />
+    </xs:restriction>
+  </xs:simpleType>
+   -->
+  <xs:complexType name="MatchResultDto">
+    <xs:sequence>
+      <xs:element name="hasHit" type="xs:boolean" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="subjectList" nillable="true" type="tns:SubjectDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubjectDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dataSource" type="xs:string" />
+      <xs:element minOccurs="0" name="hitDecision" type="xs:boolean" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element minOccurs="0" name="nicId" type="xs:string" />
+      <xs:element minOccurs="0" name="transactionId" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="scoreList" nillable="true" type="tns:ScoreDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ScoreDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fingerPosition" type="xs:short" />
+      <xs:element minOccurs="0" name="score" type="xs:float" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Identification">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="fingerprints"  type="tns:ImageFingerprintDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdentificationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="matchResult" type="tns:MatchResultDto" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="Verification">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="transactionId" type="xs:string" />
+      <xs:element minOccurs="0" name="nin" type="xs:string" />
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="fingerprints"  type="tns:ImageFingerprintDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VerificationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="subject" type="tns:SubjectDto" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

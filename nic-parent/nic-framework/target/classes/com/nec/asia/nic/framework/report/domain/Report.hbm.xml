@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2013 6:46:21 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.report.domain.Report" table="REPORTS">
+        <id name="reportId" type="string">
+            <column name="REPORT_ID" length="30" />
+            <generator class="assigned" />
+        </id>
+        <property name="reportName" type="string">
+            <column name="REPORT_NAME" length="80" not-null="true">
+                <comment>Name of the Report(For Display Title in List)</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="REPORT_DESC" length="255">
+                <comment>Description of the Report</comment>
+            </column>
+        </property>
+        <property name="reportCategory" type="string">
+            <column name="REPORT_CATEGORY" length="30">
+                <comment>Category of the Report</comment>
+            </column>
+        </property>
+        <property name="reportPriority" type="java.lang.Integer">
+            <column name="REPORT_PRIORITY" precision="2" scale="0">
+                <comment>The order/sequence of the Report in Drop Down List(0 to 99)</comment>
+            </column>
+        </property>
+        <property name="htmlFormat" type="string">
+            <column name="HTML_FORMAT" length="1">
+                <comment>HTML Report Flag to indicate this report can be view in HTML(Y/N)</comment>
+            </column>
+        </property>
+        <property name="htmlUrl" type="string">
+            <column name="HTML_URL" length="200">
+                <comment>HTML URL to define the relative URL to forward to.(To view Report with additional handling.)</comment>
+            </column>
+        </property>
+        <property name="serverFlag" type="string">
+            <column name="SERVER_FLAG" length="1">
+                <comment>Server Flag to indicate this report deployed on Report Server(Y/N)</comment>
+            </column>
+        </property>
+        <property name="serverUrl" type="string">
+            <column name="SERVER_URL" length="200">
+                <comment>Server URL to define the relative URL to forward to generate and download the PDF report</comment>
+            </column>
+        </property>
+        <property name="systemId" type="string">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="string">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="string">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="string">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="string">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="string">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="string">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDate" type="timestamp">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="string">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+        <set name="reportParameters" table="REPORT_PARAMETER" inverse="true" lazy="false" fetch="select" cascade="save-update">
+            <key>
+                <column name="REPORT_ID" length="30" not-null="true">
+                    <comment>Identifier of the Report</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.framework.report.domain.ReportParameter" />
+        </set>
+        <!-- <set name="reportTemplates" table="REPORT_TEMPLATE" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="REPORT_ID" length="30" not-null="true">
+                    <comment>Identifier of the Report</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.framework.report.dto.ReportTemplateDto" />
+        </set> -->
+    </class>
+</hibernate-mapping>

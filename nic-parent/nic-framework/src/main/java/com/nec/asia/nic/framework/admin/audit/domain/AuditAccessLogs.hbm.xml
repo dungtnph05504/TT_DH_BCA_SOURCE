@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 17, 2013 1:58:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.audit.domain.AuditAccessLogs" table="AUDIT_ACCESS_LOGS">
+        <id name="accessLogId" type="java.lang.Long">
+            <column name="ACCESS_LOG_ID" precision="20" scale="0" />
+			<generator class="sequence">
+            	<param name="sequence">AUDIT_ACCESS_LOG_ID</param>
+            </generator>
+        </id>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" length="64" not-null="true">
+                <comment>User Id of Officer who access the system</comment>
+            </column>
+        </property>
+        <property name="wkstnId" type="java.lang.String">
+            <column name="WKSTN_ID" length="64" not-null="true">
+                <comment>Workstation Id of Officer who access the system</comment>
+            </column>
+        </property>
+        <property name="functionName" type="java.lang.String">
+            <column name="FUNCTION_NAME" length="100" not-null="true">
+                <comment>Name of the accessing Function</comment>
+            </column>
+        </property>
+        <property name="errorFlag" type="java.lang.String">
+            <column name="ERROR_FLAG" length="1">
+                <comment>ERROR Flag to indicate this function called is error(Y/N)</comment>
+            </column>
+        </property>
+        <property name="auditDate" type="java.util.Date">
+            <column name="AUDIT_DATETIME" length="7" not-null="true">
+                <comment>Date and time when the record was audited</comment>
+            </column>
+        </property>
+        <property name="timeTaken" type="java.lang.Long">
+            <column name="TIME_TAKEN" precision="10" scale="0">
+                <comment>Duration of Function Call in milliseconds</comment>
+            </column>
+        </property>
+        <property name="serverId" type="java.lang.String">
+            <column name="SERVER_ID" length="64">
+                <comment>Server Id of the access</comment>
+            </column>
+        </property>
+        <property name="sessionId" type="java.lang.String">
+            <column name="SESSION_ID" length="100">
+                <comment>HTTP Session Id</comment>
+            </column>
+        </property>
+        <property name="paramValues" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType">
+            <column name="PARAM_VALUES">
+                <comment>Input Parameters of the access function</comment>
+            </column>
+        </property>
+        <property name="accessLogData" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType">
+            <column name="ACCESS_LOG_DATA">
+                <comment>Log Data of the access, such as Error Stacktrace</comment>
+            </column>
+        </property>
+        <property name="archiveFlag" type="java.lang.String">
+            <column name="ARCHIVE_FLAG" length="1">
+                <comment>Archive Flag to indicate whether the record already archived(Y/N)</comment>
+            </column>
+        </property>
+        <property name="archiveBy" type="java.lang.String">
+            <column name="ARCHIVE_BY" length="64">
+                <comment>Officer or System who archive the record</comment>
+            </column>
+        </property>
+        <property name="archiveDate" type="java.util.Date">
+            <column name="ARCHIVE_DATETIME" length="7">
+                <comment>Date and time when the record was archived</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

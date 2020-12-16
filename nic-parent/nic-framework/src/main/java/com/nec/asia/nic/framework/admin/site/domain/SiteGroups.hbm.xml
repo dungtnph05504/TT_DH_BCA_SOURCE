@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 14, 2016 10:26:40 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.site.domain.SiteGroups" table="EPP_CENTRAL_SYS.SITE_GROUPS">
+        <id name="groupId" type="string">
+            <column name="GROUP_ID" length="5" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupName" type="string">
+            <column name="GROUP_NAME" length="60">
+                <comment>Group Name</comment>
+            </column>
+        </property>
+        <property name="createVersion" type="java.lang.Integer">
+            <column name="CREATE_VERSION" precision="5" scale="0">
+                <comment>Version Created</comment>
+            </column>
+        </property>
+        <property name="updateVersion" type="java.lang.Integer">
+            <column name="UPDATE_VERSION" precision="5" scale="0">
+                <comment>Version Updated</comment>
+            </column>
+        </property>
+        <property name="levelNic" type="string">
+            <column name="LEVEL_NIC" length="20">
+                <comment>Level Nic</comment>
+            </column>
+        </property>
+        <property name="typeArea" type="string">
+            <column name="TYPE_AREA" length="100">
+                <comment>Phan biet vung mien (Bac / Trung / Nam)</comment>
+            </column>
+        </property>
+        <property name="archiveCode" type="string">
+            <column name="ARCHIVE_CODE" length="20">
+                <comment>Số tài liệu</comment>
+            </column>
+        </property>
+        <set name="siteRepositories" table="EPP_CENTRAL_SYS.SITE_REPOSITORY" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="GROUP_ID" length="5">
+                    <comment>Group ID</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.framework.admin.site.domain.SiteRepository" />
+        </set>
+    </class>
+</hibernate-mapping>

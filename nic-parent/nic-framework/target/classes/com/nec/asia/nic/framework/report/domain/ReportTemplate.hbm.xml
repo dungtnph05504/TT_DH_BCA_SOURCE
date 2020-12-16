@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2013 6:46:21 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.report.domain.ReportTemplate" table="REPORT_TEMPLATES">
+        <composite-id name="id" class="com.nec.asia.nic.framework.report.domain.ReportTemplateId">
+            <key-property name="reportId" type="string" >
+                <column name="REPORT_ID" length="30" />
+            </key-property>
+            <key-property name="templateFileName" type="string">
+                <column name="TEMPLATE_FILE_NAME" />
+            </key-property>
+        </composite-id>
+        <property name="mainReportFlg" type="string">
+            <column name="MAIN_RPT_FLAG" length="1">
+                <comment>Main Report Flag(Y/N)</comment>
+            </column>
+        </property>
+        <property name="templateImage" type="com.nec.asia.nic.framework.dataAccess.type.ByteBlobType">
+            <column name="TEMPLATE_DATA">
+                <comment>File binary of Jasper Report Template(jrxml)</comment>
+            </column>
+        </property>
+        <property name="query" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType">
+            <column name="SQL_QUERY">
+                <comment>Sql query to use in Jasper Report</comment>
+            </column>
+        </property>
+        <property name="systemId" type="string">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="string">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="string">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="string">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="string">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="string">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="string">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDate" type="timestamp">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="string">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

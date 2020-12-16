@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.TemplatePassportImage"
+		table="EPP_CENTRAL.TEMPLATE_PASSPORT_IMAGE" optimistic-lock="version">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.TEMPLATE_PASSPORT_IMAGE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="templatePassportId" type="java.lang.Long">
+			<column name="TEMPLATE_PASSPORT_ID" length="50">
+				<comment>template passport id fk</comment>
+			</column>
+		</property>	
+		<property name="docType" type="string">
+			<column name="DOC_TYPE" length="20">
+				<comment></comment>
+			</column>
+		</property>  
+		<property name="docData" type="org.hibernate.type.MaterializedBlobType">
+			<column name="DOC_DATA" >
+				<comment></comment>
+			</column>
+		</property> 
+		<!-- <property name="serial" type="int">
+			<column name="SERIAL" length="10">
+				<comment></comment>
+			</column>
+		</property> -->
+	</class>
+	<sql-query name="updateTemplatePassportImg">
+        <![CDATA[
+            UPDATE TEMPLATE_PASSPORT_IMAGE SET DOC_DATA=:docdata  WHERE TEMPLATE_PASSPORT_ID=:id and DOC_TYPE=:docType
+        ]]>
+	</sql-query>
+</hibernate-mapping>

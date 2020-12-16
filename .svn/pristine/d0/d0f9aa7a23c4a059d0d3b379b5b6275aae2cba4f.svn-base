@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="trpStatistic.init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/epp_trp_stats_report.jsp" />		
+	</definition>
+	
+	<definition name="sftpStatistic.init" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/statistic/sftp/sftp_stats_report.jsp" />		
+	</definition>
+	
+</tiles-definitions>

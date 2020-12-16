@@ -1,0 +1,11 @@
+##
+# Modification History:
+# 12 Jul 2017 (chris): hanoi dev environment
+##
+
+# Credential information of IDSERVER for NIC System
+idserver.systemid = EPP
+idserver.password = WyTiFYGUdD9x
+idserver.endpoint = http://localhost:8280/idserver-webservices/itf/secured/securedTransactionCommandService
+idserver.datasource = BMS
+idserver.match.datatypes = TPL

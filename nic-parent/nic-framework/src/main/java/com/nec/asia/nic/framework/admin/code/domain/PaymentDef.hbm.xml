@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 10:20:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.code.domain.PaymentDef" table="PAYMENT_DEF">
+        <composite-id name="id" class="com.nec.asia.nic.framework.admin.code.domain.PaymentDefId">
+            <key-property name="transactionType" type="java.lang.String">
+                <column name="TRANSACTION_TYPE" length="10" />
+            </key-property>
+            <key-property name="transactionSubtype" type="java.lang.String">
+                <column name="TRANSACTION_SUBTYPE" length="30" />
+            </key-property>
+            <key-property name="noOfTimeLost" type="int">
+                <column name="NUM_OF_TIME_LOST" precision="10" scale="0" />
+            </key-property>
+        </composite-id>
+        <property name="feeAmount" type="java.lang.Double">
+            <column name="FEE_AMOUNT" precision="18" scale="5">
+                <comment>Fee Amount to pay of the Payment Rule(Decimal)</comment>
+            </column>
+        </property>
+        <property name="reduceRateFlag" type="yes_no">
+            <column name="REDUCE_RATE_FLAG" length="1">
+                <comment>Reduce Rate flag to indicate the fee should be discounted for senior citizen(Y/N)</comment>
+            </column>
+        </property>
+        <property name="waivableFlag" type="yes_no">
+            <column name="WAIVABLE_FLAG" length="1">
+                <comment>Waivable flag to indicate the fee can be waived(Y/N)</comment>
+            </column>
+        </property>
+        <property name="systemId" type="java.lang.String">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="java.lang.String">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="java.lang.String">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDateTime" type="java.util.Date">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="java.lang.String">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="java.lang.String">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDateTime" type="java.util.Date">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="java.lang.String">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="java.lang.String">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDateTime" type="java.util.Date">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="yes_no">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+        <property name="typePayment" type="java.lang.String">
+            <column name="TYPE_PAYMENT" length="64">
+                <comment>kind payment</comment>
+            </column>
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" length="200">
+                <comment>name payment</comment>
+            </column>
+        </property>
+        <property name="a08Id" type="long">
+			<column name="A08_ID" precision="10" scale="0">
+				<comment>Code master by A08</comment>
+			</column>
+		</property>
+    </class>
+</hibernate-mapping>

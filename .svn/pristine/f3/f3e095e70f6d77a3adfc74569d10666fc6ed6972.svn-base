@@ -1,0 +1,1166 @@
+/******************************************************************************
+* Defines default styles for site pages.                                      *
+*******************************************************************************/
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+body {
+	margin: 0;
+	background-color: #F9F9F9;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	height: 100%;
+}
+.btn-search {
+	height: 30px;
+    width: 80px;	
+}
+h1 {
+	font-size: 200%;
+}
+
+h2 {
+	font-size: 140%;
+}
+.cla-font {
+	
+}
+h3 {
+	font-size: 120%;
+}
+
+h4 {
+	font-size: 100%;
+}
+
+td {
+	font-size: 9pt;
+}
+
+th {
+	font-weight: bold;
+	font-size: 9pt;
+}
+
+fieldset {
+	font-size: 9pt;
+}
+
+input,textarea {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding: 3px;
+	border: 1px solid #d6d1d1;
+}
+
+select {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1em;
+	padding: 3px;
+	border: 1px solid #d6d1d1;
+}
+
+form {
+	margin: 0;
+}
+
+table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+}
+
+.cla-form-bca {
+	border: solid 1px #cccccc; 
+	border-radius: 4px; 
+	margin: 2px;
+	min-width:100%;
+	float:left
+}
+
+.bttn {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	width: auto;
+	height: 26px;
+	margin :   1px 2px 1px 2px;
+	border-top: 1px outset #B1B1B1;
+	border-right: 1px outset #000000;
+	border-bottom: 1px outset #000000;
+	border-left: 1px outset #B1B1B1;
+	background-color: #ECF8FB;
+}
+
+.listBox {
+	width: 260px;
+	height: 400px;
+	font-size: 9px;
+}
+
+.smallListBox {
+	width: 260px;
+	height: 200px;
+	font-size: 9px;
+}
+
+.instructTip {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+.title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13pt;
+	font-weight: bold;
+	color: #3A40AD;
+}
+
+.subtitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+	color: #3A40AD;
+}
+
+.infoBar {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #3A40AD;
+}
+
+.mainBody {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	background-color: #e0e0e0;
+	border: 1px outset #e0e0e0;
+	padding: 4px 4px 4px 4px;
+}
+
+.legend {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+	padding: 0px 6px 4px 4px;
+	color: #3366CC;
+}
+
+.groupLegend {
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 50px;
+	background-color: #eee;
+	padding: 4px 15px 4px 15px;
+	color: black;
+	border: 1px solid #DEDEDE;
+}
+
+.serverLegend {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #fff;
+	font-weight: bold;
+	/*margin-left: 50px;
+	padding: 4px 5px 4px 5px;*/
+	color: black;
+}
+
+.errorTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15pt;
+	font-weight: bold;
+}
+
+.errorBox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #FF0000;
+	background-color: #FFFFEE;
+	border: 1px outset #e0e0e0;
+}
+
+.messageBody {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	background-color: #eeeeee;
+	border: 1px outset #e0e0e0;
+}
+
+.messageBox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #3366CC;
+	background-color: #eeeeee;
+	border: 1px outset #e0e0e0;
+}
+
+.message {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-style: italic;
+	font-weight: bold;
+	color: maroon;
+}
+
+.customizedDisplayTag {
+	border: 1px solid #CCCCCC;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	width: 100%;
+}
+
+.customizedDisplayTag th {
+	text-align: center;
+	background: #F4F9FE url(images/background.gif);
+	background-color: #F4F9FE;
+	color: black;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: default;
+	height: 25px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.customizedDisplayTag td.normal {
+	background-color: whitesmoke;
+	padding: 2px 4px 2px 4px;
+}
+.customizedDisplayTag tr.even {
+	background-color: whitesmoke;
+}
+
+.customizedDisplayTag tr.odd {
+	background-color: whitesmoke;
+}
+
+
+.customizedDisplayTag tr.even {
+	height: 25px;
+	background-color: #fff;
+}
+
+.customizedDisplayTag tr.odd {
+	height: 25px;
+	background-color: #fff;
+}
+
+.customizedDisplayTag td {
+	padding: 4px;
+	text-align: left;
+	vertical-align: middle;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.displayTag {
+	border: 1px solid #CCCCCC;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	width: 99.8%;
+}
+
+.displayTag th {
+	color: white;
+	background-color: #666699;
+	text-align: left;
+	padding: 2px 4px 2px 4px;
+	white-space: nowrap;
+}
+
+.displayTag th.report {
+	color: white;
+	background-color: #666699;
+	background-position: right;
+	text-align: center;
+	padding: 2px 4px 2px 4px;
+}
+
+.displayTag th.sorted a {
+	background: no-repeat;
+	background-position: right;
+	display: block;
+	width: 99.8%;
+}
+
+.displayTag th.sortable a {
+	background: no-repeat;
+	background-position: right;
+	display: block;
+	cursor: pointer;
+	width: 99.8%;
+}
+
+th.sorted a, th.sortable a {
+  padding-right: 4px;
+}
+
+.displayTag th.sortable a {
+	background-image: url(images/arrow_off.png);
+}
+
+.displayTag th.order1 a {
+	background-image: url(images/arrow_down.png);
+}
+
+.displayTag th.order2 a {
+	background-image: url(images/arrow_up.png);
+}
+
+.displayTag tr.even {
+	background-color: #eeeeee;
+}
+
+.displayTag tr.odd {
+	background-color: whitesmoke;
+}
+
+.displayTag td {
+	padding: 2px 4px 2px 4px;
+	text-align: left;
+	vertical-align: top;
+}
+
+.displayTag td.total {
+	background-color: #E2E2E2;
+	padding: 2px 4px 2px 4px;
+}
+
+.displayTag td.normal {
+	background-color: whitesmoke;
+	padding: 2px 4px 2px 4px;
+}
+
+.displayTag a {
+	color: #F0E68C;
+}
+
+.displayTag tr.even a,.displayTag tr.odd a {
+	color: #3366CC;
+}
+
+/******************************************************************************
+* Highlight of display tag table when mouseover and on click
+*******************************************************************************/
+.displayTag tr.highlight {
+	background: #9D9DFF;
+}
+
+.displayTag tr.selected {
+	background: #CCCCFF;
+	color: #fff;
+}
+
+.reportTable {
+	border: 1px solid #A0A0A0;
+	width: 100%;
+}
+
+.reportTable th {
+	color: white;
+	background-color: #666699;
+	text-align: center;
+	padding: 0px 0px 0px 0px;
+}
+
+.reportTable tr.even {
+	background-color: #eeeeee;
+}
+
+.reportTable tr.odd {
+	background-color: whitesmoke;
+}
+
+.reportTable td {
+	padding: 0px 0px 0px 0px;
+}
+
+.reportTable td.total {
+	background-color: #E2E2E2;
+	padding: 0px 0px 0px 0px;
+}
+
+.reportTable td.normal {
+	background-color: whitesmoke;
+	padding: 0px 0px 0px 0px;
+}
+
+.reportTable a {
+	color: #3366CC;
+}
+
+.reportTable tr.even a,.displayTag tr.odd a {
+	color: #3366CC;
+}
+
+/******************************************************************************
+* Defines styles for menu bar.												  *
+*******************************************************************************/
+div.menuBar,div.menuBar a.menuButton,div.menu,div.menu a.menuItem {
+	font-family: Arial, "MS Sans Serif", sans-serif;
+	font-size: 9pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+}
+
+html,#contents {
+	min-height: 100%;
+	width: 100%;
+	height: 100%;
+}
+
+html>body,html>body #contents {
+	height: auto;
+}
+
+#contents {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+/*
+#main {
+	margin-bottom: .5em;
+	height: auto;
+	padding: .5em;
+}
+*/
+div.menuBar { /*	background-color: #e0e0e0;
+	border: 2px outset #e0e0e0;
+	padding: 4px 2px 4px 2px;
+	text-align: left;*/
+	
+}
+
+div.menuBar a.menuButton {
+	background-color: transparent;
+	border: 1px solid #e0e0e0;
+	color: #000000;
+	cursor: default;
+	left: 0px;
+	margin: 1px;
+	padding: 2px 6px 2px 6px;
+	position: relative;
+	text-decoration: none;
+	top: 0px;
+	z-index: 100;
+}
+
+div.menuBar a.menuButton:hover {
+	background-color: red;
+	border: 1px inset #e0e0e0;
+	color: #000000;
+}
+
+div.menuBar a.menuButtonActive,div.menuBar a.menuButtonActive:hover {
+	background-color: transparent;
+	color: #5050f0;
+	cursor: pointer;
+}
+
+div.menu {
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	left: 0px;
+	position: absolute;
+	margin-top: -1px;
+	top: 0px;
+	visibility: hidden;
+	z-index: 101;
+}
+
+div.menu a.menuItem {
+	color: #000000;
+	cursor: default;
+	display: block;
+	padding: 3px 1em;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+div.menu a.menuItem:hover,div.menu a.menuItemHighlight {
+	background-color: #5050f0;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+div.menu a.menuItem span.menuItemText {
+	
+}
+
+div.menu a.menuItem span.menuItemArrow {
+	margin-right: -.75em;
+	display: inline;
+}
+
+div.menu div.menuItemSep {
+	border: 1px inset #e0e0e0;
+	margin: 4px 1px;
+}
+
+.backgroundimage { /*background: url(../../img/bg.jpg) no-repeat;
+	background-position: top center;
+	height: 490px;
+	width: 100%;
+	top: 0px;
+	visibility: visible;*/
+	
+}
+
+td.NotReceived {
+	background-color: #818180;
+}
+
+div.menuBar a.menuButton {
+	border: 0px;
+	border-right: 1px solid #EEEEEE;
+	color: #0066CC;
+	font-family: Arial, Tahoma;
+	font-weight: bold;
+	line-height: 1;
+	margin: 0;
+	padding: 7px;
+}
+
+div.menuBar {
+	/* background-image: url(../../img/new/subNav_shadow.png); */
+	background-position: bottom left;
+	background-repeat: repeat-x;
+	float: left;
+	width: 100%;
+	line-height: 29px;
+}
+
+div.menu a.menuItem {
+	color: #000000;
+	/*background-image:url(../../img/new/subNav_shadow.png);*/
+	background-position: center center;
+	background-color: #f4f4f4;
+	border-bottom: 1px solid #ddd;
+	font-size: 11px;
+	height: 18px;
+	cursor: default;
+	display: block;
+	padding-top: 4px;
+	padding-right: 0px;
+	width: 250px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+div.menu {
+	position: absolute;
+}
+
+fieldset {
+	border: 0px;
+	border: 1px solid #eee;
+	padding: 10px;
+}
+
+fieldset fieldset {
+	border: 1px solid #dedede;
+	/* background: #Fff url(../../img/new/head.png); */
+	background-repeat: repeat-x;
+}
+
+.legend {
+	font-size: 18px;
+	margin-left: 50px;
+	background-color: #eee;
+	padding: 4px 15px 4px 15px;
+	color: black;
+	border: 1px solid #DEDEDE;
+}
+
+.displayTag th {
+	/*background: #F4F9FE url(images/background3.jpg);*/
+	background-color: #CEF6F5;
+	color: black;
+	background-position: center center;
+	background-repeat: repeat-x;
+	cursor: default;
+	height: 25px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+table#row {
+	background-color: #E3F1FE;
+	font-family: arial;
+	font-size: 11px;
+	color: black;
+	border: 0px;
+	border-spacing: 1px;
+}
+
+table#rowOrganization {
+	background-color: #E3F1FE;
+	font-family: arial;
+	font-size: 11px;
+	color: black;
+	border: 0px;
+	border-spacing: 1px;
+}
+
+table#parent {
+	background-color: #E3F1FE;
+	font-family: arial;
+	font-size: 11px;
+	color: black;
+	border: 0px;
+	border-spacing: 1px;
+}
+
+
+
+.mainBody {
+	background-color: white;
+	border: 0px;
+}
+
+.displayTag tr.even {
+	/*background: #F9FCFF url(images/background.gif);*/
+	height: 25px;
+	background-color: #F4F9FE;
+}
+
+.displayTag tr.odd {
+	height: 25px;
+	background-color: #fff;
+}
+
+.displayTag td {
+	padding: 4px;
+	text-align: left;
+	vertical-align: middle;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.displayTag th.order1 a {
+	color: #3366CC;
+}
+
+.displayTag a {
+	color: #3366CC;
+}
+
+.displayTag tr.darkred td{
+    background:#CFCFCF;
+}
+
+.displayTag tr.darkred td.sorted{
+    background:#CFCFCF;
+}
+
+input[type="submit"],.bttnSize {
+	/* background-image: url(../../img/new/nav_left_hover.gif); */
+	border: 1px solid #DDDDDD;
+	cursor: pointer;
+	font-family: Arial, Tahoma;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 3px;
+	/*width: 60px;*/
+}
+
+input[type="submit"],.investigatiobBttnSize {
+/* 	background-image: url(../../img/new/nav_left_hover.gif); */
+	border: 1px solid #DDDDDD;
+	cursor: pointer;
+	font-family: Arial, Tahoma;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 3px;
+	/*width: 140px;*/
+}
+
+.securityQuestionsBttnSize {
+	/* background-image: url(../../img/new/nav_left_hover.gif); */
+	border: 1px solid #DDDDDD;
+	cursor: pointer;
+	font-family: Arial, Tahoma;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 3px;
+	width: 160px;
+}
+
+table,fieldset {
+	margin-top: 3px;
+}
+
+.reportTable tr.even a,.displayTag tr.odd a {
+	
+}
+
+div.menuBar a.menuButton:hover {
+	background-color: transparent;
+	border: 0px;
+	border-right: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.person-btn {
+	cursor: pointer;
+	background-color: blue;
+	color: white;
+}
+
+.flatTable {
+	border-color: #dfdfdf;
+	border-width: 0 0 1px 1px;
+	border-style: solid;
+}
+
+.flatTable td {
+	border-color: #dfdfdf;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	margin: 0;
+	padding: 4px;
+	background-color: #f3f3f3;
+}
+
+.flatTable span {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#clk-history li,#ps-related li {
+	border: 1px solid #eee;
+	background-color: #f6f6f6;
+	padding: 3px;
+	margin: 10px;
+	display: inline;
+	cursor: pointer;
+	list-style-type: none;
+}
+
+.light-bg {
+	background-color: #fdfdfd;
+}
+
+.btn {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.table-title {
+	font-weight: bold;
+}
+
+.pagelinks {
+	font-size: 12px; font-family: Arial;
+	margin-top: 15px;
+}
+
+.pagelinks a {
+	color: #36C;
+}
+
+.tb-label {
+	border: 1px solid #ddd; padding: 2px;
+	background-color: #f4f4f4; margin: 10px;
+}
+
+.tb-label a {
+	color: black;
+}
+
+.chartTable th {
+	/* background: #F4F9FE url(../../img/new/background.gif); */
+	background-color: #F4F9FE;
+	color: black;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: default;
+	height: 25px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.chartTableth {
+	color: white;
+	background-color: #666699;
+	text-align: center;
+	padding: 2px 4px 2px 4px;
+	white-space: nowrap;
+}
+
+.chartTableeven {
+	background-color: #fff;
+	height: 25px;
+}
+
+.chartTableodd {
+	height: 25px;
+	/* background: #F9FCFF url(../../img/new/background3); */
+}
+
+.chartTabletd {
+	padding: 2px 4px 2px 4px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.chartTable {
+	border: 1px solid #E3F1FE;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	border-spacing: 1px;
+	background-color: #E3F1FE;
+}
+
+.chartTableth {
+	/* background: #F4F9FE url(../../img/new/background.gif); */
+	background-color: #F4F9FE;
+	color: black;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: default;
+	height: 25px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.nowrap {
+	overflow: hidden;   
+	white-space: nowrap; 
+	text-align: left;
+	font-size: 8pt;
+	width:20px;
+}
+
+.noscrollbar {
+	overflow-y: hidden;
+	overflow-x: hidden;
+	height: 13px;
+	border: 0px;
+	resize:none;
+}
+
+.noscrollbarWithHeight {
+	
+	
+	border: 0px;
+	resize:none;
+}
+
+
+.unselectable {     
+	-moz-user-select: none; /* for FireFox */     
+	-webkit-user-select: none; /* for Chrome and Safari */     
+	-khtml-user-select: none; /* probably old webkit browsers, but new support it too */     
+	user-select: none; /* for future CSS3 compliant browsers */ 
+} 
+.fullscreen {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: inherit;
+}
+
+.Utility {
+		color: black;
+}	
+.NodeName {
+	font-weight:bold;
+	color: #800080;	
+}
+.AttributeName 
+{
+	font-weight:bold;
+	color: black;
+}
+.AttributeValue
+{
+	color:blue;
+}
+.NodeValue
+{
+	color: black;
+}
+.Element {
+	border-left-color:black;
+	border-left-width:thin;
+	border-left-style:dashed;
+	padding-top:0px;
+	margin-top:1px;
+}
+.Clickable {	
+	font-weight:900;
+	font-size:large;
+	color: #800080;	
+	cursor:pointer;
+
+	vertical-align:middle;
+}
+
+/* progress bar container */
+.progressbar{
+        border:1px solid black;
+        width:280px;
+        height:20px;
+        position:relative;
+        color:black; 
+}
+/* color bar */
+.progressbar div.progress{
+        position:absolute;
+        width:0;
+        height:100%;
+        overflow:hidden;
+        background-color:#369;
+}
+/* text on bar */
+.progressbar div.progress .text{
+        position:absolute;
+        text-align:center;
+        color:white;
+}
+/* text off bar */
+.progressbar div.text{
+        position:absolute;
+        width:100%;
+        height:100%;
+        text-align:center;
+}
+
+.labelValueColumnWidth {
+	width:514px;
+}
+
+.labelColumnWidth {
+	width:222px;
+}
+
+.valueColumnWidth {
+	width:292px;
+}
+
+.subLabelColumnWidth {
+	width:146px;
+}
+
+.subValueColumnWidth {
+	width:146px;
+}
+
+.valueFullColumnWidth {
+	width:832px;
+}
+
+.attributeLabelColumnWidth {
+	width:222px;
+}
+
+.attributeValueColumnWidth {
+	width:832px;
+}
+
+.attributeDropDownValueColumnWidth {
+	width:840px;	
+}
+
+.mainInfoDropDownValueColumnWidth {
+	width:300px;	
+}
+
+.ZebraDialog {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background: #FFF;
+    padding: 0px;
+    width: 350px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 0px 4px 2px #222;
+    -moz-box-shadow: 0px 0px 4px 2px #222;
+    box-shadow: 0px 0px 4px 2px #222;
+    *border: 1px solid #666;    /* IE6 & 7 */
+    border: 1px solid #666\9;   /* IE8 */
+}
+
+.ZebraDialog .ZebraDialog_Title {
+    margin: 0;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    background: #222;
+    color: #FFF;
+    text-align: left;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    *padding: 7px 10px;     /* IE6 & 7 */
+    padding: 7px 10px\9;    /* IE8 */
+}
+
+.ZebraDialog .ZebraDialog_Body              { background-repeat: no-repeat; background-position: 10px 10px; padding: 10px; text-align: left; z-index:99 }
+
+.ZebraDialog .ZebraDialog_Icon              { padding: 10px 10px 10px 68px; min-height: 48px; _height: 48px }
+
+/* .ZebraDialog .ZebraDialog_Confirmation      { background-image: url(../../img/icons/confirmation.png) }
+.ZebraDialog .ZebraDialog_Error             { background-image: url(../../img/icons/error.png) }
+.ZebraDialog .ZebraDialog_Information       { background-image: url(../../img/icons/information.png) }
+.ZebraDialog .ZebraDialog_Question          { background-image: url(../../img/icons/question.png) }
+.ZebraDialog .ZebraDialog_Warning           { background-image: url(../../img/icons/warning.png) } */
+
+.ZebraDialog .ZebraDialog_Buttons {
+    background: #E5E5E5;
+    border-top: 1px solid #DADADA;
+    padding: 5px 5px 5px 10px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.ZebraDialog .ZebraDialog_Buttons a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    background: transparent;
+    border: 1px solid #AAA;
+    padding: 4px 10px;
+    float: right;
+    margin-right: 5px;
+    min-width: 60px;
+    _width: 60px;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ZebraDialog .ZebraDialog_Buttons a:hover   { background: #717366; color: #FFF }
+
+.ZebraDialogOverlay                         { background: #666 }
+
+.ac_results {
+	padding: 0px;
+	border: 1px solid black;
+	background-color: white;
+	overflow: auto;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: inside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 10px;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white /*url('indicator.gif')*/ right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}
+
+/* Footer styles */
+
+.necfoot1 .copyright {
+    color: #999999;
+    margin-right: 10px;
+}
+.necfoot1 {
+    font-size: 92%;
+    line-height: normal;
+}
+
+.necfoot1 {
+    background-color: #FFFFFF;
+}
+
+.necfoot1 {
+    border-top: 1px solid #CDCDCD ;
+    font-size: 92%;
+    line-height: normal;
+    margin: 0;
+    padding: 0.1em 0 0;
+    text-align: right;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.necfoot1 .copyright span {
+    line-height: 10px;
+    padding-right: 10px;
+     margin-right: 10px;
+    
+    /*
+     
+     display: block; */
+}
+
+.necfoot1 .copyright span {
+    border-right: 1px solid #CDCDCD;
+}
+
+
+.vmTableWidth
+{
+   width: 109px;
+}
+textarea
+{
+   resize:vertical;
+}
+	
+.combo_button{
+	 height: 23px;
+	 vertical-align: top;
+	 width:25px;
+}
+
+.highcharts-container span {
+background-color: #ffffff;
+}

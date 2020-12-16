@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Details" pageWidth="800" pageHeight="900" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="780" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isIgnorePagination="true" uuid="b515d949-1f43-4c1b-9992-e5f8aac9ed12">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="154"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="reportId" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="reportTitle" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="110">
+			<rectangle>
+				<reportElement uuid="0ddc7483-308e-4b64-bf36-c3fc3bc71d32" x="0" y="10" width="780" height="99"/>
+			</rectangle>
+			<image>
+				<reportElement uuid="e7eada6b-31b0-42dd-a38a-4001acd6505b" x="3" y="15" width="141" height="94"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="37262996-0dc8-4304-9372-7abfb54ca3bf" x="174" y="53" width="70" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="37262996-0dc8-4304-9372-7abfb54ca3bf" mode="Transparent" x="174" y="72" width="140" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Generation Date Time]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="607375f0-4f43-44c5-8546-c3d4368e6229" x="335" y="53" width="275" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="607375f0-4f43-44c5-8546-c3d4368e6229" x="335" y="72" width="275" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy hh:mm").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bd89f1f4-e5aa-4c97-abf4-93dfc2b5b6f9" x="319" y="53" width="10" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd89f1f4-e5aa-4c97-abf4-93dfc2b5b6f9" x="319" y="72" width="10" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6c34c545-055b-49af-aee4-a5007dfa3ae8" x="162" y="10" width="1" height="100"/>
+			</line>
+			<line>
+				<reportElement uuid="7d786c3f-9004-488a-bdae-51862af7621b" x="162" y="49" width="618" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement uuid="607375f0-4f43-44c5-8546-c3d4368e6229" x="163" y="15" width="637" height="18" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50"/>
+	</columnHeader>
+	<detail>
+		<band height="50"/>
+	</detail>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

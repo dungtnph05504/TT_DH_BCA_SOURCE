@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+ <tlib-version>1.0</tlib-version>
+ <short-name>colfunction</short-name>
+ <uri>colfunction</uri>
+ <function>
+ 	<name>contains</name>
+ 	<function-class>com.nec.asia.nic.common.el.CollectionFunctions</function-class>
+ 	<function-signature>boolean collectionContains(java.lang.Object,java.util.Collection)</function-signature>
+ </function>
+  <function>
+ 	<name>isPreviledged</name>
+ 	<function-class>com.nec.asia.nic.common.el.UserSessionFunctions</function-class>
+ 	<function-signature>boolean isPreviledged(java.lang.String,com.nec.asia.nic.web.session.UserSession)</function-signature>
+ </function>
+</taglib>

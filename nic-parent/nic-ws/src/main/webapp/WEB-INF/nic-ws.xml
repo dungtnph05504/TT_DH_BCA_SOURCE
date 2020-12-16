@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="
+		http://cxf.apache.org/jaxws 
+		http://cxf.apache.org/schemas/jaxws.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://cxf.apache.org/core 
+		http://cxf.apache.org/schemas/core.xsd
+		http://cxf.apache.org/jaxrs 
+		http://cxf.apache.org/schemas/jaxrs.xsd
+		">
+	<import resource="spring-context.xml" />
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<!-- <jaxws:endpoint id="terminateWS" implementor="com.nec.asia.nic.dx.ws.impl.TerminationWSImpl" 
+		address="/terminate"> <jaxws:inInterceptors><ref bean="wss4jInInterceptor"/></jaxws:inInterceptors> 
+		<jaxws:outInterceptors><ref bean="wss4jOutInterceptor"/><ref bean="outLoggingInterceptor"/></jaxws:outInterceptors> 
+		</jaxws:endpoint> -->
+	<!-- <jaxws:endpoint id="signWS" implementor="sg.com.nec.SignServiceSoapImpl" 
+		address="/sign"></jaxws:endpoint> -->
+
+	<jaxws:endpoint id="transactionWS"
+		implementor="com.nec.asia.nic.dx.ws.impl.TransactionWSImpl" address="/transaction"></jaxws:endpoint>
+	<jaxws:endpoint id="adminWS"
+		implementor="com.nec.asia.nic.dx.ws.impl.AdminWSImpl" address="/admin" />
+	<jaxws:endpoint id="syncWS"
+		implementor="com.nec.asia.nic.dx.ws.impl.SyncWSImpl" address="/sync" />
+	<jaxws:endpoint id="afisWS"
+		implementor="com.nec.asia.nic.dx.ws.impl.IdserverWSImpl" address="/afis" />
+
+	<!-- <jaxws:endpoint id="reportWS" implementor="com.nec.asia.nic.dx.ws.impl.ReportWSImpl" 
+		address="/report" /> -->
+	<!-- <jaxws:endpoint id="nicWS" implementor="com.nec.asia.nic.dx.ws.impl.NicWSImpl" 
+		address="/nic" /> -->
+	<!-- <jaxws:endpoint id="dxWS" implementor="com.nec.asia.nic.dx.ws.impl.DxWSImpl" 
+		address="/dx" /> -->
+	<!-- <jaxws:endpoint id="cardstockWS" implementor="com.nec.asia.nic.dx.ws.impl.CardstockWSImpl" 
+		address="/cardstock" /> -->
+	<!-- <jaxws:endpoint id="validateWS" implementor="com.nec.asia.nic.dx.ws.impl.ValidateWSImpl" 
+		address="/validate" /> -->
+
+
+	<jaxrs:server address="/rest" id="persoService1">
+		<jaxrs:serviceBeans>
+			<ref bean="persoService" />
+			<ref bean="reportService" />
+			<ref bean="syncNicService" />
+			<ref bean="transactionService" />
+			<ref bean="ReportDocumentService" />
+			<ref bean="immiService" />
+			<ref bean="masterService" />
+			<ref bean="nicPersoService" />
+			<ref bean="investigationService" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+			</bean>
+		</jaxrs:providers>
+	</jaxrs:server>
+	<bean class="service.personic.bussiness.NicPersoService" id="nicPersoService" />
+	<bean class="service.master.bussiness.MasterService" id="masterService" />
+	<bean class="service.immihistory.bussiness.ImmiService" id="immiService" />
+	<bean class="service.transaction.bussiness.TransactionService" id="transactionService" />
+	<bean class="service.transaction.bussiness.ReportDocumentService" id="ReportDocumentService" />
+	<bean class="service.perso.bussiness.PersoService" id="persoService" />
+	<bean class="service.perso.bussiness.ReportService" id="reportService" />
+	<bean class="service.perso.bussiness.SyncNicService" id="syncNicService" />
+	<bean class="service.investigation.bussiness.InvestigationService" id="investigationService" />
+	<bean id="inLoggingInterceptor" class="org.apache.cxf.interceptor.LoggingInInterceptor">
+		<property name="limit" value="10000" />
+	</bean>
+	<bean id="outLoggingInterceptor" class="org.apache.cxf.interceptor.LoggingOutInterceptor">
+		<property name="limit" value="500" />
+	</bean>
+	<cxf:bus>
+		<cxf:inInterceptors>
+			<ref bean="inLoggingInterceptor" />
+		</cxf:inInterceptors>
+		<cxf:outInterceptors>
+			<ref bean="outLoggingInterceptor" />
+		</cxf:outInterceptors>
+	</cxf:bus>
+</beans>

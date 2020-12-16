@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicDocumentHistory" table="EPP_DOCUMENT_HISTORY" optimistic-lock="version">
+		<id name="statusLogId" type="long">
+			<column name="STATUS_LOG_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_DOCUMENT_HISTORY_LOG_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="16" not-null="true">
+				<comment>Passport Number</comment>
+			</column>
+		</property>
+		<property name="siteCode" type="string">
+			<column name="SITE_CODE" length="5">
+				<comment>Site Code for Reroute</comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="30" not-null="true">
+				<comment>Document Status</comment>
+			</column>
+		</property>
+		<property name="statusUpdateBy" type="string">
+			<column name="STATUS_UPDATE_BY" length="64">
+				<comment>Document Status Update By</comment>
+			</column>
+		</property>
+		<property name="statusUpdateTime" type="timestamp">
+			<column name="STATUS_UPDATE_TIME" length="7">
+				<comment>Document Status Update Datetime</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

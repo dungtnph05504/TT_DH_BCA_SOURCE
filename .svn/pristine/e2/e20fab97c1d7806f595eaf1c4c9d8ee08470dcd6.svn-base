@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="officalNation.list" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/officalNation/officalNationList.jsp" />		
+	</definition>
+	
+	<definition name="add-offical-nation" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/officalNation/add-offical-nation.jsp" />
+	</definition>
+	
+	<definition name="update-offical-nation" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/adminconsole/officalNation/update-offical-nation.jsp" />
+	</definition>
+</tiles-definitions>

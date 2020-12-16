@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:clustering="http://cxf.apache.org/clustering"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/clustering http://cxf.apache.org/schemas/clustering.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<cxf:bus name="defaultOutBus">
+        <cxf:features>
+            <cxf:logging limit="-1" />
+        </cxf:features>
+    </cxf:bus>
+    
+    <cxf:bus name="securedOutBus" >
+        <cxf:features>
+            <cxf:logging limit="-1" />
+        </cxf:features>
+        <cxf:inInterceptors><ref bean="wss4jInInterceptor"/></cxf:inInterceptors>
+        <cxf:outInterceptors><ref bean="wss4jOutInterceptor"/></cxf:outInterceptors>
+    </cxf:bus>
+    <bean id="wss4jInInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="UsernameToken"/>
+				<entry key="passwordType" value="PasswordDigest" />
+				<entry key="passwordCallbackRef"><ref bean="serverPasswordCallbackHandler"/></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="wss4jOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="user" value="CPDServer" />
+				<entry key="action" value="UsernameToken"/>
+				<entry key="passwordType" value="PasswordDigest" />
+				<entry key="passwordCallbackRef"><ref bean="serverPasswordCallbackHandler"/></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="serverPasswordCallbackHandler" class="com.nec.asia.nic.framework.security.webservices.ServerPasswordCallbackHandler" />	
+    
+    <!-- 
+	<bean id="terminationWS" class="com.nec.asia.nic.dx.ws.TerminationWS"
+		factory-bean="terminationWSFactory" factory-method="create" />
+
+	<bean id="terminationWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.nic.dx.ws.TerminationWS" />
+		<property name="bus" ref="securedOutBus" />
+		<property name="address" value="http://172.16.1.165:8280/nic/services/terminate" />
+	</bean>
+    
+	<bean id="dxWS" class="com.nec.asia.nic.dx.ws.DxWS"
+		factory-bean="dxWSFactory" factory-method="create" />
+
+	<bean id="dxWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.nic.dx.ws.DxWS" />
+		<property name="address" value="http://172.16.1.165:8280/nic/services/dx" />
+	</bean>
+	
+	<bean id="nicWS" class="com.nec.asia.nic.dx.ws.NicWS"
+		factory-bean="nicWSFactory" factory-method="create" />
+
+	<bean id="nicWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.nic.dx.ws.NicWS" />
+		<property name="address" value="http://172.16.1.165:8280/nic/services/nic" />
+	</bean>
+	 -->
+	<bean id="transactionWS" class="com.nec.asia.nic.dx.ws.TransactionWS"
+		factory-bean="transactionWSFactory" factory-method="create" />
+
+	<bean id="transactionWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.nic.dx.ws.TransactionWS" />
+		<property name="address" value="http://localhost:8480/eppws/services/transaction" />
+	</bean>
+	
+	<bean id="adminWS" class="com.nec.asia.nic.dx.ws.AdminWS"
+		factory-bean="adminWSFactory" factory-method="create" />
+
+	<bean id="adminWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.nic.dx.ws.AdminWS" />
+		<property name="address" value="http://localhost:8480/eppws/services/admin" />
+	</bean>
+	
+	<bean id="afisWS" class="com.nec.asia.nic.dx.ws.IdserverWS"
+		factory-bean="afisWSFactory" factory-method="create" />
+
+	<bean id="afisWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.nic.dx.ws.IdserverWS" />
+		<property name="address" value="http://localhost:8480/eppws/services/afis" />
+	</bean>
+	<!-- 
+		<property name="inInterceptors">
+			<list>
+				<ref bean="wss4jInInterceptor" />
+			</list>
+		</property>
+		<property name="outInterceptors">
+			<list>
+				<ref bean="wss4jInInterceptor" />
+			</list>
+		</property>
+ 	<bean id="wss4jInInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+		<constructor-arg>
+			<map>
+				<entry key="action" value="UsernameToken"/>
+				<entry key="passwordType" value="PasswordText" />
+				<entry key="passwordCallbackRef"><ref bean="passwordCallback"/></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+		<bean id="passwordCallback" class="UTPasswordCallback">
+	</bean>
+	-->
+	<!-- 
+	<bean id="packWS" class="necsap.epassport.wspack.Service1Soap"
+		factory-bean="packWSFactory" factory-method="create" />
+
+	<bean id="packWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="necsap.epassport.wspack.Service1Soap" />
+		<property name="bus" ref="defaultOutBus" />
+		<property name="address" value="http://172.16.1.6/WSPACK/DataPackingService.asmx" />
+	</bean>
+	
+	<bean id="persoWS" class="com.nec.asia.Persoservices"
+		factory-bean="persoWSFactory" factory-method="create" />
+
+	<bean id="persoWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.Persoservices" />
+		<property name="bus" ref="defaultOutBus" />
+		<property name="address" value="http://172.16.1.166:1002/PersoService.svc" />
+	</bean>
+	 -->
+	 
+	<!-- 
+	<bean id="signWS" class="sg.com.nec.SignServiceSoap" factory-bean="signWSFactory" factory-method="create" />
+	<bean id="signWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="sg.com.nec.SignServiceSoap" />
+		<property name="address" value="http://172.16.1.6/WSSIGN/SignService.asmx" />
+	</bean>
+
+	<jaxws:client id="signWS" serviceClass="sg.com.nec.SignServiceSoap">
+		<jaxws:features>
+			<clustering:loadDistributor>
+				<clustering:strategy>
+					<bean class="org.apache.cxf.clustering.SequentialStrategy">
+						<property name="alternateAddresses" ref="signWSurllist" />
+					</bean>
+				</clustering:strategy>
+			</clustering:loadDistributor>
+		</jaxws:features>
+	</jaxws:client>
+ 
+	<util:list id="signWSurllist" list-class="java.util.ArrayList">
+		<value>http://172.16.1.165:8280/nic/services/sign</value>
+		<value>http://172.16.1.165:8480/nic/services/sign</value>
+		<value>http://172.16.1.6/WSSIGN/SignService.asmx</value>
+	</util:list>
+	 	-->
+	<context:component-scan base-package="com.nec.asia.nic.comp.trans.utils">
+<!-- 		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" /> -->
+	</context:component-scan>
+</beans>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/jee
+		http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-4.2.xsd"
+>
+
+
+    <!-- ==============================DataSource============================== -->
+    <!-- commented, moved to spring-jee-datasource.xml
+    <jee:jndi-lookup id="dataSource" jndi-name="java:/nic_web" /> 
+     -->
+    
+    <!-- ==============================Hibernate ============================== -->
+    <bean id="hbSessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+    
+        <property name="mappingResources">
+            <ref bean="mappingResources" />
+        </property>
+          <property name="schemaUpdate" value="false"/>
+          <property name="hibernateProperties">
+              <props>
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop> -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <!-- <prop key="hibernate.hbm2ddl.auto">validate</prop> -->
+                <!-- <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
+
+                  <!-- <prop key="hibernate.jdbc.batch_size">50</prop>
+                  <prop key="hibernate.cache.use_second_level_cache">false</prop>  -->                                  
+                  <!-- Add to use C3PO Connection Pooling              
+                  <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>                  
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.OSCacheProvider</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>            
+                <prop key="hibernate.c3p0.max_size">100</prop>
+                <prop key="hibernate.c3p0.min_size">10</prop>
+                <prop key="hibernate.c3p0.initial_pool_size">10</prop>
+                <prop key="hibernate.c3p0.min_pool_size">10</prop>
+                <prop key="hibernate.c3p0.max_pool_size">100</prop>
+                <prop key="hibernate.c3p0.timeout">1800</prop>
+                <prop key="hibernate.c3p0.max_statements">50</prop>      
+                -->
+              </props>
+          </property>
+    </bean>
+
+    <!-- Hibernate Mapping Files -->
+    <util:list id="hibernateMappingResources">
+        <value>com/nec/asia/nic/framework/admin/code/domain/Codes.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/code/domain/CodeValues.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/code/domain/Parameters.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/code/domain/PaymentDef.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/audit/domain/AuditAccessLogs.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/audit/domain/AuditSessionLogs.hbm.xml</value>  
+        
+
+        <value>com/nec/asia/nic/framework/admin/rbac/domain/Functions.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/rbac/domain/Users.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/rbac/domain/Roles.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/admin/rbac/domain/Workstations.hbm.xml</value>
+
+        <value>com/nec/asia/nic/framework/report/domain/Report.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/report/domain/ReportParameter.hbm.xml</value>
+        <value>com/nec/asia/nic/framework/report/domain/ReportTemplate.hbm.xml</value>        
+                
+        <!-- EPP -->
+        <value>com/nec/asia/nic/resources/hibernate/EppAfisData.hbm.xml</value>
+        <!-- <value>com/nec/asia/nic/resources/hibernate/EppApprovalData.hbm.xml</value> -->
+        <value>com/nec/asia/nic/resources/hibernate/EppDocumentData.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppDocumentHistory.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppFpData.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppRegistrationData.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppRejectionData.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppSearchHitResult.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppSearchResult.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppTransaction.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppTransactionAttachment.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppTransactionLog.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppTransactionReconRpt.hbm.xml</value>
+        <value>com/nec/asia/nic/resources/hibernate/EppWorkflowJob.hbm.xml</value>
+    </util:list>
+    
+    <bean id="mappingResources" class="org.springframework.beans.factory.config.ListFactoryBean"
+        parent="hibernateMappingResources">
+        <property name="sourceList">
+            <list merge="true"></list>
+        </property>
+    </bean>
+<!--      <import resource="spring-dao.xml" />  -->
+     <!-- no in used -->
+    <bean id="jbossTxManager" class="org.springframework.transaction.jta.JtaTransactionManager" lazy-init="true"/>
+</beans>

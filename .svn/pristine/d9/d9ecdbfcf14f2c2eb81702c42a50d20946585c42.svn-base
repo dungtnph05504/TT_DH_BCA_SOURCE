@@ -1,0 +1,1 @@
+jar cfm spid6-unsigned.jar MANIFEST.txt sg NECA

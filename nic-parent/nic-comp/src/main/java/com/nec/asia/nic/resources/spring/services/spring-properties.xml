@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="propertiesLocationFactory" class="com.nec.asia.nic.utils.HostnameAwareList">
+		<property name="fallbackToDefault" value="true" />
+		<property name="hostnameValueListMap">
+			<map>
+				<entry key="default">
+					<list>
+						<value>classpath:/com/nec/asia/nic/resources/properties/webservices.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/idserver.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/ldap.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/nic.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/quartz.properties</value>
+					</list>
+				</entry>
+				<entry key="HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB">
+					<list>
+						<value>classpath:/com/nec/asia/nic/resources/properties/dev/webservices.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/dev/idserver.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/dev/ldap.properties</value>	
+						<value>classpath:/com/nec/asia/nic/resources/properties/dev/nic.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/dev/quartz.properties</value>
+					</list>
+				</entry>
+				<entry key="HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF">
+					<list>
+						<value>classpath:/com/nec/asia/nic/resources/properties/test/webservices.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/test/idserver.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/test/ldap.properties</value>	
+						<value>classpath:/com/nec/asia/nic/resources/properties/test/nic.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/test/quartz.properties</value>
+					</list>
+				</entry>
+				<entry key="BAF-NIC">
+					<list>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/webservices.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/idserver.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/ldap.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/nic.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/quartz.properties</value>
+					</list>
+				</entry>
+				<entry key="BAF-NIC-DEV">
+					<list>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/dev/webservices.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/dev/idserver.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/dev/ldap.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/dev/nic.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/hanoi/dev/quartz.properties</value>
+					</list>
+				</entry>
+				<entry key="PEPP01,PEPP02">
+					<list>
+						<value>classpath:/com/nec/asia/nic/resources/properties/prod/webservices.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/prod/idserver.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/prod/ldap.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/prod/nic.properties</value>
+						<value>classpath:/com/nec/asia/nic/resources/properties/prod/quartz.properties</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound">
+			<value>true</value>
+		</property>
+		<property name="systemPropertiesModeName">
+			<value>SYSTEM_PROPERTIES_MODE_OVERRIDE</value>
+		</property>
+		<property name="locations">
+			<bean factory-bean="propertiesLocationFactory" factory-method="getValueList"/>
+		</property>
+	</bean>
+</beans>

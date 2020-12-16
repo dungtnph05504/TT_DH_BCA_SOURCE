@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 3:28:48 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.job.domain.Job" table="JOB" optimistic-lock="version">
+        <id name="jobId" type="string">
+            <column name="JOB_ID" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="jobName" type="string">
+            <column name="JOB_NAME" length="80" not-null="true" />
+        </property>
+        <property name="jobDescription" type="string">
+            <column name="JOB_DESCRIPTION" length="200" />
+        </property>
+        <property name="active" type="yes_no">
+            <column name="ISACTIVE" length="1" not-null="true" />
+        </property>
+        <property name="jobClass" type="string">
+            <column name="JOB_CLASS" length="128" not-null="true" />
+        </property>
+        <property name="jobProperties" type="com.nec.asia.nic.framework.dataAccess.type.StringClobType">
+            <column name="JOB_PROPERTIES" />
+        </property>
+        <property name="jobStatus" type="com.nec.asia.nic.framework.job.scheduler.dataAccess.type.JobStatusType">
+            <column name="JOB_STATUS" length="1" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="CREATEDATE" length="7" not-null="true" />
+        </property>
+        <property name="updatedate" type="timestamp">
+            <column name="UPDATEDATE" length="7" />
+        </property>
+        <property name="createby" type="string">
+            <column name="CREATEBY" length="40" not-null="true" />
+        </property>
+        <property name="updateby" type="string">
+            <column name="UPDATEBY" length="40" />
+        </property>
+        <property name="secured" type="yes_no">
+            <column name="SECURED" length="1" />
+        </property>
+        <property name="lastExecutedDate" type="timestamp">
+            <column name="LAST_EXECUTED_DATE" />
+        </property>
+        <property name="nextPlannedDate" type="timestamp">
+            <column name="NEXT_PLANNED_DATE" />
+        </property>
+        <!-- <set name="jobSchedule" table="NSYS_JOB_SCHEDULE" inverse="true" lazy="true" fetch="select"> -->
+         <set name="jobSchedule" table="JOB_SCHEDULE" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="JOB_ID" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.nec.asia.nic.framework.admin.job.domain.JobSchedule" />
+        </set>
+    </class>
+</hibernate-mapping>

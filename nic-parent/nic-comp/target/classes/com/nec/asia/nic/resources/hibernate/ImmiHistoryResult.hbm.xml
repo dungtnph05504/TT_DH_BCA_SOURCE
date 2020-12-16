@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.immihistory.domain.ImmiHistoryResult" table="EPP_CENTRAL.IMMIHISTORYRESULT" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.SEQ_IMMIHISTORYRESULT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="createdBy" type="int">
+			<column name="CREATEDBY" precision="10" scale="0">
+				<comment>CREATEDBY</comment>
+			</column>
+		</property>
+		<property name="lastModifiedBy" type="int">
+			<column name="LASTMODIFIEDBY" precision="10" scale="0">
+				<comment>LASTMODIFIEDBY</comment>
+			</column>
+		</property>
+		<property name="createdTime" type="timestamp">
+			<column name="CREATEDTIME" length="6">
+				<comment>CREATEDTIME</comment>
+			</column>
+		</property>
+		<property name="lastModifiedtime" type="timestamp">
+			<column name="LASTMODIFIEDTIME" length="6" >
+				<comment>LASTMODIFIEDTIME</comment>
+			</column>
+		</property>
+		<property name="immiId" type="long">
+			<column name="IMMIID" precision="10" scale="0">
+				<comment>IMMIID</comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTIONID" length="36">
+				<comment>TRANSACTIONID</comment>
+			</column>
+		</property>
+		<property name="preprocess" type="int">
+			<column name="PREPROCESS" precision="1" scale="0">
+				<comment>PREPROCESS</comment>
+			</column>
+		</property>
+		<property name="supervisorId" type="int">
+			<column name="SUPERVISORID" precision="10" scale="0" >
+				<comment>SUPERVISORID</comment>
+			</column>
+		</property>
+		<property name="gateUserId" type="int">
+			<column name="GATEUSERID" precision="10" scale="0" >
+				<comment>GATEUSERID</comment>
+			</column>
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORTNO" length="20" >
+				<comment>PASSPORTNO</comment>
+			</column>
+		</property>
+		<property name="gateNote" type="string">
+			<column name="GATENOTE" length="1000" >
+				<comment>GATENOTE</comment>
+			</column>
+		</property>
+		<property name="supervisorNote" type="string">
+			<column name="SUPERVISORNOTE" length="1000" >
+				<comment>SUPERVISORNOTE</comment>
+			</column>
+		</property>
+		<property name="rsBlacklist" type="string">
+			<column name="RSBLACKLIST" length="1000" >
+				<comment>RSBLACKLIST</comment>
+			</column>
+		</property>
+		<property name="rsBlacklistStatus" type="int">
+			<column name="RSBLACKLISTSTATUS" precision="1" scale="0" >
+				<comment>RSBLACKLISTSTATUS</comment>
+			</column>
+		</property>
+		<property name="rsVisa" type="string">
+			<column name="RSVISA" length="1000" >
+				<comment>RSVISA</comment>
+			</column>
+		</property>
+		<property name="rsVisaStatus" type="int">
+			<column name="RSVISASTATUS" precision="1" scale="0" >
+				<comment>RSVISASTATUS</comment>
+			</column>
+		</property>
+		<property name="rsEVisa" type="string">
+			<column name="RSEVISA" length="1000" >
+				<comment>RSEVISA</comment>
+			</column>
+		</property>
+		<property name="rsEVisaStatus" type="int">
+			<column name="RSEVISASTATUS" precision="1" scale="0" >
+				<comment>RSEVISASTATUS</comment>
+			</column>
+		</property>
+		<property name="rsFreeVisa" type="string">
+			<column name="RSFREEVISA" length="1000" >
+				<comment>RSFREEVISA</comment>
+			</column>
+		</property>
+		<property name="rsFreeVisaStatus" type="int">
+			<column name="RSFREEVISASTATUS" precision="1" scale="0" >
+				<comment>RSFREEVISASTATUS</comment>
+			</column>
+		</property>
+		<property name="rsFreeVisaCard" type="string">
+			<column name="RSFREEVISACARD" length="1000" >
+				<comment>RSFREEVISACARD</comment>
+			</column>
+		</property>
+		<property name="rsFreeVisaCardStatus" type="int">
+			<column name="RSFREEVISACARDSTATUS" precision="1" scale="0" >
+				<comment>RSFREEVISACARDSTATUS</comment>
+			</column>
+		</property>
+		<property name="rsCa" type="string">
+			<column name="RSCA" length="1000" >
+				<comment>RSCA</comment>
+			</column>
+		</property>
+		<property name="rsCaStatus" type="int">
+			<column name="RSCASTATUS" precision="1" scale="0" >
+				<comment>RSCASTATUS</comment>
+			</column>
+		</property>
+		<property name="rsFlight" type="string">
+			<column name="RSFLIGHT" length="1000" >
+				<comment>RSFLIGHT</comment>
+			</column>
+		</property>
+		<property name="rsFlightStatus" type="int">
+			<column name="RSFLIGHTSTATUS" precision="1" scale="0" >
+				<comment>RSFLIGHTSTATUS</comment>
+			</column>
+		</property>
+		<property name="rsPassport" type="string">
+			<column name="RSPASSPORT" length="1000" >
+				<comment>RSPASSPORT</comment>
+			</column>
+		</property>
+		<property name="rsPassportStatus" type="int">
+			<column name="RSPASSPORTSTATUS" precision="1" scale="0" >
+				<comment>RSPASSPORTSTATUS</comment>
+			</column>
+		</property>
+		<property name="rsImmiHistory" type="string">
+			<column name="RSIMMIHISTORY" length="1000" >
+				<comment>RSIMMIHISTORY</comment>
+			</column>
+		</property>
+		<property name="rsImmiHistoryStatus" type="int">
+			<column name="RSIMMIHISTORYSTATUS" precision="1" scale="0" >
+				<comment>RSIMMIHISTORYSTATUS</comment>
+			</column>
+		</property>
+		<property name="systemResult" type="int">
+			<column name="SYSTEMRESULT" precision="1" scale="0" >
+				<comment>SYSTEMRESULT</comment>
+			</column>
+		</property>
+		<property name="superviorResult" type="int">
+			<column name="SUPERVISORRESULT" precision="1" scale="0" >
+				<comment>SUPERVISORRESULT</comment>
+			</column>
+		</property>
+		<property name="adResult" type="int">
+			<column name="ADRESULT" precision="1" scale="0" >
+				<comment>ADRESULT</comment>
+			</column>
+		</property>
+		<property name="partitionCheck" type="int">
+			<column name="PARTITIONCHECK" precision="1" scale="0" >
+				<comment>PARTITIONCHECK</comment>
+			</column>
+		</property>
+		<property name="adId" type="int">
+			<column name="ADID" precision="10" scale="0" >
+				<comment>ADID</comment>
+			</column>
+		</property>
+		<property name="adNote" type="string">
+			<column name="ADNOTE" length="200" >
+				<comment>ADNOTE</comment>
+			</column>
+		</property>
+		<property name="rsBlacklistChecked" type="string">
+			<column name="RSBLACKLIST_CHECKED" length="1000" >
+				<comment>RSBLACKLIST_CHECKED</comment>
+			</column>
+		</property>
+		<property name="rsBlacklistStatusChecked" type="int">
+			<column name="RSBLACKLISTSTATUS_CHECKED" precision="1" scale="0" >
+				<comment>RSBLACKLISTSTATUS_CHECKED</comment>
+			</column>
+		</property>
+		<property name="rsBlacklistNoteChecked" type="string">
+			<column name="RSBLACKLISTNOTE_CHECKED" length="2000" >
+				<comment>RSBLACKLISTNOTE_CHECKED</comment>
+			</column>
+		</property>
+		<property name="rsBlacklistUserIdChecked" type="int">
+			<column name="RSBLACKLISTUSERID_CHECKED" >
+				<comment>RSBLACKLISTUSERID_CHECKED</comment>
+			</column>
+		</property>
+		<property name="rsBlacklistUsernameChecked" type="string">
+			<column name="RSBLACKLISTUSERNAME_CHECKED" length="200" >
+				<comment>RSBLACKLISTUSERNAME_CHECKED</comment>
+			</column>
+		</property>
+		<property name="rsVisaImmi" type="string">
+			<column name="RSVISAIMMI" length="1000" >
+				<comment>RSVISAIMMI</comment>
+			</column>
+		</property>
+		<one-to-one name="immi" class="com.nec.asia.nic.comp.immihistory.domain.ImmiHistory"
+			constrained="true"></one-to-one>
+	</class>
+</hibernate-mapping>

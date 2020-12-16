@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.EppIdentificationAttachmnt" table="EPP_CENTRAL.EPP_IDENTIFICATION_ATTCHMNT" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="10" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_IDENTI_ATTACHMNT_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="identificationId" type="long">
+			<column name="IDENTIFICATION_ID" precision="19" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="base64" type="org.hibernate.type.MaterializedClobType">
+			<column name="BASE64">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

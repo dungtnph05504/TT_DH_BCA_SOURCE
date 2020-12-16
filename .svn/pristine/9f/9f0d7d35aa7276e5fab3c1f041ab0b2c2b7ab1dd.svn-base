@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions> 
+	<definition name="show.cardEnquiry" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />  
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/enquiry/cardEnquiry/cardEnquiry.jsp" />
+	</definition> 
+	
+	<definition name="show.cardEnquiryDetail" extends="viewpopup.layout.standard">
+		<put-attribute name="queue" value="" /> 
+		<put-attribute name="transaction" value="/WEB-INF/layout/transactionInfo.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/enquiry/cardEnquiry/cardEnquiryDetail.jsp" />
+	</definition> 
+</tiles-definitions>

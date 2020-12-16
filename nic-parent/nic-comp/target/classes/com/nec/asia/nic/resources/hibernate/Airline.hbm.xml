@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.EppAirline"
+		table="EPP_CENTRAL.AIRLINE">
+		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.AIRLINE_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="createBy" type="string">
+			<column name="CREATED_BY" length="120" not-null="true"/>
+		</property>
+		<property name="lastModifiedBy" type="string">
+			<column name="LAST_MODIFIED_BY" length="120"/>
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATED_TIME" length="6"/>
+		</property>
+		<property name="lastModifiedDate" type="timestamp">
+			<column name="LAST_MODIFIED_TIME" length="6"/>
+		</property>
+		<property name="code" type="string">
+			<column name="CODE" length="30"/>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="150"/>
+		</property>
+		<property name="countryCode" type="string">
+			<column name="COUNTRY_CODE" length="10"/>
+		</property>
+		<property name="descriptions" type="string">
+			<column name="DESCRIPTIONS" length="500"/>
+		</property>
+		<property name="closedTime" type="timestamp">
+			<column name="CLOSED_TIME" length="6"/>
+		</property>
+	</class>
+</hibernate-mapping>

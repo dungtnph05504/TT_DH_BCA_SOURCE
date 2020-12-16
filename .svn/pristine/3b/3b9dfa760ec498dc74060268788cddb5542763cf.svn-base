@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions
+    xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl = "http://schemas.xmlsoap.org/wsdl/"
+    xmlns:ns1 = "http://ws.dx.nic.asia.nec.com/"
+    xmlns:cmn = "http://common.dx.nic.asia.nec.com/"
+    name = "adminWS"
+    targetNamespace = "http://ws.dx.nic.asia.nec.com/">
+    <wsdl:types>
+        <xs:schema
+            xmlns:xs = "http://www.w3.org/2001/XMLSchema"
+            xmlns:tns = "http://ws.dx.nic.asia.nec.com/"
+            xmlns:adn = "http://admin.dx.nic.asia.nec.com/"
+            elementFormDefault = "unqualified"
+            targetNamespace = "http://ws.dx.nic.asia.nec.com/"
+            version = "1.0">
+            <xs:import namespace="http://admin.dx.nic.asia.nec.com/" schemaLocation="admin.xsd" />
+            <xs:import namespace="http://common.dx.nic.asia.nec.com/" schemaLocation="common.xsd" />
+            
+            <xs:element name = "GetProofDocumentMatrix" type = "adn:GetProofDocumentMatrix"/>
+            <xs:element name = "GetProofDocumentMatrixResponse" type = "adn:GetProofDocumentMatrixResponse"/>
+            <xs:element name = "GetPaymentMatrix" type = "adn:GetPaymentMatrix"/>
+            <xs:element name = "GetPaymentMatrixResponse" type = "adn:GetPaymentMatrixResponse"/>
+            <xs:element name = "GetAuthorizedFunctions" type = "adn:GetAuthorizedFunctions"/>
+            <xs:element name = "GetAuthorizedFunctionsResponse" type = "adn:GetAuthorizedFunctionsResponse"/>
+            <xs:element name = "GetConfigurations" type = "adn:GetConfigurations"/>
+            <xs:element name = "GetConfigurationsResponse" type = "adn:GetConfigurationsResponse"/>
+            <xs:element name = "ChangeUserPassword" type = "adn:ChangeUserPassword"/>
+            <xs:element name = "ChangeUserPasswordResponse" type = "adn:ChangeUserPasswordResponse"/>
+            <xs:element name = "GetDecisionManager" type = "adn:GetConfigurations"/>
+            <xs:element name = "GetDecisionManagerResponse" type = "adn:GetConfigurationsResponse"/>
+            <xs:element name = "OfficalNationUpload" type = "adn:OfficalNationTransaction"/>
+            <xs:element name = "OfficalNationResponse" type = "xsd:string"/>
+            <xs:element name = "OfficalNationFind" type = "xsd:string"/>
+            <xs:element name = "OfficalNationFindResponse" type = "xsd:string"/>
+            <xs:element name = "OfficalNationUpdateStatus" type = "xsd:string"/>
+            <xs:element name = "OfficalNationUpdateStatusResponse" type = "xsd:string"/>
+            <xs:element name = "OfficalNationUpdateStatusFail" type = "xsd:string"/>
+            <xs:element name = "OfficalNationUpdateStatusFailResponse" type = "xsd:string"/>
+            <xs:element name = "ParaSignerCompareRequest" type = "adn:ParaSignerCompareRequest"/>
+            <xs:element name = "ParaSignerCompareResponse" type = "adn:ParaSignerCompareResponse"/>
+            <xs:element name = "GetPaymentMatrixAllRequest" type = "adn:GetPaymentMatrixAllRequest"/>
+            <xs:element name = "GetPaymentMatrixAllResponse" type = "adn:GetPaymentMatrixAllResponse"/>
+            <xs:element name = "GetAuthenUserRequest" type = "adn:UserRequest"/>
+            <xs:element name = "GetAuthenUserResponse" type = "adn:UserData"/>
+            <xs:element name = "GetMappingAuthenticationRequest" type = "adn:UserRequest"/>
+            <xs:element name = "GetMappingAuthenticationResponse" type = "adn:MappingAuthenData"/>
+            <xs:element name = "GetRecieptRequest" type = "adn:GetRecieptAllRequest"/>
+            <xs:element name = "GetRecieptResponse" type = "xsd:string"/>
+            <xs:element name = "FaultException" type="cmn:FaultDetail" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="faultException">
+		<wsdl:part element="ns1:FaultException" name="faultException"></wsdl:part>
+	</wsdl:message>
+    <wsdl:message name = "getProofDocumentMatrix">
+        <wsdl:part element = "ns1:GetProofDocumentMatrix" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getProofDocumentMatrixResponse">
+        <wsdl:part element = "ns1:GetProofDocumentMatrixResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getPaymentMatrix">
+        <wsdl:part element = "ns1:GetPaymentMatrix" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getPaymentMatrixResponse">
+        <wsdl:part element = "ns1:GetPaymentMatrixResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getAuthorizedFunctions">
+        <wsdl:part element = "ns1:GetAuthorizedFunctions" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getAuthorizedFunctionsResponse">
+        <wsdl:part element = "ns1:GetAuthorizedFunctionsResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getConfigurations">
+        <wsdl:part element = "ns1:GetConfigurations" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getConfigurationsResponse">
+        <wsdl:part element = "ns1:GetConfigurationsResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "changeUserPassword">
+        <wsdl:part element = "ns1:ChangeUserPassword" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "changeUserPasswordResponse">
+        <wsdl:part element = "ns1:ChangeUserPasswordResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+        <wsdl:message name = "officalNationRequest">
+        <wsdl:part element = "ns1:OfficalNationUpload" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "officalNationResponse">
+        <wsdl:part element = "ns1:OfficalNationResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+   	<wsdl:message name = "officalNationFindRequest">
+        <wsdl:part element = "ns1:OfficalNationFind" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "officalNationFindResponse">
+        <wsdl:part element = "ns1:OfficalNationFindResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "officalNationUpdateStatusRequest">
+        <wsdl:part element = "ns1:OfficalNationUpdateStatus" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "officalNationUpdateStatusResponse">
+        <wsdl:part element = "ns1:OfficalNationUpdateStatusResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "officalNationUpdateStatusFailRequest">
+        <wsdl:part element = "ns1:OfficalNationUpdateStatusFail" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "officalNationUpdateStatusFailResponse">
+        <wsdl:part element = "ns1:OfficalNationUpdateStatusFailResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getParaSignerCompareRequest">
+        <wsdl:part element = "ns1:ParaSignerCompareRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getParaSignerCompareResponse">
+        <wsdl:part element = "ns1:ParaSignerCompareResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getPaymentMatrixAllRequest">
+        <wsdl:part element = "ns1:GetPaymentMatrixAllRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getPaymentMatrixAllResponse">
+        <wsdl:part element = "ns1:GetPaymentMatrixAllResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getAuthenUserRequest">
+        <wsdl:part element = "ns1:GetAuthenUserRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getAuthenUserResponse">
+        <wsdl:part element = "ns1:GetAuthenUserResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getMappingAuthenticationRequest">
+        <wsdl:part element = "ns1:GetMappingAuthenticationRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getMappingAuthenticationResponse">
+        <wsdl:part element = "ns1:GetMappingAuthenticationResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getRecieptRequest">
+        <wsdl:part element = "ns1:GetRecieptRequest" name = "input"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name = "getRecieptResponse">
+        <wsdl:part element = "ns1:GetRecieptResponse" name = "output"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:portType name = "adminWS">
+        <wsdl:operation name = "getProofDocumentMatrix">
+            <wsdl:input message = "ns1:getProofDocumentMatrix" ></wsdl:input>
+            <wsdl:output message = "ns1:getProofDocumentMatrixResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getPaymentMatrix">
+            <wsdl:input message = "ns1:getPaymentMatrix" ></wsdl:input>
+            <wsdl:output message = "ns1:getPaymentMatrixResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getAuthorizedFunctions">
+            <wsdl:input message = "ns1:getAuthorizedFunctions" ></wsdl:input>
+            <wsdl:output message = "ns1:getAuthorizedFunctionsResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getConfigurations">
+            <wsdl:input message = "ns1:getConfigurations" ></wsdl:input>
+            <wsdl:output message = "ns1:getConfigurationsResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "changeUserPassword">
+            <wsdl:input message = "ns1:changeUserPassword" ></wsdl:input>
+            <wsdl:output message = "ns1:changeUserPasswordResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "uploadNationOffical">
+            <wsdl:input message = "ns1:officalNationRequest"></wsdl:input>
+            <wsdl:output message = "ns1:officalNationResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+          <wsdl:operation name = "findResultOfficalNation">
+            <wsdl:input message = "ns1:officalNationFindRequest"></wsdl:input>
+            <wsdl:output message = "ns1:officalNationFindResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "officalNationUpdateStatus">
+            <wsdl:input message = "ns1:officalNationUpdateStatusRequest"></wsdl:input>
+            <wsdl:output message = "ns1:officalNationUpdateStatusResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "officalNationUpdateStatusFail">
+            <wsdl:input message = "ns1:officalNationUpdateStatusFailRequest"></wsdl:input>
+            <wsdl:output message = "ns1:officalNationUpdateStatusFailResponse"></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getParaSignerCompare">
+        	<wsdl:input message = "ns1:getParaSignerCompareRequest"></wsdl:input>
+            <wsdl:output message = "ns1:getParaSignerCompareResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getPaymentMatrixAll">
+        	<wsdl:input message = "ns1:getPaymentMatrixAllRequest"></wsdl:input>
+            <wsdl:output message = "ns1:getPaymentMatrixAllResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getAuthenUser">
+        	<wsdl:input message = "ns1:getAuthenUserRequest"></wsdl:input>
+            <wsdl:output message = "ns1:getAuthenUserResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name = "getMappingAuthentication">
+        	<wsdl:input message = "ns1:getMappingAuthenticationRequest"></wsdl:input>
+            <wsdl:output message = "ns1:getMappingAuthenticationResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+         <wsdl:operation name = "uploadRecieptInformation">
+        	<wsdl:input message = "ns1:getRecieptRequest"></wsdl:input>
+            <wsdl:output message = "ns1:getRecieptResponse" ></wsdl:output>
+            <wsdl:fault message="ns1:faultException" name="faultException"></wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

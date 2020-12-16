@@ -1,0 +1,7 @@
+Application-Name: SPID 6.0
+Application-Library-Allowable-Codebase: *
+Caller-Allowable-Codebase: *
+Codebase: *
+Permissions: all-permissions
+Trusted-Only: true
+Trusted-Library: true

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 10:20:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.framework.admin.code.domain.Codes" table="CODES">
+  <id name="codeId" type="java.lang.String">
+   <column length="30" name="CODE_ID"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="codeDesc" type="java.lang.String">
+   <column length="255" name="CODE_DESC">
+    <comment>Description of Code Table</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="userAccessibleFlag" type="yes_no">
+   <column length="1" name="USER_ACCESSIBLE_FLAG">
+    <comment>User Accessible Flag(Y/N)</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="adminAccessibleFlag" type="yes_no">
+   <column length="1" name="ADMIN_ACCESSIBLE_FLAG">
+    <comment>System Administrator Accessible Flag(Y/N)</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="systemId" type="java.lang.String">
+   <column length="16" name="SYSTEM_ID">
+    <comment>System Id</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="createBy" type="java.lang.String">
+   <column length="64" name="CREATE_BY">
+    <comment>User Id of Officer who create the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="createWkstnId" type="java.lang.String">
+   <column length="64" name="CREATE_WKSTN_ID">
+    <comment>Workstation Id of Officer who create the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
+   <column name="CREATE_DATETIME">
+    <comment>Date Time of creation for the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="updateBy" type="java.lang.String">
+   <column length="64" name="UPDATE_BY">
+    <comment>User Id of Officer who update the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="updateWkstnId" type="java.lang.String">
+   <column length="64" name="UPDATE_WKSTN_ID">
+    <comment>Workstation Id of Officer who update the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="updateDate" type="java.util.Date">
+   <column name="UPDATE_DATETIME">
+    <comment>Date Time of latest update for the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteBy" type="java.lang.String">
+   <column length="64" name="DELETE_BY">
+    <comment>User Id of Officer who delete the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteWkstnId" type="java.lang.String">
+   <column length="64" name="DELETE_WKSTN_ID">
+    <comment>Workstation Id of Officer who delete the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteDate" type="java.util.Date">
+   <column name="DELETE_DATETIME">
+    <comment>Date Time of deletion for the record</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="deleteFlag" type="yes_no">
+   <column length="1" name="DELETE_FLAG">
+    <comment>Delete Flag to indicate this record is deleted</comment>
+   </column>
+  </property>
+  <!-- bi-directional one-to-many association to CodeValues -->
+  <set name="codeValues" lazy="false" inverse="true" table="CODE_VALUES">
+   <!-- fetch="select" sort="unsorted" -->
+   <key>
+    <column length="30" name="CODE_ID" not-null="true">
+     <comment>Identifier of Code Table</comment>
+    </column>
+   </key>
+   <one-to-many class="com.nec.asia.nic.framework.admin.code.domain.CodeValues"/>
+  </set>
+ </class>
+</hibernate-mapping>

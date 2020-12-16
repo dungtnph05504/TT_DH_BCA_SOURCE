@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicTransactionAttachment" table="EPP_TRANSACTION_ATTACHMENT" optimistic-lock="version">
+		<id name="transactionDocId" type="long">
+			<column name="TRANSACTION_DOC_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_TRANSACTION_DOC_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+<!--         <many-to-one name="nicTransaction" class="com.nec.asia.nic.comp.trans.domain.NicTransaction" fetch="select">
+            <column name="TRANSACTION_ID" length="36">
+                <comment>Application Id</comment>
+            </column>
+        </many-to-one> -->
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Application Id</comment>
+			</column>
+		</property>
+
+		<property name="docType" type="string">
+			<column name="DOC_TYPE" length="30" not-null="true">
+				<comment>Attachment Type (FP: Fingerprint, TPL: FMS Templates, PH: Photo, SC: Scan Document, MNU: Minutiae Template)</comment>
+			</column>
+		</property>
+		<property name="serialNo" type="string">
+			<column name="SERIAL_NO" length="2">
+				<comment>Position or Page Number</comment>
+			</column>
+		</property>
+		<property name="docData" type="org.hibernate.type.MaterializedBlobType">
+			<column name="DOC_DATA">
+				<comment>Binary Data if internal</comment>
+			</column>
+		</property>
+		<property name="storageRefId" type="string">
+			<column name="STORAGE_REF_ID" length="150">
+				<comment>Reference Lob Id if external</comment>
+			</column>
+		</property>
+		<property name="storageType" type="string">
+			<column name="STORAGE_TYPE" length="1">
+				<comment>Storage Type (O: Online, R: Reference)</comment>
+			</column>
+		</property>
+		<property name="remarks" type="string">
+			<column name="REMARKS" length="1000">
+				<comment>From DCM - Scanned Document Remarks</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Create Workstation Id</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Update By</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="string">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Update Workstation Id</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+		
+<!-- 		<property name="createByName" type="string">
+			<column name="CREATE_BY_NAME" length="120">
+				<comment>createByName</comment>
+			</column>
+		</property>
+		<property name="updateByName" type="string">
+			<column name="UPDATE_BY_NAME" length="120">
+				<comment>updateByName</comment>
+			</column>
+		</property> -->
+	</class>
+</hibernate-mapping>

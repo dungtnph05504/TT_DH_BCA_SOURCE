@@ -1,0 +1,52 @@
+﻿ .ui-autocomplete {
+            max-height: 150px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .pagination {
+            margin: 0px;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        * html .ui-autocomplete {
+            height: 150px;
+        }
+
+        label {
+            font-weight: normal;
+        }
+
+        .dropdown a {
+            color: white;
+        }
+
+.navbar-right > li > a:hover,
+.navbar-right > li > a:focus {
+    text-decoration: none;
+    background-color: #397a44;
+}
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+    background-color: #397a44;
+    border-color: #397a44;
+}
+
+        .nav-menu {
+            padding: 6px 0px;
+        }
+
+        #wrapper {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .login-infor{
+            z-index:2000;
+        }body {
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<!-- Modification History: 01 Oct 2013 (Sailaja): Added New view supervisor-rejectJob-List 
+	for the supervisor rejected job list -->
+
+<tiles-definitions>
+	<!-- ========== DANH SÁCH ĐIỂM IN ========== -->
+	<!-- ================================================= -->	
+	<definition name="persoLocations.list" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Danh sách trung tâm cá thể hóa" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/persoLocations-list.jsp" />
+	</definition>
+	
+	<definition name="persoLocations.compare" extends="global.layout.standard">
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/persoLocations-compare.jsp" />
+	</definition>
+	<definition name="inventory.items.show" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý phôi in" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/inventory-items.jsp" />
+	</definition>
+	<definition name="inventory.show" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý kho" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/inventory.jsp" />
+	</definition>
+	<definition name="inventory.dt.show" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Quản lý phiếu xuất/nhập" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/inventory-dt.jsp" />
+	</definition>
+	<definition name="persoLocations.add.edit" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm cá thể hóa" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/addEditLocation.jsp" />
+	</definition>
+	<definition name="siteLocations.add.edit" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Trung tâm cá thể hóa" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/addEditSiteLocation.jsp" />
+	</definition>
+	<definition name="persoLocations.detail.list" extends="global.layout.standardTitle">
+		<put-attribute name="title" value="Chi tiết TT cá thể hóa" />
+		<put-attribute name="queue" value="" />
+		<put-attribute name="transaction" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/persoLocations/persoLocations-detail-list.jsp" />
+	</definition>
+	<definition name="inventory.detail.popup"
+		template="/WEB-INF/views/persoLocations/edit-inventory-detail.jsp" />
+	<definition name="inventory.show.popup"
+		template="/WEB-INF/views/persoLocations/edit-inventory.jsp" />
+	<definition name="inventory.item.popup"
+		template="/WEB-INF/views/persoLocations/edit-inventory-items.jsp" />	
+	<!-- ========== DANH SÁCH ĐIỂM IN ========== - END -->
+	<!-- ============================================================================================== -->
+</tiles-definitions>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:tns="http://ws.dx.nic.asia.nec.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+	xmlns:cmn="http://common.dx.nic.asia.nec.com/"
+	name="idserverWS" 
+	targetNamespace="http://ws.dx.nic.asia.nec.com/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ids="http://idserver.dx.nic.asia.nec.com/"
+			xmlns:tns="http://ws.dx.nic.asia.nec.com/" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" targetNamespace="http://ws.dx.nic.asia.nec.com/">
+			<xs:import namespace="http://idserver.dx.nic.asia.nec.com/" schemaLocation="idserver.xsd" />
+			<xs:import namespace="http://common.dx.nic.asia.nec.com/" schemaLocation="common.xsd" />
+			
+			<xs:element name="identification" type="ids:Identification" />
+			<xs:element name="identificationResponse" type="ids:IdentificationResponse" />
+			<xs:element name="verification" type="ids:Verification" />
+			<xs:element name="verificationResponse" type="ids:VerificationResponse" />
+			<xs:element name="FaultException" type="cmn:FaultDetail" />
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="faultException">
+		<wsdl:part element="tns:FaultException" name="faultException"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="identification">
+		<wsdl:part element="tns:identification" name="input"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="identificationResponse">
+		<wsdl:part element="tns:identificationResponse" name="output"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="verification">
+		<wsdl:part element="tns:verification" name="input"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="verificationResponse">
+		<wsdl:part element="tns:verificationResponse" name="output"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:portType name="idserverWS">
+		<wsdl:operation name="identification">
+			<wsdl:input message="tns:identification" name="identification"></wsdl:input>
+			<wsdl:output message="tns:identificationResponse" name="identificationResponse"></wsdl:output>
+			<wsdl:fault message="tns:faultException" name="faultException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="verification">
+			<wsdl:input message="tns:verification" name="verification"></wsdl:input>
+			<wsdl:output message="tns:verificationResponse" name="verificationResponse"></wsdl:output>
+			<wsdl:fault message="tns:faultException" name="faultException"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>

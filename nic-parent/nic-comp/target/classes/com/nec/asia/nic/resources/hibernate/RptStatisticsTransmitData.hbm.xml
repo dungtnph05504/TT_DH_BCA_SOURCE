@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	 <class name="com.nec.asia.nic.comp.trans.domain.RptStatisticsTransmitData" table="EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA" optimistic-lock="version">
+		  	<id name="id" type="long">
+				<column name="ID" precision="10" scale="0" />
+				<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.SEQ_RPT_STATISTICS</param>
+				<param name="allocationSize">100</param>
+			</generator>
+			</id>
+		    <property name="type" type="string">
+				<column name="TYPE" length="15">
+					<comment>TYPE</comment>
+				</column>
+			</property>
+			<property name="siteCode" type="string">
+				<column name="SITE_CODE" length="20">
+					<comment>SITE_CODE</comment>
+				</column>
+			</property>
+			<property name="rptDate" type="timestamp">
+				<column name="RPT_DATE" length="7">
+					<comment>RPT_DATE</comment>
+				</column>
+			</property>
+			<property name="total" type="int">
+				<column name="TOTAL" precision="10" scale="0">
+					<comment>TOTAL</comment>
+				</column>
+			</property>
+			<property name="updateDatetime" type="timestamp">
+				<column name="UPDATE_DATETIME" length="7">
+					<comment>Update Datetime</comment>
+				</column>
+			</property>
+	 </class>
+	 <sql-query name="truyvantruyendl">
+		<return-scalar column="sitecode" type="string" />
+		<return-scalar column="type" type="string" />
+		<return-scalar column="total" type="integer" />
+		<return-scalar column="rptdate" type="date" />
+		<return-scalar column="id" type="long" />
+        <![CDATA[
+			SELECT  EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.SITE_CODE as sitecode, 
+                	EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.TYPE as type, 
+                	EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.TOTAL as total,
+                	EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.RPT_DATE as rptdate,
+                	EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.ID as id
+			FROM EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA
+			WHERE EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.SITE_CODE = (:site)
+			AND TRUNC(TO_DATE(EPP_CENTRAL.RPT_STATISTICS_TRANSMIT_DATA.RPT_DATE,'DD/MM/YY')) >= TRUNC(TO_DATE(SYSDATE,'DD/MM/YY'))
+        ]]>
+	</sql-query>
+</hibernate-mapping>

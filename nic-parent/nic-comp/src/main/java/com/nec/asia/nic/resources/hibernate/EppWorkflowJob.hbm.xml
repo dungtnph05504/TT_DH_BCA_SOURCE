@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 20, 2016 10:06:55 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicUploadJob" table="EPP_WORKFLOW_JOB" optimistic-lock="version">
+		<id name="workflowJobId" type="long">
+			<column name="WORKFLOW_JOB_ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_WORKFLOW_JOB_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<many-to-one name="nicTransaction" class="com.nec.asia.nic.comp.trans.domain.NicTransaction" lazy="false" fetch="select" insert="false" update="false">
+			<column name="TRANSACTION_ID" length="36">
+				<comment>Application Id</comment>
+			</column>
+		</many-to-one>
+		<property name="transactionId" type="string">
+			<column name="TRANSACTION_ID" length="36" not-null="true">
+				<comment>Application Id</comment>
+			</column>
+		</property>
+		<property name="jobType" type="string">
+			<column name="JOB_TYPE" length="30">
+				<comment>Job Type</comment>
+			</column>
+		</property>
+		<property name="jobPriority" type="int">
+			<column name="JOB_PRIORITY" precision="10" scale="0">
+				<comment>Job Priority (1: Normal, 2: Express, 3: VIP)</comment>
+			</column>
+		</property>
+		<property name="jobCreatedTime" type="timestamp">
+			<column name="JOB_CREATED_TIME" length="7">
+				<comment>Job Creation Time</comment>
+			</column>
+		</property>
+		<property name="jobCurrentStage" type="string">
+			<column name="JOB_CURRENT_STAGE" length="30">
+				<comment>Job Current Stage</comment>
+			</column>
+		</property>
+		<property name="jobCurrentStatus" type="string">
+			<column name="JOB_CURRENT_STATUS" length="50">
+				<comment>Job Current Status</comment>
+			</column>
+		</property>
+		<property name="jobStartTime" type="timestamp">
+			<column name="JOB_START_TIME" length="7">
+				<comment>Job start datetime</comment>
+			</column>
+		</property>
+		<property name="jobEndTime" type="timestamp">
+			<column name="JOB_END_TIME" length="7">
+				<comment>Job end datetime</comment>
+			</column>
+		</property>
+		<property name="cpdCheckStatus" type="string">
+			<column name="CPD_CHECK_STATUS" length="2">
+				<comment>Central Passport Database Validation Status</comment>
+			</column>
+		</property>
+		<property name="afisRegisterStatus" type="string">
+			<column name="AFIS_REGISTER_STATUS" length="2">
+				<comment>AFIS Register Status</comment>
+			</column>
+		</property>
+		<property name="afisCheckStatus" type="string">
+			<column name="AFIS_CHECK_STATUS" length="2">
+				<comment>AFIS 1:N Status</comment>
+			</column>
+		</property>
+		<property name="afisVerifyStatus" type="string">
+			<column name="AFIS_VERIFY_STATUS" length="2">
+				<comment>AFIS 1:1 Status</comment>
+			</column>
+		</property>
+		<property name="blacklistCheckStatus" type="string">
+			<column name="BLACKLIST_CHECK_STATUS" length="2">
+				<comment>Blacklist Status</comment>
+			</column>
+		</property>
+		<property name="identificationCheckStatus" type="string">
+			<column name="IDENTIFICATION_CHECK_STATUS" length="2">
+				<comment>Identification Status</comment>
+			</column>
+		</property>
+		<property name="investigationType" type="string">
+			<column name="INVESTIGATION_TYPE" length="30">
+				<comment>Investigation Type (CPD, AFIS, PERSO)</comment>
+			</column>
+		</property>
+		<property name="investigationStatus" type="string">
+			<column name="INVESTIGATION_STATUS" length="2">
+				<comment>Investigation Status (00: NEW, 01: WIP, 06: SUSPENDED, 02: APPROVED, 04: REJECTED)</comment>
+			</column>
+		</property>
+		<property name="investigationOfficerId" type="string">
+			<column name="INVESTIGATION_OFFICER_ID" length="120">
+				<comment>Investigation Officer ID</comment>
+			</column>
+		</property>
+		<property name="afisUpdateStatus" type="string">
+			<column name="AFIS_UPDATE_STATUS" length="2">
+				<comment>AFIS Update Status</comment>
+			</column>
+		</property>
+		<property name="persoRegisterStatus" type="string">
+			<column name="PERSO_REGISTER_STATUS" length="2">
+				<comment>PERSO Register Status</comment>
+			</column>
+		</property>
+		<property name="jobCompletedFlag" type="yes_no">
+			<column name="JOB_COMPLETED_FLAG" length="1">
+				<comment>Job Completed Flag</comment>
+			</column>
+		</property>
+		<property name="jobReprocessCount" type="int">
+			<column name="JOB_REPROCESS_COUNT" precision="10" scale="0">
+				<comment>Retry Count for current Stage</comment>
+			</column>
+		</property>
+		<property name="jobApproveStatus" type="string">
+			<column name="JOB_APPROVE_STATUS" length="20">
+				<comment>Job Approve Status</comment>
+			</column>
+		</property>
+		<property name="tempPassportNo" type="string">
+			<column name="TEMP_PASSPORT_NO" length="16">
+				<comment>TEMP_PASSPORT_NO</comment>
+			</column>
+		</property>
+		<property name="checkSigner" type="string">
+			<column name="CHECK_SIGNER" length="20">
+				<comment>Kiem tra chu ky ho chieu</comment>
+			</column>
+		</property>
+		<property name="receiptNo" type="string">
+			<column name="RECEIPT_NO" length="64">
+				<comment>Luu goi ma goi tin tu A08</comment>
+			</column>
+		</property>
+		<property name="validateInfoBca" type="int">
+			<column name="VALIDATE_INFO_BCA" precision="2" scale="0">
+				<comment>VALIDATE_INFO_BCA</comment>
+			</column>
+		</property>
+<!-- 		<property name="originalyPersonCode" type="string">
+			<column name="ORIGINALY_PERSON_CODE" length="36">
+				<comment>Mã cá nhân khớp : Nếu trùng</comment>
+			</column>
+		</property> -->
+		<property name="dateApprovePerson" type="timestamp">
+			<column name="DATE_APPROVE_PERSON" length="7">
+				<comment>ngày khớp / không khớp dữ liệu cá nhấn</comment>
+			</column>
+		</property>
+		<property name="noteApprovePerson" type="string">
+			<column name="NOTE_APPROVE_PERSON" length="4000">
+				<comment>Ghi chú khớp cá nhân</comment>
+			</column>
+		</property>
+		<property name="originalyBlacklistId" type="long">
+			<column name="ORIGINALY_BLACKLIST_ID" precision="19" scale="0">
+				<comment>Mã hồ sơ nghi trùng</comment>
+			</column>
+		</property>
+		<property name="dateApproveInvestigation" type="timestamp">
+			<column name="DATE_APPROVE_INVESTIGATION" length="7">
+				<comment>Ngày tra cứu danh sách đen</comment>
+			</column>
+		</property>
+		<property name="noteApproveObj" type="string">
+			<column name="NOTE_APPROVE_OBJ" length="4000">
+				<comment>Ghi chú danh sách đen</comment>
+			</column>
+		</property>
+		<property name="dateApproveNin" type="timestamp">
+			<column name="DATE_APPROVE_NIN" length="7">
+				<comment>ngày tra CMND/CCCD</comment>
+			</column>
+		</property>
+		<property name="noteApproveNin" type="string">
+			<column name="NOTE_APPROVE_NIN" length="4000">
+				<comment>Ghi chú tra cứu CCCD</comment>
+			</column>
+		</property>
+		<property name="editTimeExpiry" type="timestamp">
+			<column name="EDIT_TIME_EXPIRY" length="7">
+				<comment>Thay doi ngay het han</comment>
+			</column>
+		</property>
+		<property name="workflowJobRunAgainCount" type="int">
+			<column name="WORKFLOW_JOB_RUN_AGAIN_COUNT" precision="2" scale="0">
+				<comment>Số lần chạy job</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="64">
+				<comment>Create By</comment>
+			</column>
+		</property>
+		<property name="createWkstnId" type="string">
+			<column name="CREATE_WKSTN_ID" length="64">
+				<comment>Create Workstation Id</comment>
+			</column>
+		</property>
+		<property name="createDatetime" type="timestamp">
+			<column name="CREATE_DATETIME" length="7">
+				<comment>Create Datetime</comment>
+			</column>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="64">
+				<comment>Update By</comment>
+			</column>
+		</property>
+		<property name="updateWkstnId" type="string">
+			<column name="UPDATE_WKSTN_ID" length="64">
+				<comment>Update Workstation Id</comment>
+			</column>
+		</property>
+		<property name="updateDatetime" type="timestamp">
+			<column name="UPDATE_DATETIME" length="7">
+				<comment>Update Datetime</comment>
+			</column>
+		</property>
+		<property name="investigationDate" type="timestamp">
+			<column name="INVESTIGATION_DATE" length="7">
+				<comment>Thoi gian luu ho so</comment>
+			</column>
+		</property>
+		<property name="userApproverObj" type="string">
+			<column name="USER_APPROVE_OBJ" length="120">
+				<comment>Cán bộ tra cứu đối tươnợng</comment>
+			</column>
+		</property>
+		<!-- <property name="originalyId" type="string">
+			<column name="ORIGINALY_ID" length="36">
+				<comment>mã hồ sơ của bản ghi đối tượng khớp</comment>
+			</column>
+		</property>
+		
+		<property name="originalyPersonId" type="string">
+			<column name="ORIGINALY_PERSON_ID" length="25">
+				<comment>mã hồ sơ của bản ghi Person</comment>
+			</column>
+		</property>
+		<property name="approveFlag" type="string">
+			<column name="APPROVE_FLAG" length="2">
+				
+			</column>
+		</property> -->
+        <!-- <set name="nicSearchResults" table="EPP_SEARCH_RESULT" inverse="true" lazy="false" cascade="all">
+            <key>
+                <column name="WORKFLOW_JOB_ID" precision="20" scale="0" not-null="true">
+                    <comment>Foreign Key - Workflow Job Id</comment>
+                </column>
+            </key>
+            <one-to-many class="com.nec.asia.nic.comp.trans.domain.NicSearchResult" />
+        </set>
+		<one-to-one name="nicApprovalData" class="com.nec.asia.nic.comp.trans.domain.NicApprovalData" lazy="false" cascade="all">
+		</one-to-one>
+		 -->
+		<one-to-one name="nicRejectionData" class="com.nec.asia.nic.comp.trans.domain.NicRejectionData" lazy="false" cascade="all"><!-- constrained="true" -->
+		</one-to-one>
+	</class>
+
+
+
+	<sql-query name="epp.NicUploadJobDaoImpl.assignNewJobBasedOnStatus">
+		<return-scalar column="WORKFLOW_JOB_ID" type="long" />
+            <![CDATA[ 
+		            SELECT WORKFLOW_JOB_ID
+					FROM (
+					        SELECT j.workflow_job_id AS WORKFLOW_JOB_ID
+					        FROM   EPP_WORKFLOW_JOB J
+					             , EPP_TRANSACTION  T
+					        WHERE
+					               j.investigation_status     =   :investigationStatus
+					           AND j.investigation_officer_id IS  NULL
+					           AND t.transaction_id           =   j.transaction_id
+					        ORDER BY
+					             t.est_date_of_collection ASC
+					           , t.priority               DESC
+					     ) 
+					where rownum = 1 
+            ]]>
+	</sql-query>
+
+
+
+</hibernate-mapping>

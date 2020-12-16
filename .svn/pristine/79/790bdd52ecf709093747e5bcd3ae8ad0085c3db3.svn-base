@@ -1,0 +1,39 @@
+##
+# Modification History:
+# 26 Mar 2014 (chris): add ca-02.endpoint to support round-robin load-balancer, remove two way SSL configuration
+##
+
+# information of SERVER CPDv2
+#cpdv2.endpoint=http://localhost/cpdv2/cxf/nicWebService
+#cdv2.endpoint=http://localhost:8080/cpdv2/cxf/nicWebService
+cpdv2.endpoint=http://172.16.1.165:8280/cpdv2/cxf/nicWebService
+#cpdv2.decoupled.endpoint=http://localhost:9990/decoupled_endpoint
+
+# information of SERVER CA
+#ca.endpoint=http://localhost/signserver/signingservice
+#ca.endpoint=http://localhost:8180/signserver/signingservice
+ca.endpoint=https://172.16.1.165/signserver/signingservice
+ca-02.endpoint=https://172.16.1.164/signserver/signingservice
+#only required if two way SSL
+ca.keystore.file=C:/truststore/ca/Keystore.jks
+ca.keystore.keypass=password
+ca.keystore.storepass=password
+ca.truststore.file=C:/truststore/ca/Truststore.jks
+ca.truststore.storepass=password
+
+# information of data pack web service
+datapack.endpoint=http://172.16.1.6/WSPACK/DataPackingService.asmx
+
+# information of perso web service
+perso.endpoint=http://172.16.1.166:1002/PersoService.svc
+
+# information of cims web service
+#inventory.endpoint=http://172.16.1.166:13332/CIWS/CardInventoryServiceLibrary.UpdateNICCardInventoryState.svc
+
+# information of arjo web service
+inventory.endpoint=http://172.16.14.123:18080/asisInventoryWS/services/InventoryPort
+
+# information of perso job cancellation web service
+#perso.jobcancellation.endpoint=http://172.16.1.166:1002/PersoJobCancellation/JobCancellationService.svc
+#perso.jobcancellation.endpoint=http://weefong-win7/PersoJobCancellation/JobCancellationService.svc
+perso.jobcancellation.endpoint=http://172.16.1.165:8280/PersoJobCancellation/JobCancellationService.svc

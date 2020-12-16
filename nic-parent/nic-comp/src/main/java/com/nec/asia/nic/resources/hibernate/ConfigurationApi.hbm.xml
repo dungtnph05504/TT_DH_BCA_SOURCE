@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.ConfigurationApi" table="EPP_CENTRAL.CONFIGURATION_API" optimistic-lock="version">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.CONFIGURATION_API_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="uriApi" type="string">
+			<column name="URI_API" length="36">
+				<comment>URI_API</comment>
+			</column>
+		</property>
+		<property name="nameApi" type="string">
+			<column name="NAME_API" length="50">
+				<comment>NAME_API</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="250">
+				<comment>DESCRIPTION</comment>
+			</column>
+		</property>
+		<property name="closeAll" type="yes_no">
+			<column name="CLOSE_ALL" >
+				<comment>CLOSE_ALL</comment>
+			</column>
+		</property>
+		<property name="closeMember" type="string">
+			<column name="CLOSE_MEMBER" length="250">
+				<comment>CLOSE_MEMBER</comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="120">
+				<comment>CREATE_BY</comment>
+			</column>
+		</property>
+		<property name="createDate" type="java.util.Date">
+			<column name="CREATE_DATE">
+				<comment>CREATE_DATE</comment>
+			</column>
+		</property>		
+		<property name="type" type="int">
+			<column name="TYPE" precision="2" scale="0">
+				<comment>TYPE</comment>
+			</column>
+		</property>		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,324 @@
+2020-05-28 15:43:42,704 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9e414: startup date [Thu May 28 15:43:42 ICT 2020]; root of context hierarchy
+2020-05-28 15:43:42,786 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 15:43:43,038 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 15:43:43,080 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:43:43,096 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 15:43:43,122 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 15:43:43,156 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:43:43,165 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 15:43:43,192 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 15:44:00,916 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 15:44:00,920 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 15:44:00,921 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 15:44:00,921 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 15:44:00,985 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 15:44:00,992 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 15:44:00,997 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 15:44:01,001 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 15:44:01,162 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 15:44:01,505 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 15:44:01,722 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 15:44:01,731 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 15:44:01,734 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 15:44:01,736 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 15:44:03,576 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap3i6n41k4kx23|118d0e8, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap3i6n41k4kx23|118d0e8, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 15:44:04,070 INFO  [org.hibernate.dialect.Dialect] (main) HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-05-28 15:44:04,083 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] (main) HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2020-05-28 15:44:04,249 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] (main) HHH000399: Using default transaction strategy (direct JDBC transactions)
+2020-05-28 15:44:04,256 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] (main) HHH000397: Using ASTQueryTranslatorFactory
+2020-05-28 15:44:04,345 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 5.2.2.Final
+2020-05-28 15:44:05,764 WARN  [org.hibernate.hql.internal.ast.HqlSqlWalker] (main) [DEPRECATION] Encountered positional parameter near line 2, column 251 in HQL: [
+        from com.nec.asia.nic.comp.trans.domain.NicRejectionData a where (syncStatus is null or syncStatus = 'N') and exists (select 1 from com.nec.asia.nic.comp.trans.domain.NicTransaction b where b.transactionId=a.transactionId and b.issSiteCode = ?)
+    ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2020-05-28 15:44:06,231 INFO  [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] (main) Creating Service {http://cmd.spec.baf.asia.nec.com/}BioCommandServiceService from class com.nec.asia.baf.spec.cmd.BioCommandService
+2020-05-28 15:44:14,278 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] (main) Using DataSource [com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap3i6n41k4kx23|118d0e8, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap3i6n41k4kx23|118d0e8, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]] of Hibernate SessionFactory for HibernateTransactionManager
+2020-05-28 15:45:54,559 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@ecea5e: startup date [Thu May 28 15:45:54 ICT 2020]; root of context hierarchy
+2020-05-28 15:45:54,633 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 15:45:54,855 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 15:45:54,877 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:45:54,886 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 15:45:54,895 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 15:45:54,905 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:45:54,915 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 15:45:54,923 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 15:45:56,213 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 15:45:56,216 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 15:45:56,216 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 15:45:56,216 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 15:45:56,216 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 15:45:56,217 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 15:45:56,217 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 15:45:56,217 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 15:45:56,387 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 15:45:56,688 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 15:45:56,868 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 15:45:56,878 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 15:45:56,880 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 15:45:56,881 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 15:45:57,581 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap3knk2n0vx0x|132299b, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap3knk2n0vx0x|132299b, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 15:45:58,027 INFO  [org.hibernate.dialect.Dialect] (main) HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-05-28 15:45:58,041 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] (main) HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2020-05-28 15:45:58,201 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] (main) HHH000399: Using default transaction strategy (direct JDBC transactions)
+2020-05-28 15:45:58,208 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] (main) HHH000397: Using ASTQueryTranslatorFactory
+2020-05-28 15:45:58,287 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 5.2.2.Final
+2020-05-28 15:45:59,677 WARN  [org.hibernate.hql.internal.ast.HqlSqlWalker] (main) [DEPRECATION] Encountered positional parameter near line 2, column 251 in HQL: [
+        from com.nec.asia.nic.comp.trans.domain.NicRejectionData a where (syncStatus is null or syncStatus = 'N') and exists (select 1 from com.nec.asia.nic.comp.trans.domain.NicTransaction b where b.transactionId=a.transactionId and b.issSiteCode = ?)
+    ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2020-05-28 15:46:00,112 INFO  [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] (main) Creating Service {http://cmd.spec.baf.asia.nec.com/}BioCommandServiceService from class com.nec.asia.baf.spec.cmd.BioCommandService
+2020-05-28 15:46:07,765 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] (main) Using DataSource [com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap3knk2n0vx0x|132299b, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap3knk2n0vx0x|132299b, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]] of Hibernate SessionFactory for HibernateTransactionManager
+2020-05-28 15:47:59,926 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9e414: startup date [Thu May 28 15:47:59 ICT 2020]; root of context hierarchy
+2020-05-28 15:47:59,999 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 15:48:00,222 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 15:48:00,243 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:48:00,254 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 15:48:00,261 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 15:48:00,272 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:48:00,283 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 15:48:00,290 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 15:48:01,509 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 15:48:01,512 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 15:48:01,512 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 15:48:01,513 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 15:48:01,514 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 15:48:01,514 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 15:48:01,514 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 15:48:01,514 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 15:48:01,657 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 15:48:01,967 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 15:48:02,152 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 15:48:02,160 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 15:48:02,162 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 15:48:02,164 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 15:48:02,827 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap3nc7i1x8ry0|12965ca, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap3nc7i1x8ry0|12965ca, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 15:48:03,282 INFO  [org.hibernate.dialect.Dialect] (main) HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-05-28 15:48:03,296 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] (main) HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2020-05-28 15:48:03,455 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] (main) HHH000399: Using default transaction strategy (direct JDBC transactions)
+2020-05-28 15:48:03,459 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] (main) HHH000397: Using ASTQueryTranslatorFactory
+2020-05-28 15:48:03,541 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 5.2.2.Final
+2020-05-28 15:48:04,878 WARN  [org.hibernate.hql.internal.ast.HqlSqlWalker] (main) [DEPRECATION] Encountered positional parameter near line 2, column 251 in HQL: [
+        from com.nec.asia.nic.comp.trans.domain.NicRejectionData a where (syncStatus is null or syncStatus = 'N') and exists (select 1 from com.nec.asia.nic.comp.trans.domain.NicTransaction b where b.transactionId=a.transactionId and b.issSiteCode = ?)
+    ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2020-05-28 15:48:05,305 INFO  [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] (main) Creating Service {http://cmd.spec.baf.asia.nec.com/}BioCommandServiceService from class com.nec.asia.baf.spec.cmd.BioCommandService
+2020-05-28 15:48:13,096 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] (main) Using DataSource [com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap3nc7i1x8ry0|12965ca, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap3nc7i1x8ry0|12965ca, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]] of Hibernate SessionFactory for HibernateTransactionManager
+2020-05-28 15:58:09,224 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1e79c77: startup date [Thu May 28 15:58:09 ICT 2020]; root of context hierarchy
+2020-05-28 15:58:09,297 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 15:58:09,518 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 15:58:09,538 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:58:09,548 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 15:58:09,555 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 15:58:09,566 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:58:09,578 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 15:58:09,585 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 15:58:10,782 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 15:58:10,785 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 15:58:10,785 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 15:58:10,785 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 15:58:10,785 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 15:58:10,787 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 15:58:10,787 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 15:58:10,787 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 15:58:10,935 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 15:58:11,255 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 15:58:11,437 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 15:58:11,444 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 15:58:11,446 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 15:58:11,448 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 15:58:12,109 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge2k0aap40ebw1bwbi7u|d9f0f8, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge2k0aap40ebw1bwbi7u|d9f0f8, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 15:58:32,086 WARN  [com.mchange.v2.async.ThreadPoolAsynchronousRunner] (Timer-0) com.mchange.v2.async.ThreadPoolAsynchronousRunner$DeadlockDetector@1445d30 -- APPARENT DEADLOCK!!! Creating emergency threads for unassigned pending tasks!
+2020-05-28 15:58:32,089 WARN  [com.mchange.v2.async.ThreadPoolAsynchronousRunner] (Timer-0) com.mchange.v2.async.ThreadPoolAsynchronousRunner$DeadlockDetector@1445d30 -- APPARENT DEADLOCK!!! Complete Status: 
+	Managed Threads: 3
+	Active Threads: 3
+	Active Tasks: 
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@f2f442 (com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1)
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@8245a6 (com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0)
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@aacae4 (com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2)
+	Pending Tasks: 
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@ee5fe7
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@1da3d52
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@f00ef0
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@64d4ff
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@1dbdda8
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@1b57d0b
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask@2478b9
+Pool thread stack traces:
+	Thread[com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2,5,main]
+		java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+		java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+		java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+		java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+		java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+		java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+		java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+		java.net.Socket.connect(Socket.java:579)
+		oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:150)
+		oracle.net.nt.ConnOption.connect(ConnOption.java:133)
+		oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:370)
+		oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:434)
+		oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:687)
+		oracle.net.ns.NSProtocol.connect(NSProtocol.java:247)
+		oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1102)
+		oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:320)
+		oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:546)
+		oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:236)
+		oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+		oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:521)
+		com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:135)
+		com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
+		com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
+		com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
+		com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
+		com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
+		com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+	Thread[com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0,5,main]
+		java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+		java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+		java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+		java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+		java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+		java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+		java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+		java.net.Socket.connect(Socket.java:579)
+		oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:150)
+		oracle.net.nt.ConnOption.connect(ConnOption.java:133)
+		oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:370)
+		oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:434)
+		oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:687)
+		oracle.net.ns.NSProtocol.connect(NSProtocol.java:247)
+		oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1102)
+		oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:320)
+		oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:546)
+		oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:236)
+		oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+		oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:521)
+		com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:135)
+		com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
+		com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
+		com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
+		com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
+		com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
+		com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+	Thread[com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1,5,main]
+		java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+		java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+		java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+		java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+		java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+		java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+		java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+		java.net.Socket.connect(Socket.java:579)
+		oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:150)
+		oracle.net.nt.ConnOption.connect(ConnOption.java:133)
+		oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:370)
+		oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:434)
+		oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:687)
+		oracle.net.ns.NSProtocol.connect(NSProtocol.java:247)
+		oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1102)
+		oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:320)
+		oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:546)
+		oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:236)
+		oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+		oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:521)
+		com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:135)
+		com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
+		com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
+		com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
+		com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
+		com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
+		com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
+		com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+
+
+2020-05-28 15:59:31,601 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1e79c77: startup date [Thu May 28 15:59:31 ICT 2020]; root of context hierarchy
+2020-05-28 15:59:31,679 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 15:59:31,902 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 15:59:31,922 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:59:31,932 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 15:59:31,940 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 15:59:31,950 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 15:59:31,962 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 15:59:31,971 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 15:59:33,165 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 15:59:33,167 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 15:59:33,168 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 15:59:33,168 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 15:59:33,169 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 15:59:33,169 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 15:59:33,170 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 15:59:33,170 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 15:59:33,319 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 15:59:33,631 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 15:59:33,817 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 15:59:33,824 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 15:59:33,826 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 15:59:33,828 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 15:59:34,497 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap425wapfuub6|d9f0f8, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap425wapfuub6|d9f0f8, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 15:59:35,001 INFO  [org.hibernate.dialect.Dialect] (main) HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-05-28 15:59:35,012 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] (main) HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2020-05-28 15:59:35,175 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] (main) HHH000399: Using default transaction strategy (direct JDBC transactions)
+2020-05-28 15:59:35,179 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] (main) HHH000397: Using ASTQueryTranslatorFactory
+2020-05-28 15:59:35,262 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 5.2.2.Final
+2020-05-28 15:59:36,615 WARN  [org.hibernate.hql.internal.ast.HqlSqlWalker] (main) [DEPRECATION] Encountered positional parameter near line 2, column 251 in HQL: [
+        from com.nec.asia.nic.comp.trans.domain.NicRejectionData a where (syncStatus is null or syncStatus = 'N') and exists (select 1 from com.nec.asia.nic.comp.trans.domain.NicTransaction b where b.transactionId=a.transactionId and b.issSiteCode = ?)
+    ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2020-05-28 15:59:37,047 INFO  [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] (main) Creating Service {http://cmd.spec.baf.asia.nec.com/}BioCommandServiceService from class com.nec.asia.baf.spec.cmd.BioCommandService
+2020-05-28 15:59:44,576 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] (main) Using DataSource [com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap425wapfuub6|d9f0f8, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap425wapfuub6|d9f0f8, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]] of Hibernate SessionFactory for HibernateTransactionManager
+2020-05-28 16:33:33,335 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@ebdfff: startup date [Thu May 28 16:33:33 ICT 2020]; root of context hierarchy
+2020-05-28 16:33:33,406 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 16:33:33,609 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 16:33:33,629 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 16:33:33,641 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 16:33:33,650 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 16:33:33,662 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 16:33:33,673 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 16:33:33,681 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 16:33:34,767 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 16:33:34,770 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 16:33:34,770 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 16:33:34,771 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 16:33:34,771 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 16:33:34,772 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 16:33:34,772 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 16:33:34,772 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 16:33:34,890 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 16:33:35,185 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 16:33:35,326 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 16:33:35,333 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 16:33:35,335 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 16:33:35,336 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 16:33:35,911 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge2k0aap59x6l19dnivd|1669625, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge2k0aap59x6l19dnivd|1669625, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 17:20:01,717 INFO  [org.springframework.context.support.ClassPathXmlApplicationContext] (main) Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@d1851a: startup date [Thu May 28 17:20:01 ICT 2020]; root of context hierarchy
+2020-05-28 17:20:01,794 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-context.xml]
+2020-05-28 17:20:02,022 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [spring-hibernate.xml]
+2020-05-28 17:20:02,043 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 17:20:02,052 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services.xml]
+2020-05-28 17:20:02,060 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-properties.xml]
+2020-05-28 17:20:02,070 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-dao.xml]
+2020-05-28 17:20:02,081 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-service-reportData.xml]
+2020-05-28 17:20:02,089 INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] (main) Loading XML bean definitions from class path resource [com/nec/asia/nic/resources/spring/services/spring-services-idserver.xml]
+2020-05-28 17:20:03,334 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4. Current configured valueList keys: [default, HP,THANHTU,MIS160500012,CHRIS-WONG,GIS-2CE-VNEPPDB, HP,THANHTU,CHRIS-WONGNB,GIS-2CE-BAF, BAF-NIC, BAF-NIC-DEV, PEPP01,PEPP02]
+2020-05-28 17:20:03,337 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Cannot find valueList for hostname: DESKTOP-GPG48U4
+2020-05-28 17:20:03,337 WARN  [com.nec.asia.nic.utils.HostnameAwareList] (main) Trying to fallback on default list
+2020-05-28 17:20:03,337 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/webservices.properties]
+2020-05-28 17:20:03,338 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/idserver.properties]
+2020-05-28 17:20:03,338 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/ldap.properties]
+2020-05-28 17:20:03,338 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/nic.properties]
+2020-05-28 17:20:03,339 INFO  [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer] (main) Loading properties file from class path resource [com/nec/asia/nic/resources/properties/quartz.properties]
+2020-05-28 17:20:03,517 INFO  [com.mchange.v2.log.MLog] (main) MLog clients using log4j logging.
+2020-05-28 17:20:03,813 INFO  [com.mchange.v2.c3p0.C3P0Registry] (main) Initializing c3p0-0.9.1.1 [built 15-March-2007 01:32:31; debug? true; trace: 10]
+2020-05-28 17:20:04,003 INFO  [org.hibernate.annotations.common.Version] (main) HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2020-05-28 17:20:04,010 INFO  [org.hibernate.Version] (main) HHH000412: Hibernate Core {4.3.11.Final}
+2020-05-28 17:20:04,013 INFO  [org.hibernate.cfg.Environment] (main) HHH000206: hibernate.properties not found
+2020-05-28 17:20:04,015 INFO  [org.hibernate.cfg.Environment] (main) HHH000021: Bytecode provider name : javassist
+2020-05-28 17:20:04,698 INFO  [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] (main) Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap6xowm12ljtzc|1782747, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap6xowm12ljtzc|1782747, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+2020-05-28 17:20:05,168 INFO  [org.hibernate.dialect.Dialect] (main) HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2020-05-28 17:20:05,178 INFO  [org.hibernate.engine.jdbc.internal.LobCreatorBuilder] (main) HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2020-05-28 17:20:05,341 INFO  [org.hibernate.engine.transaction.internal.TransactionFactoryInitiator] (main) HHH000399: Using default transaction strategy (direct JDBC transactions)
+2020-05-28 17:20:05,346 INFO  [org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory] (main) HHH000397: Using ASTQueryTranslatorFactory
+2020-05-28 17:20:05,427 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 5.2.2.Final
+2020-05-28 17:20:06,806 WARN  [org.hibernate.hql.internal.ast.HqlSqlWalker] (main) [DEPRECATION] Encountered positional parameter near line 2, column 251 in HQL: [
+        from com.nec.asia.nic.comp.trans.domain.NicRejectionData a where (syncStatus is null or syncStatus = 'N') and exists (select 1 from com.nec.asia.nic.comp.trans.domain.NicTransaction b where b.transactionId=a.transactionId and b.issSiteCode = ?)
+    ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2020-05-28 17:20:07,226 INFO  [org.apache.cxf.wsdl.service.factory.ReflectionServiceFactoryBean] (main) Creating Service {http://cmd.spec.baf.asia.nec.com/}BioCommandServiceService from class com.nec.asia.baf.spec.cmd.BioCommandService
+2020-05-28 17:20:14,951 INFO  [org.springframework.orm.hibernate4.HibernateTransactionManager] (main) Using DataSource [com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 5, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge1abaap6xowm12ljtzc|1782747, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> oracle.jdbc.driver.OracleDriver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge1abaap6xowm12ljtzc|1782747, idleConnectionTestPeriod -> 0, initialPoolSize -> 10, jdbcUrl -> jdbc:oracle:thin:@20.1.9.18:1521:epptw, lastAcquisitionFailureDefaultUser -> null, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 100, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]] of Hibernate SessionFactory for HibernateTransactionManager

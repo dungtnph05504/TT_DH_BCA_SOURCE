@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 	<class name="com.nec.asia.nic.comp.trans.domain.EppRecieptManager" table="EPP_CENTRAL.EPP_RECEIPT">
+		<!-- <id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_RECIEPT_MANAGER_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id> -->
+		<id name="recieptNo" type="string">
+			<column name="RECIEPT_NO" length="200" />
+			<generator class="assigned" />
+		</id>
+  <!-- 		<property name="recieptNo" type="string">
+			<column name="RECIEPT_NO" length="200">
+				<comment></comment>
+			</column>
+		</property> -->
+		<property name="officeName" type="string">
+			<column name="OFFICE_NAME" length="250">
+				<comment></comment>
+			</column>
+		</property>		
+		<property name="fullname" type="string">
+			<column name="FULL_NAME" length="250">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dob" type="timestamp">
+			<column name="DOB" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="phone" type="string">
+			<column name="PHONE" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="ADDRESS" length="200">
+				<comment></comment>
+			</column>
+		</property>	
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyDate" type="timestamp">
+			<column name="MODIFY_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="modifyBy" type="string">
+			<column name="MODIFY_BY" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ninNumber" type="string">
+			<column name="NIN_NUMBER" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="paymentFlag" type="string">
+			<column name="PAYMENT_FLAG" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="paymentAmount" type="java.lang.Double">
+			<column name="PAYMENT_AMOUNT" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateDob" type="string">
+			<column name="DATE_DOB" length="2">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="regSiteCode" type="string">
+			<column name="REG_SITE_CODE" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfIssue" type="string">
+			<column name="DATE_OF_ISSUE" length="8">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateInWeek" type="string">
+			<column name="DATE_IN_WEEK" length="30">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="note" type="string">
+			<column name="NOTE" length="400">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfReceipt" type="string">
+			<column name="PLACE_OF_RECEIPT" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deliveryAtOffice" type="yes_no">
+			<column name="DELIVERY_AT_OFFICE" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deliveryOffice" type="string">
+			<column name="DELIVERY_OFFICE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="amountOfPassport" type="int">
+			<column name="AMOUNT_OF_PASSPORT" precision="3" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="amountOfRegistration" type="int">
+			<column name="AMOUNT_OF_REGISTRATION" precision="3" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="amountOfPerson" type="int">
+			<column name="AMOUNT_OF_PERSON" precision="3" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="amountOfImage" type="int">
+			<column name="AMOUNT_OF_IMAGE" precision="3" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="documentType" type="string">
+			<column name="DOCUMENT_TYPE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="prevPassportNo" type="string">
+			<column name="PREV_PASSPORT_NO" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="addedDocuments" type="string">
+			<column name="ADDED_DOCUMENTS" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="documentaryNo" type="string">
+			<column name="DOCUMENTARY_NO" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="documentaryIssued" type="string">
+			<column name="DOCUMENTARY_ISSUED" length="8">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="isDelivered" type="string">
+			<column name="IS_DELIVERED" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="isPostOffice" type="yes_no">
+			<column name="IS_POST_OFFICE" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="noteOfDelivery" type="string">
+			<column name="NOTE_OF_DELIVERY" length="400">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="signName" type="string">
+			<column name="SIGN_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="docOfDelivery" type="string">
+			<column name="DOC_OF_DELIVERY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="docmentaryOffice" type="string">
+			<column name="DOCUMENTARY_OFFICE" length="400">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="docmentaryAddress" type="string">
+			<column name="DOCUMENTARY_ADDRESS" length="400">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="listCode" type="string">
+			<column name="LIST_CODE" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="inputCompleted" type="yes_no">
+			<column name="INPUT_COMPLETED" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		
+		<property name="deletedDate" type="timestamp">
+			<column name="DELETED_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deletedBy" type="string">
+			<column name="DELETED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deletedName" type="string">
+			<column name="DELETED_NAME" length="150">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deletedReason" type="string">
+			<column name="DELETED_REASON" length="300">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createByName" type="string">
+			<column name="CREATE_BY_NAME" length="120">
+				<comment>CREATE_BY_NAME</comment>
+			</column>
+		</property>
+		<property name="receivedBy" type="string">
+			<column name="RECEIVED_BY" length="120">
+				<comment>RECEIVED_BY</comment>
+			</column>
+		</property>
+ 	</class>
+</hibernate-mapping>

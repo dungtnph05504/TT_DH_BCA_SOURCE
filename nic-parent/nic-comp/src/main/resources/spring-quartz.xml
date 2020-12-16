@@ -1,0 +1,287 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+	<!--
+		/*
+		* Modification History:
+		*
+		* 18 Dec 2015 (chris): commented ResetIOJob, ReconReportJob, resetIOJobCronTrigger, reconReportJobCronTrigger
+		* 01 Apr 2016 (chris): change ReprocessStuckJob to run on 2,8,14,20 (every 6 hours)
+        * 16 Aug 2016 (chris): change ReprocessStuckJob to run on every 30 minutes.
+		*/
+	-->
+	<import resource="spring-context.xml" />
+
+<!-- 	<bean id="jobScheduleService" class="com.nec.asia.nic.framework.job.scheduler.impl.JobScheduleServiceImpl">
+		<property name="dao" ref="jobScheduleDao" />
+		<property name="scheduler" ref="quartzScheduler" />
+	</bean>
+ -->
+
+	<bean id="reportDataAccessDao" class="com.nec.asia.nic.comp.job.dao.impl.ReportDataAccessDaoImpl" parent="abstractDao">
+		<property name="dataSource" ref="datasource" />
+	</bean>
+	<bean id="reportDataAccessService" class="com.nec.asia.nic.comp.job.service.impl.ReportDataAccessServiceImpl">
+		<property name="dao" ref="reportDataAccessDao" />
+	</bean>
+
+	<bean id="transactionTask" class="com.nec.asia.nic.comp.job.TransactionTask" scope="prototype">
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="NTHREDS" value="${nic.job.threadpool}" />
+	</bean>
+
+	<bean id="reprocessTask" class="com.nec.asia.nic.comp.job.TransactionReprocessTask" scope="prototype">
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="NTHREDS" value="${nic.job.threadpool}" />
+	</bean>
+
+	<bean id="syncPassportTask" class="com.nec.asia.nic.comp.job.SyncPassportTask" scope="prototype">
+		<property name="queuesJobScheduleService" ref="queuesJobScheduleService" />
+		<property name="NTHREDS" value="${nic.job.threadpool}" />
+	</bean>
+	
+	<bean id="ldsProcessTask" class="com.nec.asia.nic.comp.job.LdsProcessTask" scope="prototype">
+		<property name="queuesJobScheduleService" ref="queuesJobScheduleService" />
+		<property name="NTHREDS" value="${nic.job.threadpool}" />
+	</bean>
+
+	<bean id="dailyTask" class="com.nec.asia.nic.comp.job.DailyTask" scope="prototype">
+		<property name="uploadJobService" ref="uploadJobService" />
+		<property name="reportDataAccessService" ref="reportDataAccessService" />
+
+	</bean>
+	
+	<!-- 	Job Detail - NIC Verification Job -->
+	<bean name="NicVerificationJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.TransactionProcessing" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="transactionTask" value-ref="transactionTask" />
+			</map>
+		</property>
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used -->
+	<bean id="jobVerifyTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="NicVerificationJob" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="30000" />
+	</bean>
+	
+	<!-- 	Job Detail - NIC SYNC PASSPORT -->
+	<bean name="NicSyncPassportJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.SyncPassport" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="syncPassportTask" value-ref="syncPassportTask" />
+			</map>
+		</property>
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used -->
+	<bean id="jobSyncPassportTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="NicSyncPassportJob" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="30000" />
+	</bean>
+	
+	<!-- 	Job Detail - NIC LDS PROCESS -->
+	<bean name="NicLdsProcessJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.LdsProcess" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="ldsProcessTask" value-ref="ldsProcessTask" />
+			</map>
+		</property>
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used -->
+	<bean id="jobLdsProcessTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="NicLdsProcessJob" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="30000" />
+	</bean>
+	
+	<!-- 	Job Detail - NIC Daily Job for stored proc-->
+	<bean name="NicDailyJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.StoredProcDailyJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="dailyTask" value-ref="dailyTask" />
+			</map>
+		</property>
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for daily job-->
+	<bean id="dailyJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="NicDailyJob" />
+		<property name="cronExpression" value="0 30 0 * * ?" />
+	</bean>
+	
+	<!-- 	Job Detail - NIC Recon Report Data Generation -->
+	<bean name="ReconReportJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.ReconReportDataGenerationJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used NIC Recon Report Data Generation -->
+	<bean id="reconReportJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="ReconReportJob" />
+		<property name="cronExpression" value="0 15 0,6,12,18 * * ?" />
+	</bean>
+	
+	<!-- 	Job Detail - Reset Investigation Officer ID -->
+	<bean name="ResetIOJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.InvestigationOfficerIdDailyResetJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for Resetting Investigation Officer ID Daily -->
+	<bean id="resetIOJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="ResetIOJob" />
+		<property name="cronExpression" value="0 30 0 * * ?" />
+	</bean>
+	
+	<!-- 	Job Detail - Reprocess Stuck Transactions-->
+	<bean name="ReprocessStuckJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.TransactionReprocessJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="reprocessTask" value-ref="reprocessTask" />
+			</map>
+		</property>
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for Reprocess Stuck Transactions -->
+	<bean id="reprocessJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="ReprocessStuckJob" />
+		<property name="cronExpression" value="15,45 * * * * ?" />
+	</bean>
+
+	<!-- 	Job Detail - Update Perso Status Job -->
+	<bean name="UpdatePersoStatusJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.UpdatePersoStatusJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for Update Perso Status-->
+	<bean id="persoStatusTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="UpdatePersoStatusJob" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="120000" />
+	</bean>
+
+
+	<!-- 	Job Detail - Update Perso Dispatch Info Job -->
+	<bean name="UpdateDispatchInfoJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.UpdateDispatchInfoJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for Update Perso Dispatch Info-->
+	<bean id="dispatchInfoTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="UpdateDispatchInfoJob" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="60000" />
+	</bean>
+
+	<!-- 	Job Detail - Sync Dispatch Status to Inventory Job -->
+	<bean name="InventorySyncJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.InventorySyncJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for Sync Dispatch Status to Inventory-->
+	<bean id="inventorySyncTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="InventorySyncJob" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="60000" />
+	</bean>
+	
+		<!-- 	Job Detail - Re-Sync Dispatch Status to Inventory Job -->
+	<bean name="InventoryReprocessSyncJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.nec.asia.nic.comp.job.InventoryReprocessSyncJob" />
+		<property name="durability" value="true" />
+	</bean>
+	
+	<!-- 	Trigger Used for Sync Dispatch Status to Inventory-->
+	<bean id="inventoryReprocessSyncTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="InventoryReprocessSyncJob" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="300000" />
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="quartzProperties">
+			<props>
+				<prop key="org.quartz.scheduler.instanceId">${quartz.scheduler.instanceId}</prop>
+				<prop key="org.quartz.scheduler.instanceName">${quartz.scheduler.instanceName}</prop>
+				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+				<prop key="org.quartz.threadPool.threadCount">${quartz.threadPool.threadCount}</prop>
+				<prop key="org.quartz.threadPool.threadPriority">${quartz.threadPool.threadPriority}</prop>
+				<prop key="org.quartz.jobStore.misfireThreshold">${quartz.jobStore.misfireThreshold}</prop>
+
+				<prop key="org.quartz.jobStore.class">org.springframework.scheduling.quartz.LocalDataSourceJobStore</prop>
+				<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.oracle.OracleDelegate</prop>
+				<prop key="org.quartz.jobStore.tablePrefix">PPAPP.QRTZ_</prop>
+				<prop key="org.quartz.jobStore.isClustered">${quartz.jobStore.isClustered}</prop>
+				<prop key="org.quartz.jobStore.useProperties">false</prop>
+				<prop key="org.quartz.jobStore.selectWithLockSQL">SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?</prop>
+				<!-- Plugins -->
+				<prop key="org.quartz.plugin.shutdownhook.cleanShutdown">true</prop>
+				<prop key="org.quartz.plugin.shutdownhook.class">org.quartz.plugins.management.ShutdownHookPlugin</prop>
+				<prop key="org.quartz.plugin.triggHistory.class">org.quartz.plugins.history.LoggingTriggerHistoryPlugin</prop>
+				<prop key="org.quartz.plugin.triggHistory.triggerFiredMessage">Trigger {1}.{0} fired job {6}.{5} at: {4, date, HH:mm:ss MM/dd/yyyy}</prop>
+				<prop key="org.quartz.plugin.triggHistory.triggerCompleteMessage">Trigger {1}.{0} completed firing job {6}.{5} at {4, date, HH:mm:ss MM/dd/yyyy}.
+				</prop>
+
+				<prop key="org.quartz.scheduler.classLoadHelper.class">org.quartz.simpl.CascadingClassLoadHelper</prop>
+			</props>
+		</property>
+
+		<property name="triggers">
+			<list>
+				<ref bean="jobSyncPassportTrigger" />
+				<ref bean="jobLdsProcessTrigger" />
+				<ref bean="jobVerifyTrigger" />
+				<ref bean="reprocessJobCronTrigger" />
+				<ref bean="dailyJobCronTrigger" />
+				<ref bean="persoStatusTrigger" />
+				<ref bean="dispatchInfoTrigger" />
+				<ref bean="inventorySyncTrigger" />
+				<ref bean="inventoryReprocessSyncTrigger" />
+				
+			</list>
+		</property>
+
+		<property name="jobDetails">
+			<list>
+				<ref bean="NicLdsProcessJob" />
+				<ref bean="NicSyncPassportJob" />
+				<ref bean="NicVerificationJob" />
+				<ref bean="ReprocessStuckJob" />
+				<ref bean="NicDailyJob" />
+				<ref bean="UpdatePersoStatusJob" />
+				<ref bean="UpdateDispatchInfoJob" />
+				<ref bean="InventorySyncJob" />
+				<ref bean="InventoryReprocessSyncJob" />
+			</list>
+		</property>
+
+		<property name="dataSource" ref="datasource" />
+
+		<property name="transactionManager" ref="txManager" />
+		<property name="schedulerName" value="${quartz.scheduler.instanceName}" />
+		<property name="autoStartup" value="${quartz.autoStartup}" />
+		<property name="startupDelay" value="${quartz.startupDelay}" /> 
+		<!-- requires if on JTA -->
+		<!-- <property name="nonTransactionalDataSource" ref="${quartz.datasource}"/> -->
+	</bean>
+
+	<bean id="org.quartz.JobListener" class="com.nec.asia.nic.comp.job.listener.NicJobExecutionListener" />
+	<!-- <bean id="org.quartz.TriggerListener" class="com.nec.asia.nic.framework.job.scheduler.JobScheduleTriggerListener"/> -->
+
+</beans>

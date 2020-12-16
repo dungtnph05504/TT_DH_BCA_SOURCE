@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 10:20:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.framework.admin.code.domain.ParaSignerCompares" table="ParaSignerCompares">
+  		<id name="id" type="long">
+			<column name="ID" precision="20" scale="0" />
+		</id>
+		<property name="package_id" type="string">
+			<column name="PACKAGE_ID" length="40"/>
+		</property>
+		<property name="package_name" type="string">
+			<column name="PACKAGE_NAME" length="100"/>
+		</property>
+		<property name="transaction_id" type="string">
+			<column name="TRANSACTION_ID" length="50"/>
+		</property>
+		<property name="type_list" type="int">
+			<column name="TYPE_LIST"/>
+		</property>
+		<property name="createBy" type="string">
+			<column name="CREATE_BY" length="30" />
+		</property>
+		<property name="createDate" type="timestamp">
+			<column name="CREATE_DATE" length="7"/>
+		</property>
+		<property name="updateDate" type="timestamp">
+			<column name="UPDATE_DATE" length="7"/>
+		</property>
+		<property name="updateBy" type="string">
+			<column name="UPDATE_BY" length="30"/>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" />
+		</property>
+ </class>
+</hibernate-mapping>

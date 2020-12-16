@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 1, 2016 9:50:15 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+	<class name="com.nec.asia.nic.comp.trans.domain.NicTransactionLost" table="EPP_CENTRAL.EPP_TRANSACTION_LOST" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="10" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_TRANSACTION_LOST_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<!-- <property name="archiveCode" type="string">
+			<column name="ARCHIVE_CODE" length="30">
+				<comment>Số hồ sơ lưu</comment>
+			</column>
+		</property> -->
+		<property name="updatedDate" type="timestamp">
+			<column name="UPDATED_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedBy" type="string">
+			<column name="UPDATED_BY" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="transactionId" type="string">
+			<column name="TRASACTION_ID" length="36">
+				<comment>Số hồ sơ</comment>
+			</column>
+		</property>
+		<property name="reason" type="string">
+			<column name="REASON" length="2000">
+				<comment>Lý do hủy</comment>
+			</column>
+		</property>
+		<property name="personCode" type="string">
+			<column name="PERSON_CODE" length="20">
+				<comment>Mã cá nhân</comment>
+			</column>
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="20">
+				<comment>Số hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="officeOfDiplomaCode" type="string">
+			<column name="OFFICE_OF_DIPLOMA_CODE" length="20">
+				<comment>Cơ quan gửi công văn</comment>
+			</column>
+		</property>
+		<property name="officeCode" type="string">
+			<column name="OFFICE_CODE" length="10">
+				<comment>Cơ quan đăng ký</comment>
+			</column>
+		</property>
+		<property name="note" type="string">
+			<column name="NOTE" length="2000">
+				<comment>Ghi chú</comment>
+			</column>
+		</property>
+		<property name="isSendNotification" type="yes_no">
+			<column name="IS_SEND_NOTIFICATION" length="1">
+				<comment>Gửi thông báo</comment>
+			</column>
+		</property>
+		<property name="isCancelPassportStatus" type="yes_no">
+			<column name="IS_CANCEL_PASSPORT_STATUS" length="1">
+				<comment>Cờ hủy hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="diplomaCode" type="string">
+			<column name="DIPLOMA_CODE" length="50">
+				<comment>Số công văn</comment>
+			</column>
+		</property>
+		<property name="dateOfRegister" type="timestamp">
+			<column name="DATE_OF_REGISTER" length="7">
+				<comment>Ngày đăng ký</comment>
+			</column>
+		</property>
+		<property name="dateOfDiploma" type="timestamp">
+			<column name="DATE_OF_DIPLOMA" length="7">
+				<comment>Ngày công văn</comment>
+			</column>
+		</property>
+		<property name="createdDate" type="timestamp">
+			<column name="CREATED_DATE" length="7">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" length="120">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="approverPosition" type="string">
+			<column name="APPROVER_POSITION" length="200">
+				<comment>Chức vụ</comment>
+			</column>
+		</property>
+		<property name="approverName" type="string">
+			<column name="APPROVER_NAME" length="120">
+				<comment>Người duyệt</comment>
+			</column>
+		</property>
+		<property name="approverLevel" type="string">
+			<column name="APPROVER_LEVEL" length="100">
+				<comment>Cấp bậc</comment>
+			</column>
+		</property>
+		<property name="docType" type="string">
+			<column name="DOC_TYPE" length="20">
+				<comment>Loại giấy tờ</comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="120">
+				<comment>Họ tên</comment>
+			</column>
+		</property>
+		<property name="searchName" type="string">
+			<column name="SEARCH_NAME" length="120">
+				<comment>Tên không dấu in hoa</comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="1">
+				<comment>Giới tính</comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="string">
+			<column name="DATE_OF_BIRTH" length="8">
+				<comment>Ngày sinh</comment>
+			</column>
+		</property>
+		<property name="placeOfBirthCode" type="string">
+			<column name="PLACE_OF_BIRTH_CODE" length="20">
+				<comment>Mã nơi sinh</comment>
+			</column>
+		</property>
+		<property name="nationalityCode" type="string">
+			<column name="NATIONALITY_CODE" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfDocIssue" type="timestamp">
+			<column name="DATE_OF_DOC_ISSUE" length="7">
+				<comment>Ngày cấp</comment>
+			</column>
+		</property>
+		<property name="dateOfDocExpiry" type="timestamp">
+			<column name="DATE_OF_DOC_EXPIRY" length="7">
+				<comment>Ngày hết hạn</comment>
+			</column>
+		</property>
+		<property name="rstApprovalDate" type="timestamp">
+			<column name="RST_APPROVAL_DATE" length="7">
+				<comment>Ngày khôi phục</comment>
+			</column>
+		</property>
+		<property name="rstApproverName" type="string">
+			<column name="RST_APPROVER_NAME" length="120">
+				<comment>Người phê duyệt</comment>
+			</column>
+		</property>
+		<property name="rstApproverPosition" type="string">
+			<column name="RST_APPROVER_POSITION" length="200">
+				<comment>Chức vụ người phê duyệt</comment>
+			</column>
+		</property>
+		<property name="rstApproverLevel" type="string">
+			<column name="RST_APPROVER_LEVEL" length="200">
+				<comment>Cấp bậc</comment>
+			</column>
+		</property>
+		<property name="rstDiplomaCode" type="string">
+			<column name="RST_DIPLOMA_CODE" length="50">
+				<comment>Sô công văn</comment>
+			</column>
+		</property>
+		<property name="rstDiplomaDate" type="timestamp">
+			<column name="RST_DIPLOMA_DATE" length="7">
+				<comment>Ngày công văn</comment>
+			</column>
+		</property>
+		<property name="rstNote" type="string">
+			<column name="RST_NOTE" length="500">
+				<comment>Lý do khôi phục</comment>
+			</column>
+		</property>
+		<property name="printer" type="yes_no">
+			<column name="PRINTER" length="1">
+				<comment>Trạng thái in: N chưa in, Y Đã in</comment>
+			</column>
+		</property>
+		<property name="sendDiplomaDate" type="timestamp">
+			<column name="SEND_DIPLOMA_DATE" length="7">
+				<comment>Ngày công văn đi</comment>
+			</column>
+		</property>
+		<property name="sendDiplomaCode" type="string">
+			<column name="SEND_DIPLOMA_CODE" length="50">
+				<comment>Sô công văn đi</comment>
+			</column>
+		</property>
+		<property name="sendSignName" type="string">
+			<column name="SEND_SIGN_NAME" length="120">
+				<comment>Người ký công văn đi</comment>
+			</column>
+		</property>
+		<property name="sendSignPosition" type="string">
+			<column name="SEND_SIGN_POSITION" length="120">
+				<comment>Chức vụ</comment>
+			</column>
+		</property>
+		<property name="sendSignLevel" type="string">
+			<column name="SEND_SIGN_LEVEL" length="120">
+				<comment>Cấp bậc</comment>
+			</column>
+		</property>
+		<property name="sendOfficeCode" type="string">
+			<column name="SEND_OFFICE_CODE" length="10">
+				<comment>Cơ quan gửi thông báo</comment>
+			</column>
+		</property>
+		<property name="sendIssue" type="string">
+			<column name="SEND_ISSUE" length="500">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="sendDear" type="string">
+			<column name="SEND_DEAR" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfIssueCode" type="string">
+			<column name="PLACE_OF_ISSUE_CODE" length="20">
+				<comment>Mã nơi cấp hộ chiếu</comment>
+			</column>
+		</property>
+		<property name="isCancelPhysical" type="yes_no">
+			<column name="IS_CANCEL_PHYSICAL" length="1">
+				<comment>Hủy vật lý: Y/N</comment>
+			</column>
+		</property>
+	</class>
+	
+	<!-- <sql-query name="getLostDocumentData">
+		<return-scalar column="dateC" type="date" />
+            <![CDATA[ 
+				SELECT * FROM EPP_CENTRAL.EPP_TRANSACTION_LOST 
+				WHERE TO_DATE(EPP_CENTRAL.EPP_TRANSACTION_LOST.CREATE_DATE,'DD/MM/YY') = TO_DATE((:dateC),'DD/MM/YY')
+				AND EPP_CENTRAL.EPP_TRANSACTION_LOST.PROCESS_STATUS = 'SUCCESS'
+            ]]>
+	</sql-query> -->
+</hibernate-mapping>

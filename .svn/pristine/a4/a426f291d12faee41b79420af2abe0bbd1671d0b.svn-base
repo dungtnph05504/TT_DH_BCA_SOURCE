@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2013 6:44:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.rbac.domain.Users" table="USERS" lazy="false">
+        <id name="userId" type="string">
+            <column name="USER_ID" length="64" />
+            <generator class="assigned" />
+        </id>
+        <property name="sysAdminFlag" type="org.hibernate.type.YesNoType">
+            <column name="SYS_ADMIN_FLAG" length="1">
+                <comment>System Administrator Account Indicator,(Y/N)</comment>
+            </column>
+        </property>
+        <property name="siteCode" type="string">
+            <column name="SITE_CODE" length="5">
+                <comment>Location site code assigned for the User</comment>
+            </column>
+        </property>
+        <property name="userStartDate" type="timestamp">
+            <column name="USER_START_DATE" length="7">
+                <comment>Start Date of User Account</comment>
+            </column>
+        </property>
+        <property name="userEndDate" type="timestamp">
+            <column name="USER_END_DATE" length="7">
+                <comment>End Date of User Account</comment>
+            </column>
+        </property>
+        <property name="activeIndicator" type="org.hibernate.type.YesNoType">
+            <column name="ACTIVE_INDICATOR" length="1">
+                <comment>Active Indicator of User Account(A: Active, I: Inactive, D: Disabled)</comment>
+            </column>
+        </property>
+        <property name="systemId" type="string">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="string">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="string">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="string">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="string">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="string">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="string">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDate" type="timestamp">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="org.hibernate.type.YesNoType">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+        <property name="dateOfPwdExpiry" type="timestamp">
+            <column name="DATE_OF_PWD_EXPIRY" length="7">
+                <comment>Date of Expiry of User Password</comment>
+            </column>
+        </property>
+         <property name="siteGroupCode" type="string">
+            <column name="SITE_GROUP_CODE" length="2">
+                <comment>Id Nhom trung tam</comment>
+            </column>
+        </property>
+        <property name="userName" type="string">
+            <column name="USER_NAME" length="250">
+               
+            </column>
+        </property>
+        <property name="position" type="string">
+            <column name="POSITION" length="25">
+                
+            </column>
+        </property>
+        <property name="department" type="string">
+            <column name="DEPARTMENT" length="20">
+                
+            </column>
+        </property>
+        <property name="passwordTemp" type="string">
+            <column name="PASSWORD_TEMP" length="50">
+                
+            </column>
+        </property>
+        <set name="roles" table="USERS_ROLES" lazy="false">
+        	<key>
+        		<column name="USER_ID" not-null="true"></column>
+        	</key>
+			<many-to-many entity-name="com.nec.asia.nic.framework.admin.rbac.domain.Roles" not-found="ignore"> 
+				<column name="ROLE_ID" not-null="true"></column>
+			</many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

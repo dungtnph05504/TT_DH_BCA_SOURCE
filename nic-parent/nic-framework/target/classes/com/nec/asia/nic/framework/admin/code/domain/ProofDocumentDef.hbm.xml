@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 10:20:55 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.nec.asia.nic.framework.admin.code.domain.ProofDocumentDef" table="PROOF_DOCUMENT_DEF">
+        <composite-id name="id" class="com.nec.asia.nic.framework.admin.code.domain.ProofDocumentDefId">
+            <key-property name="documentId" type="java.lang.String">
+                <column name="DOCUMENT_ID" length="16" />
+            </key-property>
+            <key-property name="transactionType" type="java.lang.String">
+                <column name="TRANSACTION_TYPE" length="10" />
+            </key-property>
+            <key-property name="transactionSubtype" type="java.lang.String">
+                <column name="TRANSACTION_SUBTYPE" length="30" />
+            </key-property>
+        </composite-id>
+        <property name="documentDesc" type="java.lang.String">
+            <column name="DOCUMENT_DESC" length="255">
+                <comment>Description of the Proof Document</comment>
+            </column>
+        </property>
+        <property name="requireIndicator" type="java.lang.String">
+            <column name="REQUIRE_INDICATOR" length="30" not-null="true">
+                <comment>Require Indicator to indicate the proof Document is Mandatory or Optional(M: Mandatory, O: Optional)</comment>
+            </column>
+        </property>
+        <property name="systemId" type="java.lang.String">
+            <column name="SYSTEM_ID" length="16">
+                <comment>System Id</comment>
+            </column>
+        </property>
+        <property name="createBy" type="java.lang.String">
+            <column name="CREATE_BY" length="64">
+                <comment>User Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createWkstnId" type="java.lang.String">
+            <column name="CREATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who create the record</comment>
+            </column>
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATE_DATETIME" length="7">
+                <comment>Date Time of creation for the record</comment>
+            </column>
+        </property>
+        <property name="updateBy" type="java.lang.String">
+            <column name="UPDATE_BY" length="64">
+                <comment>User Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateWkstnId" type="java.lang.String">
+            <column name="UPDATE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who update the record</comment>
+            </column>
+        </property>
+        <property name="updateDate" type="java.util.Date">
+            <column name="UPDATE_DATETIME" length="7">
+                <comment>Date Time of latest update for the record</comment>
+            </column>
+        </property>
+        <property name="deleteBy" type="java.lang.String">
+            <column name="DELETE_BY" length="64">
+                <comment>User Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteWkstnId" type="java.lang.String">
+            <column name="DELETE_WKSTN_ID" length="64">
+                <comment>Workstation Id of Officer who delete the record</comment>
+            </column>
+        </property>
+        <property name="deleteDate" type="java.util.Date">
+            <column name="DELETE_DATETIME" length="7">
+                <comment>Date Time of deletion for the record</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="java.lang.String">
+            <column name="DELETE_FLAG" length="1">
+                <comment>Delete Flag to indicate this record is deleted</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

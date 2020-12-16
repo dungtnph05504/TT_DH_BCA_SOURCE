@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppPerson" table="EPP_PERSON" optimistic-lock="version">
+		<id name="personId" type="long">
+			<column name="PERSON_ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_PERSON_SEQ_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="personCode" type="string">
+			<column name="PERSON_CODE" length="15">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="orgPerson" type="string">
+			<column name="ORG_PERSON" length="15">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="refId" type="string">
+			<column name="REF_ID" length="15">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="otherName" type="string">
+			<column name="OTHER_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="searchName" type="string">
+			<column name="SEARCH_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="string">
+			<column name="DATE_OF_BIRTH" length="8">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfBirthCode" type="string">
+			<column name="PLACE_OF_BIRTH_CODE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfBirthName" type="string">
+			<column name="PLACE_OF_BIRTH_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="idNumber" type="string">
+			<column name="ID_NUMBER" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfIdIssue" type="string">
+			<column name="DATE_OF_ID_ISSUE" length="8">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfIdIssueName" type="string">
+			<column name="PLACE_OF_ID_ISSUE_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ethnic" type="string">
+			<column name="ETHNIC" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="religion" type="string">
+			<column name="RELIGION" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ethnicCode" type="string">
+			<column name="ETHNIC_CODE" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="religionCode" type="string">
+			<column name="RELIGION_CODE" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nationalityName" type="string">
+			<column name="NATIONALITY_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nationalityCode" type="string">
+			<column name="NATIONALITY_CODE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fatherName" type="string">
+			<column name="FATHER_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="fatherSearchName" type="string">
+			<column name="FATHER_SEARCH_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="motherName" type="string">
+			<column name="MOTHER_NAME" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="motherSearchName" type="string">
+			<column name="MOTHER_SEARCH_NAME"  length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="countryOfBirth" type="string">
+			<column name="COUNTRY_OF_BIRTH"  length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY"  length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createTs" type="timestamp">
+			<column name="CREATE_TS"  length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedBy" type="string">
+			<column name="UPDATED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateTs" type="timestamp">
+			<column name="UPDATED_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="isChecked" type="yes_no">
+			<column name="IS_CHECKED" >
+				<comment></comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="500">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="srcOffice" type="string">
+			<column name="SRC_OFFICE" length="10">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="srcDoc" type="string">
+			<column name="SRC_DOC" length="50">
+				<comment></comment>
+			</column>
+		</property>
+<!-- 		<property name="createdByName" type="string">
+			<column name="CREATED_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property> -->
+<!-- 		<property name="updatedByName" type="string">
+			<column name="UPDATED_BY_NAME" length="120">
+				<comment></comment>
+			</column>
+		</property> -->
+<!-- 		<property name="status" type="string">
+			<column name="STATUS" length="10">
+				<comment></comment>
+			</column>
+		</property> -->
+	</class>
+</hibernate-mapping>

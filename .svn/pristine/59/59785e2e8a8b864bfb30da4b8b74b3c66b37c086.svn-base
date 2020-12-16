@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="
+http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- class="com.nec.asia.idserver.agent.framework.springSupport.SpringServiceManager" -->
+	<bean id="idserver.agent.SpringServiceManager"
+		class="com.nec.asia.idserver.agent.base.spring.SpringServiceManager">
+	</bean>
+	
+	<bean id="authInterceptor" class="com.nec.asia.idserver.agent.util.SystemTokenClientInterceptor">
+		<property name="systemId" value="${idserver.systemid}" />
+		<property name="systemPw" value="${idserver.password}" />
+	</bean>	
+	
+    <bean id="itfWS" class="com.nec.asia.baf.spec.cmd.BioCommandService"
+		factory-bean="itfWSFactory" factory-method="create" />
+
+	<bean id="itfWSFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="com.nec.asia.baf.spec.cmd.BioCommandService" />
+		<property name="bus" ref="defaultOutBus" />
+		<property name="address" value="${idserver.endpoint}" />
+	</bean>
+	
+	
+	<bean id="idserverWebserviceClient"
+		class="com.nec.asia.idserver.agent.client.impl.IdsvrWebserviceClientImpl" lazy-init="true">
+		<!--  
+		<property name="webserviceTimeoutMilli" value="${idserver.webserviceTimeoutMilli}"/>
+		<property name="stubPoolMaxActiveCount" value="${idserver.stubPoolMaxActiveCount}"/>
+		<property name="stubPoolMaxIdleCount" value="${idserver.stubPoolMaxIdleCount}"/>
+		-->
+	</bean>
+	
+	<bean id="idserverAgentService" class="com.nec.asia.idserver.agent.service.impl.IdserverAgentServiceImpl">
+		<property name="idsvrWebserviceClient" ref="idserverWebserviceClient" />
+		<property name="dataSource" value="${idserver.datasource}" />
+		<property name="systemId" value="${idserver.systemid}" />
+		<property name="biometricDataTypes" value="${idserver.match.datatypes}" />
+	</bean>	
+	
+	<cxf:bus name="defaultOutBus">
+        <cxf:features>
+            <cxf:logging limit="-1" />
+        </cxf:features>
+    </cxf:bus>
+</beans>

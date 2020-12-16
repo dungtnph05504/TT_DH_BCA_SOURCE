@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.EppBlacklist" table="EPP_CENTRAL.EPP_BLACKLIST" optimistic-lock="version">
+		<id name="id" type="long">
+			<column name="ID" precision="19" scale="0" />
+			<generator class="sequence">
+				<param name="sequence">EPP_CENTRAL.EPP_BLACKLIST_ID</param>
+				<param name="allocationSize">100</param>
+			</generator>
+		</id>
+		<property name="deleteTs" type="timestamp">
+			<column name="DELETE_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="deletedBy" type="string">
+			<column name="DELETED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updateTs" type="timestamp">
+			<column name="UPDATE_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="updatedBy" type="string">
+			<column name="UPDATED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createTs" type="timestamp">
+			<column name="CREATE_TS" length="6">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="createdBy" type="string">
+			<column name="CREATED_BY" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="NAME" length="255">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="searchName" type="string">
+			<column name="SEARCH_NAME" length="255">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="nickName" type="string">
+			<column name="NICK_NAME" length="255">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="dateOfBirth" type="string">
+			<column name="DATE_OF_BIRTH" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="GENDER" length="255">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="ethnic" type="string">
+			<column name="ETHNIC" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="religion" type="string">
+			<column name="RELIGION" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="originNationalityId" type="int">
+			<column name="ORIGIN_NATIONALITY_ID" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="currentNationalityId" type="int">
+			<column name="CURRENT_NATIONALITY_ID" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="occupation" type="string">
+			<column name="OCCUPATION" length="100">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="placeOfBirthId" type="int">
+			<column name="PLACE_OF_BIRTH_ID" precision="10" scale="0">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="passportNo" type="string">
+			<column name="PASSPORT_NO" length="9">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="idNumber" type="string">
+			<column name="ID_NUMBER" length="30">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="ADDRESS" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="residentAddress" type="string">
+			<column name="RESIDENT_ADDRESS" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="family" type="string">
+			<column name="FAMILY" length="300">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="regCause" type="string">
+			<column name="REG_CAUSE" length="800">
+				<comment></comment>
+			</column>
+		</property>
+		
+		<property name="basedOnDoc" type="string">
+			<column name="BASED_ON_DOC" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="note" type="string">
+			<column name="NOTE" length="1000">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngRegNo" type="string">
+			<column name="MNG_REG_NO" length="30">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngRegOffice" type="string">
+			<column name="MNG_REG_OFFICE" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngBehave" type="string">
+			<column name="MNG_BEHAVE" length="300">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngApprovedBy" type="string">
+			<column name="MNG_APPROVED_BY" length="200">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngPhoneNo" type="string">
+			<column name="MNG_PHONE_NO" length="20">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngDocNo" type="string">
+			<column name="MNG_DOC_NO" length="30">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngDocDate" type="string">
+			<column name="MNG_DOC_DATE" length="8">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngExpire_" type="string">
+			<column name="MNG_EXPIRE_" length="8">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="mngNote" type="string">
+			<column name="MNG_NOTE" length="300">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="type_" type="string">
+			<column name="TYPE_" length="50">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="level_" type="string">
+			<column name="LEVEL_" length="1">
+				<comment></comment>
+			</column>
+		</property>
+		<property name="status" type="string">
+			<column name="STATUS" length="10">
+				<comment></comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

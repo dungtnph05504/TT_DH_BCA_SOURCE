@@ -1,0 +1,306 @@
+package com.nec.asia.nic.comp.trans.dao;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.hibernate.criterion.Order;
+
+import com.nec.asia.nic.comp.trans.domain.BaseModelList;
+import com.nec.asia.nic.comp.trans.domain.BaseModelSingle;
+import com.nec.asia.nic.comp.trans.domain.NicSearchHitResult;
+import com.nec.asia.nic.comp.trans.domain.NicSearchResult;
+import com.nec.asia.nic.comp.trans.domain.NicTransaction;
+import com.nec.asia.nic.comp.trans.domain.NicUploadJob;
+import com.nec.asia.nic.comp.trans.dto.AssignmentFilter;
+import com.nec.asia.nic.comp.trans.dto.AssignmentFilterAll;
+import com.nec.asia.nic.comp.trans.service.exception.NicUploadJobServiceException;
+import com.nec.asia.nic.framework.PaginatedResult;
+import com.nec.asia.nic.framework.dao.GenericDao;
+/**
+ * Nic Upload Job Dao interface: To retrieve, save/update the job.
+ * 
+ * @author sailaja_chinapothula
+ */
+
+/*
+ * Modification History
+ * 
+ * 28/08/2013 :(Peddi Swapna): Modified the assignNewJob method to return void.
+ * 
+ * 27 Sept 2013 (Peddi Swapna): Added getPendingInvestigationsCount method to get the pending investigations count.
+ *
+ * 01 Oct 2013 (Sailaja): Added findRejectedJobsForSupervisor method to get the rejected jobs list.
+ * 
+ * 04 Oct 2013 (Sailaja) : Added assignNewRejectesdJob method to get the new rejected jobs list.
+ * 
+ * 29 Oct 2013 (chris) : Added create job.
+ * 
+ * 12 Nov 2013 (chris) : Added findAllPendingInvestigationJob.
+ * 
+ * 26 Nov 2013 (Sailaja) : Added cancelTransaction method to update the investigation status
+ * 
+ * 08 Jan 2014 (Sailaja) : Added updatePersoRegisterStatusOnReprint method for reprint
+ * 
+ * 15 Apr 2014 (Peddi Swapna) : Added getUploadJobId method to get the job id.
+ * 
+ * 06 May 2014 (jp): added getCarTxnBeforeFeb7 to sync card status to cpd for transactions before 07FEB
+ * 
+ * 08 May 2014 (Peddi Swapna) : Allowing the user to see the error transactions based on the search criteria.
+ * 
+ * 29 Feb 2016 (tue) : Added findAllForPagination.
+ *
+ * 01 Apr 2016 (chris) : add parameter to config interval, rety count.
+ */
+
+public interface NicUploadJobDao extends GenericDao<NicUploadJob, Long> {
+	//default methods from super class
+	//public NicUploadJob findById(Long uploadJobId);
+	//public Long save (NicUploadJob e);
+	//public void saveOrUpdate(NicUploadJob e);
+    //public NicUploadJob merge(NicUploadJob e);
+	//public void delete(NicUploadJob e);
+	//public void delete(Long uploadJobId);
+	//public List<NicUploadJob> findAll ();
+	
+	/* To find the job list based on transaction Id */
+	PaginatedResult<NicUploadJob> findByTransactionId(String txnId, String owner) throws Exception;
+	
+	/* To assign an unassigned jobs to the officer -- New Investigation -- Update the Officer Id with the current user */
+	public NicUploadJob assignNewJob(String userid) throws Exception;
+	
+	/* To find the assigned job for the officer Id -- Start New Investigation for this job */
+	public List<NicUploadJob> newInvestigation(long obj) throws Exception;
+
+	/* To Approve the card */
+	public void approveJobId(long approveJobId, String userId, String wkstnId) throws Exception;
+	
+	/* To Reject the card -- Update NIC_UPLOAD_JOB table */
+	public void rejectJobId(long rejectJobId, String userId, String wkstnId) throws Exception; 
+	
+	/* To Reject the card -- Update NIC_JOB_CPD_CHECK_RESULT table */
+	public void updateDecisionOnReject(long rejectJobId, String userId, String wkstnId) throws Exception; 
+	
+	
+	//public PaginatedResult<NicUploadJob> getJobListByTransType(List<String> transIds);
+	
+	public PaginatedResult<NicUploadJob> getJobList(String jobType, Long jobId, String jobState, String[] recordStatus, String txnId, String nin, String owner, int pageNo, int pageSize);
+	
+	
+	//to get job list for quartz job scheduler
+	public List<NicUploadJob> getTransactionJobsInQueue(Map<String, String> configMap) throws Exception;
+	
+	
+	/*
+	 * To return the PaginatedResult<NicUploadJob> for those job waiting for investigation.
+	 * It will filter by the officer Id passed in.  
+	 */
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId(String officerId, int pageNo, int pageSize);
+
+	/* To get the pending Investigation Job List count */
+	public long getPendingInvestigationsCount() throws Exception;
+	
+	/* To get the list of rejected jobs for the supervisor for investigation */
+	public PaginatedResult<NicUploadJob> findRejectedJobsForSupervisor(String officerId, int pageNo, int pageSize);
+	
+	/* To assign an unassigned rejected jobs to the supervisor -- New Investigation Rejected */
+	public void assignNewRejectJob(String userid) throws Exception;
+	
+	/* To create nic upload job to process transaction */
+	public Long createWorkflowJob(String transactionId, String jobType, Integer jobPriority);
+	public BaseModelSingle<Long> createWorkflowJobCheck(String transactionId, String jobType, Integer jobPriority, Integer countCall, String personCode);
+
+	public List<NicUploadJob> findAllPendingInvestigationJob();
+
+	public void cancelTransaction(Long jobId, String userId, String wkstnId);
+	
+
+	PaginatedResult<NicUploadJob> findAllForPagination(
+			NicUploadJob nicUploadJob, Date from, Date to,
+			int pageNo, int pageSize, boolean ignoreCase, boolean enableLike,
+			Order order) throws Exception;
+
+	PaginatedResult<NicUploadJob> findAllForPagination(NicUploadJob nicUploadJob, String[] investStatus,Long jobId,boolean isShowErrTrans, int pageNo, int pageSize, boolean ignoreCase, boolean enableLike, Order order);
+	public PaginatedResult<NicUploadJob> findAllForPagination(NicUploadJob nicUploadJob, String[] investStatus,Long jobId, String siteCode, boolean isShowErrTrans, int pageNo, int pageSize, boolean ignoreCase, boolean enableLike, Order order);
+    
+	/* To update Perso Register Status upon Reprint */
+	public String updatePersoRegisterStatusOnReprint(String transactionId,
+			String transactionType, String userId, String wkstnId) throws Exception;
+
+	public Long getUploadJobId(String transId, String[] jobTypes)  throws Exception;
+	
+	public List<NicUploadJob> getTxnWithMaxReprocessCount(Map<String, String> configMap) throws Exception;
+ 
+	public long getSuspendedInvestigationsCount() throws Exception;
+
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId(String[] recordStatuses, String officerId, int pageNo, int pageSize);
+	
+	public void suspendJobId(long JobId, String userId, String wkstnId) throws Exception;
+ 
+	public NicUploadJob assignNewSuspendedJob(String userid) throws Exception;
+
+	public List<String> getAllSearchTypes(long jobId, String mainTransactionId, String hitTransactionId) throws Exception;
+
+//	public List<NicSearchHitResult> getAllSearchHitResult (long jobId, String mainTransactionId,String hitTransactionId) throws Exception;
+
+//	public List<NicSearchResult> getAllSearchResult(long jobId, String mainTransactionId, List<Long> searchResultIds) throws Exception;
+
+	public List<NicSearchResult> getAllSearchResult(Long jobId ) throws Exception;
+
+	public List<NicSearchHitResult> getAllSearchHitResult(List<NicSearchResult> results) throws Exception;
+
+	public List<NicSearchHitResult> getAllSearchHitResult (long searchResultId) throws Exception;
+	 
+	PaginatedResult<NicUploadJob> findTransactions(String txnId, String owner, List<String> statuses) throws Exception;
+
+	public List<NicSearchHitResult> getAllSearchHitResult(Long jobId, String hitTransactionId, List<String> searchTypes) throws Exception;
+
+	public List<NicSearchResult> getAllSearchResult(Long jobId , List<String> searchTypes) throws Exception;
+
+    public List<NicSearchHitResult> getAllSearchHitResult(long searchResultId, String transactionIdHit) throws Exception;
+    
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId(String officerId, int pageNo, int pageSize, Boolean assignedOnly);
+    
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly);
+    
+	public void unassignInvestigationJob(long jobId, String officerUserId, String officerWorkstationId) throws Exception;
+	public void unassignInvestigationAllJobsForUser(String userId, String officerUserId, String officerWorkstationId) throws Exception; 
+	
+	public void unassignSuspendedInvestigationJob(long jobId, String officerUserId, String officerWorkstationId) throws Exception;
+	public void unassignSuspendedInvestigationAllJobsForUser(String userId, String officerUserId, String officerWorkstationId) throws Exception;
+
+	public Boolean updateMatchingData(Long jobId, String tagetTransactionId, int type, String note, Long idBlacklist, String fullName) throws Exception;
+	/**
+	 * 
+	 * @param nicUploadJob
+	 * @param nicTransaction
+	 * @param investStatus
+	 * @param jobId
+	 * @param isShowErrTrans
+	 * @param pageNo
+	 * @param pageSize
+	 * @param ignoreCase
+	 * @param enableLike
+	 * @param order
+	 * @return
+	 */
+	public PaginatedResult<NicUploadJob> findAllForPagination(
+	    NicUploadJob nicUploadJob, NicTransaction nicTransaction, String[] investStatus, Long jobId, boolean isShowErrTrans, Date dateFrom, Date dateTo, int pageNo, int pageSize, boolean ignoreCase, boolean enableLike,
+	    Order order);
+	
+	public List<NicSearchResult> getAllSearchResult__1_1_Y__1_N_N__excluded(Long jobId ) throws Exception;
+    
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId(String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilter assignmentFilter);
+	
+	public void unassignInvestigationJobs(List<Long> jobIds, String officerUserId, String officerWorkstationId) throws Exception;
+	
+	public void assignInvestigationJobs(List<Long> jobIds, String assignToId, String officerUserId, String officerWorkstationId) throws Exception;
+    
+	public void assignInvestigationJobs1(List<Long> jobIds, String[] assignToId, String officerUserId, String officerWorkstationId) throws Exception;
+
+	public void assignInvestigationJobsUpdate(List<Long> jobIds, String[] assignToId, String officerUserId, String officerWorkstationId) throws Exception;
+	
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+	
+	public List<NicUploadJob> findInvestigationJobForPaginationByOfficerId2(String[] recordStatuses,String officerId, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+
+	public List<NicUploadJob> findInvestigationJobListB(String packageId, AssignmentFilterAll assignmentFilter);
+	
+	public List<NicUploadJob> findInvestigationJobApprove(String packageId, AssignmentFilterAll assignmentFilter);
+	public BaseModelSingle<NicUploadJob> findNicUpByReceiptNo(String packageId, String receiptNo, String transactionId);
+	
+	public int countInvestigationJobListB(String packageId, String[] recordStatuses);
+
+	
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId1(String[] recordStatuses, String officerId, String leaderId,int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+
+	public List<NicUploadJob> findInvestigationProcessByJobId(Long[] JobList, String officerId, AssignmentFilterAll assignmentFilter);
+	
+	//public List<NicUploadJob> findInvestigationJobForPaginationByOfficerId2(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+
+	
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerIdAll(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+	
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationByOfficerId_DSQ(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+	
+	public PaginatedResult<NicUploadJob> findAllStatusPerso(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+	
+	public PaginatedResult<NicUploadJob> findPendingPassportNo(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+	
+	public void unassignSuspendedInvestigationJobs(List<Long> jobIds, String officerUserId, String officerWorkstationId) throws Exception;
+	
+	public void assignSuspendedInvestigationJobs(List<Long> jobIds, String assignToId, String officerUserId, String officerWorkstationId) throws Exception;
+
+	public BaseModelList<NicUploadJob> findAllByTransactionId(String txnId) throws Exception;
+	
+	public List<NicUploadJob> findAllByPersonID(long id)throws Exception;
+	public List<NicUploadJob> findAllByPersonCode(String code)throws Exception;
+	// THÊM ĐỂ SEARCH BẢN GHI DANH SÁCH CHỜ PHÊ DUYỆT
+	PaginatedResult<NicUploadJob> findByTransactionIdApprove(String txnId, String owner) throws Exception;
+	// THÊM ĐỂ SEARCH BẢN GHI DANH SÁCH DUYỆT IN
+	PaginatedResult<NicUploadJob> findByTransactionIdPerso(String txnId, String owner) throws Exception;
+	// THÊM ĐỂ SEARCH BẢN GHI DANH SÁCH ĐỒNG BỘ DỮ LIỆU HC SANG A72
+	PaginatedResult<NicUploadJob> findByTransactionIdSync(String txnId, String owner) throws Exception;
+	//tunt
+	public PaginatedResult<NicUploadJob> findApproveJobForPaginationByOfficerId(
+			String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilter assignmentFilter)  throws Exception;
+	public PaginatedResult<NicUploadJob> findApproveJobForPaginationByOfficerIdALL(
+			String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilter assignmentFilter)  throws Exception;
+	public void approveJobIdStatus(long approveJobId, String userId, String wkstnId) throws Exception;
+	
+	public void approveJob_Confirmed(long approveJobId, String userId, String wkstnId, String investStatus) throws Exception;
+	
+	//
+	public PaginatedResult<NicUploadJob> findAssignmentForPaginationByOfficerId(String officerId, int pageNo, int pageSize, Boolean assignedOnly);
+	public PaginatedResult<NicUploadJob> findAssignmentForPaginationByOfficerId(String officerId, int pageNo, int pageSize);
+	public PaginatedResult<NicUploadJob> findAssignmentForPaginationByOfficerId(String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilter assignmentFilter);
+	public PaginatedResult<NicUploadJob> findAssignmentForPaginationByOfficerId(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly);
+	public PaginatedResult<NicUploadJob> findAssignmentForPaginationByOfficerId(String[] recordStatuses, String officerId, int pageNo, int pageSize);
+	public PaginatedResult<NicUploadJob> findAssignmentForPaginationByOfficerId(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilter assignmentFilter);
+	//end
+	
+	public NicUploadJob getUploadJobByTransactionIdJob(String transId) throws Exception;
+	public String getUploadJobByTransactionId(String transId) throws Exception;
+	public void getSaveTempPassportNo(String transactionId, String passportNo) throws Exception;
+
+	//lay danh sach perso
+	public PaginatedResult<NicUploadJob> findPersoList(
+			String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilter assignmentFilter)  throws Exception;
+
+	public void assignInvestigationOnlyJob(long jobIds, String assignToId, String officerUserId, String officerWorkstationId) throws Exception;
+
+	//Trung lay danh sach đồng bộ dữ liệu đơn
+		public PaginatedResult<NicUploadJob> findSyncSingerList(
+				String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter)  throws Exception;
+	
+	//TRUNG THÊM CHO PHẦN PHÂN CÔNG
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationNullOfficer(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+
+	//Phúc thêm lấy danh sách phân công theo mã phiếu
+	public List<NicUploadJob> findAllByPackageId(String packageId) throws Exception;
+		
+	public List<NicUploadJob> findAllByTransactionIdOrStatus(String[] status,String txnId) throws Exception;
+		
+	//TRUNG THÊM CHO PHẦN PHÂN CÔNG
+	public PaginatedResult<NicUploadJob> findInvestigationJobForPaginationNullOfficerPackage(String[] recordStatuses, String officerId, int pageNo, int pageSize, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+	public List<NicUploadJob> findInvestigationJobForPagination(String[] recordStatuses, String officerId, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+
+	public NicUploadJob getNicTransactionByPrevPPno(String prevPassportNo, String typePassport, String nin) throws Exception;
+
+	public BaseModelSingle<NicUploadJob> getUploadJobByTransactionIdSinger(Long jobId, String transId);
+	
+	public List<NicUploadJob> getListByStatusAndYear(String[] recordStatuses, Calendar calendar);
+	
+	public List<NicUploadJob> findInvestigationJobForPaginationByOfficerId2(String[] recordStatuses, String officerId, String leaderId, Boolean assignedOnly, AssignmentFilterAll assignmentFilter);
+
+	public BaseModelSingle<NicUploadJob> updateJobState(long jobId, String state, int command);
+	
+	public BaseModelSingle<Void> updateJobStatus(long jobId, String status);
+	
+	public BaseModelSingle<Void> saveOrUpdateService(NicUploadJob nicUp);
+
+	Long createWorkflowJobNoRun(String transactionId, String transactionType,
+			Integer jobPriority, int i, String personCode) throws Exception;
+	
+}

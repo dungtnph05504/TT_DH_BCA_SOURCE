@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.nec.asia.nic.comp.trans.domain.NicTransactionPayment" table="EPP_TRANSACTION_PAYMENT">
+  <id name="transactionId" type="java.lang.String">
+   <column length="36" name="TRANSACTION_ID"/>
+   <generator class="foreign">
+    <param name="property">nicTransaction</param>
+   </generator>
+  </id>
+  <one-to-one class="com.nec.asia.nic.comp.trans.domain.NicTransaction" constrained="true" name="nicTransaction" lazy="false" />
+  <property generated="never" lazy="false" name="paymentId" type="java.lang.String">
+   <column length="30" name="PAYMENT_ID" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="feeAmount" type="java.lang.Double">
+   <column name="FEE_AMOUNT" not-null="true" precision="18" scale="5"/>
+  </property>
+  <property generated="never" lazy="false" name="noOfTimeLost" type="java.lang.Integer">
+   <column name="NUM_OF_TIME_LOST" precision="10" scale="0">
+    <comment>The number of times lost or damage.</comment>
+   </column>
+  </property>
+  <property generated="never" lazy="false" name="reduceRateFlag" type="yes_no">
+   <column length="1" name="REDUCE_RATE_FLAG"/>
+  </property>
+  <property generated="never" lazy="false" name="reduceRateAmount" type="java.lang.Double">
+   <column name="REDUCE_RATE_AMOUNT" precision="18" scale="5"/>
+  </property>
+  <property generated="never" lazy="false" name="paymentAmount" type="java.lang.Double">
+   <column name="PAYMENT_AMOUNT" precision="18" scale="5"/>
+  </property>
+  <property generated="never" lazy="false" name="collectionOfficerId" type="java.lang.String">
+   <column length="64" name="COLLECTION_OFFICER_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="paymentDatetime" type="java.util.Date">
+   <column length="7" name="PAYMENT_DATETIME"/>
+  </property>
+  <property generated="never" lazy="false" name="receiptId" type="java.lang.String">
+   <column length="30" name="RECEIPT_ID" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="waiverFlag" type="yes_no">
+   <column length="1" name="WAIVER_FLAG"/>
+  </property>
+  <property generated="never" lazy="false" name="waiverReason" type="java.lang.String">
+   <column length="100" name="WAIVER_REASON"/>
+  </property>
+  <property generated="never" lazy="false" name="waiverOfficerId" type="java.lang.String">
+   <column length="64" name="WAIVER_OFFICER_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="cashReceived" type="java.lang.Double">
+   <column name="CASH_RECEIVED" precision="18" scale="5"/>
+  </property>
+  <property generated="never" lazy="false" name="balance" type="java.lang.Double">
+   <column name="BALANCE" precision="18" scale="5"/>
+  </property>
+  <property generated="never" lazy="false" name="paymentStatus" type="java.lang.String">
+   <column length="1" name="PAYMENT_STATUS"/>
+  </property>
+  <property generated="never" lazy="false" name="createBy" type="java.lang.String">
+   <column length="64" name="CREATE_BY"/>
+  </property>
+  <property generated="never" lazy="false" name="createWkstnId" type="java.lang.String">
+   <column length="64" name="CREATE_WKSTN_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="createDatetime" type="java.util.Date">
+   <column length="7" name="CREATE_DATETIME"/>
+  </property>
+  <property generated="never" lazy="false" name="updateBy" type="java.lang.String">
+   <column length="64" name="UPDATE_BY"/>
+  </property>
+  <property generated="never" lazy="false" name="updateWkstnId" type="java.lang.String">
+   <column length="64" name="UPDATE_WKSTN_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="updateDatetime" type="java.util.Date">
+   <column length="7" name="UPDATE_DATETIME"/>
+  </property>
+ </class>
+</hibernate-mapping>
